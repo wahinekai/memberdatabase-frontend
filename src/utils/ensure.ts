@@ -1,10 +1,6 @@
 // Tests to see whether a string is null or whitespace
-const isNotNullOrWhitespace = input => {
+const isNotNullOrWhitespace = (input: string) => {
     input = isNotNull(input)
-
-    if (typeof input != "string") {
-        throw new Error("input is not a string")
-    }
 
     if (input === "") {
         throw new Error("input is an empty string")
@@ -18,7 +14,7 @@ const isNotNullOrWhitespace = input => {
 }
 
 // Checks to see if something is null or undefined
-const isNotNull = input => {
+const isNotNull = (input: any) => {
     if (input === null) {
         throw new Error("input is null")
     }
@@ -31,12 +27,8 @@ const isNotNull = input => {
 }
 
 // Checks to see if an array is null or empty
-const isNotNullOrEmpty = input => {
+const isNotNullOrEmpty = (input: any[]) => {
     input = isNotNull(input);
-
-    if (Array.isArray(input)) {
-        throw new Error("input is not an array")
-    }
 
     if (!input.length) {
         throw new Error("input is empty")

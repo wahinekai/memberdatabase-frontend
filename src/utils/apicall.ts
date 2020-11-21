@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { isNotNullOrEmpty } from "./ensure"
+import { isNotNullOrWhitespace } from "./ensure"
 
-const apiCall = async (method, path, data) => {
+const apiCall = async (method: string, path: string, data: object) => {
     try {
         let pathWithEndpoint = path
         if (process && process.env) {
@@ -12,10 +12,24 @@ const apiCall = async (method, path, data) => {
             }
         }
 
-        const res = await axios[method.toLowerCase()](
-            pathWithEndpoint,
-            data
-        )
+        let res: any;
+
+        switch(method.toLowerCase()) {
+            case "get":
+                res = await axios.get(pathWithEndpoint)
+                break
+            case "post":
+                res = await axios.post(pathWithEndpoint, data)
+                break
+            case "put":
+                res = await axios.put(pathWithEndpoint, data)
+                break
+            case "delete":
+                res = await axios.delete(pathWithEndpoint)
+                break
+            default:
+                throw new Error("Unknown HTTP Method")
+        }
 
         return res.data
     } catch (err) {
@@ -28,8 +42,8 @@ const apiCall = async (method, path, data) => {
     }
 }
 
-const setAuthTokenHeader = token => {
-    token = isNotNullOrEmpty(token)
+const setAuthTokenHeader = (token: string) => {
+    token = isNotNullOrWhitespace(token)
     axios.defaults.headers.common['token'] = token
 }
 
