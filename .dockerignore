@@ -1,0 +1,7 @@
+node_modules
+build
+Dockerfile
+LICENSE.txt
+README.md
+.gitignore
+*.py

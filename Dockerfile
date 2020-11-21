@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:alpine as install
+FROM node:alpine as build
 
 # set working directory
 WORKDIR /app
@@ -15,25 +15,26 @@ RUN npm install
 COPY src src
 COPY public public
 
-FROM install as run_dev
-
-EXPOSE 3000
-
-# start app
-ENTRYPOINT [ "npm", "start" ]
-
-FROM install as build
-
 ARG REACT_APP_BACKEND_ENDPOINT
 
 # Build the project for production
-RUN REACT_APP_BACKEND_ENDPOINT=${REACT_APP_BACKEND_ENDPOINT}\
-    npm run build
+# RUN REACT_APP_BACKEND_ENDPOINT=${REACT_APP_BACKEND_ENDPOINT} \
+#   npm run build
+
+RUN npm run build
 
 # Run Stage Start
-FROM nginx as run_prod
+FROM nginx 
 
 EXPOSE 80
+
+# --------- only for those using react router ----------
+# if you are using react router 
+# you need to overwrite the default nginx configurations
+# remove default nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
+# replace with custom one
+COPY nginx/nginx.conf /etc/nginx/conf.d
 
 #Copy production build files from builder phase to nginx
 COPY --from=build /app/build /usr/share/nginx/html
