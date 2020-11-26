@@ -1,6 +1,6 @@
-const round = number => Math.round(number * 100) / 100
+const round = (num: number) => Math.round(num * 100) / 100
 
-const monitorReducer = createStore => (
+const monitorReducer = (createStore) => (
   reducer,
   initialState,
   enhancer
