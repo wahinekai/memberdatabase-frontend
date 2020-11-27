@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 
 import { Error, FormLabel, Logout, Submit, LoginHeader } from '../components';
-import { User, PropTypes, Validation, IReduxState } from '../model';
+import { User, PropTypes, Validation, ReduxState } from '../model';
 import { updateUser, getUser } from '../store/actions/user';
 import { logout } from '../store/actions/auth';
 import { isNotNull } from '../utils/ensure';
@@ -69,7 +69,7 @@ const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
     }
 };
 
-const mapStateToProps = ({ user }: IReduxState) => ({
+const mapStateToProps = ({ user }: ReduxState) => ({
     user,
 });
 
