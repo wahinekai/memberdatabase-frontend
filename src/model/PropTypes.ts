@@ -58,7 +58,7 @@ type OptionalChildren = {
 };
 
 type OptionalUser = {
-    user: User | null;
+    user?: User | null;
 };
 
 type HTMLFor = {
