@@ -1,17 +1,22 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { ReactChild } from 'react';
+import { ReactNode } from 'react';
 
-import { IUser } from './';
+import { LoginObject, RegisterObject, User } from './';
 
 // PropTypes for components & containers
 export type Authenticated = OptionalUser & Children;
 export type Unauthenticated = OptionalUser & Children;
 export type Error = Children;
-export type FormLabel = HTMLFor & Children;
+export type FormLabel = HTMLFor & OptionalChildren;
 export type Logo = OptionalClassname;
 export type TopNavbar = Username;
 export type Header = OptionalClassname & Children;
 export type MainRouter = OptionalUser;
+export type Profile = Logout & OptionalUser & GetUser;
+export type Login = OnLogin;
+export type Register = OnRegister;
+export type Logout = OnLogout;
+export type Submit = OptionalClassname;
 
 export type NavbarEntry = {
     link: string;
@@ -23,13 +28,18 @@ export type LoginHeader = {
     text: string;
 };
 
-export type Logout = {
+// PropTypes that makes these entries up
+type OnLogout = {
     onLogout(): void;
 };
 
-export type Submit = OptionalClassname;
+type OnRegister = {
+    onRegister(values: RegisterObject): void;
+};
 
-// PropTypes that makes these entries up
+type OnLogin = {
+    onLogin(values: LoginObject): void;
+};
 
 type OptionalClassname = {
     className?: string;
@@ -40,13 +50,21 @@ type Username = {
 };
 
 type Children = {
-    children: ReactChild;
+    children: ReactNode;
+};
+
+type OptionalChildren = {
+    children?: ReactNode;
 };
 
 type OptionalUser = {
-    user: IUser | null;
+    user: User | null;
 };
 
 type HTMLFor = {
     htmlFor: string;
+};
+
+type GetUser = {
+    getUser(): void;
 };

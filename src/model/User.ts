@@ -1,7 +1,8 @@
-interface IUser {
+type User = {
     token: string;
     email: string;
     admin: boolean;
-}
+    phone?: number;
+};
 
-export default IUser;
+export default User;

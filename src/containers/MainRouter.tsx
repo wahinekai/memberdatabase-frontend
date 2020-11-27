@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Profile, Login, Register } from '.';
 import { Authenticated, BottomNavbar, Unauthenticated } from '../components';
-import { PropTypes } from '../model';
+import { IReduxState, PropTypes } from '../model';
 
 const MainRouter: FC<PropTypes.MainRouter> = ({ user }) => (
     <Router>
@@ -31,7 +31,7 @@ const MainRouter: FC<PropTypes.MainRouter> = ({ user }) => (
     </Router>
 );
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user }: IReduxState) => ({
     user,
 });
 

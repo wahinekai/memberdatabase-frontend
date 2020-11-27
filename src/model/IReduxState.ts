@@ -1,7 +1,7 @@
-import { IUser } from './';
+import { User } from './';
 
 interface IReduxState {
-    user: IUser | null;
+    user: User | null;
 }
 
 export default IReduxState;

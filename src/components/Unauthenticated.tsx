@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { isNotNull, isNotNullOrWhitespace } from '../utils/ensure';
-import { IUser, PropTypes } from '../model';
+import { User, PropTypes } from '../model';
 
-const Unauthenticated = ({ user, children }: PropTypes.Unauthenticated) => {
+const Unauthenticated: FC<PropTypes.Unauthenticated> = ({ user, children }) => {
     try {
-        user = isNotNull<IUser>(user);
+        user = isNotNull<User>(user);
         isNotNullOrWhitespace(user.token);
         return <Redirect to="/login" />;
     } catch (err) {
-        return children;
+        return <>{children}</>;
     }
 };
 
