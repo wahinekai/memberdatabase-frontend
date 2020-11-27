@@ -1,15 +1,10 @@
-import React, { ReactChild } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { isNotNull, isNotNullOrWhitespace } from '../utils/ensure';
-import { IUser } from '../model';
+import { IUser, PropTypes } from '../model';
 
-type PropTypes = {
-    user?: IUser | null;
-    children: ReactChild;
-};
-
-const Authenticated = ({ user, children }: PropTypes) => {
+const Authenticated = ({ user, children }: PropTypes.Authenticated) => {
     try {
         user = isNotNull<IUser>(user);
         isNotNullOrWhitespace(user.token);

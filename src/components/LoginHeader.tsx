@@ -1,11 +1,8 @@
 import React, { FC } from 'react';
 import { Logo, Header } from '.';
+import { PropTypes } from '../model';
 
-type PropTypes = {
-    text: string;
-};
-
-const LoginHeader: FC<PropTypes> = ({ text }) => (
+const LoginHeader: FC<PropTypes.LoginHeader> = ({ text }) => (
     <>
         <div className="row">
             <div className="col-12">

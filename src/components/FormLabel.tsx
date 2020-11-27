@@ -1,11 +1,7 @@
-import React, { FC, ReactChild } from 'react';
+import React, { FC } from 'react';
+import { PropTypes } from '../model';
 
-type PropTypes = {
-    htmlFor: string;
-    children: ReactChild;
-};
-
-const FormLabel: FC<PropTypes> = ({ children, htmlFor }) => (
+const FormLabel: FC<PropTypes.FormLabel> = ({ children, htmlFor }) => (
     <label className="px-2" htmlFor={htmlFor}>
         {children}
     </label>

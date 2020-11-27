@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { Profile, Login, Register } from './';
+import { Profile, Login, Register } from '.';
 import { Authenticated, BottomNavbar, Unauthenticated } from '../components';
+import { PropTypes } from '../model';
 
-const MainRouter = () => (
+const MainRouter: FC<PropTypes.MainRouter> = ({ user }) => (
     <Router>
         <Switch>
             <Route exact path="/register">

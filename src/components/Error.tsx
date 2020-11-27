@@ -1,10 +1,8 @@
-import React, { FC, ReactChild } from 'react';
+import React, { FC } from 'react';
 
-type PropTypes = {
-    children: ReactChild;
-};
+import { PropTypes } from '../model';
 
-const Error: FC<PropTypes> = ({ children }) => (
+const Error: FC<PropTypes.Error> = ({ children }) => (
     <div className="text-danger">
         <small>{children}</small>
     </div>

@@ -1,10 +1,7 @@
-import React, { FC, ReactChild } from 'react';
+import React, { FC } from 'react';
 
-type PropTypes = {
-    className?: string;
-    children: ReactChild;
-};
+import { PropTypes } from '../model';
 
-const Header: FC<PropTypes> = ({ children, className }) => <h1 className={`${className}`}>{children}</h1>;
+const Header: FC<PropTypes.Header> = ({ children, className }) => <h1 className={`${className}`}>{children}</h1>;
 
 export default Header;
