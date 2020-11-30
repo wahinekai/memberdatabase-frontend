@@ -9,8 +9,8 @@ import { faUsers, faHandshake, faGamepad, faTrophy, faUser, faShoppingCart } fro
 
 import { Loading } from './components';
 
-import _$ from 'jquery'; // eslint-disable-line no-unused-vars
-import _Popper from 'popper.js'; // eslint-disable-line no-unused-vars
+import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
