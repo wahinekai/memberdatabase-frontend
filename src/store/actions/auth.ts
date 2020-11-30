@@ -1,4 +1,4 @@
-import { apiCall, setAuthTokenHeader, clearAuthTokenHeader } from '../../utils/apicall';
+import { apiCallAsync, setAuthTokenHeader, clearAuthTokenHeader } from '../../utils/apicall';
 import { ActionTypes, LoginObject, ReduxTypes, RegisterObject, User } from '../../model';
 import { Dispatch } from '../../model/ReduxTypes';
 
@@ -15,7 +15,7 @@ export const onRegister: ReduxTypes.onRegister = (data): ReduxTypes.Thunk => {
 };
 
 const loginAsync = async (dispatch: Dispatch, data: LoginObject) => {
-    const user = await apiCall<User>('POST', '/user/login', data);
+    const user = await apiCallAsync<User>('POST', '/user/login', data);
     setAuthTokenHeader(user.token);
     dispatch({
         type: ActionTypes.SET_USER,
@@ -24,7 +24,7 @@ const loginAsync = async (dispatch: Dispatch, data: LoginObject) => {
 };
 
 const registerAsync = async (dispatch: Dispatch, data: RegisterObject) => {
-    const user = await apiCall<User>('POST', '/user/register', data);
+    const user = await apiCallAsync<User>('POST', '/user/register', data);
     setAuthTokenHeader(user.token);
     dispatch({
         type: ActionTypes.SET_USER,

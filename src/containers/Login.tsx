@@ -10,7 +10,7 @@ import { onLogin } from '../store/actions/auth';
 const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     const history = useHistory();
 
-    const onSubmit = useCallback(
+    const onSubmitAsync = useCallback(
         async (values: LoginObject) => {
             try {
                 await onLogin(values);
@@ -29,7 +29,7 @@ const Login: FC<PropTypes.Login> = ({ onLogin }) => {
                 <Formik
                     initialValues={initialLoginObject}
                     validationSchema={Validation.loginSchema}
-                    onSubmit={onSubmit}
+                    onSubmit={onSubmitAsync}
                 >
                     {({ errors, touched }) => (
                         <Form>

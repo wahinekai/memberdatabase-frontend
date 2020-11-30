@@ -10,7 +10,7 @@ import { onRegister } from '../store/actions/auth';
 const Register: FC<PropTypes.Register> = ({ onRegister }) => {
     const history = useHistory();
 
-    const onSubmit = useCallback(
+    const onSubmitAsync = useCallback(
         async (values: RegisterObject) => {
             try {
                 await onRegister(values);
@@ -29,7 +29,7 @@ const Register: FC<PropTypes.Register> = ({ onRegister }) => {
                 <Formik
                     initialValues={initialRegisterObject}
                     validationSchema={Validation.registerSchema}
-                    onSubmit={onSubmit}
+                    onSubmit={onSubmitAsync}
                 >
                     {({ errors, touched }) => (
                         <Form>

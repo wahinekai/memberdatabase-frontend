@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { isNotNullOrWhitespace } from './ensure';
 
-const apiCall = async <T = any>(method: string, path: string, data: any = null) => {
+const apiCallAsync = async <T = any>(method: string, path: string, data: any = null) => {
     try {
         let pathWithEndpoint = path;
         if (process && process.env) {
@@ -46,4 +46,4 @@ const clearAuthTokenHeader = () => {
     delete axios.defaults.headers.common['token'];
 };
 
-export { apiCall, setAuthTokenHeader, clearAuthTokenHeader };
+export { apiCallAsync, setAuthTokenHeader, clearAuthTokenHeader };

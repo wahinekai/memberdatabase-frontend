@@ -10,7 +10,7 @@ import { isNotNull } from '../utils/ensure';
 
 const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
     // Create onSubmit callback to update user
-    const onSubmit = useCallback(async (values: User) => {
+    const onSubmitAsync = useCallback(async (values: User) => {
         try {
             await updateUser(values);
         } catch (err) {
@@ -31,7 +31,11 @@ const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
                 <Logout onLogout={onLogout} />
                 <LoginHeader text="Profile" />
                 <div className="center">
-                    <Formik initialValues={user} validationSchema={Validation.updateProfileSchema} onSubmit={onSubmit}>
+                    <Formik
+                        initialValues={user}
+                        validationSchema={Validation.updateProfileSchema}
+                        onSubmit={onSubmitAsync}
+                    >
                         {({ errors, touched }) => (
                             <Form>
                                 <div className="row">

@@ -14,7 +14,7 @@ const isNotNullOrWhitespace = (input?: string | null) => {
 };
 
 // Checks to see if something is null or undefined
-const isNotNull = <T>(input?: T | null) => {
+const isNotNull = <T = any>(input?: T | null) => {
     if (input === null) {
         throw new Error('input is null');
     }
@@ -27,7 +27,7 @@ const isNotNull = <T>(input?: T | null) => {
 };
 
 // Checks to see if an array is null or empty
-const isNotNullOrEmpty = <T>(input?: T[] | null) => {
+const isNotNullOrEmpty = <T = any>(input?: T[] | null) => {
     input = isNotNull(input);
 
     if (!input.length) {
