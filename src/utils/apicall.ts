@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { isNotNullOrWhitespace } from './ensure';
 
-const apiCall = async (method: string, path: string, data: object) => {
+const apiCall = async <T = any>(method: string, path: string, data: any = null) => {
     try {
         let pathWithEndpoint = path;
         if (process && process.env) {
@@ -12,7 +12,7 @@ const apiCall = async (method: string, path: string, data: object) => {
             }
         }
 
-        let res: any;
+        let res: AxiosResponse<T>;
 
         switch (method.toLowerCase()) {
             case 'get':

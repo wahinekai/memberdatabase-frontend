@@ -1,53 +1,40 @@
-import { CLEAR_USER, SET_USER } from './types';
-import {
-  apiCall,
-  setAuthTokenHeader,
-  clearAuthTokenHeader,
-} from '../../utils/apicall';
+import { apiCall, setAuthTokenHeader, clearAuthTokenHeader } from '../../utils/apicall';
+import { ActionTypes, LoginObject, ReduxTypes, RegisterObject, User } from '../../model';
+import { Dispatch } from '../../model/ReduxTypes';
 
-export const login = (data: any) => {
-  return (dispatch) => {
-    loginAsync(dispatch, data);
-  };
+export const onLogin: ReduxTypes.onLogin = (data): ReduxTypes.Thunk => {
+    return (dispatch) => {
+        loginAsync(dispatch, data);
+    };
 };
 
-export const register = (data) => {
-  return (dispatch) => {
-    registerAsync(dispatch, data);
-  };
+export const onRegister: ReduxTypes.onRegister = (data): ReduxTypes.Thunk => {
+    return (dispatch) => {
+        registerAsync(dispatch, data);
+    };
 };
 
-const loginAsync = async (dispatch, data) => {
-  const loginResponse = await apiCall('POST', '/user/login', data);
-  const token = loginResponse.result;
-  setAuthTokenHeader(token);
-  const profileResponse = await apiCall(
-    'GET',
-    `/user/profile/get?username=${data.username}`
-  );
-  const user = profileResponse.result;
-  user.token = token;
-  dispatch({
-    type: SET_USER,
-    user,
-  });
+const loginAsync = async (dispatch: Dispatch, data: LoginObject) => {
+    const user = await apiCall<User>('POST', '/user/login', data);
+    setAuthTokenHeader(user.token);
+    dispatch({
+        type: ActionTypes.SET_USER,
+        user,
+    });
 };
 
-const registerAsync = async (dispatch, data) => {
-  const response = await apiCall('POST', '/user/register', data);
-  const token = response.result;
-  setAuthTokenHeader(token);
-  const user = data;
-  user.token = token;
-  dispatch({
-    type: SET_USER,
-    user,
-  });
+const registerAsync = async (dispatch: Dispatch, data: RegisterObject) => {
+    const user = await apiCall<User>('POST', '/user/register', data);
+    setAuthTokenHeader(user.token);
+    dispatch({
+        type: ActionTypes.SET_USER,
+        user,
+    });
 };
 
 export const logout = () => {
-  clearAuthTokenHeader();
-  return {
-    type: CLEAR_USER,
-  };
+    clearAuthTokenHeader();
+    return {
+        type: ActionTypes.CLEAR_USER,
+    };
 };

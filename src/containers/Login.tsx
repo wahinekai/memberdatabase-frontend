@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 
 import { Error, LoginHeader, Submit } from '../components';
 import { initialLoginObject, LoginObject, PropTypes, Validation } from '../model';
-import { login } from '../store/actions/auth';
+import { onLogin } from '../store/actions/auth';
 
 const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     const onSubmit = useCallback(
@@ -67,6 +67,6 @@ const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     );
 };
 
-const mapDispatchToProps = { onLogin: login };
+const mapDispatchToProps = { onLogin };
 
 export default connect(null, mapDispatchToProps)(Login);

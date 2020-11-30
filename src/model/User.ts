@@ -5,4 +5,10 @@ type User = {
     phone?: number;
 };
 
+export const noUser: User = {
+    token: '',
+    email: '',
+    admin: false,
+};
+
 export default User;

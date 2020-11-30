@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 
 import { Error, FormLabel, LoginHeader, Submit } from '../components';
 import { initialRegisterObject, PropTypes, RegisterObject, Validation } from '../model';
-import { register } from '../store/actions/auth';
+import { onRegister } from '../store/actions/auth';
 
 const Register: FC<PropTypes.Register> = ({ onRegister }) => {
     const onSubmit = useCallback(
@@ -85,6 +85,6 @@ const Register: FC<PropTypes.Register> = ({ onRegister }) => {
     );
 };
 
-const mapDispatchToProps = { onRegister: register };
+const mapDispatchToProps = { onRegister };
 
 export default connect(null, mapDispatchToProps)(Register);

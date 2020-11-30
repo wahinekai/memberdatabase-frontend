@@ -1,7 +1,12 @@
 import { User } from '.';
+import { noUser } from './User';
 
 type ReduxState = {
-    user: User | null;
+    user: User;
+};
+
+export const initialReduxState = {
+    user: noUser,
 };
 
 export default ReduxState;

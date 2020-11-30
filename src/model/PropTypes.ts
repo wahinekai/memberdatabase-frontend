@@ -1,7 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { ReactNode } from 'react';
 
-import { LoginObject, RegisterObject, User } from './';
+import { ReduxTypes, User } from './';
 
 // PropTypes for components & containers
 export type Authenticated = OptionalUser & Children;
@@ -13,8 +13,8 @@ export type TopNavbar = Username;
 export type Header = OptionalClassname & Children;
 export type MainRouter = OptionalUser;
 export type Profile = Logout & OptionalUser & GetUser;
-export type Login = OnLogin;
-export type Register = OnRegister;
+export type Login = OnLoginProp;
+export type Register = OnRegisterProp;
 export type Logout = OnLogout;
 export type Submit = OptionalClassname;
 
@@ -33,12 +33,12 @@ type OnLogout = {
     onLogout(): void;
 };
 
-type OnRegister = {
-    onRegister(values: RegisterObject): void;
+type OnRegisterProp = {
+    onRegister: ReduxTypes.onRegister;
 };
 
-type OnLogin = {
-    onLogin(values: LoginObject): void;
+type OnLoginProp = {
+    onLogin: ReduxTypes.onLogin;
 };
 
 type OptionalClassname = {
