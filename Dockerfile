@@ -18,18 +18,15 @@ COPY public public
 ARG REACT_APP_BACKEND_ENDPOINT
 
 # Build the project for production
-# RUN REACT_APP_BACKEND_ENDPOINT=${REACT_APP_BACKEND_ENDPOINT} \
-#   npm run build
-
 RUN npm run build
 
 # Run Stage Start
-FROM nginx 
+FROM nginx
 
 EXPOSE 80
 
 # --------- only for those using react router ----------
-# if you are using react router 
+# if you are using react router
 # you need to overwrite the default nginx configurations
 # remove default nginx configuration file
 RUN rm /etc/nginx/conf.d/default.conf
