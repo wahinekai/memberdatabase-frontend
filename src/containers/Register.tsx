@@ -8,10 +8,10 @@ import { initialRegisterObject, PropTypes, RegisterObject, Validation } from '..
 import { onRegister } from '../store/actions/auth';
 
 const Register: FC<PropTypes.Register> = ({ onRegister }) => {
+    const history = useHistory();
+
     const onSubmit = useCallback(
         async (values: RegisterObject) => {
-            const history = useHistory();
-
             try {
                 await onRegister(values);
                 history.push('/');
@@ -19,7 +19,7 @@ const Register: FC<PropTypes.Register> = ({ onRegister }) => {
                 console.error(err);
             }
         },
-        [onRegister]
+        [onRegister, history]
     );
 
     return (

@@ -9,25 +9,22 @@ import { logout } from '../store/actions/auth';
 import { isNotNull } from '../utils/ensure';
 
 const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
+    // Create onSubmit callback to update user
+    const onSubmit = useCallback(async (values: User) => {
+        try {
+            await updateUser(values);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+    // Update Redux store with newest user
+    useEffect(() => {
+        getUser();
+    }, [getUser]);
+
     try {
         user = isNotNull(user);
-
-        // Create onSubmit callback to update user
-        const onSubmit = useCallback(
-            async (values: User) => {
-                try {
-                    await updateUser(values);
-                } catch (err) {
-                    console.error(err);
-                }
-            },
-            [updateUser]
-        );
-
-        // Update Redux store with newest user
-        useEffect(() => {
-            getUser();
-        }, [getUser]);
 
         return (
             <div className="container">

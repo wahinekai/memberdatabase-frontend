@@ -8,10 +8,10 @@ import { initialLoginObject, LoginObject, PropTypes, Validation } from '../model
 import { onLogin } from '../store/actions/auth';
 
 const Login: FC<PropTypes.Login> = ({ onLogin }) => {
+    const history = useHistory();
+
     const onSubmit = useCallback(
         async (values: LoginObject) => {
-            const history = useHistory();
-
             try {
                 await onLogin(values);
                 history.push('/');
@@ -19,7 +19,7 @@ const Login: FC<PropTypes.Login> = ({ onLogin }) => {
                 console.error(err);
             }
         },
-        [login, history]
+        [onLogin, history]
     );
 
     return (

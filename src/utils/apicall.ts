@@ -33,11 +33,6 @@ const apiCall = async <T = any>(method: string, path: string, data: any = null) 
 
         return res.data;
     } catch (err) {
-        if (err.response) {
-            err.response.data.status = err.response.status;
-            throw err.response.data;
-        }
-
         throw err;
     }
 };
