@@ -1,0 +1,55 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "no-secrets",
+        "this",
+        "no-loops",
+        "only-error",
+        "react-redux",
+        "jsdoc",
+        "prettier"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:react-redux/recommended",
+        "plugin:jsdoc/recommended",
+        "prettier",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
+    ],
+    "rules": {
+        "import/order": "error",
+        "prettier/prettier": "error",
+        "no-secrets/no-secrets": "error",
+        "this/no-this": "error",
+        "no-loops/no-loops": "error",
+        "jsdoc/require-description": "error",
+        "jsdoc/require-file-overview": "error",
+        "jsdoc/require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "ArrowFunctionExpression": true,
+                    "ClassDeclaration": true,
+                    "ClassExpression": true,
+                    "FunctionExpression": true,
+                    "MethodDefinition": true
+                }
+            }
+        ],
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns-type": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

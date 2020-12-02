@@ -1,5 +1,14 @@
-// Tests to see whether a string is null or whitespace
-const isNotNullOrWhitespace = (input?: string | null) => {
+/**
+ * @file Utility functions for input sanitization
+ */
+
+/**
+ * Tests to see whether a string is null or whitespace
+ *
+ * @param input - The input string to test
+ * @returns - The input string, which is now known to be a non-whitespace string
+ */
+const isNotNullOrWhitespace = (input?: string | null): string => {
     input = isNotNull(input);
 
     if (input === '') {
@@ -13,8 +22,13 @@ const isNotNullOrWhitespace = (input?: string | null) => {
     return input;
 };
 
-// Checks to see if something is null or undefined
-const isNotNull = <T = any>(input?: T | null) => {
+/**
+ * Checks to see if something is null or undefined
+ *
+ * @param input - The input something (we have no idea what it is)
+ * @returns The input object
+ */
+const isNotNull = <T = never>(input?: T | null): T => {
     if (input === null) {
         throw new Error('input is null');
     }
@@ -26,8 +40,13 @@ const isNotNull = <T = any>(input?: T | null) => {
     return input;
 };
 
-// Checks to see if an array is null or empty
-const isNotNullOrEmpty = <T = any>(input?: T[] | null) => {
+/**
+ * Checks to see if an array is null or empty
+ *
+ * @param input - The input array
+ * @returns - The array, which in now known to be not null or empty
+ */
+const isNotNullOrEmpty = <T = never>(input?: T[] | null): T[] => {
     input = isNotNull(input);
 
     if (!input.length) {

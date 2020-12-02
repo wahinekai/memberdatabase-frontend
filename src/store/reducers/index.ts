@@ -1,8 +1,8 @@
-import { ActionTypes, initialReduxState } from '../../model';
-import { clearUser, setUser } from './user';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { ActionTypes, initialReduxState } from '../../model';
+import { clearUser, setUser } from './user';
 import { createReducer } from './CreateReducer';
 import { rehydrate } from './persist';
 

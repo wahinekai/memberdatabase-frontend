@@ -2,6 +2,9 @@ import React, { FC } from 'react';
 import { PropTypes } from '../../model';
 import NavbarEntry from './NavbarEntry';
 
+/**
+ *
+ */
 const Navbar: FC = () => {
     const pages: Array<PropTypes.NavbarEntry> = [
         {

@@ -1,13 +1,19 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 
-import { Error, FormLabel, Logout, Submit, LoginHeader } from '../components';
-import { User, PropTypes, Validation, ReduxState } from '../model';
-import { updateUser, getUser } from '../store/actions/user';
+import { Error, FormLabel, LoginHeader, Logout, Submit } from '../components';
+import { PropTypes, ReduxState, User, Validation } from '../model';
+import { getUser, updateUser } from '../store/actions/user';
 import { logout } from '../store/actions/auth';
 import { isNotNull } from '../utils/ensure';
 
+/**
+ * @param root0
+ * @param root0.user
+ * @param root0.onLogout
+ * @param root0.getUser
+ */
 const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(async (values: User) => {
@@ -70,6 +76,10 @@ const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
     }
 };
 
+/**
+ * @param root0
+ * @param root0.user
+ */
 const mapStateToProps = ({ user }: ReduxState) => ({
     user,
 });

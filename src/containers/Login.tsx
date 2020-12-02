@@ -1,12 +1,16 @@
 import React, { FC, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 
 import { Error, LoginHeader, Submit } from '../components';
-import { initialLoginObject, LoginObject, PropTypes, Validation } from '../model';
+import { LoginObject, PropTypes, Validation, initialLoginObject } from '../model';
 import { onLogin } from '../store/actions/auth';
 
+/**
+ * @param root0
+ * @param root0.onLogin
+ */
 const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     const history = useHistory();
 

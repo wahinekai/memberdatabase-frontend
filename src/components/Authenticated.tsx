@@ -2,8 +2,13 @@ import React, { FC } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { isNotNull, isNotNullOrWhitespace } from '../utils/ensure';
-import { User, PropTypes } from '../model';
+import { PropTypes, User } from '../model';
 
+/**
+ * @param root0
+ * @param root0.user
+ * @param root0.children
+ */
 const Authenticated: FC<PropTypes.Authenticated> = ({ user, children }) => {
     try {
         user = isNotNull<User>(user);

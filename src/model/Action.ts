@@ -1,6 +1,5 @@
-import { User } from '.';
-
 import { RehydrateAction } from 'redux-persist';
+import { User } from '.';
 
 export enum ActionTypes {
     CLEAR_USER = 'user/CLEAR_USER',

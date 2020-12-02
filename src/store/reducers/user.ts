@@ -1,5 +1,9 @@
-import { noUser, ReduxState, User } from '../../model';
+import { ReduxState, User, noUser } from '../../model';
 
+/**
+ * @param state
+ * @param user
+ */
 export const setUser = (state: ReduxState, user: User): ReduxState => {
     // Add token to user if not included
     if (state.user !== noUser && !user.token) {
@@ -11,6 +15,9 @@ export const setUser = (state: ReduxState, user: User): ReduxState => {
     };
 };
 
+/**
+ * @param state
+ */
 export const clearUser = (state: ReduxState): ReduxState => {
     return {
         ...state,

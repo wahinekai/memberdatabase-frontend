@@ -1,5 +1,5 @@
-import { User } from '.';
 import { noUser } from './User';
+import { User } from '.';
 
 type ReduxState = {
     user: User;

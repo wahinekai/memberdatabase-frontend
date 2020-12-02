@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 import { PropTypes } from '../../model';
 
+/**
+ * @param root0
+ * @param root0.username
+ */
 const ProfileNavbar: FC<PropTypes.TopNavbar> = ({ username }) => (
     <nav className="navbar navbar-expand container">
         <Link to="/profile" className="row">

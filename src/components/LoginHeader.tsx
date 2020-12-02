@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
-import { Logo, Header } from '.';
 import { PropTypes } from '../model';
+import { Header, Logo } from '.';
 
+/**
+ * @param root0
+ * @param root0.text
+ */
 const LoginHeader: FC<PropTypes.LoginHeader> = ({ text }) => (
     <>
         <div className="row">

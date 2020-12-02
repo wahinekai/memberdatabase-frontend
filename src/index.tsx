@@ -1,16 +1,20 @@
+/**
+ * @file Entrypoint for the project. Sets up the Redux persisted store, and
+ * renders the MainRouter container as the root container
+ */
+
 import React, { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { MainRouter } from './containers';
 import { Provider } from 'react-redux';
-import { configureStore, createPersistor } from './store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUsers, faHandshake, faGamepad, faTrophy, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
-import { Loading } from './components';
+import { faGamepad, faHandshake, faShoppingCart, faTrophy, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import { Loading } from './components';
+import { configureStore, createPersistor } from './store';
+import { MainRouter } from './containers';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';

@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { Profile, Login, Register } from '.';
+import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Authenticated, BottomNavbar, Unauthenticated } from '../components';
-import { ReduxState, PropTypes } from '../model';
+import { PropTypes, ReduxState } from '../model';
+import { Login, Profile, Register } from '.';
 
+/**
+ * @param root0
+ * @param root0.user
+ */
 const MainRouter: FC<PropTypes.MainRouter> = ({ user }) => (
     <Router>
         <Switch>
@@ -31,6 +35,10 @@ const MainRouter: FC<PropTypes.MainRouter> = ({ user }) => (
     </Router>
 );
 
+/**
+ * @param root0
+ * @param root0.user
+ */
 const mapStateToProps = ({ user }: ReduxState) => ({
     user,
 });

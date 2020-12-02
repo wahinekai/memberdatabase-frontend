@@ -1,7 +1,11 @@
-import { initialReduxState, ReduxState } from '../../model';
+import { ReduxState, initialReduxState } from '../../model';
 import { setAuthTokenHeader } from '../../utils/apicall';
 
-export const rehydrate = (_state: ReduxState, payload: object) => {
+/**
+ * @param _state
+ * @param payload
+ */
+export const rehydrate = (_state: ReduxState, payload: unknown) => {
     try {
         // Pull user from persisted store
         const persistedStore = payload as ReduxState;

@@ -1,48 +1,61 @@
+/**
+ * @file API call utility file wrapping Axios's API
+ */
+
 import axios, { AxiosResponse } from 'axios';
+import { HttpMethodTypes } from '../model';
 import { isNotNullOrWhitespace } from './ensure';
 
-const apiCallAsync = async <T = any>(method: string, path: string, data: any = null) => {
-    try {
-        let pathWithEndpoint = path;
-        if (process && process.env) {
-            if (process.env.BACKEND_ENDPOINT) {
-                pathWithEndpoint = process.env.BACKEND_ENDPOINT + path;
-            } else if (process.env.REACT_APP_BACKEND_ENDPOINT) {
-                pathWithEndpoint = process.env.REACT_APP_BACKEND_ENDPOINT + path;
-            }
-        }
-
-        let res: AxiosResponse<T>;
-
-        switch (method.toLowerCase()) {
-            case 'get':
-                res = await axios.get(pathWithEndpoint);
-                break;
-            case 'post':
-                res = await axios.post(pathWithEndpoint, data);
-                break;
-            case 'put':
-                res = await axios.put(pathWithEndpoint, data);
-                break;
-            case 'delete':
-                res = await axios.delete(pathWithEndpoint);
-                break;
-            default:
-                throw new Error('Unknown HTTP Method');
-        }
-
-        return res.data;
-    } catch (err) {
-        throw err;
+/**
+ * Wrapper upon Axios's API supporting all HTTP Method Types and using endpoint prefixes in a .env file
+ *
+ * @param method - The HTTP Method to call
+ * @param path - The path to be used (or appended onto REACT_APP_BACKEND_ENDPOINT environment variable)
+ * @param data - An optional parameter for PUT and POST allowing data of any kind to be passed in the body of the function
+ * @returns The response from the API
+ */
+const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, data: unknown = null): Promise<T> => {
+    let pathWithEndpoint = path;
+    if (process.env.REACT_APP_BACKEND_ENDPOINT) {
+        pathWithEndpoint = process.env.REACT_APP_BACKEND_ENDPOINT + path;
     }
+
+    let res: AxiosResponse<T>;
+
+    switch (method) {
+        case HttpMethodTypes.GET:
+            res = await axios.get(pathWithEndpoint);
+            break;
+        case HttpMethodTypes.POST:
+            res = await axios.post(pathWithEndpoint, data);
+            break;
+        case HttpMethodTypes.PUT:
+            res = await axios.put(pathWithEndpoint, data);
+            break;
+        case HttpMethodTypes.DELETE:
+            res = await axios.delete(pathWithEndpoint);
+            break;
+        default:
+            throw new Error('Unsupported HTTP Method');
+    }
+
+    return res.data;
 };
 
-const setAuthTokenHeader = (token: string) => {
+/**
+ * Sets the Axios default authentication token
+ *
+ * @param token - The authentication token to set as default
+ */
+const setAuthTokenHeader = (token: string): void => {
     token = isNotNullOrWhitespace(token);
     axios.defaults.headers.common['token'] = token;
 };
 
-const clearAuthTokenHeader = () => {
+/**
+ * Clears the Axios default authentication token header
+ */
+const clearAuthTokenHeader = (): void => {
     delete axios.defaults.headers.common['token'];
 };
 
