@@ -1,3 +1,7 @@
+/**
+ * @file Types related to Redux Actions
+ */
+
 import { RehydrateAction } from 'redux-persist';
 import { User } from '.';
 

@@ -1,3 +1,7 @@
+/**
+ * @file PropTypes for all components and containers
+ */
+
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { ReactNode } from 'react';
 

@@ -1,3 +1,7 @@
+/**
+ * @file types related to users
+ */
+
 type User = {
     token: string;
     email: string;

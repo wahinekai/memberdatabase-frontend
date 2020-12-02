@@ -1,3 +1,7 @@
+/**
+ * @file Helper types for Redux actions & reducers
+ */
+
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Action, LoginObject, ReduxState, RegisterObject } from '.';
 

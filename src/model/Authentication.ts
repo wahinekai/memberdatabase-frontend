@@ -1,3 +1,7 @@
+/**
+ * @file Types related to authentication
+ */
+
 export type LoginObject = {
     username: string;
     password: string;

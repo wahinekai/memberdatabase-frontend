@@ -1,3 +1,7 @@
+/**
+ * @file Schemas for form validation
+ */
+
 import * as Yup from 'yup';
 
 // Building Blocks

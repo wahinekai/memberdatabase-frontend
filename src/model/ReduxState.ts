@@ -1,3 +1,7 @@
+/**
+ * @file Types relating to the redux store
+ */
+
 import { noUser } from './User';
 import { User } from '.';
 
