@@ -2,9 +2,8 @@
  * @file Redux actions regarding users
  */
 
-import { ActionTypes, ReduxTypes, User } from '../../model';
-import { MethodTypes } from '../../model/Http';
-import { apiCallAsync } from '../../utils/apicall';
+import { ActionTypes, ReduxTypes, HttpMethodTypes, User } from '../../model';
+import { apiCallAsync } from '../../utils';
 
 /**
  * Wrapper function around getUserAsync for redux thunk
@@ -37,7 +36,7 @@ export const updateUser = (data: User): ReduxTypes.Thunk => {
  */
 const getUserAsync = async (dispatch: ReduxTypes.Dispatch, getState: ReduxTypes.GetState) => {
     const data = getState().user;
-    const user = await apiCallAsync<User>(MethodTypes.GET, `/user/profile/get?username=${data.email}`);
+    const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/profile/username=${data.email}`);
     dispatch({
         type: ActionTypes.SET_USER,
         user,
@@ -51,7 +50,7 @@ const getUserAsync = async (dispatch: ReduxTypes.Dispatch, getState: ReduxTypes.
  * @param data - New user data to update the backend with
  */
 const updateUserAsync = async (dispatch: ReduxTypes.Dispatch, data: User) => {
-    const user = await apiCallAsync<User>(MethodTypes.PUT, `/user/profile/update?username=${data.email}`, data);
+    const user = await apiCallAsync<User>(HttpMethodTypes.PUT, `/user/profile/update?username=${data.email}`, data);
     dispatch({
         type: ActionTypes.SET_USER,
         user,

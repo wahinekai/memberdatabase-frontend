@@ -7,10 +7,12 @@ import { User } from '.';
 
 type ReduxState = {
     user: User;
+    token: string;
 };
 
 export const initialReduxState = {
     user: noUser,
+    token: '',
 };
 
 export default ReduxState;

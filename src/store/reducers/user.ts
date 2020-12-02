@@ -2,7 +2,7 @@
  * @file Reducer functions based on user interaction
  */
 
-import { ReduxState, User, noUser } from '../../model';
+import { ReduxState, User, initialReduxState } from '../../model';
 
 /**
  * Update the redux state by setting the user equal to the user passed in
@@ -11,16 +11,10 @@ import { ReduxState, User, noUser } from '../../model';
  * @param user - User passed in action
  * @returns The new redux state
  */
-export const setUser = (state: ReduxState, user: User): ReduxState => {
-    // Add token to user if not included
-    if (state.user !== noUser && !user.token) {
-        state.user.token = user.token;
-    }
-    return {
-        ...state,
-        user,
-    };
-};
+export const setUser = (state: ReduxState, user: User): ReduxState => ({
+    ...state,
+    user,
+});
 
 /**
  * Update the rexux state by clearing the user
@@ -28,9 +22,7 @@ export const setUser = (state: ReduxState, user: User): ReduxState => {
  * @param state - previous redux state
  * @returns The new redux state
  */
-export const clearUser = (state: ReduxState): ReduxState => {
-    return {
-        ...state,
-        user: noUser,
-    };
-};
+export const clearUser = (state: ReduxState): ReduxState => ({
+    ...state,
+    user: initialReduxState.user,
+});

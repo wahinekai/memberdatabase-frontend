@@ -9,6 +9,7 @@ import { ActionTypes, initialReduxState } from '../../model';
 import { clearUser, setUser } from './user';
 import { createReducer } from './CreateReducer';
 import { rehydrate } from './persist';
+import { clearToken, setToken } from './auth';
 
 // Configuration for redux persistance
 const persistConfig = {
@@ -23,5 +24,7 @@ export default persistReducer(
         [ActionTypes.SET_USER]: setUser,
         [ActionTypes.CLEAR_USER]: clearUser,
         [ActionTypes.REHYDRATE]: rehydrate,
+        [ActionTypes.SET_TOKEN]: setToken,
+        [ActionTypes.CLEAR_TOKEN]: clearToken,
     })
 );

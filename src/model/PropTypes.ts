@@ -9,8 +9,8 @@ import { ReactNode } from 'react';
 import { ReduxTypes, User } from './';
 
 // PropTypes for components & containers
-export type Authenticated = OptionalUser & Children;
-export type Unauthenticated = OptionalUser & Children;
+export type Authenticated = OptionalToken & Children;
+export type Unauthenticated = OptionalToken & Children;
 export type Error = Children;
 export type FormLabel = HTMLFor & OptionalChildren;
 export type Logo = OptionalClassname;
@@ -69,6 +69,10 @@ type OptionalChildren = {
 
 type OptionalUser = {
     user?: User | null;
+};
+
+type OptionalToken = {
+    token?: string | null;
 };
 
 type HTMLFor = {

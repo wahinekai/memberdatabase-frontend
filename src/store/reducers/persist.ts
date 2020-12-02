@@ -19,8 +19,8 @@ export const rehydrate = (_state: ReduxState, payload: unknown): ReduxState => {
         const persistedStore = payload as ReduxState;
 
         // Set auth token header
-        if (persistedStore.user.token) {
-            setAuthTokenHeader(persistedStore.user.token);
+        if (persistedStore.token) {
+            setAuthTokenHeader(persistedStore.token);
         }
         return persistedStore;
     } catch (err) {

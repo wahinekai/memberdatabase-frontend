@@ -8,18 +8,18 @@
  * @param input - The input string to test
  * @returns - The input string, which is now known to be a non-whitespace string
  */
-const isNotNullOrWhitespace = (input?: string | null): string => {
-    input = isNotNull(input);
+const isNotNullOrWhitespace = (input: () => string | null | undefined): string => {
+    const inputString = isNotNull(input);
 
-    if (input === '') {
+    if (inputString === '') {
         throw new Error('input is an empty string');
     }
 
-    if (input.trim() === '') {
+    if (inputString.trim() === '') {
         throw new Error('input is all whitespace');
     }
 
-    return input;
+    return inputString;
 };
 
 /**
@@ -28,16 +28,18 @@ const isNotNullOrWhitespace = (input?: string | null): string => {
  * @param input - The input something (we have no idea what it is)
  * @returns The input object
  */
-const isNotNull = <T = never>(input?: T | null): T => {
-    if (input === null) {
+const isNotNull = <T = never>(input: () => T | null | undefined): T => {
+    const inputResult = input();
+
+    if (inputResult === null) {
         throw new Error('input is null');
     }
 
-    if (typeof input === 'undefined') {
+    if (typeof inputResult === 'undefined') {
         throw new Error('input is undefined');
     }
 
-    return input;
+    return inputResult;
 };
 
 /**
@@ -46,14 +48,14 @@ const isNotNull = <T = never>(input?: T | null): T => {
  * @param input - The input array
  * @returns - The array, which in now known to be not null or empty
  */
-const isNotNullOrEmpty = <T = never>(input?: T[] | null): T[] => {
-    input = isNotNull(input);
+const isNotNullOrEmpty = <T = never>(input: () => T[] | null | undefined): T[] => {
+    const inputArray = isNotNull(input);
 
-    if (!input.length) {
+    if (!inputArray.length) {
         throw new Error('input is empty');
     }
 
-    return input;
+    return inputArray;
 };
 
 export { isNotNull, isNotNullOrEmpty, isNotNullOrWhitespace };

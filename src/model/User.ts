@@ -2,17 +2,16 @@
  * @file types related to users
  */
 
-type User = {
-    token: string;
+export type User = {
+    firstName: string;
     email: string;
-    admin: boolean;
-    phone?: number;
+};
+
+export type UserWithToken = User & {
+    token: string;
 };
 
 export const noUser: User = {
-    token: '',
+    firstName: '',
     email: '',
-    admin: false,
 };
-
-export default User;

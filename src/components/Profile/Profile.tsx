@@ -5,7 +5,7 @@ import React, { FC, useCallback, useEffect } from 'react';
 import { Formik } from 'formik';
 
 import { PropTypes, User, Validation } from '../../model';
-import { isNotNull } from '../../utils/ensure';
+import { Ensure } from '../../utils';
 import ProfileForm from './ProfileForm';
 
 /**
@@ -36,7 +36,7 @@ const Profile: FC<PropTypes.Profile> = ({ user, getUser, updateUser }) => {
     }, [getUser]);
 
     try {
-        user = isNotNull(user);
+        user = Ensure.isNotNull<User>(() => user);
 
         return (
             <Formik initialValues={user} validationSchema={Validation.updateProfileSchema} onSubmit={onSubmitAsync}>

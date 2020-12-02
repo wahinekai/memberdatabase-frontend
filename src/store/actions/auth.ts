@@ -2,8 +2,8 @@
  * @file Redux Action functions related to authentication
  */
 
-import { apiCallAsync, clearAuthTokenHeader, setAuthTokenHeader } from '../../utils/apicall';
-import { Action, ActionTypes, HttpMethodTypes, LoginObject, ReduxTypes, RegisterObject, User } from '../../model';
+import { apiCallAsync, clearAuthTokenHeader, setAuthTokenHeader } from '../../utils';
+import { ActionTypes, HttpMethodTypes, LoginObject, ReduxTypes, RegisterObject, UserWithToken } from '../../model';
 import { Dispatch } from '../../model/ReduxTypes';
 
 /**
@@ -31,17 +31,39 @@ export const onRegister: ReduxTypes.onRegister = (data): ReduxTypes.Thunk => {
 };
 
 /**
+ * Wrapper function around onLogoutThunk
+ *
+ * @returns A redux thunk
+ */
+export const onLogout = (): ReduxTypes.Thunk => {
+    return (dispatch) => {
+        onLogoutThunk(dispatch);
+    };
+};
+
+/**
  * Logs in the user, setting up the user in the redux store as the return from the login call
  *
  * @param dispatch - Redux async dispatch
  * @param data - Login data
  */
 const loginAsync = async (dispatch: Dispatch, data: LoginObject) => {
-    const user = await apiCallAsync<User>(HttpMethodTypes.POST, '/user/login', data);
+    // Login with the backend
+    const user = await apiCallAsync<UserWithToken>(HttpMethodTypes.POST, '/authentication/login', data);
+
+    // Set auth token header
     setAuthTokenHeader(user.token);
+
+    // Set user in redux store
     dispatch({
         type: ActionTypes.SET_USER,
         user,
+    });
+
+    // Set authentication token in redux store
+    dispatch({
+        type: ActionTypes.SET_TOKEN,
+        token: user.token,
     });
 };
 
@@ -52,22 +74,41 @@ const loginAsync = async (dispatch: Dispatch, data: LoginObject) => {
  * @param data - Registration data
  */
 const registerAsync = async (dispatch: Dispatch, data: RegisterObject) => {
-    const user = await apiCallAsync<User>(HttpMethodTypes.POST, '/user/register', data);
+    // Register with the backend
+    const user = await apiCallAsync<UserWithToken>(HttpMethodTypes.POST, '/authentication/register', data);
+
+    // Set auth token header
     setAuthTokenHeader(user.token);
+
+    // Set user in redux store
     dispatch({
         type: ActionTypes.SET_USER,
         user,
+    });
+
+    // Set authentication token in redux store
+    dispatch({
+        type: ActionTypes.SET_TOKEN,
+        token: user.token,
     });
 };
 
 /**
  * Logs the user out, clearing the Redux store and Auth Token Header
  *
- * @returns A redux action clearing the user from the store
+ * @param dispatch - Redux async dispatch
  */
-export const onLogout = (): Action => {
+const onLogoutThunk = (dispatch: Dispatch) => {
+    // Clear token header for API calls
     clearAuthTokenHeader();
-    return {
+
+    // Clear user from store
+    dispatch({
         type: ActionTypes.CLEAR_USER,
-    };
+    });
+
+    // Clear token from store
+    dispatch({
+        type: ActionTypes.CLEAR_TOKEN,
+    });
 };
