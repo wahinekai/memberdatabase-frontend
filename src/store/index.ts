@@ -1,15 +1,21 @@
+/**
+ * @file Holds functions needed to create and persist the redux store
+ */
+
 import { Middleware, Store, applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { persistStore } from 'redux-persist';
+import { Persistor, persistStore } from 'redux-persist';
 
 import logger from 'redux-logger';
-import { ReduxState } from '../model';
+import { Action, ReduxState } from '../model';
 import rootReducer from './reducers';
 
 /**
+ * Configure and return the redux store
  *
+ * @returns the redux store
  */
-export const configureStore = () => {
+export const configureStore = (): Store<ReduxState, Action> => {
     const middlewares: Middleware[] = [thunk];
 
     if (process.env.NODE_ENV === 'development') {
@@ -23,6 +29,9 @@ export const configureStore = () => {
 };
 
 /**
- * @param store
+ * Persist a redux store using the redux persist module
+ *
+ * @param store - redux store to persist
+ * @returns A persisted store
  */
-export const createPersistor = (store: Store<ReduxState>) => persistStore(store);
+export const createPersistor = (store: Store<ReduxState, Action>): Persistor => persistStore(store);
