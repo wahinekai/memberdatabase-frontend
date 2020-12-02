@@ -3,8 +3,8 @@
  */
 
 import { connect } from 'react-redux';
-
 import { Profile } from '../components';
+
 import { getUser, updateUser } from '../store/actions';
 import { mapStateToProps } from '../store/utils';
 

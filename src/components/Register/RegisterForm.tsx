@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { Field, Form } from 'formik';
 
 import { Error, FormLabel, Submit } from '..';
-import { PropTypes } from '../../model';
+import { PropTypes, RegisterObject } from '../../model';
 
 /**
  * The display of the registration form
@@ -16,7 +16,7 @@ import { PropTypes } from '../../model';
  * @param props.touched Formik Touched field
  * @returns The formik form for registration
  */
-const RegisterForm: FC<PropTypes.RegisterForm> = ({ errors, touched }) => (
+const RegisterForm: FC<PropTypes.Form<RegisterObject>> = ({ errors, touched }) => (
     <Form>
         <div className="row">
             <div className="col-12 text-center mb-4">

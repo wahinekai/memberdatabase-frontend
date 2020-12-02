@@ -5,7 +5,8 @@ import { Reducer } from 'redux';
 import { ReduxState } from '../../model';
 
 type FunctionMap = {
-    [key: string]: (state: unknown, payload?: unknown) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: (state: ReduxState, payload?: any) => void;
 };
 
 type CreateReducer<S = ReduxState, fnMap = FunctionMap> = (initialState: S, fnMap: fnMap) => Reducer;

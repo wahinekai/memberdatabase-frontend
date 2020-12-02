@@ -3,8 +3,9 @@
  */
 
 import React, { FC } from 'react';
-import { BottomNavbar } from '..';
-import { Authenticated, Profile } from '../../containers';
+import { BottomNavbar } from '../components';
+import { Authenticated, Logout, Profile } from '../containers';
+import LoginHeader from '../components/LoginHeader';
 
 /**
  * Contains the components and authentication status for the profile page
@@ -13,6 +14,8 @@ import { Authenticated, Profile } from '../../containers';
  */
 const ProfilePage: FC = () => (
     <Authenticated>
+        <Logout />
+        <LoginHeader text="Profile" />
         <Profile />
         <BottomNavbar />
     </Authenticated>

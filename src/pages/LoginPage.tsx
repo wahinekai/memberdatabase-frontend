@@ -3,7 +3,9 @@
  */
 
 import React, { FC } from 'react';
-import { Login, Unauthenticated } from '../../containers';
+import { Login, Unauthenticated } from '../containers';
+import { SwitchToRegister } from '../components/Login';
+import LoginHeader from '../components/LoginHeader';
 
 /**
  * Contains the components and authentication status for the login page
@@ -12,7 +14,9 @@ import { Login, Unauthenticated } from '../../containers';
  */
 const LoginPage: FC = () => (
     <Unauthenticated>
+        <LoginHeader text="Sign In" />
         <Login />
+        <SwitchToRegister />
     </Unauthenticated>
 );
 

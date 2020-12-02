@@ -5,7 +5,7 @@
 import React, { FC } from 'react';
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { PropTypes } from '../model';
-import { LoginPage, ProfilePage, RegisterPage } from './Pages';
+import { LoginPage, ProfilePage, RegisterPage } from '../pages';
 
 /**
  * The root of the application, specifying mappings between pages and components

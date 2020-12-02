@@ -3,9 +3,9 @@
  */
 
 import React, { FC } from 'react';
-import { Register, Unauthenticated } from '../../containers';
-import { LoginHeader } from '..';
-import { SwitchToSignIn } from '../Register';
+import { Register, Unauthenticated } from '../containers';
+import { LoginHeader } from '../components';
+import { SwitchToSignIn } from '../components/Register';
 
 /**
  * Contains the components and authentication status for the register page
