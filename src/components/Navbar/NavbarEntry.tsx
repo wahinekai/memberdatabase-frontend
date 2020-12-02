@@ -1,3 +1,7 @@
+/**
+ * @file contains definitions for the Navbar Entry component
+ */
+
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -5,10 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropTypes } from '../../model';
 
 /**
- * @param root0
- * @param root0.link
- * @param root0.name
- * @param root0.icon
+ * Renders a Navbar entry
+ *
+ * @param props - Properties passed down from parents to children
+ * @param props.link - The page this Navbar entry is pointing to
+ * @param props.name - The text to be rendered in this Navbar Entry
+ * @param props.icon - The name of the Font Awesome Icon to render for this Navbar entry
+ * @returns A navbar entry component
  */
 const NavbarEntry: FC<PropTypes.NavbarEntry> = ({ link, name, icon }) => (
     <li className="col-4 nav-item nav-link">

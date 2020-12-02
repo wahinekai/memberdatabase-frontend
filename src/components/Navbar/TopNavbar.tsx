@@ -1,13 +1,20 @@
+/**
+ * @file contains definitions for the top navbar component
+ */
+
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PropTypes } from '../../model';
 
 /**
- * @param root0
- * @param root0.username
+ * The Top Navbar component
+ *
+ * @param props - Properties passed down from parents to children
+ * @param props.username - The username of the current user
+ * @returns The top navbar component
  */
-const ProfileNavbar: FC<PropTypes.TopNavbar> = ({ username }) => (
+const TopNavbar: FC<PropTypes.TopNavbar> = ({ username }) => (
     <nav className="navbar navbar-expand container">
         <Link to="/profile" className="row">
             <img
@@ -25,4 +32,4 @@ const ProfileNavbar: FC<PropTypes.TopNavbar> = ({ username }) => (
     </nav>
 );
 
-export default ProfileNavbar;
+export default TopNavbar;

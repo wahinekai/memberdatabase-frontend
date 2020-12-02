@@ -1,3 +1,7 @@
+/**
+ * @file Contains definitions for the Login Component
+ */
+
 import React, { FC, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
@@ -6,8 +10,11 @@ import { LoginObject, PropTypes, Validation, initialLoginObject } from '../model
 import { Error, LoginHeader, Submit } from '.';
 
 /**
- * @param root0
- * @param root0.onLogin
+ * The login component
+ *
+ * @param props - Properties passed down from parents to children
+ * @param props.onLogin - The function to log in the user
+ * @returns The login component
  */
 const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     const history = useHistory();
@@ -59,7 +66,7 @@ const Login: FC<PropTypes.Login> = ({ onLogin }) => {
                 </Formik>
             </div>
             <div className="col-12 d-block text-center mt-4">
-                Don't have an account?
+                Don&apost have an account?
                 <Link className="text-primary" to="/register">
                     {' '}
                     Sign up

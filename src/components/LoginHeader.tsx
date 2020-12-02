@@ -1,10 +1,17 @@
+/**
+ * @file A Header to be used during the login portions of the application
+ */
+
 import React, { FC } from 'react';
 import { PropTypes } from '../model';
 import { Header, Logo } from '.';
 
 /**
- * @param root0
- * @param root0.text
+ * Returns the functional component for the login header
+ *
+ * @param props - Properties passed down from the parent components
+ * @param props.text - The text to render in the header
+ * @returns The login header component
  */
 const LoginHeader: FC<PropTypes.LoginHeader> = ({ text }) => (
     <>

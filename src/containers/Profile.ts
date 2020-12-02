@@ -5,10 +5,10 @@
 import { connect } from 'react-redux';
 
 import { Profile } from '../components';
-import { getUser, onLogout, updateUser } from '../store/actions';
+import { getUser, updateUser } from '../store/actions';
 import { mapStateToProps } from '../store/utils';
 
-const mapDispatchToProps = { updateUser, getUser, onLogout };
+const mapDispatchToProps = { updateUser, getUser };
 
 const ProfileContainer = connect(mapStateToProps.onlyUser, mapDispatchToProps)(Profile);
 

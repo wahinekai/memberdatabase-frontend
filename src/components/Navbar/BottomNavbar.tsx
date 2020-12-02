@@ -1,9 +1,15 @@
+/**
+ * @file Contains definition for the bottom navbar component
+ */
+
 import React, { FC } from 'react';
 import { PropTypes } from '../../model';
 import NavbarEntry from './NavbarEntry';
 
 /**
+ * The bottom navbar component
  *
+ * @returns The bottom nabvar
  */
 const Navbar: FC = () => {
     const pages: Array<PropTypes.NavbarEntry> = [
