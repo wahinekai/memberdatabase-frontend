@@ -65,7 +65,7 @@ const registerAsync = async (dispatch: Dispatch, data: RegisterObject) => {
  *
  * @returns A redux action clearing the user from the store
  */
-export const logout = (): Action => {
+export const onLogout = (): Action => {
     clearAuthTokenHeader();
     return {
         type: ActionTypes.CLEAR_USER,

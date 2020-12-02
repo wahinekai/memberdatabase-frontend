@@ -3,9 +3,10 @@
  */
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FormikErrors, FormikTouched } from 'formik';
 import { ReactNode } from 'react';
 
-import { ReduxTypes, User } from './';
+import { ReduxTypes, RegisterObject, User } from './';
 
 // PropTypes for components & containers
 export type Authenticated = OptionalUser & Children;
@@ -16,7 +17,7 @@ export type Logo = OptionalClassname;
 export type TopNavbar = Username;
 export type Header = OptionalClassname & Children;
 export type MainRouter = OptionalUser;
-export type Profile = Logout & OptionalUser & GetUser;
+export type Profile = Logout & OptionalUser & GetUser & UpdateUser;
 export type Login = OnLoginProp;
 export type Register = OnRegisterProp;
 export type Logout = OnLogout;
@@ -32,7 +33,15 @@ export type LoginHeader = {
     text: string;
 };
 
+export type RegisterForm = {
+    errors: RegisterFormikErrors;
+    touched: RegisterFormikTouched;
+};
+
 // PropTypes that makes these entries up
+type RegisterFormikErrors = FormikErrors<RegisterObject>;
+type RegisterFormikTouched = FormikTouched<RegisterObject>;
+
 type OnLogout = {
     onLogout(): void;
 };
@@ -71,4 +80,8 @@ type HTMLFor = {
 
 type GetUser = {
     getUser(): void;
+};
+
+type UpdateUser = {
+    updateUser(values: User): void;
 };

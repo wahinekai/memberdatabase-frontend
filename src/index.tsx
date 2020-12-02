@@ -12,9 +12,8 @@ import { faGamepad, faHandshake, faShoppingCart, faTrophy, faUser, faUsers } fro
 
 import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
-import { Loading } from './components';
+import { Loading, MainRouter } from './components';
 import { configureStore, createPersistor } from './store';
-import { MainRouter } from './containers';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';

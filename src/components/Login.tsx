@@ -1,11 +1,9 @@
 import React, { FC, useCallback } from 'react';
-import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
-import { Error, LoginHeader, Submit } from '../components';
 import { LoginObject, PropTypes, Validation, initialLoginObject } from '../model';
-import { onLogin } from '../store/actions/auth';
+import { Error, LoginHeader, Submit } from '.';
 
 /**
  * @param root0
@@ -71,6 +69,4 @@ const Login: FC<PropTypes.Login> = ({ onLogin }) => {
     );
 };
 
-const mapDispatchToProps = { onLogin };
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

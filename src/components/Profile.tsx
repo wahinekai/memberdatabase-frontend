@@ -1,12 +1,9 @@
 import React, { FC, useCallback, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
 
-import { Error, FormLabel, LoginHeader, Logout, Submit } from '../components';
-import { PropTypes, ReduxState, User, Validation } from '../model';
-import { getUser, updateUser } from '../store/actions/user';
-import { logout } from '../store/actions/auth';
+import { PropTypes, User, Validation } from '../model';
 import { isNotNull } from '../utils/ensure';
+import { Error, FormLabel, LoginHeader, Logout, Submit } from '.';
 
 /**
  * @param root0
@@ -14,15 +11,18 @@ import { isNotNull } from '../utils/ensure';
  * @param root0.onLogout
  * @param root0.getUser
  */
-const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
+const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser, updateUser }) => {
     // Create onSubmit callback to update user
-    const onSubmitAsync = useCallback(async (values: User) => {
-        try {
-            await updateUser(values);
-        } catch (err) {
-            console.error(err);
-        }
-    }, []);
+    const onSubmitAsync = useCallback(
+        async (values: User) => {
+            try {
+                await updateUser(values);
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [updateUser]
+    );
 
     // Update Redux store with newest user
     useEffect(() => {
@@ -76,14 +76,4 @@ const Profile: FC<PropTypes.Profile> = ({ user, onLogout, getUser }) => {
     }
 };
 
-/**
- * @param root0
- * @param root0.user
- */
-const mapStateToProps = ({ user }: ReduxState) => ({
-    user,
-});
-
-const mapDispatchToProps = { updateUser, getUser, onLogout: logout };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default Profile;

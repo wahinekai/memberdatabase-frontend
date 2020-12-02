@@ -26,6 +26,8 @@
     ],
     "rules": {
         "import/order": "error",
+        "react/prop-types": "off",
+        "react-redux/connect-prefer-named-arguments": "off",
         "prettier/prettier": "error",
         "no-secrets/no-secrets": "error",
         "this/no-this": "error",
