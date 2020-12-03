@@ -3,8 +3,17 @@
  */
 
 export type User = {
-    firstName: string;
+    firstName?: string;
+    lastName?: string;
+    active: boolean;
     email: string;
+    facebookName?: string;
+    payPalName?: string;
+    phoneNumber?: string;
+    streetAddress?: string;
+    city?: string;
+    region?: string;
+    country?: string;
 };
 
 export type UserWithToken = User & {
@@ -14,4 +23,5 @@ export type UserWithToken = User & {
 export const noUser: User = {
     firstName: '',
     email: '',
+    active: false,
 };

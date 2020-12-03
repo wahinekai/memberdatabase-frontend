@@ -3,11 +3,12 @@
  */
 
 import * as Yup from 'yup';
+import 'yup-phone';
 
 // Building Blocks
 const email = Yup.string().email('Must enter a valid email').required('email is required');
 
-const phone = Yup.number().required('Phone number is required');
+const phone = Yup.string().phone().required('Phone number is required');
 
 const username = Yup.string()
     .min(4, 'Username must be 4+ characters')
@@ -33,3 +34,5 @@ export const updateProfileSchema = Yup.object().shape({
     email: email,
     phone: phone,
 });
+
+// TODO: Validation for states & countries - must be in country list, then state list

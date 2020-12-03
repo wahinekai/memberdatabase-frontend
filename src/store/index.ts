@@ -15,7 +15,7 @@ import rootReducer from './reducers';
  *
  * @returns the redux store
  */
-export const configureStore = (): Store<ReduxState, Action> => {
+const configureStore = (): Store<ReduxState, Action> => {
     const middlewares: Middleware[] = [thunk];
 
     if (process.env.NODE_ENV === 'development') {
@@ -35,3 +35,5 @@ export const configureStore = (): Store<ReduxState, Action> => {
  * @returns A persisted store
  */
 export const createPersistor = (store: Store<ReduxState, Action>): Persistor => persistStore(store);
+
+export const store = configureStore();

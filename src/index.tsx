@@ -13,14 +13,13 @@ import { faGamepad, faHandshake, faShoppingCart, faTrophy, faUser, faUsers } fro
 import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { Loading } from './components';
-import { configureStore, createPersistor } from './store';
+import { store, createPersistor } from './store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { MainRouter } from './routers';
 
-const store = configureStore();
-
+// Add full set of fontawesome library icons
 library.add(faGamepad, faTrophy, faUser, faShoppingCart, faUsers, faHandshake);
 
 render(

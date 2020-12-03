@@ -5,6 +5,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { HttpMethodTypes } from '../model';
 import { isNotNullOrWhitespace } from './ensure';
+import { loadSettings } from '.';
 
 /**
  * Wrapper upon Axios's API supporting all HTTP Method Types and using endpoint prefixes in a .env file
@@ -15,10 +16,8 @@ import { isNotNullOrWhitespace } from './ensure';
  * @returns The response from the API
  */
 const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, data: unknown = null): Promise<T> => {
-    let pathWithEndpoint = path;
-    if (process.env.REACT_APP_BACKEND_ENDPOINT) {
-        pathWithEndpoint = process.env.REACT_APP_BACKEND_ENDPOINT + path;
-    }
+    const { backendEndpoint } = loadSettings();
+    const pathWithEndpoint = backendEndpoint + path;
 
     let res: AxiosResponse<T>;
 
@@ -48,7 +47,7 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
  * @param token - The authentication token to set as default
  */
 const setAuthTokenHeader = (token: string): void => {
-    token = isNotNullOrWhitespace(token);
+    token = isNotNullOrWhitespace(() => token);
     axios.defaults.headers.common['token'] = token;
 };
 

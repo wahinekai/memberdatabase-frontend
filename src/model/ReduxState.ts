@@ -2,8 +2,7 @@
  * @file Types relating to the redux store
  */
 
-import { noUser } from './User';
-import { User } from '.';
+import { User, noUser } from '.';
 
 type ReduxState = {
     user: User;
