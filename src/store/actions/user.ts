@@ -36,7 +36,8 @@ export const updateUser = (data: User): ReduxTypes.Thunk => {
  */
 const getUserAsync = async (dispatch: ReduxTypes.Dispatch, getState: ReduxTypes.GetState) => {
     const data = getState().user;
-    const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/profile/username=${data.email}`);
+    console.log(data);
+    const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/profile`);
     dispatch({
         type: ActionTypes.SET_USER,
         user,

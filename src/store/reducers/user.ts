@@ -17,7 +17,7 @@ export const setUser = (state: ReduxState, user: User): ReduxState => ({
 });
 
 /**
- * Update the rexux state by clearing the user
+ * Update the redux state by clearing the user
  *
  * @param state - previous redux state
  * @returns The new redux state

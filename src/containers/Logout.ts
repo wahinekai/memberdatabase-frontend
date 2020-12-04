@@ -5,10 +5,7 @@
 import { connect } from 'react-redux';
 
 import { Logout } from '../components';
-import { onLogout } from '../store/actions';
 
-const mapDispatchToProps = { onLogout };
-
-const LogoutContainer = connect(null, mapDispatchToProps)(Logout);
+const LogoutContainer = connect(null, null)(Logout);
 
 export default LogoutContainer;

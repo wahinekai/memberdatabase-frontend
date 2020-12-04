@@ -8,7 +8,6 @@ import * as PropTypes from './PropTypes';
 import * as Validation from './Validation';
 import * as ReduxTypes from './ReduxTypes';
 import { Settings, EnvironmentSettings, GlobalSettings } from './Settings';
-import { LoginObject, RegisterObject, initialLoginObject, initialRegisterObject } from './Authentication';
 import Action, { ActionTypes } from './Action';
 import { MethodTypes as HttpMethodTypes } from './Http';
 
@@ -19,19 +18,9 @@ export type {
     GlobalSettings,
     ReduxState,
     ReduxTypes,
-    LoginObject,
-    RegisterObject,
     User,
     UserWithToken,
     PropTypes,
 };
 
-export {
-    ActionTypes,
-    HttpMethodTypes,
-    initialLoginObject,
-    initialReduxState,
-    initialRegisterObject,
-    noUser,
-    Validation,
-};
+export { ActionTypes, HttpMethodTypes, initialReduxState, noUser, Validation };

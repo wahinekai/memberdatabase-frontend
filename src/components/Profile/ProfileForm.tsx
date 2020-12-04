@@ -29,7 +29,7 @@ const ProfileForm: FC<PropTypes.Form<User>> = ({ errors, touched }) => (
 
         <div className="row">
             <div className="col-12 text-center mb-4">
-                {errors.phone && touched.phone ? <Error>{errors.phone}</Error> : null}
+                {errors.phoneNumber && touched.phoneNumber ? <Error>{errors.phoneNumber}</Error> : null}
                 <FormLabel htmlFor="phone"></FormLabel>
                 <Field name="phone" placeholder="phone" />
             </div>

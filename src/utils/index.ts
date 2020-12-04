@@ -6,5 +6,6 @@ import { apiCallAsync, setAuthTokenHeader, clearAuthTokenHeader } from './apical
 import * as Ensure from './ensure';
 import * as Timer from './timer';
 import { loadSettings } from './loadSettings';
+import { signInAuthProvider } from './auth';
 
-export { apiCallAsync, Ensure, Timer, loadSettings, setAuthTokenHeader, clearAuthTokenHeader };
+export { apiCallAsync, Ensure, Timer, loadSettings, setAuthTokenHeader, signInAuthProvider, clearAuthTokenHeader };
