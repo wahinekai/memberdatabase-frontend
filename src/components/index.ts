@@ -8,7 +8,7 @@ import Header from './Header';
 import Loading from './Loading';
 import LoginHeader from './LoginHeader';
 import Logo from './Logo';
-import Logout from './Logout';
+import { Logout } from './Logout';
 import { BottomNavbar, TopNavbar } from './Navbar';
 import { Profile } from './Profile';
 import Submit from './Submit';

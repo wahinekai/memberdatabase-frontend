@@ -21,7 +21,7 @@ const settings: Readonly<Settings> = {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaifrontend/user_impersonation',
+                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaidevelopment/user_impersonation',
             ],
         },
         signInConfig: {

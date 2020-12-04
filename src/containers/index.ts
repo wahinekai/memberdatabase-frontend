@@ -3,6 +3,5 @@
  */
 
 import Profile from './Profile';
-import Logout from './Logout';
 
-export { Profile, Logout };
+export { Profile };

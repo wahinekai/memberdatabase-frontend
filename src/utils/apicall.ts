@@ -48,14 +48,14 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
  */
 const setAuthTokenHeader = (token: string): void => {
     token = isNotNullOrWhitespace(() => token);
-    axios.defaults.headers.common['token'] = token;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
 /**
  * Clears the Axios default authentication token header
  */
 const clearAuthTokenHeader = (): void => {
-    delete axios.defaults.headers.common['token'];
+    delete axios.defaults.headers.common['Authorization'];
 };
 
 export { apiCallAsync, setAuthTokenHeader, clearAuthTokenHeader };

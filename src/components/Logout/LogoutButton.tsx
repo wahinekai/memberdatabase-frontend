@@ -3,7 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { PropTypes } from '../model';
+import { PropTypes } from '../../model';
 
 /**
  * The logout button component
