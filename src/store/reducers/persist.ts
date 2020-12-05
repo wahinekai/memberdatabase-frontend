@@ -3,7 +3,6 @@
  */
 
 import { ReduxState, initialReduxState } from '../../model';
-import { loadSettings, signInAuthProvider } from '../../utils';
 
 /**
  * Attempts to re-create the redux store from saved information.  Returns redux
@@ -17,13 +16,6 @@ export const rehydrate = (_state: ReduxState, payload: unknown): ReduxState => {
     try {
         // Pull user from persisted store
         const persistedStore = payload as ReduxState;
-
-        const { accessTokenScopes } = loadSettings().auth;
-
-        // Get access token for API requests
-        signInAuthProvider.getAccessToken({
-            scopes: accessTokenScopes,
-        });
 
         return persistedStore;
     } catch (err) {

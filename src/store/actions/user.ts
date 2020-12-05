@@ -37,7 +37,8 @@ export const updateUser = (data: User): ReduxTypes.Thunk => {
 const getUserAsync = async (dispatch: ReduxTypes.Dispatch, getState: ReduxTypes.GetState) => {
     const data = getState().user;
     console.log(data);
-    const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/profile`);
+    const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/user`);
+    console.log(user);
     dispatch({
         type: ActionTypes.SET_USER,
         user,

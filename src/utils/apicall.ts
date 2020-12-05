@@ -2,10 +2,9 @@
  * @file API call utility file wrapping Axios's API
  */
 
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HttpMethodTypes } from '../model';
-import { isNotNullOrWhitespace } from './ensure';
-import { loadSettings } from '.';
+import { loadSettings, signInAuthProvider } from '.';
 
 /**
  * Wrapper upon Axios's API supporting all HTTP Method Types and using endpoint prefixes in a .env file
@@ -19,20 +18,31 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
     const { backendEndpoint } = loadSettings();
     const pathWithEndpoint = backendEndpoint + path;
 
+    const { accessTokenScopes } = loadSettings().auth;
+
+    const { accessToken } = await signInAuthProvider.getAccessToken({ scopes: accessTokenScopes });
+
+    // Configure OAuth Header
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
     let res: AxiosResponse<T>;
 
     switch (method) {
         case HttpMethodTypes.GET:
-            res = await axios.get(pathWithEndpoint);
+            res = await axios.get(pathWithEndpoint, config);
             break;
         case HttpMethodTypes.POST:
-            res = await axios.post(pathWithEndpoint, data);
+            res = await axios.post(pathWithEndpoint, data, config);
             break;
         case HttpMethodTypes.PUT:
-            res = await axios.put(pathWithEndpoint, data);
+            res = await axios.put(pathWithEndpoint, data, config);
             break;
         case HttpMethodTypes.DELETE:
-            res = await axios.delete(pathWithEndpoint);
+            res = await axios.delete(pathWithEndpoint, config);
             break;
         default:
             throw new Error('Unsupported HTTP Method');
@@ -41,21 +51,4 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
     return res.data;
 };
 
-/**
- * Sets the Axios default authentication token
- *
- * @param token - The authentication token to set as default
- */
-const setAuthTokenHeader = (token: string): void => {
-    token = isNotNullOrWhitespace(() => token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-};
-
-/**
- * Clears the Axios default authentication token header
- */
-const clearAuthTokenHeader = (): void => {
-    delete axios.defaults.headers.common['Authorization'];
-};
-
-export { apiCallAsync, setAuthTokenHeader, clearAuthTokenHeader };
+export default apiCallAsync;

@@ -15,13 +15,13 @@ const signInPolicy = 'B2C_1_signup_signin';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 
 const settings: Readonly<Settings> = {
-    backendEndpoint: 'http://localhost:5000',
+    backendEndpoint: 'https://localhost:5001',
     ...globalSettings,
     auth: {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaidevelopment/user_impersonation',
+                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaifrontend/user_impersonation',
             ],
         },
         signInConfig: {
@@ -38,7 +38,7 @@ const settings: Readonly<Settings> = {
             },
         },
         options: globalSettings.auth.options,
-        accessTokenScopes: ['https://wahinekaidevelopment.onmicrosoft.com/wahinekaidevelopment/user_impersonation'],
+        accessTokenScopes: ['https://wahinekaidevelopment.onmicrosoft.com/wahinekaibackend/user_impersonation'],
     },
 };
 
