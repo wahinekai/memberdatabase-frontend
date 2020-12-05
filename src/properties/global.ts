@@ -7,7 +7,7 @@ import { GlobalSettings } from '../model';
 
 const settings: Readonly<GlobalSettings> = {
     supportedCountries: ['US', 'CA'],
-    msal: {
+    auth: {
         options: {
             loginType: LoginType.Redirect,
         },

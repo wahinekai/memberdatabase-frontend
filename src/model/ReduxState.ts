@@ -6,12 +6,10 @@ import { User, noUser } from '.';
 
 type ReduxState = {
     user: User;
-    token: string;
 };
 
-export const initialReduxState = {
+export const initialReduxState: ReduxState = {
     user: noUser,
-    token: '',
 };
 
 export default ReduxState;

@@ -15,7 +15,7 @@ import { loadSettings } from './loadSettings';
 const createSignInAuthProvider = (settings: Settings): MsalAuthProvider => {
     console.log(settings);
     const {
-        msal: { options, authenticationParameters, signInConfig },
+        auth: { options, authenticationParameters, signInConfig },
     } = settings;
     return new MsalAuthProvider(signInConfig, authenticationParameters, options);
 };

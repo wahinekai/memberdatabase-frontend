@@ -1,28 +1,61 @@
 /**
- * @file Reducer functions based on authentication
+ * @file Reducer functions based on authentication.  Note - no state related to authentication is saved here.
+ * However, the axios access token for the backend is set here.
  */
 
-import { ReduxState, initialReduxState } from '../../model';
-
-/**
- * Update the redux state by setting the token equal to the token passed in
- *
- * @param state - previous redux state
- * @param token - Authentication token to save
- * @returns The new redux state
- */
-export const setToken = (state: ReduxState, token: string): ReduxState => ({
-    ...state,
-    token,
-});
+import { AccessTokenResponse, IAccountInfo } from 'react-aad-msal';
+import { ReduxState } from '../../model';
+import { clearAuthTokenHeader, loadSettings, setAuthTokenHeader, signInAuthProvider } from '../../utils';
 
 /**
- * Update the redux state by clearing the token
+ * Update the redux state on acquisition of access token
+ *
+ * @param state - previous redux state
+ * @param payload - The payload of the action
+ * @returns The new redux state
+ */
+export const acquiredAccessTokenSuccess = (state: ReduxState, payload: AccessTokenResponse): ReduxState => {
+    setAuthTokenHeader(payload.accessToken);
+    return state;
+};
+
+/**
+ * Update the redux state on acquisition of access token failure
  *
  * @param state - previous redux state
  * @returns The new redux state
  */
-export const clearToken = (state: ReduxState): ReduxState => ({
-    ...state,
-    token: initialReduxState.token,
-});
+export const acquiredAccessTokenError = (state: ReduxState): ReduxState => {
+    clearAuthTokenHeader();
+    return state;
+};
+
+/**
+ * Update the redux state on successful login
+ *
+ * @param state - previous redux state
+ * @param _payload - The payload of the action
+ * @returns The new redux state
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const loginSuccess = (state: ReduxState, _payload: IAccountInfo): ReduxState => {
+    const { accessTokenScopes } = loadSettings().auth;
+
+    // Get access token for API requests
+    signInAuthProvider.getAccessToken({
+        scopes: accessTokenScopes,
+    });
+
+    return state;
+};
+
+/**
+ * Update the redux state on successful logout
+ *
+ * @param state - previous redux state
+ * @returns The new redux state
+ */
+export const logoutSuccess = (state: ReduxState): ReduxState => {
+    clearAuthTokenHeader();
+    return state;
+};

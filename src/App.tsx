@@ -19,15 +19,15 @@ import { signInAuthProvider } from './utils';
  */
 const App: FC = () => {
     return (
-        <AzureAD provider={signInAuthProvider} forceLogin={true}>
-            <StrictMode>
-                <Provider store={store}>
-                    <PersistGate loading={<Loading />} persistor={createPersistor(store)}>
+        <StrictMode>
+            <Provider store={store}>
+                <PersistGate loading={<Loading />} persistor={createPersistor(store)}>
+                    <AzureAD provider={signInAuthProvider} forceLogin={true} reduxStore={store}>
                         <MainRouter />
-                    </PersistGate>
-                </Provider>
-            </StrictMode>
-        </AzureAD>
+                    </AzureAD>
+                </PersistGate>
+            </Provider>
+        </StrictMode>
     );
 };
 

@@ -5,11 +5,12 @@
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { AuthenticationActions } from 'react-aad-msal';
 import { ActionTypes, initialReduxState } from '../../model';
 import { clearUser, setUser } from './user';
 import { createReducer } from './CreateReducer';
 import { rehydrate } from './persist';
-import { clearToken, setToken } from './auth';
+import { acquiredAccessTokenError, acquiredAccessTokenSuccess, loginSuccess, logoutSuccess } from './auth';
 
 // Configuration for redux persistance
 const persistConfig = {
@@ -24,7 +25,9 @@ export default persistReducer(
         [ActionTypes.SET_USER]: setUser,
         [ActionTypes.CLEAR_USER]: clearUser,
         [ActionTypes.REHYDRATE]: rehydrate,
-        [ActionTypes.SET_TOKEN]: setToken,
-        [ActionTypes.CLEAR_TOKEN]: clearToken,
+        [AuthenticationActions.AcquiredAccessTokenSuccess]: acquiredAccessTokenSuccess,
+        [AuthenticationActions.AcquiredAccessTokenError]: acquiredAccessTokenError,
+        [AuthenticationActions.LoginSuccess]: loginSuccess,
+        [AuthenticationActions.LogoutSuccess]: logoutSuccess,
     })
 );

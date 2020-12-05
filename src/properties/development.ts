@@ -17,7 +17,7 @@ const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 const settings: Readonly<Settings> = {
     backendEndpoint: 'http://localhost:5000',
     ...globalSettings,
-    msal: {
+    auth: {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
@@ -37,7 +37,8 @@ const settings: Readonly<Settings> = {
                 storeAuthStateInCookie: true,
             },
         },
-        options: globalSettings.msal.options,
+        options: globalSettings.auth.options,
+        accessTokenScopes: ['https://wahinekaidevelopment.onmicrosoft.com/wahinekaidevelopment/user_impersonation'],
     },
 };
 

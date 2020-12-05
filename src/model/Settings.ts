@@ -9,15 +9,16 @@ export type Settings = EnvironmentSettings & GlobalSettings;
 
 export type EnvironmentSettings = {
     backendEndpoint: string;
-    msal: {
+    auth: {
         signInConfig: Configuration;
         authenticationParameters: AuthenticationParameters;
+        accessTokenScopes: string[];
     };
 };
 
 export type GlobalSettings = {
     supportedCountries: string[];
-    msal: {
+    auth: {
         options: IMsalAuthProviderConfig;
     };
 };

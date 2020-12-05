@@ -2,15 +2,14 @@
  * @file Types related to Redux Actions
  */
 
+import { AuthError } from 'msal';
+import { AccessTokenResponse, AuthenticationActions, IAccountInfo } from 'react-aad-msal';
 import { RehydrateAction } from 'redux-persist';
 import { User } from '.';
 
 export enum ActionTypes {
     CLEAR_USER = 'user/CLEAR_USER',
     SET_USER = 'user/SET_USER',
-    SET_TOKEN = 'authentication/SET_TOKEN',
-    // eslint-disable-next-line no-secrets/no-secrets
-    CLEAR_TOKEN = 'authentication/CLEAR_TOKEN',
     REHYDRATE = 'persist/REHYDRATE', // From redux-persist, can't use imported const in enum
 }
 
@@ -19,19 +18,39 @@ type SetUserAction = {
     user: User;
 };
 
-type SetTokenAction = {
-    type: ActionTypes.SET_TOKEN;
-    token: string;
-};
-
-type ClearTokenAction = {
-    type: ActionTypes.CLEAR_TOKEN;
-};
-
 type ClearUserAction = {
     type: ActionTypes.CLEAR_USER;
 };
 
-type Action = SetUserAction | ClearUserAction | RehydrateAction | SetTokenAction | ClearTokenAction;
+type UserActions = SetUserAction | ClearUserAction;
+
+type CustomActions = UserActions | RehydrateAction;
+
+type AcquiredAccessTokenSuccessAction = {
+    type: AuthenticationActions.AcquiredAccessTokenSuccess;
+    payload: AccessTokenResponse;
+};
+
+type AcquiredAccessTokenErrorAction = {
+    type: AuthenticationActions.AcquiredAccessTokenError;
+    payload: AuthError;
+};
+
+type LoginSuccessAction = {
+    type: AuthenticationActions.LoginSuccess;
+    payload: IAccountInfo;
+};
+
+type LogoutSuccessAction = {
+    type: AuthenticationActions.LogoutSuccess;
+};
+
+type AadActions =
+    | AcquiredAccessTokenSuccessAction
+    | AcquiredAccessTokenErrorAction
+    | LoginSuccessAction
+    | LogoutSuccessAction;
+
+type Action = CustomActions | AadActions;
 
 export default Action;
