@@ -8,12 +8,12 @@ import { ReduxState, User, initialReduxState } from '../../model';
  * Update the redux state by setting the user equal to the user passed in
  *
  * @param state - previous redux state
- * @param user - User passed in action
+ * @param payload - User passed in action
  * @returns The new redux state
  */
-export const setUser = (state: ReduxState, user: User): ReduxState => ({
+export const setUser = (state: ReduxState, payload: User): ReduxState => ({
     ...state,
-    user,
+    user: payload,
 });
 
 /**

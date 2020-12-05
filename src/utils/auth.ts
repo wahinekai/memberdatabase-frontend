@@ -13,7 +13,6 @@ import { loadSettings } from './loadSettings';
  * @returns A Msal auth provider
  */
 const createSignInAuthProvider = (settings: Settings): MsalAuthProvider => {
-    console.log(settings);
     const {
         auth: { options, authenticationParameters, signInConfig },
     } = settings;

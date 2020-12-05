@@ -11,8 +11,8 @@ import { apiCallAsync } from '../../utils';
  * @returns The redux thunk
  */
 export const getUser = (): ReduxTypes.Thunk => {
-    return (dispatch, getState) => {
-        getUserAsync(dispatch, getState);
+    return (dispatch) => {
+        getUserAsync(dispatch);
     };
 };
 
@@ -32,16 +32,13 @@ export const updateUser = (data: User): ReduxTypes.Thunk => {
  * Updates the user information in the Redux store from the backend
  *
  * @param dispatch - Redux dispatch
- * @param getState - Redux ability to get the state of the store
  */
-const getUserAsync = async (dispatch: ReduxTypes.Dispatch, getState: ReduxTypes.GetState) => {
-    const data = getState().user;
-    console.log(data);
+const getUserAsync = async (dispatch: ReduxTypes.Dispatch) => {
     const user = await apiCallAsync<User>(HttpMethodTypes.GET, `/user`);
     console.log(user);
     dispatch({
         type: ActionTypes.SET_USER,
-        user,
+        payload: user,
     });
 };
 
@@ -55,6 +52,6 @@ const updateUserAsync = async (dispatch: ReduxTypes.Dispatch, data: User) => {
     const user = await apiCallAsync<User>(HttpMethodTypes.PUT, `/user/profile/update?username=${data.email}`, data);
     dispatch({
         type: ActionTypes.SET_USER,
-        user,
+        payload: user,
     });
 };

@@ -3,8 +3,8 @@
  */
 
 import React, { FC } from 'react';
-import { BottomNavbar, LoginHeader, Logout } from '../components';
-import { Profile } from '../containers';
+import { BottomNavbar, LoginHeader } from '../components';
+import { Logout, Profile } from '../containers';
 
 /**
  * Contains the components and authentication status for the profile page

@@ -13,7 +13,7 @@ export enum ActionTypes {
 
 type SetUserAction = {
     type: ActionTypes.SET_USER;
-    user: User;
+    payload: User;
 };
 
 type ClearUserAction = {

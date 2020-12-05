@@ -3,17 +3,17 @@
  */
 
 export type User = {
-    firstName?: string;
-    lastName?: string;
+    firstName?: string | null;
+    lastName?: string | null;
     active: boolean;
     email: string;
-    facebookName?: string;
-    payPalName?: string;
-    phoneNumber?: string;
-    streetAddress?: string;
-    city?: string;
-    region?: string;
-    country?: string;
+    facebookName?: string | null;
+    payPalName?: string | null;
+    phoneNumber?: string | null;
+    streetAddress?: string | null;
+    city?: string | null;
+    region?: string | null;
+    country?: string | null;
 };
 
 export type UserWithToken = User & {
