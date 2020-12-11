@@ -4,7 +4,7 @@
 
 import { Guid } from 'guid-typescript';
 import { Ensure } from '../utils';
-import { Chapter, Country, IValidatable, Level } from '.';
+import { Chapter, Country, IValidatable, Level, Position } from '.';
 
 /**
  * Model of a user - clone of backend User.cs

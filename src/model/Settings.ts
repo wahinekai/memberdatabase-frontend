@@ -17,7 +17,6 @@ export type EnvironmentSettings = {
 };
 
 export type GlobalSettings = {
-    supportedCountries: string[];
     auth: {
         options: IMsalAuthProviderConfig;
     };

@@ -2,14 +2,14 @@
  * @file Types relating to the redux store
  */
 
-import { User, noUser } from '.';
+import { User } from '.';
 
 type ReduxState = {
-    user: User;
+    user: User | null;
 };
 
 export const initialReduxState: ReduxState = {
-    user: noUser,
+    user: null,
 };
 
 export default ReduxState;
