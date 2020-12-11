@@ -2,8 +2,10 @@
  * @file Index file compiling exports from the model module
  */
 
+import { Chapter, Country, Level, EnteredStatus, Position } from './Enums';
+import IValidatable from './IValidatable';
 import ReduxState, { initialReduxState } from './ReduxState';
-import { User, UserWithToken, noUser } from './User';
+import User from './User';
 import * as PropTypes from './PropTypes';
 import * as Validation from './Validation';
 import * as ReduxTypes from './ReduxTypes';
@@ -15,12 +17,22 @@ export type {
     Action,
     Settings,
     EnvironmentSettings,
+    IValidatable,
     GlobalSettings,
     ReduxState,
     ReduxTypes,
     User,
-    UserWithToken,
     PropTypes,
 };
 
-export { ActionTypes, HttpMethodTypes, initialReduxState, noUser, Validation };
+export {
+    ActionTypes,
+    Chapter,
+    Country,
+    EnteredStatus,
+    HttpMethodTypes,
+    initialReduxState,
+    Level,
+    Position,
+    Validation,
+};

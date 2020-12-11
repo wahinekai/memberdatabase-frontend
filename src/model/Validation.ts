@@ -3,7 +3,6 @@
  */
 
 import * as Yup from 'yup';
-import 'yup-phone';
 
 // Building Blocks
 const email = Yup.string().email('Must enter a valid email').required('email is required');

@@ -1,16 +1,7 @@
 {
     "root": true,
     "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint",
-        "no-secrets",
-        "this",
-        "no-loops",
-        "only-error",
-        "react-redux",
-        "jsdoc",
-        "prettier"
-    ],
+    "plugins": ["@typescript-eslint", "no-secrets", "no-loops", "only-error", "react-redux", "jsdoc", "prettier"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
@@ -30,7 +21,6 @@
         "react-redux/connect-prefer-named-arguments": "off",
         "prettier/prettier": "error",
         "no-secrets/no-secrets": "error",
-        "this/no-this": "error",
         "no-loops/no-loops": "error",
         "jsdoc/require-description": "error",
         "jsdoc/require-file-overview": "error",
