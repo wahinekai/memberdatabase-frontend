@@ -3,7 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { BottomNavbar, LoginHeader, Logout, Profile } from '../components';
+import { BottomNavbar, LoginHeader, Profile } from '../components';
 
 /**
  * Contains the components and authentication status for the profile page
@@ -13,7 +13,6 @@ import { BottomNavbar, LoginHeader, Logout, Profile } from '../components';
 const ProfilePage: FC = () => {
     return (
         <>
-            <Logout />
             <LoginHeader text="Profile" />
             <Profile />
             <BottomNavbar />

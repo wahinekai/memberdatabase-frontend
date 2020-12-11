@@ -14,19 +14,19 @@ import NavbarEntry from './NavbarEntry';
 const Navbar: FC = () => {
     const pages: Array<PropTypes.NavbarEntry> = [
         {
-            icon: 'trophy',
-            link: '/tournaments/my',
-            name: 'Tournaments',
+            icon: 'search',
+            link: '/search',
+            name: 'Find other users',
         },
         {
-            icon: 'gamepad',
-            link: '/games',
-            name: 'Games',
+            icon: 'id-badge',
+            link: '/profile',
+            name: 'Edit your profile',
         },
         {
-            icon: 'shopping-cart',
-            link: '/',
-            name: 'Store',
+            icon: 'sign-out-alt',
+            link: '/logout',
+            name: 'Logout',
         },
     ];
 

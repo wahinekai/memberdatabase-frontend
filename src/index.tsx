@@ -6,7 +6,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGamepad, faHandshake, faShoppingCart, faTrophy, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faIdBadge, faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -16,6 +16,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from './App';
 
 // Add full set of fontawesome library icons
-library.add(faGamepad, faTrophy, faUser, faShoppingCart, faUsers, faHandshake);
+library.add(faIdBadge, faSearch, faSignOutAlt);
 
 render(<App />, document.getElementById('root'));
