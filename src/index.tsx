@@ -1,6 +1,6 @@
 /**
- * @file Entrypoint for the project. Sets up the Redux persisted store, and
- * renders the MainRouter container as the root container
+ * @file Entrypoint for the project.
+ * Renders the MainRouter container as the root container
  */
 
 import React from 'react';

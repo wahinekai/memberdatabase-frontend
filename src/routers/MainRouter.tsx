@@ -4,7 +4,6 @@
 
 import React, { FC } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { PropTypes } from '../model';
 import { ProfilePage } from '../pages';
 
 /**
@@ -12,7 +11,7 @@ import { ProfilePage } from '../pages';
  *
  * @returns The Main Router Component
  */
-const MainRouter: FC<PropTypes.MainRouter> = () => (
+const MainRouter: FC = () => (
     <Router>
         <Switch>
             <Route exact path="/">

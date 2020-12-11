@@ -13,5 +13,3 @@ export const updateProfileSchema = Yup.object().shape({
     email: email,
     phoneNumber: phoneNumber,
 });
-
-// TODO: Validation for states & countries - must be in country list, then state list

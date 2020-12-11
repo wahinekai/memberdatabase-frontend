@@ -1,50 +1,91 @@
 /**
  * @file Contains definitions for the Profile component
  */
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 
-import { PropTypes, User, Validation } from '../../model';
-import { Ensure } from '../../utils';
+import { HttpMethodTypes, User, IUser, Validation } from '../../model';
+import { apiCallAsync, Ensure } from '../../utils';
+import { Error } from '..';
 import ProfileForm from './ProfileForm';
+
+/**
+ * Gets the profile of the authenticated user
+ *
+ * @returns The authenticated user's profile
+ */
+const getMeAsync = (): Promise<IUser> => apiCallAsync<IUser>(HttpMethodTypes.GET, '/Users/Me');
+
+/**
+ * Update the user in the database and return the updated user.
+ *
+ * @param updatedUserObject The updated to user to add to the database
+ * @returns The updated user from the database
+ */
+const updateMeAsync = (updatedUserObject: IUser): Promise<IUser> =>
+    apiCallAsync<IUser>(HttpMethodTypes.PUT, '/Users/Me', updatedUserObject);
 
 /**
  * The Edit Profile Component
  *
- * @param props - Properties passed down from parents to children
- * @param props.user - The current user of the application
- * @param props.getUser - A function to refresh the current user from the backend
- * @param props.updateUser - A function to propogate user changes to the backend & redux store
  * @returns The Edit Profile Component
  */
-const Profile: FC<PropTypes.Profile> = ({ user, getUser, updateUser }) => {
+const Profile: FC = () => {
+    // Create state of user
+    const [userMaybeNull, setUserState] = useState<User>();
+    const [globalError, setGlobalError] = useState<string>('');
+
+    // Create setUser callbacek to set user state as an actual user
+    const setUser = useCallback((userObject: IUser) => {
+        setUserState(new User(userObject));
+    }, []);
+
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(
-        async (values: User) => {
+        async (updatedUserObject: IUser) => {
             try {
-                await updateUser(values);
+                const updatedUser = new User(updatedUserObject);
+                updatedUser.validate();
+                const userFromBackend = await updateMeAsync(updatedUserObject);
+                setUser(userFromBackend);
             } catch (err) {
-                console.error(err);
+                setGlobalError(err);
             }
         },
-        [updateUser]
+        [setUser]
     );
 
-    // Update Redux store with newest user
+    // Update state with newest user on first render
     useEffect(() => {
-        getUser();
-    }, [getUser]);
+        try {
+            getMeAsync().then((user) => setUser(user));
+        } catch (err) {
+            setGlobalError(err);
+        }
+    }, [setUser]);
+
+    const error = globalError === '' ? <Error>{globalError}</Error> : null;
 
     try {
-        user = Ensure.isNotNull<User>(() => user);
+        const user = Ensure.isNotNull(() => userMaybeNull);
+        user.validate();
+
+        const userForFormik: IUser = user;
 
         return (
-            <Formik initialValues={user} validationSchema={Validation.updateProfileSchema} onSubmit={onSubmitAsync}>
-                {({ errors, touched }) => <ProfileForm errors={errors} touched={touched} />}
-            </Formik>
+            <>
+                {error}
+                <Formik
+                    initialValues={userForFormik}
+                    validationSchema={Validation.updateProfileSchema}
+                    onSubmit={onSubmitAsync}
+                >
+                    {({ errors, touched }) => <ProfileForm errors={errors} touched={touched} />}
+                </Formik>
+            </>
         );
     } catch (err) {
-        return null;
+        return error;
     }
 };
 

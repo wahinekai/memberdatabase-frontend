@@ -4,13 +4,13 @@
 
 import { Guid } from 'guid-typescript';
 import { Ensure } from '../utils';
-import { Chapter, Country, IValidatable, Level, Position } from '.';
+import { Chapter, Country, IUser, IValidatable, Level, Position } from '.';
 
 /**
  * Model of a user - clone of backend User.cs
  * See backend for detailed documentation
  */
-class User implements IValidatable {
+class User implements IUser, IValidatable {
     public readonly id: Guid | null = null;
     public admin: boolean | null = null;
     public firstName: string | null = null;
@@ -42,6 +42,47 @@ class User implements IValidatable {
     public needsNewMemberBag: boolean | null = null;
     public wonSurfboard: boolean | null = null;
     public dateSurfboardWon: Date | null = null;
+
+    /**
+     * Constructs a user from an IUser.
+     * This is a form of a copy constructor, but used mostly for JSON IUsers from
+     * an API call.
+     *
+     * @param userObject User object type to construct this user from
+     */
+    constructor(userObject: IUser) {
+        this.id = userObject.id;
+        this.admin = userObject.admin;
+        this.firstName = userObject.firstName;
+        this.lastName = userObject.lastName;
+        this.active = userObject.active;
+        this.facebookName = userObject.facebookName;
+        this.payPalName = userObject.payPalName;
+        this.email = userObject.email;
+        this.phoneNumber = userObject.phoneNumber;
+        this.streetAddress = userObject.streetAddress;
+        this.city = userObject.city;
+        this.region = userObject.region;
+        this.country = userObject.country;
+        this.occupation = userObject.occupation;
+        this.chapter = userObject.chapter;
+        this.birthdate = userObject.birthdate;
+        this.level = userObject.level;
+        this.startedSurfing = userObject.startedSurfing;
+        this.boards = userObject.boards;
+        this.photoUrl = userObject.photoUrl;
+        this.biography = userObject.biography;
+        this.joinedDate = userObject.joinedDate;
+        this.renewalDate = userObject.renewalDate;
+        this.terminatedDate = userObject.terminatedDate;
+        this.position = userObject.position;
+        this.dateStartedPosition = userObject.dateStartedPosition;
+        this.enteredInFacebookChapter = userObject.enteredInFacebookChapter;
+        this.enteredInFacebookWki = userObject.enteredInFacebookWki;
+        this.needsNewMemberBag = userObject.needsNewMemberBag;
+        this.wonSurfboard = userObject.wonSurfboard;
+        this.dateSurfboardWon = userObject.dateSurfboardWon;
+    }
 
     /**
      * Gets the user's age from their birthdate, returns null if birthdate is null
