@@ -15,7 +15,7 @@ const signInPolicy = 'B2C_1_signup_signin';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 
 const settings: Readonly<Settings> = {
-    backendEndpoint: 'https://localhost:5001',
+    backendEndpoint: 'https://localhost:5001/api/v1',
     ...globalSettings,
     auth: {
         authenticationParameters: {
