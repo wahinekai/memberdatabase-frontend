@@ -3,6 +3,8 @@
  */
 
 import React, { FC } from 'react';
+import Button from 'react-bootstrap/Button';
+
 import { signInAuthProvider } from '../utils';
 
 /**
@@ -11,12 +13,9 @@ import { signInAuthProvider } from '../utils';
  * @returns The logout button
  */
 const Logout: FC = () => (
-    <button
-        className="rounded bg-primary text-white border-0 px-2 py-2 fixed-top m-2"
-        onClick={signInAuthProvider.logout}
-    >
+    <Button variant="outline-light" className="rounded" onClick={signInAuthProvider.logout}>
         Logout
-    </button>
+    </Button>
 );
 
 export default Logout;

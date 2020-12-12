@@ -3,8 +3,6 @@
  */
 import React, { FC } from 'react';
 
-import { PropTypes } from '../model';
-
 /**
  * A component for errors
  *
@@ -12,7 +10,7 @@ import { PropTypes } from '../model';
  * @param props.children - Children in the React DOM tree
  * @returns An error component
  */
-const Error: FC<PropTypes.Error> = ({ children }) => (
+const Error: FC = ({ children }) => (
     <div className="text-danger">
         <small>{children}</small>
     </div>

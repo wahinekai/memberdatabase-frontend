@@ -3,6 +3,8 @@
  */
 
 import React, { FC } from 'react';
+import Image from 'react-bootstrap/Image';
+
 import { PropTypes } from '../../model';
 import logo from './logo.png';
 
@@ -13,6 +15,8 @@ import logo from './logo.png';
  * @param props.className - An optional parameter indicating additional class names that should be put on the logo
  * @returns logo component
  */
-const Logo: FC<PropTypes.Logo> = ({ className = '' }) => <img src={logo} className={`${className}`} alt="GOAT Logo" />;
+const Logo: FC<PropTypes.Logo> = ({ className = '' }) => (
+    <Image src={logo} className={`${className}`} alt="GOAT Logo" />
+);
 
 export default Logo;

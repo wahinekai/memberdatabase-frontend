@@ -3,6 +3,8 @@
  */
 
 import React, { FC } from 'react';
+import Button from 'react-bootstrap/Button';
+
 import { PropTypes } from '../model';
 
 /**
@@ -13,9 +15,9 @@ import { PropTypes } from '../model';
  * @returns Submit button component
  */
 const Submit: FC<PropTypes.Submit> = ({ children }) => (
-    <button className="rounded bg-primary text-white border-0 px-3 py-2" type="submit">
+    <Button variant="primary" className="rounded text-white border-0 px-3 py-2" type="submit">
         {children}
-    </button>
+    </Button>
 );
 
 export default Submit;

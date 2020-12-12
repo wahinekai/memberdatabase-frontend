@@ -3,7 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { BottomNavbar, LoginHeader, Profile } from '../components';
+import { Header, Profile } from '../components';
 
 /**
  * Contains the components and authentication status for the profile page
@@ -13,9 +13,8 @@ import { BottomNavbar, LoginHeader, Profile } from '../components';
 const ProfilePage: FC = () => {
     return (
         <>
-            <LoginHeader text="Profile" />
+            <Header>Edit your profile</Header>
             <Profile />
-            <BottomNavbar />
         </>
     );
 };

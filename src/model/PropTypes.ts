@@ -4,15 +4,16 @@
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormikErrors, FormikTouched } from 'formik';
-import { ReactNode } from 'react';
 
 // PropTypes for components & containers
-export type Error = Children;
-export type FormLabel = HTMLFor & OptionalChildren;
+export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
 export type TopNavbar = Username;
-export type Header = OptionalClassname & Children;
+export type Header = OptionalClassname;
 export type Submit = OptionalClassname;
+export type Input = InputAdditions & OptionalClassname & InputBase;
+export type FormHelp = FormHelpAdditions & OptionalClassname;
+export type FormField = FormFieldAdditions & InputBase;
 
 export type NavbarEntry = {
     link: string;
@@ -29,20 +30,37 @@ export type Form<T> = {
     touched: FormikTouched<T>;
 };
 
+type InputBase = {
+    name: string;
+    type?: string;
+    disabled?: boolean;
+    placeholder?: string;
+};
+
+type FormFieldAdditions = {
+    helpText?: string;
+    helpClassName?: string;
+    labelClassName?: string;
+    label?: string;
+    inputClassName?: string;
+    error?: string;
+    touched?: boolean;
+};
+
+type FormHelpAdditions = {
+    id: string;
+};
+
+type InputAdditions = {
+    'aria-describedby'?: string;
+};
+
 type OptionalClassname = {
     className?: string;
 };
 
 type Username = {
     username: string;
-};
-
-type Children = {
-    children: ReactNode;
-};
-
-type OptionalChildren = {
-    children?: ReactNode;
 };
 
 type HTMLFor = {

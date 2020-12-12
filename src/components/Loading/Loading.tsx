@@ -3,6 +3,8 @@
  */
 
 import React, { FC } from 'react';
+import Image from 'react-bootstrap/Image';
+
 import LoadingImage from './Loading.jpg';
 
 /**
@@ -10,6 +12,6 @@ import LoadingImage from './Loading.jpg';
  *
  * @returns Loading image component
  */
-const Loading: FC = () => <img className="img-fluid" src={LoadingImage} alt="Loading..." />;
+const Loading: FC = () => <Image src={LoadingImage} alt="Loading..." fluid />;
 
 export default Loading;

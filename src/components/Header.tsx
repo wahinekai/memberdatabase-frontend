@@ -14,6 +14,8 @@ import { PropTypes } from '../model';
  * @param props.className - An optional parameter specifying additional classes to be supplied to this component
  * @returns the header component
  */
-const Header: FC<PropTypes.Header> = ({ children, className = '' }) => <h1 className={`${className}`}>{children}</h1>;
+const Header: FC<PropTypes.Header> = ({ children, className = '' }) => (
+    <h1 className={`py-2 text-center ${className}`}>{children}</h1>
+);
 
 export default Header;

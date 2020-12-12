@@ -2,12 +2,14 @@
  * @file Definition for the edit profile form
  */
 
-import { Field, Form } from 'formik';
 import React, { FC } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Form } from 'formik';
+
+import { FormField, Submit } from '..';
 import { PropTypes, User } from '../../model';
-import Error from '../Error';
-import FormLabel from '../FormLabel';
-import Submit from '../Submit';
 
 /**
  * The Profile Form Component
@@ -18,29 +20,32 @@ import Submit from '../Submit';
  * @returns The Profile Form Component
  */
 const ProfileForm: FC<PropTypes.Form<User>> = ({ errors, touched }) => (
-    <Form>
-        <div className="row">
-            <div className="col-12 text-center mb-4">
-                {errors.email && touched.email ? <Error>{errors.email}</Error> : null}
-                <FormLabel htmlFor="email" />
-                <Field name="email" type="email" placeholder="email" />
-            </div>
-        </div>
+    <Container>
+        <Form>
+            <Row>
+                <Col>
+                    <FormField
+                        error={errors.email}
+                        touched={touched.email}
+                        name="email"
+                        disabled={true}
+                        helpText="Email is read-only"
+                        label="Email"
+                    />
+                </Col>
+                <Col>
+                    <FormField
+                        error={errors.phoneNumber}
+                        touched={touched.phoneNumber}
+                        name="phoneNumber"
+                        label="Phone Number"
+                    />
+                </Col>
+            </Row>
 
-        <div className="row">
-            <div className="col-12 text-center mb-4">
-                {errors.phoneNumber && touched.phoneNumber ? <Error>{errors.phoneNumber}</Error> : null}
-                <FormLabel htmlFor="phone"></FormLabel>
-                <Field name="phone" placeholder="phone" />
-            </div>
-        </div>
-
-        <div className="row">
-            <div className="col-12 text-center">
-                <Submit>Update Profile</Submit>
-            </div>
-        </div>
-    </Form>
+            <Submit>Update Profile</Submit>
+        </Form>
+    </Container>
 );
 
 export default ProfileForm;
