@@ -2,28 +2,16 @@
  * @file PropTypes for all components and containers
  */
 
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormikErrors, FormikTouched } from 'formik';
 
 // PropTypes for components & containers
 export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
-export type TopNavbar = Username;
 export type Header = OptionalClassname;
 export type Submit = OptionalClassname;
 export type Input = InputAdditions & OptionalClassname & InputBase;
 export type FormHelp = FormHelpAdditions & OptionalClassname;
 export type FormField = FormFieldAdditions & InputBase;
-
-export type NavbarEntry = {
-    link: string;
-    name: string;
-    icon: IconProp;
-};
-
-export type LoginHeader = {
-    text: string;
-};
 
 export type Form<T> = {
     errors: FormikErrors<T>;
@@ -57,10 +45,6 @@ type InputAdditions = {
 
 type OptionalClassname = {
     className?: string;
-};
-
-type Username = {
-    username: string;
 };
 
 type HTMLFor = {
