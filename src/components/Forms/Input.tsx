@@ -15,7 +15,15 @@ import { PropTypes } from '../../model';
  * @returns A Formik component integrated with bootstrap
  */
 const Input: FC<PropTypes.Input> = (props) => (
-    <Field as={FormControl} {...props} className={`px-2 ${props.className}`} />
+    <Field
+        as={FormControl}
+        className={`px-2 ${props.className}`}
+        name={props.name}
+        type={props.type}
+        placeholder={props.placeholder}
+        disabled={props.disabled}
+        aria-describedby={props['aria-describedby']}
+    />
 );
 
 export default Input;

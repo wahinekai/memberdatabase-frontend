@@ -29,19 +29,22 @@ const FormField: FC<PropTypes.FormField> = (props) => {
         </Label>
     ) : null;
 
+    const InputComponent = props.inputComponent ?? Input;
+
     const error = props.error && props.touched ? <Error>{props.error}</Error> : null;
 
     return (
         <FormGroup>
             {label}
             {error}
-            <Input
+            <InputComponent
                 name={props.name}
                 type={props.type}
                 className={props.inputClassName}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
                 aria-describedby={helpId}
+                selectType={props.selectType}
             />
             {help}
         </FormGroup>

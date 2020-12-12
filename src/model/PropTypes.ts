@@ -11,11 +11,22 @@ export type Header = OptionalClassname;
 export type Submit = OptionalClassname;
 export type Input = InputAdditions & OptionalClassname & InputBase;
 export type FormHelp = FormHelpAdditions & OptionalClassname;
-export type FormField = FormFieldAdditions & InputBase;
+export type Select = SelectAdditions & InputBase;
+export type TextArea = InputBase & TextAreaAdditions;
+export type InputComponent = Input & Select & TextArea;
+export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 
 export type Form<T> = {
     errors: FormikErrors<T>;
     touched: FormikTouched<T>;
+};
+
+type SelectAdditions = {
+    selectType?: Record<string, string>;
+};
+
+type TextAreaAdditions = {
+    rows?: number;
 };
 
 type InputBase = {
@@ -31,6 +42,10 @@ type FormFieldAdditions = {
     labelClassName?: string;
     label?: string;
     inputClassName?: string;
+    inputComponent?: React.FC<InputComponent>;
+};
+
+type FormikAdditions = {
     error?: string;
     touched?: boolean;
 };

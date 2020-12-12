@@ -4,7 +4,7 @@
 
 import { Guid } from 'guid-typescript';
 import { Ensure } from '../utils';
-import { Chapter, Country, IUser, IValidatable, Level, Position } from '.';
+import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position } from '.';
 
 /**
  * Model of a user - clone of backend User.cs
@@ -37,8 +37,8 @@ class User implements IUser, IValidatable {
     public terminatedDate: Date | null = null;
     public position: Position | null = null;
     public dateStartedPosition: Date | null = null;
-    public enteredInFacebookChapter: Date | null = null;
-    public enteredInFacebookWki: Date | null = null;
+    public enteredInFacebookChapter: EnteredStatus | null = null;
+    public enteredInFacebookWki: EnteredStatus | null = null;
     public needsNewMemberBag: boolean | null = null;
     public wonSurfboard: boolean | null = null;
     public dateSurfboardWon: Date | null = null;

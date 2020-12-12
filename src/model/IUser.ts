@@ -3,13 +3,13 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, Level, Position } from '.';
+import { Chapter, Country, EnteredStatus, Level, Position } from '.';
 
 /**
  * Interface for User types
  */
 interface IUser {
-    readonly id: Guid | null;
+    readonly id: Guid | null; // Not in forms
     admin: boolean | null;
     firstName: string | null;
     lastName: string | null;
@@ -27,16 +27,16 @@ interface IUser {
     birthdate: Date | null;
     level: Level | null;
     startedSurfing: Date | null;
-    boards: string[];
-    photoUrl: string | null;
+    boards: string[]; // Not doing (for now)
+    photoUrl: string | null; // Not doing (for now)
     biography: string | null;
     joinedDate: Date | null;
     renewalDate: Date | null;
     terminatedDate: Date | null;
     position: Position | null;
     dateStartedPosition: Date | null;
-    enteredInFacebookChapter: Date | null;
-    enteredInFacebookWki: Date | null;
+    enteredInFacebookChapter: EnteredStatus | null;
+    enteredInFacebookWki: EnteredStatus | null;
     needsNewMemberBag: boolean | null;
     wonSurfboard: boolean | null;
     dateSurfboardWon: Date | null;
