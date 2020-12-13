@@ -19,7 +19,7 @@ const Input: FC<PropTypes.Input> = (props) => (
         as={FormControl}
         className={`px-2 ${props.className}`}
         name={props.name}
-        type={props.type}
+        type={props.type ?? 'text'}
         placeholder={props.placeholder}
         disabled={props.disabled}
         aria-describedby={props['aria-describedby']}

@@ -27,7 +27,7 @@ interface IUser {
     birthdate: Date | null;
     level: Level | null;
     startedSurfing: Date | null;
-    boards: string[]; // Not doing (for now)
+    boards: string[];
     photoUrl: string | null; // Not doing (for now)
     biography: string | null;
     joinedDate: Date | null;

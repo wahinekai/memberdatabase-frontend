@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Form } from 'formik';
 
-import { FormField, Submit, DatePickerField, Select, TextArea, BooleanRadioField } from '..';
+import { FormField, Submit, DatePickerField, Select, TextArea, BooleanRadioField, InputArray } from '..';
 import { PropTypes, IUser, EnteredStatus, Position, Chapter, Level, Country } from '../../model';
 
 /**
@@ -142,6 +142,17 @@ const ProfileForm: FC<PropTypes.Form<IUser>> = ({ errors, touched }) => (
                         selectType={Level}
                         name="level"
                         label="Surfer Level"
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <FormField
+                        error={errors.boards ? errors.boards[0] : undefined}
+                        touched={touched.boards}
+                        inputComponent={InputArray}
+                        name="boards"
+                        label="Boards"
                     />
                 </Col>
             </Row>

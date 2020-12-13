@@ -11,6 +11,7 @@ import {
     FormField,
     Label,
     Input,
+    InputArray,
     Help as FormHelp,
     TextArea,
 } from './Forms';
@@ -28,6 +29,7 @@ export {
     FormField,
     Label,
     Input,
+    InputArray,
     FormHelp,
     Header,
     Logo,
