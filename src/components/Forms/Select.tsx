@@ -19,7 +19,11 @@ const Select: FC<PropTypes.Select> = (props) => {
     const [field] = useField(props);
     const enumType = Ensure.isNotNull(() => props.selectType);
     const keys = Object.keys(enumType);
-    const children = keys.map((key, i) => <option key={i}>{enumType[key]}</option>);
+    const children = keys.map((key, i) => (
+        <option value={enumType[key]} key={i}>
+            {enumType[key]}
+        </option>
+    ));
 
     return (
         <FormControl as="select" {...field}>

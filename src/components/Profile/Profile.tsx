@@ -80,7 +80,7 @@ const Profile: FC = () => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    {({ errors, touched }) => <ProfileForm errors={errors} touched={touched} />}
+                    <ProfileForm />
                 </Formik>
             </>
         );

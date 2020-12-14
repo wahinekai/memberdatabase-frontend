@@ -3,7 +3,7 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Ensure } from '../utils';
+import { Ensure, getAge } from '../utils';
 import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position } from '.';
 
 /**
@@ -89,16 +89,7 @@ class User implements IUser, IValidatable {
      *
      * @returns The age of the user
      */
-    public get age(): number | null {
-        if (this.birthdate === null) {
-            return null;
-        }
-
-        // Found at https://stackoverflow.com/questions/41792026/how-do-i-calculate-age-from-birth-date-in-angular-2-using-typescript
-        const timeDiff = Math.abs(Date.now() - this.birthdate.getTime());
-        const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
-        return age;
-    }
+    public getAge = (): number | null => (this.birthdate ? getAge(this.birthdate) : null);
 
     /**
      * Ensures this user is in a correct state
@@ -129,6 +120,11 @@ class User implements IUser, IValidatable {
         // If user has won a surfboard, must hae a date won
         if (this.wonSurfboard === true) {
             this.dateSurfboardWon = Ensure.isNotNull(() => this.dateSurfboardWon);
+        }
+
+        // If user has no leadership position, set to null
+        if (this.position === Position.NoPosition) {
+            this.position = null;
         }
 
         // Country and region validation

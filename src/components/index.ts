@@ -4,6 +4,7 @@
 
 import ApplicationNavbar from './ApplicationNavbar';
 import Error from './Error';
+import * as Sections from './Sections';
 import {
     BooleanRadioField,
     Select,
@@ -35,6 +36,7 @@ export {
     Logo,
     Logout,
     Profile,
+    Sections,
     Submit,
     Select,
     TextArea,

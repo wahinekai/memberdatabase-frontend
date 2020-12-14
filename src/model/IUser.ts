@@ -3,43 +3,26 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, EnteredStatus, Level, Position } from '.';
+import { PartialUser } from '.';
 
 /**
  * Interface for User types
  */
-interface IUser {
+interface IUser
+    extends PartialUser.IEnteredInFacebook,
+        PartialUser.IPositionInformation,
+        PartialUser.IWonSurfboardInformation,
+        PartialUser.IAdministrator,
+        PartialUser.IActivityInformation,
+        PartialUser.IBirthdate,
+        PartialUser.IPrivateLocation,
+        PartialUser.IPublicLocation,
+        PartialUser.IPrivateSurfingInformation,
+        PartialUser.IPublicSurfingInformation,
+        PartialUser.IPublicPersonalInformation,
+        PartialUser.IPrivatePersonalInformation,
+        PartialUser.INeedsNewMemberBag {
     readonly id: Guid | null; // Not in forms
-    admin: boolean | null;
-    firstName: string | null;
-    lastName: string | null;
-    active: boolean | null;
-    facebookName: string | null;
-    payPalName: string | null;
-    readonly email: string | null;
-    phoneNumber: string | null;
-    streetAddress: string | null;
-    city: string | null;
-    region: string | null;
-    country: Country | null;
-    occupation: string | null;
-    chapter: Chapter | null;
-    birthdate: Date | null;
-    level: Level | null;
-    startedSurfing: Date | null;
-    boards: string[];
-    photoUrl: string | null; // Not doing (for now)
-    biography: string | null;
-    joinedDate: Date | null;
-    renewalDate: Date | null;
-    terminatedDate: Date | null;
-    position: Position | null;
-    dateStartedPosition: Date | null;
-    enteredInFacebookChapter: EnteredStatus | null;
-    enteredInFacebookWki: EnteredStatus | null;
-    needsNewMemberBag: boolean | null;
-    wonSurfboard: boolean | null;
-    dateSurfboardWon: Date | null;
 }
 
 export default IUser;

@@ -2,8 +2,6 @@
  * @file PropTypes for all components and containers
  */
 
-import { FormikErrors, FormikTouched } from 'formik';
-
 // PropTypes for components & containers
 export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
@@ -15,10 +13,10 @@ export type Select = SelectAdditions & InputBase;
 export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
+export type Section = OptionalDisabled;
 
-export type Form<T> = {
-    errors: FormikErrors<T>;
-    touched: FormikTouched<T>;
+type OptionalDisabled = {
+    disabled?: boolean;
 };
 
 type SelectAdditions = {

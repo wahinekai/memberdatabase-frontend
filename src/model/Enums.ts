@@ -56,4 +56,5 @@ export enum Position {
     DirectorOfCommunityServices = 'Director of Community Services',
     ChapterDirector = 'Chapter Director',
     ChapterEventCoordinator = 'Chapter Event Coordinator',
+    NoPosition = 'No Leadership Position',
 }
