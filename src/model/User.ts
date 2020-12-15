@@ -95,6 +95,27 @@ class User implements IUser, IValidatable {
      * Ensures this user is in a correct state
      */
     public validate(): void {
+        // Undo ready for formik changes
+        if (this.position === Position.Default) {
+            this.position = null;
+        }
+
+        if (this.chapter === Chapter.Default) {
+            this.chapter = null;
+        }
+
+        if (this.level === Level.Default) {
+            this.level = null;
+        }
+
+        if (this.enteredInFacebookChapter === EnteredStatus.Default) {
+            this.enteredInFacebookChapter = null;
+        }
+
+        if (this.enteredInFacebookWki === EnteredStatus.Default) {
+            this.enteredInFacebookWki = null;
+        }
+
         // User must have a name
         this.firstName = Ensure.isNotNullOrWhitespace(() => this.firstName);
 
@@ -122,18 +143,26 @@ class User implements IUser, IValidatable {
             this.dateSurfboardWon = Ensure.isNotNull(() => this.dateSurfboardWon);
         }
 
-        // If user has no leadership position, set to null
-        if (this.position === Position.NoPosition) {
-            this.position = null;
-        }
-
         // Country and region validation
         if (this.region !== null) {
             // Country cannot be null
             this.country = Ensure.isNotNull(() => this.country);
-
-            // TBD pending on understanding of provinces package
         }
+    }
+
+    /**
+     * Readys the user for Formik
+     *
+     * @returns An IUser ready to be used in forms
+     */
+    public readyForFormik(): IUser {
+        this.position = this.position ?? Position.Default;
+        this.chapter = this.chapter ?? Chapter.Default;
+        this.level = this.level ?? Level.Default;
+        this.enteredInFacebookChapter = this.enteredInFacebookChapter ?? EnteredStatus.Default;
+        this.enteredInFacebookWki = this.enteredInFacebookWki ?? EnteredStatus.Default;
+
+        return this;
     }
 }
 

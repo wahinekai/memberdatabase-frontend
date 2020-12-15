@@ -25,7 +25,7 @@ const PositionInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
     } = useFormikContext<PartialUser.IPositionInformation>();
 
     const dateStartedField =
-        position && position !== Position.NoPosition ? (
+        position && position !== Position.Default ? (
             <Col>
                 <FormField
                     disabled={disabled}

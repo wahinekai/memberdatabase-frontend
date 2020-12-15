@@ -7,9 +7,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { Form } from 'formik';
 
-import { Submit, Sections } from '..';
-import { PropTypes } from '../../model';
-import { Timer, usePrevious } from '../../utils';
+import { PropTypes } from '../model';
+import { Timer, usePrevious } from '../utils';
+import { Submit, Sections } from '.';
 
 /**
  * The Profile Form Component

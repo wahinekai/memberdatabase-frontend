@@ -4,10 +4,10 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 
-import { HttpMethodTypes, User, IUser, Validation } from '../../model';
-import { apiCallAsync, Ensure } from '../../utils';
-import { Error } from '..';
+import { HttpMethodTypes, User, IUser, Validation } from '../model';
+import { apiCallAsync, Ensure } from '../utils';
 import ProfileForm from './ProfileForm';
+import { Error } from '.';
 
 /**
  * Gets the profile of the authenticated user
@@ -32,15 +32,24 @@ const updateMeAsync = (updatedUserObject: IUser): Promise<IUser> =>
  */
 const Profile: FC = () => {
     // Create state of user
-    const [userMaybeNull, setUserState] = useState<User>();
-    const [globalError, setGlobalError] = useState<string>('');
-    const [submitCount, setSubmitCount] = useState(0);
-    const [submitting, setSubmitting] = useState(false);
+    type StateType = {
+        user?: User;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        error?: any;
+        submitCount: number;
+        submitting: boolean;
+    };
 
-    // Create setUser callbacek to set user state as an actual user
-    const setUser = useCallback((userObject: IUser) => {
-        setUserState(new User(userObject));
-    }, []);
+    const [state, setState] = useState<StateType>({ submitCount: 0, submitting: false });
+
+    const { error, submitCount, submitting, user: userMaybeNull } = state;
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    const setUser = useCallback((user: IUser) => setState((state) => ({ ...state, user: new User(user) })), []);
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const setError = useCallback((error: any) => setState((state) => ({ ...state, error })), []);
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
 
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(
@@ -49,15 +58,18 @@ const Profile: FC = () => {
                 setSubmitting(true);
                 const updatedUser = new User(updatedUserObject);
                 updatedUser.validate();
-                const userFromBackend = await updateMeAsync(updatedUserObject);
-                setUser(userFromBackend);
-                setSubmitting(false);
-                setSubmitCount(submitCount + 1);
+                const userFromBackend = await updateMeAsync(updatedUser);
+                setState((state) => ({
+                    ...state,
+                    user: new User(userFromBackend),
+                    submitting: false,
+                    submitCount: submitCount + 1,
+                }));
             } catch (err) {
-                setGlobalError(err);
+                setError(err);
             }
         },
-        [setUser, submitCount]
+        [setSubmitting, submitCount, setError]
     );
 
     // Update state with newest user on first render
@@ -65,21 +77,21 @@ const Profile: FC = () => {
         try {
             getMeAsync().then((user) => setUser(user));
         } catch (err) {
-            setGlobalError(err);
+            setError(err);
         }
-    }, [setUser]);
+    }, [setUser, setError]);
 
-    const error = globalError === '' ? <Error>{globalError}</Error> : null;
+    const errorComponent = error === '' ? <Error>{error}</Error> : null;
 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
         user.validate();
 
-        const userForFormik: IUser = user;
+        const userForFormik = user.readyForFormik();
 
         return (
             <>
-                {error}
+                {errorComponent}
                 <Formik
                     initialValues={userForFormik}
                     validationSchema={Validation.updateProfileSchema}
@@ -90,7 +102,7 @@ const Profile: FC = () => {
             </>
         );
     } catch (err) {
-        return error;
+        return null;
     }
 };
 

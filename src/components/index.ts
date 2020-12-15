@@ -17,13 +17,15 @@ import {
     TextArea,
 } from './Forms';
 import Header from './Header';
-import { Profile } from './Profile';
+import Profile from './Profile';
+import EditUser from './EditUser';
 import Submit from './Submit';
 
 export {
     BooleanRadioField,
     DatePickerField,
     ApplicationNavbar,
+    EditUser,
     Error,
     FormField,
     Label,

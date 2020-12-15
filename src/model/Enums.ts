@@ -18,6 +18,7 @@ export enum Level {
     Intermediate = 'Intermediate',
     Advanced = 'Advanced',
     Expert = 'Expert',
+    Default = 'Select a Level',
 }
 
 /**
@@ -27,6 +28,7 @@ export enum EnteredStatus {
     NotEntered = 'Not Entered',
     Entered = 'Entered',
     Accepted = 'Accepted',
+    Default = 'Select a Status',
 }
 
 /**
@@ -41,6 +43,7 @@ export enum Chapter {
     Washington = 'Washington',
     Hawaii = 'Hawaii',
     Maine = 'Maine',
+    Default = 'Select a Chapter',
 }
 
 /**
@@ -56,5 +59,5 @@ export enum Position {
     DirectorOfCommunityServices = 'Director of Community Services',
     ChapterDirector = 'Chapter Director',
     ChapterEventCoordinator = 'Chapter Event Coordinator',
-    NoPosition = 'No Leadership Position',
+    Default = 'No Leadership Position',
 }

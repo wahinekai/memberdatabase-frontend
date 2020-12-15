@@ -4,7 +4,7 @@
 
 import React, { FC } from 'react';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import { ProfilePage } from '../pages';
+import { EditUserPage, ProfilePage } from '../pages';
 
 /**
  * The root of the application, specifying mappings between pages and components
@@ -19,6 +19,9 @@ const MainRouter: FC = () => (
             </Route>
             <Route exact path="/">
                 <Redirect to="/profile" />
+            </Route>
+            <Route exact path="/users/:userId">
+                <EditUserPage />
             </Route>
         </Switch>
     </Router>
