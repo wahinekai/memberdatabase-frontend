@@ -78,3 +78,11 @@ export interface IPrivatePersonalInformation {
     readonly email: string | null;
     phoneNumber: string | null;
 }
+
+export type UserForCard = IId & {
+    firstName: string | null;
+    lastName: string | null;
+    photoUrl: string | null;
+    chapter: Chapter | null;
+    position: Position | null;
+};

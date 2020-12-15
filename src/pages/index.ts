@@ -8,5 +8,6 @@ import HomePage from './HomePage';
 import ListAllUsersPage from './ListAllUsersPage';
 import NotFoundPage from './NotFoundPage';
 import ProfilePage from './ProfilePage';
+import SearchPage from './SearchPage';
 
-export { EditUserPage, ErrorPage, HomePage, ListAllUsersPage, NotFoundPage, ProfilePage };
+export { EditUserPage, ErrorPage, HomePage, ListAllUsersPage, NotFoundPage, ProfilePage, SearchPage };

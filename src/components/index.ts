@@ -21,6 +21,7 @@ import Home from './Home';
 import ListAllUsers from './ListAllUsers';
 import Profile from './Profile';
 import EditUser from './EditUser';
+import Search from './Search';
 import Submit from './Submit';
 import UserCard from './UserCard';
 
@@ -39,6 +40,7 @@ export {
     Header,
     Home,
     Profile,
+    Search,
     Sections,
     Submit,
     Select,

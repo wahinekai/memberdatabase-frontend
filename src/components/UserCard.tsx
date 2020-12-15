@@ -30,7 +30,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
                 <Card.Body>
                     <Card.Title>{`${user.firstName} ${user.lastName}`}</Card.Title>
                     <Card.Text>{body}</Card.Text>
-                    <Button href={`/users/${user.id}`} variant="primary" className="px-3 my-2">
+                    <Button href={`/users/${user.id}`} variant="outline-primary" className="px-3 my-2">
                         View User
                     </Button>
                 </Card.Body>

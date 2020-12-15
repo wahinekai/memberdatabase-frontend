@@ -4,7 +4,7 @@
 
 import React, { FC } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { EditUserPage, HomePage, ListAllUsersPage, NotFoundPage, ProfilePage } from '../pages';
+import { EditUserPage, HomePage, ListAllUsersPage, NotFoundPage, ProfilePage, SearchPage } from '../pages';
 
 /**
  * The root of the application, specifying mappings between pages and components
@@ -19,6 +19,9 @@ const MainRouter: FC = () => (
             </Route>
             <Route exact path="/search/all">
                 <ListAllUsersPage />
+            </Route>
+            <Route exact path="/search">
+                <SearchPage />
             </Route>
             <Route exact path="/profile">
                 <ProfilePage />

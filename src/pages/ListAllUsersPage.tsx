@@ -11,14 +11,12 @@ import { NavbarStyles } from '../model';
  *
  * @returns the Register page
  */
-const ListAllUsersPage: FC = () => {
-    return (
-        <>
-            <ApplicationNavbar style={NavbarStyles.light} />
-            <Header>All Members</Header>
-            <ListAllUsers />
-        </>
-    );
-};
+const ListAllUsersPage: FC = () => (
+    <>
+        <ApplicationNavbar style={NavbarStyles.light} />
+        <Header>All Members</Header>
+        <ListAllUsers />
+    </>
+);
 
 export default ListAllUsersPage;
