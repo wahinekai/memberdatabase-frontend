@@ -3,7 +3,9 @@
  */
 
 import EditUserPage from './EditUserPage';
+import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
+import NotFoundPage from './NotFoundPage';
 import ProfilePage from './ProfilePage';
 
-export { EditUserPage, HomePage, ProfilePage };
+export { EditUserPage, ErrorPage, HomePage, NotFoundPage, ProfilePage };

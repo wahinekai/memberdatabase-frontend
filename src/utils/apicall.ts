@@ -4,7 +4,7 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HttpMethodTypes } from '../model';
-import { loadSettings, signInAuthProvider } from '.';
+import { loadSettings, authProvider } from '.';
 
 /**
  * Wrapper upon Axios's API supporting all HTTP Method Types and using endpoint prefixes in a .env file
@@ -20,7 +20,7 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
 
     const { accessTokenScopes } = loadSettings().auth;
 
-    const { accessToken } = await signInAuthProvider.getAccessToken({ scopes: accessTokenScopes });
+    const { accessToken } = await authProvider.getAccessToken({ scopes: accessTokenScopes });
 
     // Configure OAuth Header
     const config: AxiosRequestConfig = {

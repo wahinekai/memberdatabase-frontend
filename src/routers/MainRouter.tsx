@@ -4,7 +4,7 @@
 
 import React, { FC } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { EditUserPage, HomePage, ProfilePage } from '../pages';
+import { EditUserPage, HomePage, NotFoundPage, ProfilePage } from '../pages';
 
 /**
  * The root of the application, specifying mappings between pages and components
@@ -22,6 +22,9 @@ const MainRouter: FC = () => (
             </Route>
             <Route exact path="/users/:userId">
                 <EditUserPage />
+            </Route>
+            <Route>
+                <NotFoundPage />
             </Route>
         </Switch>
     </Router>

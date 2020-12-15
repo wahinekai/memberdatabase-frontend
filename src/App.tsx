@@ -4,9 +4,11 @@
 
 import React, { FC, StrictMode } from 'react';
 import AzureAD from 'react-aad-msal';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { MainRouter } from './routers';
-import { signInAuthProvider } from './utils';
+import { ErrorPage } from './pages';
+import { authProvider } from './utils';
 
 /**
  * Application entrypoint definition - root of the React DOM tree
@@ -15,11 +17,13 @@ import { signInAuthProvider } from './utils';
  */
 const App: FC = () => {
     return (
-        <AzureAD provider={signInAuthProvider} forceLogin={true}>
-            <StrictMode>
-                <MainRouter />
-            </StrictMode>
-        </AzureAD>
+        <StrictMode>
+            <ErrorBoundary FallbackComponent={ErrorPage}>
+                <AzureAD provider={authProvider} forceLogin={true}>
+                    <MainRouter />
+                </AzureAD>
+            </ErrorBoundary>
+        </StrictMode>
     );
 };
 

@@ -13,7 +13,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
 import squareLogo from '../pics/squareLogo.png';
-import { signInAuthProvider } from '../utils';
+import { authProvider } from '../utils';
 import { PropTypes } from '../model';
 
 /**
@@ -38,7 +38,7 @@ const ApplicationNavbar: FC<PropTypes.Navbar> = ({ style }) => (
                     Profile
                 </NavLink>
             </Nav>
-            <Button variant={style.logoutVariant} className="rounded" onClick={signInAuthProvider.logout}>
+            <Button variant={style.logoutVariant} className="rounded" onClick={authProvider.logout}>
                 Logout
             </Button>
         </NavbarCollapse>

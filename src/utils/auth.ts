@@ -19,4 +19,4 @@ const createSignInAuthProvider = (settings: Settings): MsalAuthProvider => {
     return new MsalAuthProvider(signInConfig, authenticationParameters, options);
 };
 
-export const signInAuthProvider = createSignInAuthProvider(loadSettings());
+export const authProvider = createSignInAuthProvider(loadSettings());
