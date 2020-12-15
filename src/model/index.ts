@@ -6,6 +6,7 @@ import { Chapter, Country, Level, EnteredStatus, Position } from './Enums';
 import * as PartialUser from './PartialUser';
 import * as Regions from './Regions';
 import IUser from './IUser';
+import ISearchableUser from './ISearchableUser';
 import IValidatable from './IValidatable';
 import User from './User';
 import { NavbarStyles, NavbarStyleType } from './Navbar';
@@ -20,6 +21,7 @@ export type {
     IValidatable,
     GlobalSettings,
     IUser,
+    ISearchableUser,
     PartialUser,
     PropTypes,
     NavbarStyleType,

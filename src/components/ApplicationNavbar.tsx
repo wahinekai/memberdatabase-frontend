@@ -37,6 +37,9 @@ const ApplicationNavbar: FC<PropTypes.Navbar> = ({ style }) => (
                 <NavLink className="h4" href="/profile">
                     Profile
                 </NavLink>
+                <NavLink className="h4" href="/search/all">
+                    All Members
+                </NavLink>
             </Nav>
             <Button variant={style.logoutVariant} className="rounded" onClick={authProvider.logout}>
                 Logout

@@ -2,7 +2,6 @@
  * @file Definition for interface for a user
  */
 
-import { Guid } from 'guid-typescript';
 import { PartialUser } from '.';
 
 /**
@@ -21,8 +20,7 @@ interface IUser
         PartialUser.IPublicSurfingInformation,
         PartialUser.IPublicPersonalInformation,
         PartialUser.IPrivatePersonalInformation,
-        PartialUser.INeedsNewMemberBag {
-    readonly id: Guid | null; // Not in forms
-}
+        PartialUser.INeedsNewMemberBag,
+        PartialUser.IId {}
 
 export default IUser;

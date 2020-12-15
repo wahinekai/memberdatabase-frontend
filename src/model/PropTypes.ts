@@ -3,7 +3,8 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { NavbarStyleType } from '.';
+
+import { ISearchableUser, NavbarStyleType } from '.';
 
 // PropTypes for components
 export type FormLabel = HTMLFor & OptionalClassname;
@@ -19,12 +20,17 @@ export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled;
 export type Form = SubmitCount;
 export type EditUser = Id;
+export type UserCard = SearchableUser;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
 
 export type Navbar = {
     style: NavbarStyleType;
+};
+
+type SearchableUser = {
+    user: ISearchableUser;
 };
 
 type Id = {
