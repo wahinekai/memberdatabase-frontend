@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { HttpMethodTypes, IUser } from '../model';
+import { HttpMethodTypes, ISearchableUser } from '../model';
 import { apiCallAsync } from '../utils';
 import { UserCard } from '.';
 
@@ -16,7 +16,8 @@ import { UserCard } from '.';
  *
  * @returns All users from the backend
  */
-const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodTypes.GET, '/Users/All');
+const getAllAsync = (): Promise<ISearchableUser[]> =>
+    apiCallAsync<ISearchableUser[]>(HttpMethodTypes.GET, '/Users/All');
 
 /**
  * A Component that lists all users of the application in the form of user cards
@@ -24,7 +25,7 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
  * @returns A list of user cards in a container
  */
 const ListAllUsers: FC = () => {
-    const [users, setUsers] = useState<IUser[]>();
+    const [users, setUsers] = useState<ISearchableUser[]>();
 
     // Update state with newest user on first render
     useEffect(() => {
