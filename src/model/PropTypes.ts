@@ -2,6 +2,8 @@
  * @file PropTypes for all components and containers
  */
 
+import { NavbarStyleType } from '.';
+
 // PropTypes for components & containers
 export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
@@ -14,6 +16,15 @@ export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled;
+export type Form = SubmitCount;
+
+export type Navbar = {
+    style: NavbarStyleType;
+};
+
+type SubmitCount = {
+    submitCount: number;
+};
 
 type OptionalDisabled = {
     disabled?: boolean;

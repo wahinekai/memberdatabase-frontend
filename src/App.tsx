@@ -4,7 +4,6 @@
 
 import React, { FC, StrictMode } from 'react';
 import AzureAD from 'react-aad-msal';
-import { ApplicationNavbar } from './components';
 
 import { MainRouter } from './routers';
 import { signInAuthProvider } from './utils';
@@ -18,7 +17,6 @@ const App: FC = () => {
     return (
         <AzureAD provider={signInAuthProvider} forceLogin={true}>
             <StrictMode>
-                <ApplicationNavbar />
                 <MainRouter />
             </StrictMode>
         </AzureAD>

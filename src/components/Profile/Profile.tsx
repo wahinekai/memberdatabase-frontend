@@ -34,6 +34,7 @@ const Profile: FC = () => {
     // Create state of user
     const [userMaybeNull, setUserState] = useState<User>();
     const [globalError, setGlobalError] = useState<string>('');
+    const [submitCount, setSubmitCount] = useState(0);
 
     // Create setUser callbacek to set user state as an actual user
     const setUser = useCallback((userObject: IUser) => {
@@ -48,11 +49,12 @@ const Profile: FC = () => {
                 updatedUser.validate();
                 const userFromBackend = await updateMeAsync(updatedUserObject);
                 setUser(userFromBackend);
+                setSubmitCount(submitCount + 1);
             } catch (err) {
                 setGlobalError(err);
             }
         },
-        [setUser]
+        [setUser, submitCount]
     );
 
     // Update state with newest user on first render
@@ -80,7 +82,7 @@ const Profile: FC = () => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm />
+                    <ProfileForm submitCount={submitCount} />
                 </Formik>
             </>
         );

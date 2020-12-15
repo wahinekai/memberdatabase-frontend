@@ -9,29 +9,38 @@ import NavbarToggle from 'react-bootstrap/NavbarToggle';
 import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/NavLink';
-import { Logo, Logout } from '.';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+
+import squareLogo from '../pics/squareLogo.png';
+import { signInAuthProvider } from '../utils';
+import { PropTypes } from '../model';
 
 /**
  * Global navbar for application
  *
+ * @param props - Properties passed down from parents to children
+ * @param props.style - The style for this component
  * @returns The Navbar Component
  */
-const ApplicationNavbar: FC = () => (
-    <Navbar bg="primary" variant="dark" expand="lg">
+const ApplicationNavbar: FC<PropTypes.Navbar> = ({ style }) => (
+    <Navbar bg={style.bg} variant={style.variant} expand="lg" sticky="top">
         <NavbarBrand href="/">
-            <Logo />
+            <Image src={squareLogo} alt="Navbar Logo" width="40" height="40" />
         </NavbarBrand>
         <NavbarToggle aria-controls="applicationNavbar" />
         <NavbarCollapse id="applicationNavbar">
             <Nav className="mr-auto">
-                <NavLink className="h4" href="/search">
+                <NavLink className="h4" href="/">
                     Search
                 </NavLink>
                 <NavLink className="h4" href="/profile">
                     Profile
                 </NavLink>
             </Nav>
-            <Logout />
+            <Button variant={style.logoutVariant} className="rounded" onClick={signInAuthProvider.logout}>
+                Logout
+            </Button>
         </NavbarCollapse>
     </Navbar>
 );

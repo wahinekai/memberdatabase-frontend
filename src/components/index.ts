@@ -17,8 +17,6 @@ import {
     TextArea,
 } from './Forms';
 import Header from './Header';
-import Logo from './Logo';
-import Logout from './Logout';
 import { Profile } from './Profile';
 import Submit from './Submit';
 
@@ -33,8 +31,6 @@ export {
     InputArray,
     FormHelp,
     Header,
-    Logo,
-    Logout,
     Profile,
     Sections,
     Submit,
