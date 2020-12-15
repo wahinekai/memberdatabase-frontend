@@ -3,6 +3,7 @@
  */
 
 import EditUserPage from './EditUserPage';
+import HomePage from './HomePage';
 import ProfilePage from './ProfilePage';
 
-export { EditUserPage, ProfilePage };
+export { EditUserPage, HomePage, ProfilePage };

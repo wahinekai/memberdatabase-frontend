@@ -17,6 +17,7 @@ import {
     TextArea,
 } from './Forms';
 import Header from './Header';
+import Home from './Home';
 import Profile from './Profile';
 import EditUser from './EditUser';
 import Submit from './Submit';
@@ -33,6 +34,7 @@ export {
     InputArray,
     FormHelp,
     Header,
+    Home,
     Profile,
     Sections,
     Submit,
