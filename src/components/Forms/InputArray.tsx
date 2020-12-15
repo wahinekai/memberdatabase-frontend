@@ -42,8 +42,13 @@ const InputArray: FC<PropTypes.Input> = (props) => {
                 return (
                     <>
                         {array}
-                        <Button variant="primary" onClick={() => arrayHelpers.insert(field.value.length, '')}>
-                            +
+                        <Button
+                            className="my-2"
+                            variant="primary"
+                            onClick={() => arrayHelpers.insert(field.value.length, '')}
+                            block
+                        >
+                            Add Another
                         </Button>
                     </>
                 );
