@@ -42,6 +42,7 @@ const ProfileForm: FC<PropTypes.Form> = ({ submitCount, submitting }) => {
         };
     }, [previousSubmitCount, submitCount]);
 
+    // Effect to change message on submit button from inital submit message to submitting message if submitting
     useEffect(() => {
         if (submitting) {
             setSubmitMessage(submittingMessage);
