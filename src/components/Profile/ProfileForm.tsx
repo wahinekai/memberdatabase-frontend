@@ -29,11 +29,8 @@ const ProfileForm: FC<PropTypes.Form> = ({ submitCount, submitting }) => {
 
     // Effect to change the message on the submit button from inital submit message to after submit message for 2 seconds, then change it back
     useEffect(() => {
-        // Boolean to determine whether the submit count changed on this render
-        const submitCountChanged = previousSubmitCount !== undefined && previousSubmitCount !== submitCount;
-
         // Change count, then return it to original message
-        if (submitCountChanged) {
+        if (previousSubmitCount !== submitCount) {
             setSubmitMessage(afterSubmitMessage);
         }
 
