@@ -36,7 +36,7 @@ const Birthdate: FC<PropTypes.Section> = ({ disabled = false }) => {
             <FormField
                 label="Current Age"
                 name="age"
-                helpText="Calculated automatically from your birthdate"
+                helpText="Calculated automatically from birthdate"
                 inputComponent={ageComponent}
             />
         </Col>

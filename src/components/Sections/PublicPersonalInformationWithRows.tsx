@@ -50,7 +50,7 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
                         touched={touched.biography}
                         inputComponent={TextArea}
                         name="biography"
-                        label="Say Something About Yourself"
+                        label="About"
                     />
                 </Col>
             </Row>

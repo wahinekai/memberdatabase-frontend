@@ -28,6 +28,8 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
 
     if (country) {
         const selectType = country === Country.UnitedStates ? Regions.USStates : Regions.CanadianProvinces;
+        const label = country === Country.UnitedStates ? 'State or Territory' : 'Province or Territory';
+
         regionField = (
             <Col>
                 <FormField
@@ -35,7 +37,7 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     error={errors.region}
                     touched={touched.region}
                     name="region"
-                    label="State or Province"
+                    label={label}
                     inputComponent={Select}
                     selectType={selectType}
                 />

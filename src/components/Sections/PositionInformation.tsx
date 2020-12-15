@@ -33,7 +33,7 @@ const PositionInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     touched={touched.dateStartedPosition}
                     inputComponent={DatePickerField}
                     name="dateStartedPosition"
-                    label="Date you Started this Position"
+                    label="Date this Position was Started"
                 />
             </Col>
         ) : null;
