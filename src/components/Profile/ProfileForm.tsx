@@ -17,9 +17,11 @@ import { Timer, usePrevious } from '../../utils';
  * @returns The Profile Form Component
  * @param props - React properties passed from parent to children
  * @param props.submitCount - How many times the form has been submitted
+ * @param props.submitting - Is this form submitting?
  */
-const ProfileForm: FC<PropTypes.Form> = ({ submitCount }) => {
+const ProfileForm: FC<PropTypes.Form> = ({ submitCount, submitting }) => {
     const initialSubmitMessage = 'Update Profile';
+    const submittingMessage = 'Updating...';
     const afterSubmitMessage = 'Profile updated successfully!';
 
     const [submitMessage, setSubmitMessage] = useState(initialSubmitMessage);
@@ -42,6 +44,12 @@ const ProfileForm: FC<PropTypes.Form> = ({ submitCount }) => {
             });
         };
     }, [previousSubmitCount, submitCount]);
+
+    useEffect(() => {
+        if (submitting) {
+            setSubmitMessage(submittingMessage);
+        }
+    }, [submitting]);
 
     return (
         <Container>

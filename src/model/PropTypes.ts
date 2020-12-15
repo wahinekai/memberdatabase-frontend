@@ -24,6 +24,7 @@ export type Navbar = {
 
 type SubmitCount = {
     submitCount: number;
+    submitting: boolean;
 };
 
 type OptionalDisabled = {
