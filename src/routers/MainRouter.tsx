@@ -14,9 +14,6 @@ import { ProfilePage } from '../pages';
 const MainRouter: FC = () => (
     <Router>
         <Switch>
-            <Route exact path="/search">
-                <Redirect to="/" />
-            </Route>
             <Route exact path="/profile">
                 <ProfilePage />
             </Route>

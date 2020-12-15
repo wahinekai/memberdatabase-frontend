@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, Select } from '..';
-import { Country, PartialUser, PropTypes } from '../../model';
+import { Country, PartialUser, PropTypes, Regions } from '../../model';
 
 /**
  * A section of the edit profile form
@@ -17,13 +17,18 @@ import { Country, PartialUser, PropTypes } from '../../model';
  * @returns The component for a section of the form
  */
 const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
-    const { touched, errors } = useFormikContext<PartialUser.IPublicLocation>();
+    const {
+        values: { country },
+        touched,
+        errors,
+    } = useFormikContext<PartialUser.IPublicLocation>();
 
-    return (
-        <>
-            <Col>
-                <FormField disabled={disabled} error={errors.city} touched={touched.city} name="city" label="City" />
-            </Col>
+    // Show region field only if country is picked
+    let regionField = null;
+
+    if (country) {
+        const selectType = country === Country.UnitedStates ? Regions.USStates : Regions.CanadianProvinces;
+        regionField = (
             <Col>
                 <FormField
                     disabled={disabled}
@@ -31,8 +36,19 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     touched={touched.region}
                     name="region"
                     label="State or Province"
+                    inputComponent={Select}
+                    selectType={selectType}
                 />
             </Col>
+        );
+    }
+
+    return (
+        <>
+            <Col>
+                <FormField disabled={disabled} error={errors.city} touched={touched.city} name="city" label="City" />
+            </Col>
+            {regionField}
             <Col>
                 <FormField
                     disabled={disabled}

@@ -4,6 +4,7 @@
 
 import { Chapter, Country, Level, EnteredStatus, Position } from './Enums';
 import * as PartialUser from './PartialUser';
+import * as Regions from './Regions';
 import IUser from './IUser';
 import IValidatable from './IValidatable';
 import User from './User';
@@ -24,4 +25,4 @@ export type {
     NavbarStyleType,
 };
 
-export { Chapter, Country, EnteredStatus, HttpMethodTypes, Level, Position, Validation, User, NavbarStyles };
+export { Chapter, Country, EnteredStatus, HttpMethodTypes, Level, Position, Regions, Validation, User, NavbarStyles };
