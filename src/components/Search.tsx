@@ -18,7 +18,7 @@ import { UserCard } from '.';
  * @returns All users from the backend
  */
 const getUsersAsync = (query: string): Promise<PartialUser.UserForCard[]> =>
-    apiCallAsync<PartialUser.UserForCard[]>(HttpMethodTypes.GET, `/Search?query=${query}`);
+    apiCallAsync<PartialUser.UserForCard[]>(HttpMethodTypes.GET, `/Search/Query?query=${query}`);
 
 /**
  * A Component that displays results of a search as user cards
