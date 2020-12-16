@@ -28,7 +28,6 @@ const getUsersAsync = (query: string): Promise<PartialUser.UserForCard[]> =>
  * @returns A list of user cards in a container
  */
 const Search: FC<PropTypes.Search> = ({ query }) => {
-    console.log(query);
     const [users, setUsers] = useState<PartialUser.UserForCard[]>();
 
     // Update state with newest user on first render
