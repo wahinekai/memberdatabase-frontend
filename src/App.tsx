@@ -9,6 +9,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { MainRouter } from './routers';
 import { ErrorPage } from './pages';
 import { authProvider } from './utils';
+import { ApplicationNavbar } from './components';
 
 /**
  * Application entrypoint definition - root of the React DOM tree
@@ -20,6 +21,7 @@ const App: FC = () => {
         <StrictMode>
             <ErrorBoundary FallbackComponent={ErrorPage}>
                 <AzureAD provider={authProvider} forceLogin={true}>
+                    <ApplicationNavbar />
                     <MainRouter />
                 </AzureAD>
             </ErrorBoundary>

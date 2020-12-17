@@ -6,8 +6,7 @@ import React, { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
 
-import { ApplicationNavbar, Header, Search } from '../components';
-import { NavbarStyles } from '../model';
+import { Header, Search } from '../components';
 import { Ensure } from '../utils';
 
 /**
@@ -23,7 +22,6 @@ const SearchPage: FC = () => {
 
     return (
         <>
-            <ApplicationNavbar style={NavbarStyles.light} />
             <Header>Search Results</Header>
             <Search query={query} />
         </>

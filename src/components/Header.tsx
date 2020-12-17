@@ -5,6 +5,7 @@
 import React, { FC } from 'react';
 
 import { PropTypes } from '../model';
+import { TextCenter } from '.';
 
 /**
  * Header component
@@ -15,7 +16,9 @@ import { PropTypes } from '../model';
  * @returns the header component
  */
 const Header: FC<PropTypes.Header> = ({ children, className = '' }) => (
-    <h1 className={`py-2 text-center ${className}`}>{children}</h1>
+    <TextCenter>
+        <h1 className={`py-2 ${className}`}>{children}</h1>
+    </TextCenter>
 );
 
 export default Header;

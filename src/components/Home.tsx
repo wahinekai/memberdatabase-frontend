@@ -9,6 +9,7 @@ import Image from 'react-bootstrap/Image';
 
 import rectangleLogo from '../pics/rectangleLogo.png';
 import HomeForm from './HomeForm';
+import { TextCenter } from '.';
 
 /**
  * Definition of the Home Component
@@ -18,9 +19,9 @@ import HomeForm from './HomeForm';
 const Home: FC = () => (
     <Container fluid>
         <Row>
-            <div className="text-center">
+            <TextCenter>
                 <Image width="50%" src={rectangleLogo} alt="Wahine Kai Logo" />
-            </div>
+            </TextCenter>
         </Row>
         <Row>
             <HomeForm />

@@ -8,7 +8,7 @@ import { Guid } from 'guid-typescript';
 import { HttpMethodTypes, User, IUser, Validation, PropTypes } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
 import ProfileForm from './ProfileForm';
-import { Error } from '.';
+import { Error, TextCenter } from '.';
 
 /**
  * Gets the profile of the user specified by the id parameter
@@ -86,7 +86,12 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
         }
     }, [id, setUser, setError]);
 
-    const errorComponent = error && error !== '' ? <Error className="text-center h3">{error}</Error> : null;
+    const errorComponent =
+        error && error !== '' ? (
+            <TextCenter>
+                <Error className="h3">{error}</Error>
+            </TextCenter>
+        ) : null;
 
     const initialSubmitMessage = 'Update Member';
     const submittingMessage = 'Updating...';

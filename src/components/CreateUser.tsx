@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
-import { Error } from '.';
+import { Error, TextCenter } from '.';
 
 /**
  * Create the user in the database and return the created user.
@@ -70,7 +70,12 @@ const CreateUser: FC = () => {
         [history, setSubmitting, submitCount, setError]
     );
 
-    const errorComponent = error && error !== '' ? <Error className="text-center h3">{error}</Error> : null;
+    const errorComponent =
+        error && error !== '' ? (
+            <TextCenter>
+                <Error className="h3">{error}</Error>
+            </TextCenter>
+        ) : null;
 
     const initialSubmitMessage = 'Create Member';
     const submittingMessage = 'Creating...';

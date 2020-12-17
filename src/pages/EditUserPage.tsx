@@ -5,8 +5,8 @@
 import { Guid } from 'guid-typescript';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { ApplicationNavbar, Header, EditUser } from '../components';
-import { NavbarStyles, PropTypes } from '../model';
+import { Header, EditUser } from '../components';
+import { PropTypes } from '../model';
 import { Ensure } from '../utils';
 
 /**
@@ -21,7 +21,6 @@ const EditUserPage: FC = () => {
 
     return (
         <>
-            <ApplicationNavbar style={NavbarStyles.primary} />
             <Header>View/Edit User</Header>
             <EditUser id={id} />
         </>

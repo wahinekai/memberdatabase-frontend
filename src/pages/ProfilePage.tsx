@@ -3,8 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { ApplicationNavbar, Header, Profile } from '../components';
-import { NavbarStyles } from '../model';
+import { Header, Profile } from '../components';
 
 /**
  * Contains the components and authentication status for the profile page
@@ -14,7 +13,6 @@ import { NavbarStyles } from '../model';
 const ProfilePage: FC = () => {
     return (
         <>
-            <ApplicationNavbar style={NavbarStyles.primary} />
             <Header>Edit your profile</Header>
             <Profile />
         </>

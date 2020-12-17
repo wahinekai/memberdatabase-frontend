@@ -28,7 +28,7 @@ const PrivateSurfingInformation: FC<PropTypes.Section> = ({ disabled = false }) 
                     touched={touched.boards}
                     inputComponent={InputArray}
                     name="boards"
-                    label="Boards"
+                    label="Surfboards"
                 />
             </Col>
             <Col>

@@ -3,8 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { ApplicationNavbar, Header, ListAllUsers } from '../components';
-import { NavbarStyles } from '../model';
+import { Header, ListAllUsers } from '../components';
 
 /**
  * Contains the components and authentication status for the list all users page
@@ -13,7 +12,6 @@ import { NavbarStyles } from '../model';
  */
 const ListAllUsersPage: FC = () => (
     <>
-        <ApplicationNavbar style={NavbarStyles.light} />
         <Header>All Members</Header>
         <ListAllUsers />
     </>

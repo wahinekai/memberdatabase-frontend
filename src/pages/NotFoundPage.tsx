@@ -3,8 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { ApplicationNavbar, Header } from '../components';
-import { NavbarStyles } from '../model';
+import { Header } from '../components';
 
 /**
  * Contains the components and authentication status for the not found page
@@ -14,7 +13,6 @@ import { NavbarStyles } from '../model';
 const NotFoundPage: FC = () => {
     return (
         <>
-            <ApplicationNavbar style={NavbarStyles.primary} />
             <Header>404: Page not Found</Header>
         </>
     );

@@ -10,78 +10,78 @@ export interface IId {
 }
 
 export interface INeedsNewMemberBag {
-    needsNewMemberBag: boolean | null;
+    needsNewMemberBag?: boolean;
 }
 
 export interface IAdministrator {
-    admin: boolean | null;
+    admin?: boolean;
 }
 
 export interface IWonSurfboardInformation {
-    wonSurfboard: boolean | null;
-    dateSurfboardWon: Date | null;
+    wonSurfboard?: boolean;
+    dateSurfboardWon?: Date;
 }
 
 export interface IEnteredInFacebook {
-    enteredInFacebookChapter: EnteredStatus | null;
-    enteredInFacebookWki: EnteredStatus | null;
+    enteredInFacebookChapter?: EnteredStatus;
+    enteredInFacebookWki?: EnteredStatus;
 }
 
 export interface IPositionInformation {
-    position: Position | null;
-    dateStartedPosition: Date | null;
+    position?: Position;
+    dateStartedPosition?: Date;
 }
 
 export interface IActivityInformation {
-    active: boolean | null;
-    joinedDate: Date | null;
-    renewalDate: Date | null;
-    terminatedDate: Date | null;
+    active?: boolean;
+    joinedDate?: Date;
+    renewalDate?: Date;
+    terminatedDate?: Date;
 }
 
 export interface IBirthdate {
-    birthdate: Date | null;
+    birthdate?: Date;
 }
 
 export interface IPrivateLocation {
-    streetAddress: string | null;
+    streetAddress?: string;
 }
 
 export interface IPublicLocation {
-    city: string | null;
-    region: string | null;
-    country: Country | null;
+    city?: string;
+    region?: string;
+    country?: Country;
 }
 
 export interface IPrivateSurfingInformation {
-    startedSurfing: Date | null;
+    startedSurfing?: Date;
     boards: string[];
 }
 
 export interface IPublicSurfingInformation {
-    chapter: Chapter | null;
-    level: Level | null;
+    chapter?: Chapter;
+    level?: Level;
 }
 
 export interface IPublicPersonalInformation {
-    firstName: string | null;
-    lastName: string | null;
-    facebookName: string | null;
-    occupation: string | null;
-    photoUrl: string | null; // Not doing (for now)
-    biography: string | null;
+    firstName?: string;
+    lastName?: string;
+    facebookName?: string;
+    occupation?: string;
+    photoUrl?: string; // Not doing (for now)
+    biography?: string;
 }
 
 export interface IPrivatePersonalInformation {
-    payPalName: string | null;
-    readonly email: string | null;
-    phoneNumber: string | null;
+    payPalName?: string;
+    readonly email?: string;
+    phoneNumber?: string;
 }
 
 export type UserForCard = IId & {
-    firstName: string | null;
-    lastName: string | null;
-    photoUrl: string | null;
-    chapter: Chapter | null;
-    position: Position | null;
+    firstName?: string;
+    lastName?: string;
+    photoUrl?: string;
+    chapter?: Chapter;
+    position?: Position;
 };

@@ -14,37 +14,34 @@ import Button from 'react-bootstrap/Button';
 
 import squareLogo from '../pics/squareLogo.png';
 import { authProvider } from '../utils';
-import { PropTypes } from '../model';
 
 /**
  * Global navbar for application
  *
- * @param props - Properties passed down from parents to children
- * @param props.style - The style for this component
  * @returns The Navbar Component
  */
-const ApplicationNavbar: FC<PropTypes.Navbar> = ({ style }) => (
-    <Navbar bg={style.bg} variant={style.variant} expand="lg" sticky="top">
+const ApplicationNavbar: FC = () => (
+    <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
         <NavbarBrand href="/">
             <Image src={squareLogo} alt="Navbar Logo" width="35" height="35" />
         </NavbarBrand>
         <NavbarToggle aria-controls="applicationNavbar" />
         <NavbarCollapse id="applicationNavbar">
             <Nav className="mr-auto">
-                <NavLink className="h5" href="/">
+                <NavLink className="h5 px-3" href="/">
                     Search
                 </NavLink>
-                <NavLink className="h5" href="/profile">
-                    Profile
-                </NavLink>
-                <NavLink className="h5" href="/search/all">
-                    All Members
-                </NavLink>
-                <NavLink className="h5" href="/users/create">
+                <NavLink className="h5 px-3" href="/users/create">
                     Create a New Member
                 </NavLink>
+                <NavLink className="h5 px-3" href="/search/all">
+                    All Members
+                </NavLink>
+                <NavLink className="h5 px-3" href="/profile">
+                    Profile
+                </NavLink>
             </Nav>
-            <Button variant={style.logoutVariant} className="rounded" onClick={authProvider.logout}>
+            <Button variant="outline-light" className="rounded" onClick={authProvider.logout}>
                 Logout
             </Button>
         </NavbarCollapse>

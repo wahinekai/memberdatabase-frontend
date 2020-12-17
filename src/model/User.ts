@@ -12,36 +12,36 @@ import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position, 
  */
 class User implements IUser, IValidatable {
     public id?: Guid;
-    public admin: boolean | null = null;
-    public firstName: string | null = null;
-    public lastName: string | null = null;
-    public active: boolean | null = null;
-    public facebookName: string | null = null;
-    public payPalName: string | null = null;
-    public email: string | null = null;
-    public phoneNumber: string | null = null;
-    public streetAddress: string | null = null;
-    public city: string | null = null;
-    public region: string | null = null;
-    public country: Country | null = null;
-    public occupation: string | null = null;
-    public chapter: Chapter | null = null;
-    public birthdate: Date | null = null;
-    public level: Level | null = null;
-    public startedSurfing: Date | null = null;
+    public admin?: boolean;
+    public firstName?: string;
+    public lastName?: string;
+    public active?: boolean;
+    public facebookName?: string;
+    public payPalName?: string;
+    public email?: string;
+    public phoneNumber?: string;
+    public streetAddress?: string;
+    public city?: string;
+    public region?: string;
+    public country?: Country;
+    public occupation?: string;
+    public chapter?: Chapter;
+    public birthdate?: Date;
+    public level?: Level;
+    public startedSurfing?: Date;
     public boards: string[] = [];
-    public photoUrl: string | null = null;
-    public biography: string | null = null;
-    public joinedDate: Date | null = null;
-    public renewalDate: Date | null = null;
-    public terminatedDate: Date | null = null;
-    public position: Position | null = null;
-    public dateStartedPosition: Date | null = null;
-    public enteredInFacebookChapter: EnteredStatus | null = null;
-    public enteredInFacebookWki: EnteredStatus | null = null;
-    public needsNewMemberBag: boolean | null = null;
-    public wonSurfboard: boolean | null = null;
-    public dateSurfboardWon: Date | null = null;
+    public photoUrl?: string;
+    public biography?: string;
+    public joinedDate?: Date;
+    public renewalDate?: Date;
+    public terminatedDate?: Date;
+    public position?: Position;
+    public dateStartedPosition?: Date;
+    public enteredInFacebookChapter?: EnteredStatus;
+    public enteredInFacebookWki?: EnteredStatus;
+    public needsNewMemberBag?: boolean;
+    public wonSurfboard?: boolean;
+    public dateSurfboardWon?: Date;
 
     /**
      * Constructs a user from an IUser.
@@ -97,31 +97,31 @@ class User implements IUser, IValidatable {
     public validate(): void {
         // Undo ready for formik changes
         if (this.position === Position.Default) {
-            this.position = null;
+            delete this.position;
         }
 
         if (this.chapter === Chapter.Default) {
-            this.chapter = null;
+            delete this.chapter;
         }
 
         if (this.level === Level.Default) {
-            this.level = null;
+            delete this.level;
         }
 
         if (this.enteredInFacebookChapter === EnteredStatus.Default) {
-            this.enteredInFacebookChapter = null;
+            delete this.enteredInFacebookChapter;
         }
 
         if (this.enteredInFacebookWki === EnteredStatus.Default) {
-            this.enteredInFacebookWki = null;
+            delete this.enteredInFacebookWki;
         }
 
         if (this.region === Regions.CanadianProvinces.Default || this.region === Regions.USStates.Default) {
-            this.region = null;
+            delete this.region;
         }
 
         if (this.country === Country.Default) {
-            this.country = null;
+            delete this.country;
         }
 
         // User must have a name
@@ -142,7 +142,7 @@ class User implements IUser, IValidatable {
         }
 
         // If user has a leadership position, they must also have a date started
-        if (this.position !== null) {
+        if (this.position) {
             this.dateStartedPosition = Ensure.isNotNull(() => this.dateStartedPosition);
         }
 
@@ -152,7 +152,7 @@ class User implements IUser, IValidatable {
         }
 
         // Country and region validation
-        if (this.region !== null) {
+        if (this.region) {
             // Country cannot be null
             this.country = Ensure.isNotNull(() => this.country);
         }
@@ -188,34 +188,11 @@ class User implements IUser, IValidatable {
      */
     public static createForFormik(): IUser {
         const newUser: IUser = {
-            admin: null,
-            firstName: '',
-            lastName: '',
-            active: null,
-            facebookName: '',
-            payPalName: '',
-            email: '',
-            phoneNumber: '',
-            streetAddress: '',
-            city: '',
-            region: null,
             country: Country.Default,
-            occupation: '',
-            birthdate: null,
-            startedSurfing: null,
-            boards: [],
-            photoUrl: null,
-            biography: '',
-            joinedDate: null,
-            renewalDate: null,
-            terminatedDate: null,
-            dateStartedPosition: null,
-            needsNewMemberBag: null,
-            wonSurfboard: null,
-            dateSurfboardWon: null,
             position: Position.Default,
             chapter: Chapter.Default,
             level: Level.Default,
+            boards: [],
             enteredInFacebookChapter: EnteredStatus.Default,
             enteredInFacebookWki: EnteredStatus.Default,
         };

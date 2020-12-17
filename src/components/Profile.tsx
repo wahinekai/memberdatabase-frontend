@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
 import ProfileForm from './ProfileForm';
-import { Error } from '.';
+import { Error, TextCenter } from '.';
 
 /**
  * Gets the profile of the authenticated user
@@ -79,7 +79,12 @@ const Profile: FC = () => {
         }
     }, [setUser, setError]);
 
-    const errorComponent = error && error !== '' ? <Error className="text-center h3">{error}</Error> : null;
+    const errorComponent =
+        error && error !== '' ? (
+            <TextCenter>
+                <Error className="h3">{error}</Error>
+            </TextCenter>
+        ) : null;
 
     const initialSubmitMessage = 'Update Member';
     const submittingMessage = 'Updating...';

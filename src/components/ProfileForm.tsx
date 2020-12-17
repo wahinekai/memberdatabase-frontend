@@ -59,12 +59,24 @@ const ProfileForm: FC<PropTypes.Form> = ({
     return (
         <Container>
             <Form>
+                <Row>
+                    <h3>Personal Information</h3>
+                </Row>
                 <Sections.PublicPersonalInformationWithRows />
+                <Row>
+                    <Sections.PublicSurfingInformation />
+                </Row>
                 <Row>
                     <Sections.PrivatePersonalInformation create={create} />
                 </Row>
                 <Row>
+                    <h3>Birthday</h3>
+                </Row>
+                <Row>
                     <Sections.Birthdate />
+                </Row>
+                <Row>
+                    <h3>Address</h3>
                 </Row>
                 <Row>
                     <Sections.PrivateLocation />
@@ -73,10 +85,13 @@ const ProfileForm: FC<PropTypes.Form> = ({
                     <Sections.PublicLocation />
                 </Row>
                 <Row>
-                    <Sections.PublicSurfingInformation />
+                    <h3>Surfing Information</h3>
                 </Row>
                 <Row>
                     <Sections.PrivateSurfingInformation />
+                </Row>
+                <Row>
+                    <h3>Administrative Information</h3>
                 </Row>
                 <Row>
                     <Sections.Adminstrator />

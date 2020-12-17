@@ -3,8 +3,7 @@
  */
 
 import React, { FC } from 'react';
-import { ApplicationNavbar, Header, CreateUser } from '../components';
-import { NavbarStyles } from '../model';
+import { Header, CreateUser } from '../components';
 
 /**
  * Contains the components and authentication status for the profile page
@@ -13,7 +12,6 @@ import { NavbarStyles } from '../model';
  */
 const CreateUserPage: FC = () => (
     <>
-        <ApplicationNavbar style={NavbarStyles.primary} />
         <Header>Create User</Header>
         <CreateUser />
     </>

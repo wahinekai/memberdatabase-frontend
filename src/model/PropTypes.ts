@@ -4,7 +4,7 @@
 
 import { Guid } from 'guid-typescript';
 
-import { PartialUser, NavbarStyleType } from '.';
+import { PartialUser } from '.';
 
 // PropTypes for components
 export type Error = OptionalClassname;
@@ -26,10 +26,6 @@ export type Search = Query;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
-
-export type Navbar = {
-    style: NavbarStyleType;
-};
 
 type OptionalCreate = {
     create?: boolean;

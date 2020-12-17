@@ -28,7 +28,11 @@ const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false, c
                     touched={touched.email}
                     name="email"
                     disabled={!create}
-                    helpText={create ? "Double check - this can't be changed later!" : 'You cannot edit your email!'}
+                    helpText={
+                        create
+                            ? "Double check - this can't be changed later!"
+                            : 'Email entered when new member was created'
+                    }
                     label="Email"
                 />
             </Col>

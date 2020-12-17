@@ -6,6 +6,7 @@ import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Chapter, Position, PropTypes } from '../model';
+import { TextCenter } from '.';
 
 const emptyProfileImage = 'https://www.clker.com/cliparts/B/R/Y/m/P/e/blank-profile-hi.png';
 
@@ -24,7 +25,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
     const body = position + chapter;
 
     return (
-        <div className="text-center">
+        <TextCenter>
             <Card>
                 <Card.Img variant="top" src={image} alt="Profile picture" />
                 <Card.Body>
@@ -35,7 +36,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
                     </Button>
                 </Card.Body>
             </Card>
-        </div>
+        </TextCenter>
     );
 };
 

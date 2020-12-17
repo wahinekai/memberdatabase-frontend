@@ -24,6 +24,7 @@ import Profile from './Profile';
 import EditUser from './EditUser';
 import Search from './Search';
 import Submit from './Submit';
+import TextCenter from './TextCenter';
 import UserCard from './UserCard';
 
 export {
@@ -47,5 +48,6 @@ export {
     Submit,
     Select,
     TextArea,
+    TextCenter,
     UserCard,
 };

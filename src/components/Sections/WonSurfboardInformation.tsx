@@ -32,7 +32,7 @@ const WonSurfboardInformation: FC<PropTypes.Section> = ({ disabled = false }) =>
                 touched={touched.dateSurfboardWon}
                 inputComponent={DatePickerField}
                 name="dateSurfboardWon"
-                label="The Date This User Won a Surfboard"
+                label="Date This User Won a Surfboard"
             />
         </Col>
     ) : null;

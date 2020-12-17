@@ -26,7 +26,7 @@ const PrivateLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 error={errors.streetAddress}
                 touched={touched.streetAddress}
                 name="streetAddress"
-                label="Address"
+                label="Street Address"
             />
         </Col>
     );
