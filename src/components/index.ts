@@ -3,6 +3,7 @@
  */
 
 import ApplicationNavbar from './ApplicationNavbar';
+import CreateUser from './CreateUser';
 import Error from './Error';
 import * as Sections from './Sections';
 import {
@@ -27,6 +28,7 @@ import UserCard from './UserCard';
 
 export {
     BooleanRadioField,
+    CreateUser,
     DatePickerField,
     ApplicationNavbar,
     EditUser,

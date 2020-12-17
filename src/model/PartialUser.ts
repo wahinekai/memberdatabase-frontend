@@ -3,11 +3,10 @@
  */
 
 import { Guid } from 'guid-typescript';
-
 import { Chapter, Country, EnteredStatus, Level, Position } from '.';
 
 export interface IId {
-    readonly id: Guid | null; // Not in forms
+    id?: Guid; // Not in forms
 }
 
 export interface INeedsNewMemberBag {

@@ -34,8 +34,7 @@ const Profile: FC = () => {
     // Create state of user
     type StateType = {
         user?: User;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        error?: any;
+        error?: string;
         submitCount: number;
         submitting: boolean;
     };
@@ -46,8 +45,7 @@ const Profile: FC = () => {
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setUser = useCallback((user: IUser) => setState((state) => ({ ...state, user: new User(user) })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const setError = useCallback((error: any) => setState((state) => ({ ...state, error })), []);
+    const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
 
@@ -81,7 +79,11 @@ const Profile: FC = () => {
         }
     }, [setUser, setError]);
 
-    const errorComponent = error === '' ? <Error>{error}</Error> : null;
+    const errorComponent = error && error !== '' ? <Error className="text-center h3">{error}</Error> : null;
+
+    const initialSubmitMessage = 'Update Member';
+    const submittingMessage = 'Updating...';
+    const afterSubmitMessage = 'Member updated successfully!';
 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
@@ -97,7 +99,13 @@ const Profile: FC = () => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm submitCount={submitCount} submitting={submitting} />
+                    <ProfileForm
+                        submitCount={submitCount}
+                        submitting={submitting}
+                        initialSubmitMessage={initialSubmitMessage}
+                        submittingMessage={submittingMessage}
+                        afterSubmitMessage={afterSubmitMessage}
+                    />
                 </Formik>
             </>
         );

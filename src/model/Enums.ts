@@ -8,6 +8,7 @@
 export enum Country {
     UnitedStates = 'United States',
     Canada = 'Canada',
+    Default = 'Select a Country',
 }
 
 /**
@@ -38,7 +39,7 @@ export enum Chapter {
     Canada = 'Canada',
     OrangeCountyLosAngeles = 'Orange County/Los Angeles',
     Ventura = 'Ventura',
-    SantaCruzSanFrancisco = 'Santa Cruz/SanFrancisco',
+    SantaCruzSanFrancisco = 'Santa Cruz/San Francisco',
     Oregon = 'Oregon',
     Washington = 'Washington',
     Hawaii = 'Hawaii',

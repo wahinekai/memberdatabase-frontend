@@ -26,7 +26,7 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
     // Show region field only if country is picked
     let regionField = null;
 
-    if (country) {
+    if (country && country !== Country.Default) {
         const selectType = country === Country.UnitedStates ? Regions.USStates : Regions.CanadianProvinces;
         const label = country === Country.UnitedStates ? 'State or Territory' : 'Province or Territory';
 

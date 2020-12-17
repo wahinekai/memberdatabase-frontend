@@ -26,19 +26,22 @@ import { PropTypes } from '../model';
 const ApplicationNavbar: FC<PropTypes.Navbar> = ({ style }) => (
     <Navbar bg={style.bg} variant={style.variant} expand="lg" sticky="top">
         <NavbarBrand href="/">
-            <Image src={squareLogo} alt="Navbar Logo" width="40" height="40" />
+            <Image src={squareLogo} alt="Navbar Logo" width="35" height="35" />
         </NavbarBrand>
         <NavbarToggle aria-controls="applicationNavbar" />
         <NavbarCollapse id="applicationNavbar">
             <Nav className="mr-auto">
-                <NavLink className="h4" href="/">
+                <NavLink className="h5" href="/">
                     Search
                 </NavLink>
-                <NavLink className="h4" href="/profile">
+                <NavLink className="h5" href="/profile">
                     Profile
                 </NavLink>
-                <NavLink className="h4" href="/search/all">
+                <NavLink className="h5" href="/search/all">
                     All Members
+                </NavLink>
+                <NavLink className="h5" href="/users/create">
+                    Create a New Member
                 </NavLink>
             </Nav>
             <Button variant={style.logoutVariant} className="rounded" onClick={authProvider.logout}>

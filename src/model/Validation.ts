@@ -5,42 +5,44 @@
 import * as Yup from 'yup';
 
 // Building Blocks
-const bool = Yup.bool();
-const string = Yup.string();
-const date = Yup.date();
+const bool = Yup.bool().typeError('Must be yes or no');
+const string = Yup.string().typeError('This field is required');
+const date = Yup.date().typeError('A date is required');
+const nullableString = string.nullable();
 const nullableDate = date.nullable();
+const nullableBool = bool.nullable();
 const stringArray = Yup.array<string>();
 
 // Fields
 const admin = bool;
 const firstName = string.required('First Name is required');
-const lastName = string;
+const lastName = nullableString;
 const active = bool;
-const facebookName = string;
-const payPalName = string;
+const facebookName = nullableString;
+const payPalName = nullableString;
 const email = string.email('Must enter a valid email').required('email is required');
-const phoneNumber = string;
-const streetAddress = string;
-const city = string;
-const region = string; // TBD - more validation
-const country = string; // TBD - more validation
-const occupation = string;
-const chapter = string.required('User must belong to a chapter'); // TBD - more validation
+const phoneNumber = nullableString;
+const streetAddress = nullableString;
+const city = nullableString;
+const region = nullableString;
+const country = nullableString;
+const occupation = nullableString;
+const chapter = string.required('User must belong to a chapter');
 const birthdate = nullableDate;
-const level = string; // TBD - more validation
+const level = nullableString;
 const startedSurfing = nullableDate;
 const boards = stringArray;
-const photoUrl = string;
-const biography = string;
+const photoUrl = nullableString;
+const biography = nullableString;
 const joinedDate = date.required('Every member must have a joined date');
 const renewalDate = nullableDate;
 const terminatedDate = nullableDate;
-const position = string; // TBD - more validation
+const position = nullableString;
 const dateStartedPosition = nullableDate;
-const enteredInFacebookChapter = string; // TBD - more validation
-const enteredInFacebookWki = string; // TBD - more validation
-const needsNewMemberBag = bool;
-const wonSurfboard = bool;
+const enteredInFacebookChapter = nullableString;
+const enteredInFacebookWki = nullableString;
+const needsNewMemberBag = nullableBool;
+const wonSurfboard = nullableBool;
 const dateSurfboardWon = nullableDate;
 
 export const updateProfileSchema = Yup.object().shape({

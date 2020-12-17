@@ -7,6 +7,7 @@ import { Guid } from 'guid-typescript';
 import { PartialUser, NavbarStyleType } from '.';
 
 // PropTypes for components
+export type Error = OptionalClassname;
 export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
 export type Header = OptionalClassname;
@@ -17,8 +18,8 @@ export type Select = SelectAdditions & InputBase;
 export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
-export type Section = OptionalDisabled;
-export type Form = SubmitCount;
+export type Section = OptionalDisabled & OptionalCreate;
+export type Form = SubmitCount & SubmitMessages & OptionalCreate;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
 export type Search = Query;
@@ -28,6 +29,10 @@ export type EditUserPage = OptionalUserIdString;
 
 export type Navbar = {
     style: NavbarStyleType;
+};
+
+type OptionalCreate = {
+    create?: boolean;
 };
 
 type Query = {
@@ -49,6 +54,12 @@ type OptionalUserIdString = {
 type SubmitCount = {
     submitCount: number;
     submitting: boolean;
+};
+
+type SubmitMessages = {
+    initialSubmitMessage: string;
+    submittingMessage: string;
+    afterSubmitMessage: string;
 };
 
 type OptionalDisabled = {

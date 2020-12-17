@@ -4,21 +4,21 @@
 
 import { Guid } from 'guid-typescript';
 import { Ensure, getAge } from '../utils';
-import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position } from '.';
+import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position, Regions } from '.';
 
 /**
  * Model of a user - clone of backend User.cs
  * See backend for detailed documentation
  */
 class User implements IUser, IValidatable {
-    public readonly id: Guid | null = null;
+    public id?: Guid;
     public admin: boolean | null = null;
     public firstName: string | null = null;
     public lastName: string | null = null;
     public active: boolean | null = null;
     public facebookName: string | null = null;
     public payPalName: string | null = null;
-    public readonly email: string | null = null;
+    public email: string | null = null;
     public phoneNumber: string | null = null;
     public streetAddress: string | null = null;
     public city: string | null = null;
@@ -116,10 +116,18 @@ class User implements IUser, IValidatable {
             this.enteredInFacebookWki = null;
         }
 
+        if (this.region === Regions.CanadianProvinces.Default || this.region === Regions.USStates.Default) {
+            this.region = null;
+        }
+
+        if (this.country === Country.Default) {
+            this.country = null;
+        }
+
         // User must have a name
         this.firstName = Ensure.isNotNullOrWhitespace(() => this.firstName);
 
-        // Email is primary key, required, can't be changed
+        // Email is primary key, required, only changed on create
         Ensure.isNotNullOrWhitespace(() => this.email);
 
         // Every user belongs to a chapter
@@ -161,8 +169,57 @@ class User implements IUser, IValidatable {
         this.level = this.level ?? Level.Default;
         this.enteredInFacebookChapter = this.enteredInFacebookChapter ?? EnteredStatus.Default;
         this.enteredInFacebookWki = this.enteredInFacebookWki ?? EnteredStatus.Default;
+        this.country = this.country ?? Country.Default;
+
+        // Set up region
+        if (this.country === Country.UnitedStates) {
+            this.region = this.region ?? Regions.USStates.Default;
+        } else if (this.country === Country.Canada) {
+            this.region = this.region ?? Regions.CanadianProvinces.Default;
+        }
 
         return this;
+    }
+
+    /**
+     * Creates a new default user for formik
+     *
+     * @returns An IUser ready to be user in the forms
+     */
+    public static createForFormik(): IUser {
+        const newUser: IUser = {
+            admin: null,
+            firstName: '',
+            lastName: '',
+            active: null,
+            facebookName: '',
+            payPalName: '',
+            email: '',
+            phoneNumber: '',
+            streetAddress: '',
+            city: '',
+            region: null,
+            country: Country.Default,
+            occupation: '',
+            birthdate: null,
+            startedSurfing: null,
+            boards: [],
+            photoUrl: null,
+            biography: '',
+            joinedDate: null,
+            renewalDate: null,
+            terminatedDate: null,
+            dateStartedPosition: null,
+            needsNewMemberBag: null,
+            wonSurfboard: null,
+            dateSurfboardWon: null,
+            position: Position.Default,
+            chapter: Chapter.Default,
+            level: Level.Default,
+            enteredInFacebookChapter: EnteredStatus.Default,
+            enteredInFacebookWki: EnteredStatus.Default,
+        };
+        return newUser;
     }
 }
 

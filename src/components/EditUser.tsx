@@ -36,12 +36,11 @@ const updateByIdAsync = (id: Guid, updatedUserObject: IUser): Promise<IUser> =>
  * @param props.id - The user id of the user to get
  * @returns The Edit Profile Component
  */
-const Profile: FC<PropTypes.EditUser> = ({ id }) => {
+const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
     // Create state of user
     type StateType = {
         user?: User;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        error?: any;
+        error?: string;
         submitCount: number;
         submitting: boolean;
     };
@@ -52,8 +51,7 @@ const Profile: FC<PropTypes.EditUser> = ({ id }) => {
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setUser = useCallback((user: IUser) => setState((state) => ({ ...state, user: new User(user) })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const setError = useCallback((error: any) => setState((state) => ({ ...state, error })), []);
+    const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
 
@@ -64,6 +62,7 @@ const Profile: FC<PropTypes.EditUser> = ({ id }) => {
                 setSubmitting(true);
                 const updatedUser = new User(updatedUserObject);
                 updatedUser.validate();
+
                 const userFromBackend = await updateByIdAsync(id, updatedUser);
                 setState((state) => ({
                     ...state,
@@ -87,7 +86,11 @@ const Profile: FC<PropTypes.EditUser> = ({ id }) => {
         }
     }, [id, setUser, setError]);
 
-    const errorComponent = error === '' ? <Error>{error}</Error> : null;
+    const errorComponent = error && error !== '' ? <Error className="text-center h3">{error}</Error> : null;
+
+    const initialSubmitMessage = 'Update Member';
+    const submittingMessage = 'Updating...';
+    const afterSubmitMessage = 'Member updated successfully!';
 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
@@ -103,7 +106,13 @@ const Profile: FC<PropTypes.EditUser> = ({ id }) => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm submitCount={submitCount} submitting={submitting} />
+                    <ProfileForm
+                        submitCount={submitCount}
+                        submitting={submitting}
+                        initialSubmitMessage={initialSubmitMessage}
+                        submittingMessage={submittingMessage}
+                        afterSubmitMessage={afterSubmitMessage}
+                    />
                 </Formik>
             </>
         );
@@ -112,4 +121,4 @@ const Profile: FC<PropTypes.EditUser> = ({ id }) => {
     }
 };
 
-export default Profile;
+export default EditUser;

@@ -62,6 +62,7 @@ export enum USStates {
     WestVirginia = 'West Virginia',
     Wisconsin = 'Wisconsin',
     Wyoming = 'Wyoming',
+    Default = 'Select a State',
 }
 
 export enum CanadianProvinces {
@@ -78,4 +79,5 @@ export enum CanadianProvinces {
     Quebec = 'Quebec',
     Saskatchewan = 'Saskatchewan',
     Yukon = 'Yukon',
+    Default = 'Select a Province',
 }
