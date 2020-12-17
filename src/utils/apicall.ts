@@ -14,7 +14,11 @@ import { loadSettings, authProvider } from '.';
  * @param data - An optional parameter for PUT and POST allowing data of any kind to be passed in the body of the function
  * @returns The response from the API
  */
-const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, data: unknown = null): Promise<T> => {
+export const apiCallAsync = async <T = never>(
+    method: HttpMethodTypes,
+    path: string,
+    data: unknown = null
+): Promise<T> => {
     const { backendEndpoint } = loadSettings();
     const pathWithEndpoint = backendEndpoint + path;
 
@@ -51,4 +55,43 @@ const apiCallAsync = async <T = never>(method: HttpMethodTypes, path: string, da
     return res.data;
 };
 
-export default apiCallAsync;
+/**
+ * Get a file blob from a protected endpoint
+ *
+ * @param path - The path to be used (or appended onto REACT_APP_BACKEND_ENDPOINT environment variable)
+ * @returns The Blob of data
+ */
+export const getFileBlobAsync = async (path: string): Promise<Blob> => {
+    const { backendEndpoint } = loadSettings();
+    const pathWithEndpoint = backendEndpoint + path;
+
+    const { accessTokenScopes } = loadSettings().auth;
+
+    const { accessToken } = await authProvider.getAccessToken({ scopes: accessTokenScopes });
+
+    // Configure OAuth Header
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        responseType: 'blob',
+    };
+
+    const res = await axios.get<Blob>(pathWithEndpoint, config);
+
+    return res.data;
+};
+
+/**
+ * Download a file from a protected endpoing
+ *
+ * @param path - The path to be used
+ * @param fileName - The file name to download
+ */
+export const downloadFileAsync = async (path: string, fileName: string): Promise<void> => {
+    const blob = await getFileBlobAsync(path);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
+};

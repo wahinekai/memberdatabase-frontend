@@ -6,9 +6,10 @@ import React, { FC, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import { HttpMethodTypes, PartialUser } from '../model';
-import { apiCallAsync } from '../utils';
+import { apiCallAsync, downloadFileAsync } from '../utils';
 import { UserCard } from '.';
 
 /**
@@ -43,6 +44,16 @@ const ListAllUsers: FC = () => {
     return (
         <Container>
             <Row>{usersList}</Row>
+            <Row>
+                <Button
+                    variant="primary"
+                    className="rounded border-0 px-3 py-2 my-2"
+                    onClick={() => downloadFileAsync('/Users/AllUsers.csv', 'AllUsers.csv')}
+                    block
+                >
+                    Download a CSV of All Users
+                </Button>
+            </Row>
         </Container>
     );
 };
