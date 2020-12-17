@@ -43,7 +43,7 @@ const HomeForm: FC = () => {
                         </Col>
                         <Col>
                             <Button href="/search/all" variant="outline-primary" className="px-3 my-2">
-                                All Users
+                                All Members
                             </Button>
                         </Col>
                     </Row>
