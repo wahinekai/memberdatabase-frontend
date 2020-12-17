@@ -4,7 +4,7 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HttpMethodTypes } from '../model';
-import { loadSettings, authProvider } from '.';
+import { settings, authProvider } from '.';
 
 /**
  * Wrapper upon Axios's API supporting all HTTP Method Types and using endpoint prefixes in a .env file
@@ -19,10 +19,10 @@ export const apiCallAsync = async <T = never>(
     path: string,
     data: unknown = null
 ): Promise<T> => {
-    const { backendEndpoint } = loadSettings();
+    const { backendEndpoint } = settings;
     const pathWithEndpoint = backendEndpoint + path;
 
-    const { accessTokenScopes } = loadSettings().auth;
+    const { accessTokenScopes } = settings.auth;
 
     const { accessToken } = await authProvider.getAccessToken({ scopes: accessTokenScopes });
 
@@ -62,10 +62,10 @@ export const apiCallAsync = async <T = never>(
  * @returns The Blob of data
  */
 export const getFileBlobAsync = async (path: string): Promise<Blob> => {
-    const { backendEndpoint } = loadSettings();
+    const { backendEndpoint } = settings;
     const pathWithEndpoint = backendEndpoint + path;
 
-    const { accessTokenScopes } = loadSettings().auth;
+    const { accessTokenScopes } = settings.auth;
 
     const { accessToken } = await authProvider.getAccessToken({ scopes: accessTokenScopes });
 

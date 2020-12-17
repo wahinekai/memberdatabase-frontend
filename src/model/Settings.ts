@@ -9,6 +9,7 @@ export type Settings = EnvironmentSettings & GlobalSettings;
 
 export type EnvironmentSettings = {
     backendEndpoint: string;
+    frontendAssetsPrefix: string;
     auth: {
         signInConfig: Configuration;
         authenticationParameters: AuthenticationParameters;

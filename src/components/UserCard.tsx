@@ -5,10 +5,12 @@
 import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+
 import { Chapter, Position, PropTypes } from '../model';
+import { settings } from '../utils';
 import { TextCenter } from '.';
 
-const emptyProfileImage = 'https://www.clker.com/cliparts/B/R/Y/m/P/e/blank-profile-hi.png';
+const emptyProfileImage = `${settings.frontendAssetsPrefix}/no-image.png`;
 
 /**
  * User Card Component

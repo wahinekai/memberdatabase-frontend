@@ -6,7 +6,7 @@ import { apiCallAsync, downloadFileAsync, getFileBlobAsync } from './apicall';
 import * as Ensure from './ensure';
 import * as Timer from './timer';
 import { getAge } from './age';
-import { loadSettings } from './loadSettings';
+import { settings } from './settings';
 import { authProvider } from './auth';
 import { usePrevious } from './hooks';
 
@@ -17,7 +17,7 @@ export {
     Ensure,
     Timer,
     getAge,
-    loadSettings,
+    settings,
     authProvider,
     usePrevious,
 };

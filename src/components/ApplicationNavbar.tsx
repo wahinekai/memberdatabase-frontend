@@ -12,7 +12,7 @@ import NavLink from 'react-bootstrap/NavLink';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
-import { authProvider } from '../utils';
+import { authProvider, settings } from '../utils';
 
 /**
  * Global navbar for application
@@ -22,12 +22,7 @@ import { authProvider } from '../utils';
 const ApplicationNavbar: FC = () => (
     <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
         <NavbarBrand href="/">
-            <Image
-                src="https://wahinekaidevelopment.blob.core.windows.net/frontend-assets/squareLogo.png"
-                alt="Navbar Logo"
-                width="35"
-                height="35"
-            />
+            <Image src={`${settings.frontendAssetsPrefix}/squareLogo.png`} alt="Navbar Logo" width="35" height="35" />
         </NavbarBrand>
         <NavbarToggle aria-controls="applicationNavbar" />
         <NavbarCollapse id="applicationNavbar">

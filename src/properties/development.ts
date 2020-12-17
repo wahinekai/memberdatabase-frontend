@@ -16,6 +16,7 @@ const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 
 const settings: Readonly<Settings> = {
     backendEndpoint: 'https://localhost:5001/api/v1',
+    frontendAssetsPrefix: 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets',
     ...globalSettings,
     auth: {
         authenticationParameters: {

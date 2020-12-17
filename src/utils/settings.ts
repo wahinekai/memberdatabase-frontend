@@ -10,7 +10,7 @@ import globalSettings from '../properties';
  *
  * @returns A TypeScript object from the data in that file
  */
-export const loadSettings = (): Readonly<Settings> => {
+const loadSettings = (): Readonly<Settings> => {
     // Development environment
     if (process.env.NODE_ENV == 'development') {
         return globalSettings.development;
@@ -19,3 +19,5 @@ export const loadSettings = (): Readonly<Settings> => {
     // Production environment, default
     return globalSettings.production;
 };
+
+export const settings = loadSettings();
