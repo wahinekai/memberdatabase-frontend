@@ -23,9 +23,22 @@ export type Form = SubmitCount & SubmitMessages & OptionalCreate;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
 export type Search = Query;
+export type ProfilePhoto = Name & OptionalError & OptionalTouched;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
+
+type OptionalError = {
+    error?: string;
+};
+
+type OptionalTouched = {
+    touched?: boolean;
+};
+
+type Name = {
+    name: string;
+};
 
 type OptionalCreate = {
     create?: boolean;

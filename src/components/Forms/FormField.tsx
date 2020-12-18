@@ -45,6 +45,7 @@ const FormField: FC<PropTypes.FormField> = (props) => {
                 disabled={props.disabled}
                 aria-describedby={helpId}
                 selectType={props.selectType}
+                rows={props.rows}
             />
             {help}
         </FormGroup>

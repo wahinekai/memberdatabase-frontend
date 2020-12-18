@@ -13,10 +13,12 @@ const reactRedirectUri = 'http://localhost:3000';
 
 const signInPolicy = 'B2C_1_signup_signin';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
+const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
 
 const settings: Readonly<Settings> = {
     backendEndpoint: 'https://localhost:5001/api/v1',
-    frontendAssetsPrefix: 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets',
+    frontendAssetsPrefix,
+    emptyProfileImage: `${frontendAssetsPrefix}/no-image.png`,
     ...globalSettings,
     auth: {
         authenticationParameters: {

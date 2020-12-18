@@ -10,8 +10,6 @@ import { Chapter, Position, PropTypes } from '../model';
 import { settings } from '../utils';
 import { TextCenter } from '.';
 
-const emptyProfileImage = `${settings.frontendAssetsPrefix}/no-image.png`;
-
 /**
  * User Card Component
  *
@@ -20,7 +18,7 @@ const emptyProfileImage = `${settings.frontendAssetsPrefix}/no-image.png`;
  * @returns A User card
  */
 const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
-    const image = user.photoUrl && user.photoUrl !== '' ? user.photoUrl : emptyProfileImage;
+    const image = user.photoUrl && user.photoUrl !== '' ? user.photoUrl : settings.emptyProfileImage;
 
     const position = user.position && user.position !== Position.Default ? user.position : 'Member';
     const chapter = user.chapter && user.chapter !== Chapter.Default ? `, ${user.chapter} Chapter` : '';

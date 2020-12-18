@@ -5,11 +5,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { Form } from 'formik';
 
 import { PropTypes } from '../model';
 import { Timer, usePrevious } from '../utils';
-import { Submit, Sections } from '.';
+import { Submit, Sections, TextCenter } from '.';
 
 /**
  * The Profile Form Component
@@ -59,9 +60,6 @@ const ProfileForm: FC<PropTypes.Form> = ({
     return (
         <Container>
             <Form>
-                <Row>
-                    <h3>Personal Information</h3>
-                </Row>
                 <Sections.PublicPersonalInformationWithRows />
                 <Row>
                     <Sections.PublicSurfingInformation />
@@ -70,13 +68,21 @@ const ProfileForm: FC<PropTypes.Form> = ({
                     <Sections.PrivatePersonalInformation create={create} />
                 </Row>
                 <Row>
-                    <h3>Birthday</h3>
+                    <Col>
+                        <TextCenter>
+                            <h3>Birthday</h3>
+                        </TextCenter>
+                    </Col>
                 </Row>
                 <Row>
                     <Sections.Birthdate />
                 </Row>
                 <Row>
-                    <h3>Address</h3>
+                    <Col>
+                        <TextCenter>
+                            <h3>Address</h3>
+                        </TextCenter>
+                    </Col>
                 </Row>
                 <Row>
                     <Sections.PrivateLocation />
@@ -85,13 +91,21 @@ const ProfileForm: FC<PropTypes.Form> = ({
                     <Sections.PublicLocation />
                 </Row>
                 <Row>
-                    <h3>Surfing Information</h3>
+                    <Col>
+                        <TextCenter>
+                            <h3>Surfing Information</h3>
+                        </TextCenter>
+                    </Col>
                 </Row>
                 <Row>
                     <Sections.PrivateSurfingInformation />
                 </Row>
                 <Row>
-                    <h3>Administrative Information</h3>
+                    <Col>
+                        <TextCenter>
+                            <h3>Administrative Information</h3>
+                        </TextCenter>
+                    </Col>
                 </Row>
                 <Row>
                     <Sections.Adminstrator />

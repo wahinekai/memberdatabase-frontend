@@ -9,6 +9,7 @@ import { useFormikContext } from 'formik';
 
 import { FormField, TextArea } from '..';
 import { PartialUser, PropTypes } from '../../model';
+import ProfilePhoto from './ProfilePhotoWithContainer';
 
 /**
  * A section of the edit profile form
@@ -22,6 +23,22 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
 
     return (
         <>
+            <Row>
+                <Col>
+                    <ProfilePhoto name="photoUrl" />
+                </Col>
+                <Col>
+                    <FormField
+                        disabled={disabled}
+                        error={errors.biography}
+                        touched={touched.biography}
+                        inputComponent={TextArea}
+                        name="biography"
+                        label="About"
+                        rows={7}
+                    />
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <FormField
@@ -39,18 +56,6 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
                         touched={touched.lastName}
                         name="lastName"
                         label="Last Name"
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <FormField
-                        disabled={disabled}
-                        error={errors.biography}
-                        touched={touched.biography}
-                        inputComponent={TextArea}
-                        name="biography"
-                        label="About"
                     />
                 </Col>
             </Row>
