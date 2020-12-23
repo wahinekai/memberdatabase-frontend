@@ -9,18 +9,20 @@ import { PartialUser } from '.';
  */
 interface IUser
     extends PartialUser.IEnteredInFacebook,
-        PartialUser.IPositionInformation,
+        PartialUser.IPositions,
         PartialUser.IWonSurfboardInformation,
         PartialUser.IAdministrator,
         PartialUser.IActivityInformation,
         PartialUser.IBirthdate,
         PartialUser.IPrivateLocation,
         PartialUser.IPublicLocation,
-        PartialUser.IPrivateSurfingInformation,
         PartialUser.IPublicSurfingInformation,
         PartialUser.IPublicPersonalInformation,
         PartialUser.IPrivatePersonalInformation,
         PartialUser.INeedsNewMemberBag,
-        PartialUser.IId {}
+        PartialUser.IOptOut,
+        PartialUser.IId {
+    timeStamp?: number;
+}
 
 export default IUser;

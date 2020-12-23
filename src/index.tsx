@@ -9,6 +9,7 @@ import { render } from 'react-dom';
 import _$ from 'jquery'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import _Popper from 'popper.js'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
+import 'reflect-metadata';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from './App';

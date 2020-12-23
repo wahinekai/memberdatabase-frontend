@@ -2,14 +2,14 @@
  * @file Definition of the Birthdate section of the form
  */
 
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
 import { useFormikContext } from 'formik';
+import differenceInYears from 'date-fns/differenceInYears';
 
 import { PartialUser, PropTypes } from '../../model';
 import { DatePickerField, FormField } from '..';
-import { getAge } from '../../utils';
 import { InputComponent } from '../../model/PropTypes';
 
 /**
@@ -26,10 +26,13 @@ const Birthdate: FC<PropTypes.Section> = ({ disabled = false }) => {
         errors,
     } = useFormikContext<PartialUser.IBirthdate>();
 
-    const age = birthdate ? getAge(new Date(birthdate))?.toString() : undefined;
+    const ageCallback = useCallback(
+        () => (birthdate ? differenceInYears(new Date(), new Date(birthdate)) : undefined),
+        [birthdate]
+    );
 
     // eslint-disable-next-line jsdoc/require-jsdoc
-    const ageComponent: FC<InputComponent> = () => <FormControl disabled={true} name="age" value={age} />;
+    const ageComponent: FC<InputComponent> = () => <FormControl disabled={true} name="age" value={ageCallback()} />;
 
     const ageField = birthdate ? (
         <Col>

@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import { Chapter, Position, PropTypes } from '../model';
+import { Chapter, PropTypes } from '../model';
 import { settings } from '../utils';
 import { TextCenter } from '.';
 
@@ -20,9 +20,17 @@ import { TextCenter } from '.';
 const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
     const image = user.photoUrl && user.photoUrl !== '' ? user.photoUrl : settings.emptyProfileImage;
 
-    const position = user.position && user.position !== Position.Default ? user.position : 'Member';
-    const chapter = user.chapter && user.chapter !== Chapter.Default ? `, ${user.chapter} Chapter` : '';
-    const body = position + chapter;
+    let positionsString = '';
+
+    user.positions.forEach((position) => {
+        if (!position.ended) {
+            positionsString += `${position.name ?? ''}, `;
+        }
+    });
+
+    const positions = positionsString !== '' ? positionsString : 'Member, ';
+    const chapter = user.chapter && user.chapter !== Chapter.Default ? `${user.chapter} Chapter` : '';
+    const body = positions + chapter;
 
     return (
         <TextCenter>

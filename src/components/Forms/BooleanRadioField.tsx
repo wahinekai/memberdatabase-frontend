@@ -16,15 +16,20 @@ import { PropTypes } from '../../model';
  */
 const BooleanRadioField: FC<PropTypes.Input> = (props) => {
     const { setFieldValue } = useFormikContext();
-    const [field] = useField<boolean>(props);
+    const [{ name, value }] = useField<boolean>(props);
 
-    const changeToFalse = useCallback(() => setFieldValue(field.name, false), [field.name, setFieldValue]);
-    const changeToTrue = useCallback(() => setFieldValue(field.name, true), [field.name, setFieldValue]);
+    const toggleSwitch = useCallback(() => setFieldValue(name, !value), [name, value, setFieldValue]);
 
     return (
         <>
-            <FormCheck type="radio" label="Yes" checked={field.value === true} onChange={changeToTrue} />
-            <FormCheck type="radio" label="No" checked={field.value === false} onChange={changeToFalse} />
+            <FormCheck
+                disabled={props.disabled}
+                id={`${name}-switch`}
+                type="switch"
+                label={value ? 'Yes' : 'No'}
+                checked={value}
+                onChange={toggleSwitch}
+            />
         </>
     );
 };

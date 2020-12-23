@@ -4,6 +4,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { Guid } from 'guid-typescript';
+import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation, PropTypes } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
@@ -49,7 +50,10 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
 
     const { error, submitCount, submitting, user: userMaybeNull } = state;
     // eslint-disable-next-line jsdoc/require-jsdoc
-    const setUser = useCallback((user: IUser) => setState((state) => ({ ...state, user: new User(user) })), []);
+    const setUser = useCallback(
+        (user: IUser) => setState((state) => ({ ...state, user: plainToClass(User, user) })),
+        []
+    );
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
@@ -60,21 +64,26 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
         async (updatedUserObject: IUser) => {
             try {
                 setSubmitting(true);
-                const updatedUser = new User(updatedUserObject);
+                const updatedUser = plainToClass(User, updatedUserObject);
                 updatedUser.validate();
 
                 const userFromBackend = await updateByIdAsync(id, updatedUser);
                 setState((state) => ({
                     ...state,
-                    user: new User(userFromBackend),
+                    user: plainToClass(User, userFromBackend),
                     submitting: false,
                     submitCount: submitCount + 1,
+                    error: undefined,
                 }));
             } catch (err) {
-                setError(err);
+                setState((state) => ({
+                    ...state,
+                    error: 'Error in submission or validation of form',
+                    submitting: false,
+                }));
             }
         },
-        [id, setSubmitting, submitCount, setError]
+        [id, submitCount, setSubmitting]
     );
 
     // Update state with newest user on first render
@@ -82,14 +91,14 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
         try {
             getByIdAsync(id).then((user) => setUser(user));
         } catch (err) {
-            setError(err);
+            setError('Error in getting user');
         }
     }, [id, setUser, setError]);
 
     const errorComponent =
         error && error !== '' ? (
             <TextCenter>
-                <Error className="h3">{error}</Error>
+                <Error className="h3">{error.toString()}</Error>
             </TextCenter>
         ) : null;
 
@@ -101,10 +110,23 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
         const user = Ensure.isNotNull(() => userMaybeNull);
         user.validate();
 
+        const lastEdited = new Date(0);
+
+        if (user.timeStamp) {
+            lastEdited.setUTCSeconds(user.timeStamp);
+        }
+
+        const lastEditedComponent = user.timeStamp ? (
+            <TextCenter>
+                <h5>Last Edited: {lastEdited.toLocaleString()}</h5>
+            </TextCenter>
+        ) : null;
+
         const userForFormik = user.readyForFormik();
 
         return (
             <>
+                {lastEditedComponent}
                 {errorComponent}
                 <Formik
                     initialValues={userForFormik}

@@ -3,6 +3,7 @@
  */
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Formik } from 'formik';
+import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
@@ -43,7 +44,10 @@ const Profile: FC = () => {
 
     const { error, submitCount, submitting, user: userMaybeNull } = state;
     // eslint-disable-next-line jsdoc/require-jsdoc
-    const setUser = useCallback((user: IUser) => setState((state) => ({ ...state, user: new User(user) })), []);
+    const setUser = useCallback(
+        (user: IUser) => setState((state) => ({ ...state, user: plainToClass(User, user) })),
+        []
+    );
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
     // eslint-disable-next-line jsdoc/require-jsdoc
@@ -54,20 +58,24 @@ const Profile: FC = () => {
         async (updatedUserObject: IUser) => {
             try {
                 setSubmitting(true);
-                const updatedUser = new User(updatedUserObject);
+                const updatedUser = plainToClass(User, updatedUserObject);
                 updatedUser.validate();
                 const userFromBackend = await updateMeAsync(updatedUser);
                 setState((state) => ({
                     ...state,
-                    user: new User(userFromBackend),
+                    user: plainToClass(User, userFromBackend),
                     submitting: false,
                     submitCount: submitCount + 1,
                 }));
             } catch (err) {
-                setError(err);
+                setState((state) => ({
+                    ...state,
+                    error: 'Error in submission or validation of form',
+                    submitting: false,
+                }));
             }
         },
-        [setSubmitting, submitCount, setError]
+        [setSubmitting, submitCount]
     );
 
     // Update state with newest user on first render
@@ -75,14 +83,14 @@ const Profile: FC = () => {
         try {
             getMeAsync().then((user) => setUser(user));
         } catch (err) {
-            setError(err);
+            setError('Error in getting user');
         }
     }, [setUser, setError]);
 
     const errorComponent =
         error && error !== '' ? (
             <TextCenter>
-                <Error className="h3">{error}</Error>
+                <Error className="h3">{error.toString()}</Error>
             </TextCenter>
         ) : null;
 

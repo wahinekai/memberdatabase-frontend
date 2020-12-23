@@ -29,6 +29,7 @@ const Administrator: FC<PropTypes.Section> = ({ disabled = false }) => {
                     name="admin"
                     label="Is this user an administrator?"
                     inputComponent={BooleanRadioField}
+                    helpText="An administrator can view & edit any user"
                 />
             </Col>
         </>

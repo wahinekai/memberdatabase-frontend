@@ -4,6 +4,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
+import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure, Timer } from '../utils';
@@ -38,8 +39,6 @@ const CreateUser: FC = () => {
 
     const { error, submitCount, submitting } = state;
     // eslint-disable-next-line jsdoc/require-jsdoc
-    const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
-    // eslint-disable-next-line jsdoc/require-jsdoc
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
 
     // Create onSubmit callback to update user
@@ -47,7 +46,7 @@ const CreateUser: FC = () => {
         async (userObject: IUser) => {
             try {
                 setSubmitting(true);
-                const createdUser = new User(userObject);
+                const createdUser = plainToClass(User, userObject);
                 createdUser.validate();
                 delete createdUser.id;
 
@@ -64,16 +63,20 @@ const CreateUser: FC = () => {
                 await Timer.waitSecondsAsync(2);
                 history.push(`/users/${id.toString()}`);
             } catch (err) {
-                setError('Error in submission or validation of form');
+                setState((state) => ({
+                    ...state,
+                    error: 'Error in submission of validation of form',
+                    submitting: false,
+                }));
             }
         },
-        [history, setSubmitting, submitCount, setError]
+        [history, setSubmitting, submitCount]
     );
 
     const errorComponent =
         error && error !== '' ? (
             <TextCenter>
-                <Error className="h3">{error}</Error>
+                <Error className="h3">{error.toString()}</Error>
             </TextCenter>
         ) : null;
 

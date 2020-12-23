@@ -30,7 +30,7 @@ const EnteredInFacebook: FC<PropTypes.Section> = ({ disabled = false }) => {
                     inputComponent={Select}
                     selectType={EnteredStatus}
                     name="enteredInFacebookChapter"
-                    label="Entered in Facebook Chapter?"
+                    label="Entered in Local Facebook Chapter?"
                 />
             </Col>
             <Col>
@@ -41,7 +41,7 @@ const EnteredInFacebook: FC<PropTypes.Section> = ({ disabled = false }) => {
                     inputComponent={Select}
                     selectType={EnteredStatus}
                     name="enteredInFacebookWki"
-                    label="Entered in Facebook WKI?"
+                    label="Entered in Facebook WKI Chapter?"
                 />
             </Col>
         </>

@@ -15,7 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
  * @param props - Properties passed down from parents to children
  * @returns The Formik Integrated Date Picker
  */
-const DatePickerField: FC<PropTypes.Input> = (props) => {
+const DatePickerField: FC<PropTypes.DatePickerField> = (props) => {
     const { setFieldValue } = useFormikContext();
     const [field] = useField(props);
 
@@ -23,9 +23,11 @@ const DatePickerField: FC<PropTypes.Input> = (props) => {
 
     const onChange = useCallback((newDate: Date) => setFieldValue(field.name, newDate), [field.name, setFieldValue]);
 
+    const br = props.br === false ? null : <br />;
+
     return (
         <>
-            <br />
+            {br}
             <DatePicker
                 {...field}
                 selected={selected}

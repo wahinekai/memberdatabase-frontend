@@ -3,22 +3,26 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, EnteredStatus, Level, Position } from '.';
+import { Chapter, Country, EnteredStatus, Level, IPositionInformation } from '.';
 
 export interface IId {
     id?: Guid; // Not in forms
 }
 
+export interface IOptOut {
+    socialMediaOptOut: boolean;
+}
+
 export interface INeedsNewMemberBag {
-    needsNewMemberBag?: boolean;
+    needsNewMemberBag: boolean;
 }
 
 export interface IAdministrator {
-    admin?: boolean;
+    admin: boolean;
 }
 
 export interface IWonSurfboardInformation {
-    wonSurfboard?: boolean;
+    wonSurfboard: boolean;
     dateSurfboardWon?: Date;
 }
 
@@ -27,13 +31,13 @@ export interface IEnteredInFacebook {
     enteredInFacebookWki?: EnteredStatus;
 }
 
-export interface IPositionInformation {
-    position?: Position;
-    dateStartedPosition?: Date;
+export interface IPositions {
+    positions: IPositionInformation[];
 }
 
 export interface IActivityInformation {
-    active?: boolean;
+    active: boolean;
+    lifetimeMember: boolean;
     joinedDate?: Date;
     renewalDate?: Date;
     terminatedDate?: Date;
@@ -50,17 +54,16 @@ export interface IPrivateLocation {
 export interface IPublicLocation {
     city?: string;
     region?: string;
+    postalCode?: number;
     country?: Country;
-}
-
-export interface IPrivateSurfingInformation {
-    startedSurfing?: Date;
-    boards: string[];
 }
 
 export interface IPublicSurfingInformation {
     chapter?: Chapter;
     level?: Level;
+    startedSurfing?: Date;
+    boards?: string[];
+    surfSpots?: string[];
 }
 
 export interface IPublicPersonalInformation {
@@ -83,5 +86,5 @@ export type UserForCard = IId & {
     lastName?: string;
     photoUrl?: string;
     chapter?: Chapter;
-    position?: Position;
+    positions: IPositionInformation[];
 };

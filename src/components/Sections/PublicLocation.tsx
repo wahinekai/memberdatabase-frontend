@@ -54,6 +54,15 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
             <Col>
                 <FormField
                     disabled={disabled}
+                    error={errors.postalCode}
+                    touched={touched.postalCode}
+                    name="postalCode"
+                    label="Postal (ZIP) Code"
+                />
+            </Col>
+            <Col>
+                <FormField
+                    disabled={disabled}
                     error={errors.country}
                     touched={touched.country}
                     name="country"

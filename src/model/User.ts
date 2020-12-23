@@ -3,19 +3,32 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Ensure, getAge } from '../utils';
-import { Chapter, Country, EnteredStatus, IUser, IValidatable, Level, Position, Regions } from '.';
+import differenceInYears from 'date-fns/differenceInYears';
+import { Type } from 'class-transformer';
+
+import { Ensure } from '../utils';
+import {
+    Chapter,
+    Country,
+    EnteredStatus,
+    IUser,
+    IValidatable,
+    IFormikConvertable,
+    Level,
+    Regions,
+    PositionInformation,
+} from '.';
 
 /**
  * Model of a user - clone of backend User.cs
  * See backend for detailed documentation
  */
-class User implements IUser, IValidatable {
+class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public id?: Guid;
-    public admin?: boolean;
+    public admin = false;
     public firstName?: string;
     public lastName?: string;
-    public active?: boolean;
+    public active = true;
     public facebookName?: string;
     public payPalName?: string;
     public email?: string;
@@ -30,90 +43,45 @@ class User implements IUser, IValidatable {
     public level?: Level;
     public startedSurfing?: Date;
     public boards: string[] = [];
+    public surfSpots: string[] = [];
     public photoUrl?: string;
     public biography?: string;
     public joinedDate?: Date;
     public renewalDate?: Date;
     public terminatedDate?: Date;
-    public position?: Position;
-    public dateStartedPosition?: Date;
-    public enteredInFacebookChapter?: EnteredStatus;
-    public enteredInFacebookWki?: EnteredStatus;
-    public needsNewMemberBag?: boolean;
-    public wonSurfboard?: boolean;
+    public enteredInFacebookChapter: EnteredStatus = EnteredStatus.NotEntered;
+    public enteredInFacebookWki: EnteredStatus = EnteredStatus.NotEntered;
+    public needsNewMemberBag = false;
+    public wonSurfboard = false;
     public dateSurfboardWon?: Date;
+    public postalCode?: number;
+    public lifetimeMember = false;
+    public socialMediaOptOut = false;
+    public timeStamp?: number;
 
-    /**
-     * Constructs a user from an IUser.
-     * This is a form of a copy constructor, but used mostly for JSON IUsers from
-     * an API call.
-     *
-     * @param userObject User object type to construct this user from
-     */
-    constructor(userObject: IUser) {
-        this.id = userObject.id;
-        this.admin = userObject.admin;
-        this.firstName = userObject.firstName;
-        this.lastName = userObject.lastName;
-        this.active = userObject.active;
-        this.facebookName = userObject.facebookName;
-        this.payPalName = userObject.payPalName;
-        this.email = userObject.email;
-        this.phoneNumber = userObject.phoneNumber;
-        this.streetAddress = userObject.streetAddress;
-        this.city = userObject.city;
-        this.region = userObject.region;
-        this.country = userObject.country;
-        this.occupation = userObject.occupation;
-        this.chapter = userObject.chapter;
-        this.birthdate = userObject.birthdate;
-        this.level = userObject.level;
-        this.startedSurfing = userObject.startedSurfing;
-        this.boards = userObject.boards;
-        this.photoUrl = userObject.photoUrl;
-        this.biography = userObject.biography;
-        this.joinedDate = userObject.joinedDate;
-        this.renewalDate = userObject.renewalDate;
-        this.terminatedDate = userObject.terminatedDate;
-        this.position = userObject.position;
-        this.dateStartedPosition = userObject.dateStartedPosition;
-        this.enteredInFacebookChapter = userObject.enteredInFacebookChapter;
-        this.enteredInFacebookWki = userObject.enteredInFacebookWki;
-        this.needsNewMemberBag = userObject.needsNewMemberBag;
-        this.wonSurfboard = userObject.wonSurfboard;
-        this.dateSurfboardWon = userObject.dateSurfboardWon;
-    }
+    @Type(() => PositionInformation)
+    public positions: PositionInformation[] = [];
 
     /**
      * Gets the user's age from their birthdate, returns null if birthdate is null
      *
      * @returns The age of the user
      */
-    public getAge = (): number | null => (this.birthdate ? getAge(this.birthdate) : null);
+    public get age(): number | undefined {
+        return this.birthdate ? differenceInYears(new Date(), new Date(this.birthdate)) : undefined;
+    }
 
     /**
      * Ensures this user is in a correct state
      */
     public validate(): void {
         // Undo ready for formik changes
-        if (this.position === Position.Default) {
-            delete this.position;
-        }
-
         if (this.chapter === Chapter.Default) {
             delete this.chapter;
         }
 
         if (this.level === Level.Default) {
             delete this.level;
-        }
-
-        if (this.enteredInFacebookChapter === EnteredStatus.Default) {
-            delete this.enteredInFacebookChapter;
-        }
-
-        if (this.enteredInFacebookWki === EnteredStatus.Default) {
-            delete this.enteredInFacebookWki;
         }
 
         if (this.region === Regions.CanadianProvinces.Default || this.region === Regions.USStates.Default) {
@@ -123,6 +91,9 @@ class User implements IUser, IValidatable {
         if (this.country === Country.Default) {
             delete this.country;
         }
+
+        // Ensure each position is valid
+        this.positions.forEach((position) => position.validate());
 
         // User must have a name
         this.firstName = Ensure.isNotNullOrWhitespace(() => this.firstName);
@@ -136,18 +107,28 @@ class User implements IUser, IValidatable {
         // Every user must have a joined date
         this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
 
+        // Validation of renewal/terminated date
+        if (this.active) {
+            // Active user, must have renewal date or be lifetime member, terminated date is null
+            if (!this.lifetimeMember) {
+                this.renewalDate = Ensure.isNotNull(() => this.renewalDate);
+            }
+
+            delete this.terminatedDate;
+        } else {
+            // Inactive user, must have terminated date, no renewal date
+            this.terminatedDate = Ensure.isNotNull(() => this.terminatedDate);
+
+            delete this.renewalDate;
+        }
+
         // User must be either terminated or have renewal date
         if (this.terminatedDate === null) {
             this.renewalDate = Ensure.isNotNull(() => this.renewalDate);
         }
 
-        // If user has a leadership position, they must also have a date started
-        if (this.position) {
-            this.dateStartedPosition = Ensure.isNotNull(() => this.dateStartedPosition);
-        }
-
         // If user has won a surfboard, must hae a date won
-        if (this.wonSurfboard === true) {
+        if (this.wonSurfboard) {
             this.dateSurfboardWon = Ensure.isNotNull(() => this.dateSurfboardWon);
         }
 
@@ -164,11 +145,8 @@ class User implements IUser, IValidatable {
      * @returns An IUser ready to be used in forms
      */
     public readyForFormik(): IUser {
-        this.position = this.position ?? Position.Default;
         this.chapter = this.chapter ?? Chapter.Default;
         this.level = this.level ?? Level.Default;
-        this.enteredInFacebookChapter = this.enteredInFacebookChapter ?? EnteredStatus.Default;
-        this.enteredInFacebookWki = this.enteredInFacebookWki ?? EnteredStatus.Default;
         this.country = this.country ?? Country.Default;
 
         // Set up region
@@ -189,12 +167,19 @@ class User implements IUser, IValidatable {
     public static createForFormik(): IUser {
         const newUser: IUser = {
             country: Country.Default,
-            position: Position.Default,
             chapter: Chapter.Default,
             level: Level.Default,
             boards: [],
-            enteredInFacebookChapter: EnteredStatus.Default,
-            enteredInFacebookWki: EnteredStatus.Default,
+            surfSpots: [],
+            positions: [],
+            enteredInFacebookChapter: EnteredStatus.NotEntered,
+            enteredInFacebookWki: EnteredStatus.NotEntered,
+            wonSurfboard: false,
+            admin: false,
+            active: true,
+            needsNewMemberBag: false,
+            lifetimeMember: false,
+            socialMediaOptOut: false,
         };
         return newUser;
     }

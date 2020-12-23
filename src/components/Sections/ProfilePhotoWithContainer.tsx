@@ -4,7 +4,6 @@
 
 import { useField, useFormikContext } from 'formik';
 import React, { ChangeEvent, FC, useCallback, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormFile from 'react-bootstrap/FormFile';
@@ -47,32 +46,30 @@ const ProfilePhoto: FC<PropTypes.ProfilePhoto> = (props) => {
     const photoUrl = field.value !== undefined && field.value !== '' ? field.value : settings.emptyProfileImage;
 
     return (
-        <Container fluid>
-            <FormGroup>
-                <Row>
-                    <Col>
-                        <Label htmlFor={props.name}>Profile Photo</Label>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Image src={photoUrl} rounded height={150} width={200} className="mb-3 mt-2" />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <FormFile
-                            onChange={uploadProfilePhoto}
-                            isInvalid={props.touched && props.error !== undefined}
-                            feedback={props.error}
-                            accept="image/x-png,image/jpeg"
-                            label="Upload Photo"
-                            custom
-                        />
-                    </Col>
-                </Row>
-            </FormGroup>
-        </Container>
+        <FormGroup>
+            <Row>
+                <Col>
+                    <Label htmlFor={props.name}>Profile Photo</Label>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Image src={photoUrl} rounded height={150} width={200} className="mb-3 mt-2" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <FormFile
+                        onChange={uploadProfilePhoto}
+                        isInvalid={props.touched && props.error !== undefined}
+                        feedback={props.error}
+                        accept="image/x-png,image/jpeg"
+                        label="Upload Photo"
+                        custom
+                    />
+                </Col>
+            </Row>
+        </FormGroup>
     );
 };
 

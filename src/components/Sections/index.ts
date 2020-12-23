@@ -6,13 +6,13 @@ import Adminstrator from './Administrator';
 import ActivityInformation from './ActivityInformation';
 import Birthdate from './Birthdate';
 import EnteredInFacebook from './EnteredInFacebook';
-import PositionInformation from './PositionInformation';
+import OptOut from './OptOut';
+import PositionsWithRows from './PositionsWithRows';
 import PrivateLocation from './PrivateLocation';
 import PrivatePersonalInformation from './PrivatePersonalInformation';
-import PrivateSurfingInformation from './PrivateSurfingInformation';
 import PublicLocation from './PublicLocation';
 import PublicPersonalInformationWithRows from './PublicPersonalInformationWithRows';
-import PublicSurfingInformation from './PublicSurfingInformation';
+import PublicSurfingInformationWithRows from './PublicSurfingInformationWithRows';
 import WonSurfboardInformation from './WonSurfboardInformation';
 import NeedsNewMemberBag from './NeedsNewMemberBag';
 
@@ -22,12 +22,12 @@ export {
     Birthdate,
     EnteredInFacebook,
     NeedsNewMemberBag,
-    PositionInformation,
+    OptOut,
+    PositionsWithRows,
     PrivateLocation,
     PrivatePersonalInformation,
-    PrivateSurfingInformation,
     PublicLocation,
     PublicPersonalInformationWithRows,
-    PublicSurfingInformation,
+    PublicSurfingInformationWithRows,
     WonSurfboardInformation,
 };

@@ -43,6 +43,7 @@ const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false, c
                     touched={touched.phoneNumber}
                     name="phoneNumber"
                     label="Phone Number"
+                    type="phone"
                 />
             </Col>
             <Col>

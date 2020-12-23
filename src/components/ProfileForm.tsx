@@ -62,11 +62,16 @@ const ProfileForm: FC<PropTypes.Form> = ({
             <Form>
                 <Sections.PublicPersonalInformationWithRows />
                 <Row>
-                    <Sections.PublicSurfingInformation />
-                </Row>
-                <Row>
                     <Sections.PrivatePersonalInformation create={create} />
                 </Row>
+                <Row>
+                    <Col>
+                        <TextCenter>
+                            <h3>Surfing Information</h3>
+                        </TextCenter>
+                    </Col>
+                </Row>
+                <Sections.PublicSurfingInformationWithRows />
                 <Row>
                     <Col>
                         <TextCenter>
@@ -93,13 +98,11 @@ const ProfileForm: FC<PropTypes.Form> = ({
                 <Row>
                     <Col>
                         <TextCenter>
-                            <h3>Surfing Information</h3>
+                            <h3>Position Information</h3>
                         </TextCenter>
                     </Col>
                 </Row>
-                <Row>
-                    <Sections.PrivateSurfingInformation />
-                </Row>
+                <Sections.PositionsWithRows />
                 <Row>
                     <Col>
                         <TextCenter>
@@ -109,16 +112,14 @@ const ProfileForm: FC<PropTypes.Form> = ({
                 </Row>
                 <Row>
                     <Sections.Adminstrator />
-                    <Sections.PositionInformation />
+                    <Sections.EnteredInFacebook />
                 </Row>
                 <Row>
                     <Sections.ActivityInformation />
                 </Row>
                 <Row>
-                    <Sections.EnteredInFacebook />
-                </Row>
-                <Row>
                     <Sections.NeedsNewMemberBag />
+                    <Sections.OptOut />
                     <Sections.WonSurfboardInformation />
                 </Row>
 

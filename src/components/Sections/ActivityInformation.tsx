@@ -18,12 +18,12 @@ import { DatePickerField, FormField, BooleanRadioField } from '..';
  */
 const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
     const {
-        values: { active },
+        values: { active, lifetimeMember },
         touched,
         errors,
     } = useFormikContext<PartialUser.IActivityInformation>();
 
-    const secondDateField = active ? (
+    const renewalDateField = (
         <Col>
             <FormField
                 disabled={disabled}
@@ -34,7 +34,22 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 label="Renewal Date"
             />
         </Col>
-    ) : (
+    );
+
+    const lifetimeMemberField = (
+        <Col>
+            <FormField
+                disabled={disabled}
+                error={errors.lifetimeMember}
+                touched={touched.lifetimeMember}
+                name="lifetimeMember"
+                label="Is this user a lifetime member?"
+                inputComponent={BooleanRadioField}
+            />
+        </Col>
+    );
+
+    const terminatedDateField = (
         <Col>
             <FormField
                 disabled={disabled}
@@ -46,6 +61,17 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
             />
         </Col>
     );
+
+    const activeField = lifetimeMember ? (
+        lifetimeMemberField
+    ) : (
+        <>
+            {lifetimeMemberField}
+            {renewalDateField}
+        </>
+    );
+
+    const secondDateField = active ? activeField : terminatedDateField;
 
     return (
         <>

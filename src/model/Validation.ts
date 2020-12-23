@@ -3,15 +3,19 @@
  */
 
 import * as Yup from 'yup';
+import { IPositionInformation } from '.';
 
 // Building Blocks
 const bool = Yup.bool().typeError('Must be yes or no');
 const string = Yup.string().typeError('This field is required');
 const date = Yup.date().typeError('A date is required');
+const integer = Yup.number().typeError('A Number is required').integer('Number must be an integer');
 const nullableString = string.nullable();
 const nullableDate = date.nullable();
 const nullableBool = bool.nullable();
+const nullableInteger = integer.nullable();
 const stringArray = Yup.array<string>();
+const positionArray = Yup.array<IPositionInformation>();
 
 // Fields
 const admin = bool;
@@ -32,18 +36,18 @@ const birthdate = nullableDate;
 const level = nullableString;
 const startedSurfing = nullableDate;
 const boards = stringArray;
+const positions = positionArray;
 const photoUrl = nullableString;
 const biography = nullableString;
 const joinedDate = date.required('Every member must have a joined date');
 const renewalDate = nullableDate;
 const terminatedDate = nullableDate;
-const position = nullableString;
-const dateStartedPosition = nullableDate;
 const enteredInFacebookChapter = nullableString;
 const enteredInFacebookWki = nullableString;
 const needsNewMemberBag = nullableBool;
 const wonSurfboard = nullableBool;
 const dateSurfboardWon = nullableDate;
+const postalCode = nullableInteger;
 
 export const updateProfileSchema = Yup.object().shape({
     admin,
@@ -69,11 +73,11 @@ export const updateProfileSchema = Yup.object().shape({
     joinedDate,
     renewalDate,
     terminatedDate,
-    position,
-    dateStartedPosition,
     enteredInFacebookChapter,
     enteredInFacebookWki,
     needsNewMemberBag,
     wonSurfboard,
     dateSurfboardWon,
+    postalCode,
+    positions,
 });

@@ -23,7 +23,7 @@ const InputArray: FC<PropTypes.Input> = (props) => {
         <FieldArray
             name={props.name}
             render={(arrayHelpers) => {
-                const array = field.value.map((value, index) => (
+                const array = field.value.map((_value, index) => (
                     <InputGroup key={index}>
                         <Input
                             name={`${field.name}.${index}`}

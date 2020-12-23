@@ -29,14 +29,13 @@ export enum EnteredStatus {
     NotEntered = 'Not Entered',
     Entered = 'Entered',
     Accepted = 'Accepted',
-    Default = 'Select a Status',
 }
 
 /**
  * Supported chapters
  */
 export enum Chapter {
-    Canada = 'Canada',
+    SanDiego = 'San Diego',
     OrangeCountyLosAngeles = 'Orange County/Los Angeles',
     Ventura = 'Ventura',
     SantaCruzSanFrancisco = 'Santa Cruz/San Francisco',
@@ -52,7 +51,7 @@ export enum Chapter {
  */
 export enum Position {
     President = 'President',
-    VicePresident = 'Vice Presidient',
+    VicePresident = 'Vice President',
     VicePresidentOfEvents = 'Vice President of Events',
     VicePresidentOfFinance = 'Vice President of Finance',
     DirectorOfMarketing = 'Director of Marketing',

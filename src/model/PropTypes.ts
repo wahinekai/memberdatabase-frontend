@@ -13,10 +13,11 @@ export type Logo = OptionalClassname;
 export type Header = OptionalClassname;
 export type Submit = OptionalClassname;
 export type Input = InputAdditions & OptionalClassname & InputBase;
+export type DatePickerField = InputBase & DatePickerAdditions & OptionalClassname;
 export type FormHelp = FormHelpAdditions & OptionalClassname;
 export type Select = SelectAdditions & InputBase;
 export type TextArea = InputBase & TextAreaAdditions;
-export type InputComponent = Input & Select & TextArea;
+export type InputComponent = Input & Select & TextArea & DatePickerField;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled & OptionalCreate;
 export type Form = SubmitCount & SubmitMessages & OptionalCreate;
@@ -42,6 +43,10 @@ type Name = {
 
 type OptionalCreate = {
     create?: boolean;
+};
+
+type DatePickerAdditions = {
+    br?: boolean;
 };
 
 type Query = {
