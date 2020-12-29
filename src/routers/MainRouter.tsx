@@ -2,26 +2,19 @@
  * @file The root of the application, specifying mappings between pages and components
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { HttpMethodTypes } from '../model';
+import { IsAdminContext } from '../contexts';
 import {
     CreateUserPage,
     EditUserPage,
     HomePage,
-    ListAllUsersPage,
+    AdminToolsPage,
     NotFoundPage,
     ProfilePage,
     SearchPage,
 } from '../pages';
-import { apiCallAsync, Ensure } from '../utils';
-
-/**
- * Gets the profile of the authenticated user
- *
- * @returns The authenticated user's profile
- */
-const getIsAdminAsync = (): Promise<boolean> => apiCallAsync<boolean>(HttpMethodTypes.GET, '/Users/IsAdmin/Me');
+import { Ensure } from '../utils';
 
 /**
  * The root of the application, specifying mappings between pages and components
@@ -29,11 +22,11 @@ const getIsAdminAsync = (): Promise<boolean> => apiCallAsync<boolean>(HttpMethod
  * @returns The Main Router Component
  */
 const MainRouter: FC = () => {
+    const isAdmin = useContext(IsAdminContext);
+
     // Overall check - only admin users can use this application at the moment
     // Will throw error and go to error page if user is not an admin (or backend throws error)
-    useEffect(() => {
-        getIsAdminAsync().then((isAdmin) => Ensure.isTrue(() => isAdmin));
-    });
+    Ensure.isTrue(() => isAdmin);
 
     return (
         <Router>
@@ -44,8 +37,8 @@ const MainRouter: FC = () => {
                 <Route exact path="/users/:userId">
                     <EditUserPage />
                 </Route>
-                <Route exact path="/search/all">
-                    <ListAllUsersPage />
+                <Route exact path="/admin">
+                    <AdminToolsPage />
                 </Route>
                 <Route exact path="/search">
                     <SearchPage />

@@ -4,6 +4,9 @@
 
 import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/esm/Col';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
 
 import { PropTypes } from '../model';
 
@@ -15,9 +18,19 @@ import { PropTypes } from '../model';
  * @returns Submit button component
  */
 const Submit: FC<PropTypes.Submit> = ({ children }) => (
-    <Button variant="primary" className="rounded text-white border-0 px-3 py-2 my-2" type="submit" block>
-        {children}
-    </Button>
+    <>
+        {/* Needed so that button doesn't cover anything */}
+        <Container fluid>
+            <Row>
+                <Col>
+                    <div className="my-5"> </div>
+                </Col>
+            </Row>
+        </Container>
+        <Button variant="secondary" className="py-2 fixed-bottom" type="submit" block>
+            {children}
+        </Button>
+    </>
 );
 
 export default Submit;

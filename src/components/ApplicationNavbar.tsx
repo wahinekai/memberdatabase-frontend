@@ -30,14 +30,14 @@ const ApplicationNavbar: FC = () => (
                 <NavLink className="h5 px-3" href="/">
                     Search
                 </NavLink>
-                <NavLink className="h5 px-3" href="/users/create">
-                    Create a New Member
-                </NavLink>
-                <NavLink className="h5 px-3" href="/search/all">
-                    All Members
-                </NavLink>
                 <NavLink className="h5 px-3" href="/profile">
                     Profile
+                </NavLink>
+                <NavLink className="h5 px-3" href="/admin">
+                    Administrative Tools
+                </NavLink>
+                <NavLink className="h5 px-3" href="/users/create">
+                    New Member
                 </NavLink>
             </Nav>
             <Button variant="outline-light" className="rounded" onClick={authProvider.logout}>
