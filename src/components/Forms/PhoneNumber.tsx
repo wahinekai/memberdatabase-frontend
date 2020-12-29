@@ -20,13 +20,7 @@ const PhoneNumber: FC<PropTypes.Input> = (props) => {
     const { setFieldValue } = useFormikContext();
     const [{ name, value }] = useField<string>(props);
 
-    const onChange = useCallback(
-        (value: string) => {
-            console.log(value);
-            setFieldValue(name, value);
-        },
-        [name, setFieldValue]
-    );
+    const onChange = useCallback((value: string) => setFieldValue(name, value), [name, setFieldValue]);
 
     return (
         <PhoneInput
