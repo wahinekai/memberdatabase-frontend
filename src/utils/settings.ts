@@ -11,13 +11,22 @@ import globalSettings from '../properties';
  * @returns A TypeScript object from the data in that file
  */
 const loadSettings = (): Readonly<Settings> => {
-    // Development environment
-    if (process.env.NODE_ENV == 'development') {
-        return globalSettings.development;
+    // Production environment
+    if (process.env.REACT_APP_CUSTOM_NODE_ENV == 'production') {
+        return globalSettings.production;
     }
 
-    // Production environment, default
-    return globalSettings.production;
+    // Staging environment
+    if (process.env.REACT_APP_CUSTOM_NODE_ENV == 'staging') {
+        return globalSettings.staging;
+    }
+
+    if (process.env.REACT_APP_CUSTOM_NODE_ENV == 'localproduction') {
+        return globalSettings.localproduction;
+    }
+
+    // Development environment, default
+    return globalSettings.development;
 };
 
 export const settings = loadSettings();

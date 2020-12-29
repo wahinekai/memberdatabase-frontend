@@ -17,7 +17,7 @@ import { PropTypes } from '../../model';
 const Input: FC<PropTypes.Input> = (props) => (
     <Field
         as={FormControl}
-        className={`px-2 ${props.className}`}
+        className={`px-2 ${props.className ?? ''}`}
         name={props.name}
         type={props.type ?? 'text'}
         placeholder={props.placeholder}

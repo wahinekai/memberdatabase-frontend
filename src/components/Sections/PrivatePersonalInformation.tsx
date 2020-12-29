@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
-import { FormField } from '..';
+import { FormField, PhoneNumber } from '..';
 import { PartialUser, PropTypes } from '../../model';
 
 /**
@@ -44,6 +44,7 @@ const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false, c
                     name="phoneNumber"
                     label="Phone Number"
                     type="phone"
+                    inputComponent={PhoneNumber}
                 />
             </Col>
             <Col>

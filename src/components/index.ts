@@ -15,6 +15,7 @@ import {
     Input,
     InputArray,
     Help as FormHelp,
+    PhoneNumber,
     TextArea,
 } from './Forms';
 import Header from './Header';
@@ -43,6 +44,7 @@ export {
     Header,
     Home,
     Profile,
+    PhoneNumber,
     Search,
     Sections,
     Submit,

@@ -12,7 +12,7 @@ def parse_command_line_arguments():
     return parser.parse_args()
 
 def dockerBuild():
-    system("docker build . -t wahinekai/memberdatabase/frontend")
+    system("docker build . -t wahinekai/memberdatabase/frontend --build-arg REACT_APP_CUSTOM_NODE_ENV=localproduction")
 
 def dockerRunProduction():
     system("docker run --rm -it -p 80:80 wahinekai/memberdatabase/frontend")

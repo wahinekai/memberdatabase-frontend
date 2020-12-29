@@ -9,7 +9,8 @@ import FormField from './FormField';
 import Input from './Input';
 import InputArray from './InputArray';
 import Label from './Label';
+import PhoneNumber from './PhoneNumber';
 import Select from './Select';
 import TextArea from './TextArea';
 
-export { BooleanRadioField, DatePickerField, FormField, Help, Input, InputArray, Label, Select, TextArea };
+export { BooleanRadioField, DatePickerField, FormField, Help, Input, InputArray, Label, PhoneNumber, Select, TextArea };

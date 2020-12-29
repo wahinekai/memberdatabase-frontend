@@ -15,10 +15,18 @@ RUN npm install
 COPY src src
 COPY public public
 
-ARG REACT_APP_BACKEND_ENDPOINT
+# Copy configuration files
+COPY .prettierrc.json .prettierrc.json
+COPY .eslintignore .eslintignore
+COPY .eslintrc .eslintrc
+COPY tsconfig.json tsconfig.json
+
+# Custom build argument
+ARG REACT_APP_CUSTOM_NODE_ENV
 
 # Build the project for production
-RUN npm run build
+RUN REACT_APP_CUSTOM_NODE_ENV=${REACT_APP_CUSTOM_NODE_ENV}\
+    npm run build
 
 # Run Stage Start
 FROM nginx
