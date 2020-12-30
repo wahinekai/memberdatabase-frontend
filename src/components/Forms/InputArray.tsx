@@ -7,8 +7,9 @@ import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import { Input } from '..';
 import { PropTypes } from '../../model';
+
+import Input from './Input';
 
 /**
  * A component that creates an array of inputs

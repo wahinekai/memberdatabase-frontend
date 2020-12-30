@@ -6,8 +6,10 @@ import React, { FC } from 'react';
 import FormGroup from 'react-bootstrap/FormGroup';
 
 import { PropTypes } from '../../model';
-import { Error } from '..';
-import { Help, Input, Label } from '.';
+import Error from '../Error';
+import Help from './Help';
+import Input from './Input';
+import Label from './Label';
 
 /**
  * A React component group connecting Formik and Bootstrap

@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 import { HttpMethodTypes, PartialUser, PropTypes } from '../model';
 import { apiCallAsync } from '../utils';
-import { UserCard } from '.';
+import UserCard from './UserCard';
 
 /**
  * Gets all users from the backend

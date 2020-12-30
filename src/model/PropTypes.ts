@@ -4,7 +4,7 @@
 
 import { Guid } from 'guid-typescript';
 
-import { PartialUser } from '.';
+import { PartialUser, IUser } from '.';
 
 // PropTypes for components
 export type Error = OptionalClassname;
@@ -23,6 +23,7 @@ export type Section = OptionalDisabled & OptionalCreate;
 export type Form = SubmitCount & SubmitMessages & OptionalCreate;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
+export type AdminUserRow = AdminUser;
 export type Search = Query;
 export type ProfilePhoto = Name & OptionalError & OptionalTouched;
 
@@ -55,6 +56,10 @@ type Query = {
 
 type SearchableUser = {
     user: PartialUser.UserForCard;
+};
+
+type AdminUser = {
+    user: IUser;
 };
 
 type Id = {

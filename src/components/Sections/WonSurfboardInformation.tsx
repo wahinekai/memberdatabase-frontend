@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { PartialUser, PropTypes } from '../../model';
-import { DatePickerField, FormField, BooleanRadioField } from '..';
+import { DatePickerField, FormField, BooleanRadioField } from '../Forms';
 
 /**
  * A section of the edit profile form containing the information of a user having

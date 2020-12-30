@@ -14,7 +14,7 @@ import bsCustomFileInput from 'bs-custom-file-input';
 // import { TextCenter } from '..';
 import { HttpMethodTypes, PropTypes } from '../../model';
 import { apiCallAsync, Ensure, settings } from '../../utils';
-import { Label } from '..';
+import { Label } from '../Forms';
 
 /**
  * A Component for uploading profile photos and adding them to the formik form

@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
-import { FormField } from '..';
+import { FormField } from '../Forms';
 import { PartialUser, PropTypes } from '../../model';
 
 /**

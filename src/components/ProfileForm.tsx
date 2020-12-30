@@ -10,7 +10,10 @@ import { Form } from 'formik';
 
 import { PropTypes } from '../model';
 import { Timer, usePrevious } from '../utils';
-import { Submit, Sections, TextCenter } from '.';
+
+import * as Sections from './Sections';
+import Submit from './Submit';
+import TextCenter from './TextCenter';
 
 /**
  * The Profile Form Component

@@ -8,7 +8,8 @@ import { plainToClass } from 'class-transformer';
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
 import ProfileForm from './ProfileForm';
-import { Error, TextCenter } from '.';
+import Error from './Error';
+import TextCenter from './TextCenter';
 
 /**
  * Gets the profile of the authenticated user

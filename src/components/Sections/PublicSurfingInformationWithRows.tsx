@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useFormikContext } from 'formik';
 
-import { Select, FormField, InputArray, DatePickerField } from '..';
+import { Select, FormField, InputArray, DatePickerField } from '../Forms';
 import { PartialUser, PropTypes, Chapter, Level } from '../../model';
 
 /**

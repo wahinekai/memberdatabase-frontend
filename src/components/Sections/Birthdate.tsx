@@ -9,7 +9,7 @@ import { useFormikContext } from 'formik';
 import differenceInYears from 'date-fns/differenceInYears';
 
 import { PartialUser, PropTypes } from '../../model';
-import { DatePickerField, FormField } from '..';
+import { DatePickerField, FormField } from '../Forms';
 import { InputComponent } from '../../model/PropTypes';
 
 /**

@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useFormikContext } from 'formik';
 
-import { FormField, TextArea } from '..';
+import { FormField, TextArea } from '../Forms';
 import { PartialUser, PropTypes } from '../../model';
 import ProfilePhoto from './ProfilePhotoWithContainer';
 

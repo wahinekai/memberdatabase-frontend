@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
-import { Input } from '.';
+import { Input } from './Forms';
 
 /**
  * Form for Home Page
