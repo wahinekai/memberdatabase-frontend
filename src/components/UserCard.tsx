@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import { Chapter, PropTypes } from '../model';
-import { settings } from '../utils';
+import { settings, Predicates } from '../utils';
 import { TextCenter } from '.';
 
 /**
@@ -20,17 +20,46 @@ import { TextCenter } from '.';
 const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
     const image = user.photoUrl && user.photoUrl !== '' ? user.photoUrl : settings.emptyProfileImage;
 
-    let positionsString = '';
+    // Map and filter array
+    const positionNamesWithNull = user.positions.map((position) =>
+        position.ended ? undefined : position.name?.toString()
+    );
+    const positionNames = positionNamesWithNull.filter(Predicates.notNullOrUndefined);
 
-    user.positions.forEach((position) => {
-        if (!position.ended) {
-            positionsString += `${position.name ?? ''}, `;
-        }
-    });
+    let positions = '';
 
-    const positions = positionsString !== '' ? positionsString : 'Member, ';
-    const chapter = user.chapter && user.chapter !== Chapter.Default ? `${user.chapter} Chapter` : '';
-    const body = positions + chapter;
+    // Positions depends on length of positions
+    switch (positionNames.length) {
+        // If no position, position is "Member"
+        case 0:
+            positions = 'Member';
+            break;
+        // If two positions, combine with "and" - can't be combined with below because no comma
+        case 2:
+            positions = `${positionNames[0]} and ${positionNames[1]}`;
+            break;
+        // Default - 1 or 3+ positions - combine with commas, last has and
+        // If only 1, will return first if statement
+        default:
+            positions = positionNames.reduce((accumulator, currentValue, index) => {
+                // First member of array
+                if (index === 0) {
+                    return currentValue;
+                }
+
+                // Last member of array
+                if (index === positionNames.length - 1) {
+                    return `${accumulator}, and ${currentValue}`;
+                }
+
+                // Middle member
+                return `${accumulator}, ${currentValue}`;
+            });
+            break;
+    }
+
+    const chapter = user.chapter && user.chapter !== Chapter.Default ? user.chapter.toString() : 'Unknown';
+    const body = `${positions}, ${chapter} Chapter`;
 
     return (
         <TextCenter>
