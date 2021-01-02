@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
 import { Input } from './Forms';
+import TextCenter from './TextCenter';
 
 /**
  * Form for Home Page
@@ -35,16 +36,11 @@ const HomeForm: FC = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <div className="text-right">
+                            <TextCenter>
                                 <Button variant="outline-primary" className="px-4 my-2" type="submit">
                                     Search
                                 </Button>
-                            </div>
-                        </Col>
-                        <Col>
-                            <Button href="/search/all" variant="outline-primary" className="px-3 my-2">
-                                All Members
-                            </Button>
+                            </TextCenter>
                         </Col>
                     </Row>
                 </Form>

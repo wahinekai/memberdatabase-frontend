@@ -34,6 +34,7 @@ const DatePickerField: FC<PropTypes.DatePickerField> = (props) => {
                 placeholderText={props.placeholder}
                 className={`${props.className ?? ''} form-control px-2`}
                 onChange={onChange}
+                isClearable
             />
         </>
     );

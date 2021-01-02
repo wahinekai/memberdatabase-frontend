@@ -25,7 +25,6 @@ import TextCenter from './TextCenter';
  * @param props.initialSubmitMessage - The message to show before a form submits
  * @param props.submittingMessage - The message to show during submit of the form
  * @param props.afterSubmitMessage - The message to show for 2 seconds after submit.
- * @param props.create - This user is being created for the first time - So allow changes to readonly fields
  */
 const ProfileForm: FC<PropTypes.Form> = ({
     submitCount,
@@ -33,7 +32,6 @@ const ProfileForm: FC<PropTypes.Form> = ({
     initialSubmitMessage,
     submittingMessage,
     afterSubmitMessage,
-    create = false,
 }) => {
     const [submitMessage, setSubmitMessage] = useState(initialSubmitMessage);
     const previousSubmitCount = usePrevious(submitCount);
@@ -65,7 +63,7 @@ const ProfileForm: FC<PropTypes.Form> = ({
             <Form>
                 <Sections.PublicPersonalInformationWithRows />
                 <Row>
-                    <Sections.PrivatePersonalInformation create={create} />
+                    <Sections.PrivatePersonalInformation />
                 </Row>
                 <Row>
                     <Col>

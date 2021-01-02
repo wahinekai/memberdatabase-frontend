@@ -77,7 +77,7 @@ export interface IPublicPersonalInformation {
 
 export interface IPrivatePersonalInformation {
     payPalName?: string;
-    readonly email?: string;
+    email?: string;
     phoneNumber?: string;
 }
 

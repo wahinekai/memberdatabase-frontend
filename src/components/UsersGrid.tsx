@@ -2,8 +2,10 @@
  * @file Lists all members of Wahine Kai as a UserCard
  */
 
-import React, { FC, useEffect, useState } from 'react';
+import { Guid } from 'guid-typescript';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import { useHistory } from 'react-router-dom';
 
 import { HttpMethodTypes, IUser } from '../model';
 import { apiCallAsync } from '../utils';
@@ -22,16 +24,17 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
  */
 const UsersGrid: FC = () => {
     const [users, setUsers] = useState<IUser[]>();
+    const history = useHistory();
 
     // Update state with newest user on first render
     useEffect(() => {
         getAllAsync().then((users) => setUsers(users));
     }, [setUsers]);
 
-    console.log(users);
+    const onClick = useCallback((id?: Guid) => history.push(`/users/${id}`), [history]);
 
     const rowsMaybeNull = users?.map((user, key) => (
-        <tr key={key}>
+        <tr key={key} onClick={() => onClick(user.id)}>
             <td>{`${user.firstName ?? ''} ${user.lastName ?? ''}`}</td>
             <td>{user.chapter ?? ''}</td>
             <td>{user.email ?? ''}</td>

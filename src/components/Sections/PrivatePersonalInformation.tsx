@@ -14,10 +14,9 @@ import { PartialUser, PropTypes } from '../../model';
  *
  * @param props - Properties passed down from parents to children
  * @param props.disabled - Whether this field is read-only.  Defaults to false.
- * @param props.create - Whether this member is being created for the first time - and readonly fields can be changed
  * @returns The component for a section of the form
  */
-const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false, create = false }) => {
+const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IPrivatePersonalInformation>();
 
     return (
@@ -27,12 +26,7 @@ const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false, c
                     error={errors.email}
                     touched={touched.email}
                     name="email"
-                    disabled={!create}
-                    helpText={
-                        create
-                            ? "Double check - this can't be changed later!"
-                            : 'Email entered when new member was created'
-                    }
+                    disabled={disabled}
                     label="Email"
                 />
             </Col>

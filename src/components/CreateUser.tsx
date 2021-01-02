@@ -99,7 +99,6 @@ const CreateUser: FC = () => {
                     initialSubmitMessage={initialSubmitMessage}
                     submittingMessage={submittingMessage}
                     afterSubmitMessage={afterSubmitMessage}
-                    create={true}
                 />
             </Formik>
         </>

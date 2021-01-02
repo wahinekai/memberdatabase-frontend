@@ -19,8 +19,8 @@ export type Select = SelectAdditions & InputBase;
 export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea & DatePickerField;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
-export type Section = OptionalDisabled & OptionalCreate;
-export type Form = SubmitCount & SubmitMessages & OptionalCreate;
+export type Section = OptionalDisabled;
+export type Form = SubmitCount & SubmitMessages;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
 export type AdminUserRow = AdminUser;
@@ -40,10 +40,6 @@ type OptionalTouched = {
 
 type Name = {
     name: string;
-};
-
-type OptionalCreate = {
-    create?: boolean;
 };
 
 type DatePickerAdditions = {
