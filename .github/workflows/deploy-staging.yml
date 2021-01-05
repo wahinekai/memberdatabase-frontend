@@ -9,7 +9,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: 0.1.0
       REGISTRY: ghcr.io
       NODE_ENV: staging
     steps:
@@ -24,14 +23,13 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.REGISTRY_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           push: true # Will only build if this is not here
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
           build-args: |
             REACT_APP_CUSTOM_NODE_ENV=${{ env.NODE_ENV }}
