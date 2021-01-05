@@ -9,7 +9,7 @@ const tenant = 'wahinekaidevelopment.onmicrosoft.com';
 const applicationID = 'feb5b82e-38d1-4b53-ae80-71818e92bb9e';
 const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
-const reactRedirectUri = 'http://localhost:3000';
+const reactRedirectUri = 'https://development-wahinekaimemberdatabase.azurewebsites.net';
 
 const signInPolicy = 'B2C_1_signup_signin';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;

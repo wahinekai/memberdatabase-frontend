@@ -11,6 +11,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       NODE_ENV: staging
+      AZURE_APP: development-wahinekaimemberdatabase
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
@@ -33,3 +34,18 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
           build-args: |
             REACT_APP_CUSTOM_NODE_ENV=${{ env.NODE_ENV }}
+
+    - name: Login via Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_APP }}
+        images: ${{ env.REGISTRY }}/${{ github.repository }}:latest
+
+    - name: Azure logout
+      run: |
+        az logout
