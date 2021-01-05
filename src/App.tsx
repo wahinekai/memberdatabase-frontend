@@ -5,6 +5,7 @@
 import React, { FC, StrictMode } from 'react';
 import AzureAD from 'react-aad-msal';
 import { ErrorBoundary } from 'react-error-boundary';
+import HttpsRedirect from 'react-https-redirect';
 
 import { MainRouter } from './routers';
 import { ErrorPage } from './pages';
@@ -20,14 +21,16 @@ import { IsAdminProvider } from './providers';
 const App: FC = () => {
     return (
         <StrictMode>
-            <ErrorBoundary FallbackComponent={ErrorPage}>
-                <AzureAD provider={authProvider} forceLogin={true}>
-                    <IsAdminProvider>
-                        <ApplicationNavbar />
-                        <MainRouter />
-                    </IsAdminProvider>
-                </AzureAD>
-            </ErrorBoundary>
+            <HttpsRedirect>
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                    <AzureAD provider={authProvider} forceLogin={true}>
+                        <IsAdminProvider>
+                            <ApplicationNavbar />
+                            <MainRouter />
+                        </IsAdminProvider>
+                    </AzureAD>
+                </ErrorBoundary>
+            </HttpsRedirect>
         </StrictMode>
     );
 };
