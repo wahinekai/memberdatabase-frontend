@@ -9,7 +9,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: latest
+      IMAGE_TAG: 0.1.0
       CONTAINER_REGISTRY: ghcr.io
       REACT_APP_CUSTOM_NODE_ENV: staging
     steps:
@@ -28,7 +28,6 @@ jobs:
         with:
           push: true # Will only build if this is not here
           tags: |
-            ${{ env.CONTAINER_REGISTRY }}/${{ github.repository }}:${{ github.ref }}
             ${{ env.CONTAINER_REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}
             ${{ env.CONTAINER_REGISTRY }}/${{ github.repository }}:latest
           build-args: |
