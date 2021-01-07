@@ -16,7 +16,7 @@ const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
 
 const settings: Readonly<Settings> = {
-    backendEndpoint: 'https://localhost:5001/api/v1',
+    backendEndpoint: 'https://backend-development-wahinekaimemberdatabase.azurewebsites.net/api/v1',
     frontendAssetsPrefix,
     emptyProfileImage: `${frontendAssetsPrefix}/no-image.png`,
     ...globalSettings,
