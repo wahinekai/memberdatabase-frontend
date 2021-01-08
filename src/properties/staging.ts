@@ -11,7 +11,7 @@ const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
 const reactRedirectUri = 'https://development-wahinekaimemberdatabase.azurewebsites.net';
 
-const signInPolicy = 'B2C_1_signup_signin';
+const signInPolicy = 'B2C_1_signup_signin_api';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
 const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
 
