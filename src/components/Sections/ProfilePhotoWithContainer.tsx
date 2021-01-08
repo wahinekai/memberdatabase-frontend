@@ -54,7 +54,7 @@ const ProfilePhoto: FC<PropTypes.ProfilePhoto> = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <Image src={photoUrl} rounded height={150} width={200} className="mb-3 mt-2" />
+                    <Image src={photoUrl} rounded height={150} className="mb-3 mt-2" />
                 </Col>
             </Row>
             <Row>
