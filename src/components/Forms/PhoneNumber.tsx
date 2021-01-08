@@ -4,7 +4,7 @@
 
 import React, { FC, useCallback } from 'react';
 import { useField, useFormikContext } from 'formik';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput /*, { parsePhoneNumber } */ from 'react-phone-number-input';
 
 import { PropTypes } from '../../model';
 
@@ -18,7 +18,9 @@ import 'react-phone-number-input/style.css';
  */
 const PhoneNumber: FC<PropTypes.Input> = (props) => {
     const { setFieldValue } = useFormikContext();
-    const [{ name, value }] = useField<string>(props);
+    const [{ name, value: valueMaybeNull }] = useField<string | undefined>(props);
+
+    const value = valueMaybeNull ?? '';
 
     const onChange = useCallback((value: string) => setFieldValue(name, value), [name, setFieldValue]);
 
@@ -32,6 +34,7 @@ const PhoneNumber: FC<PropTypes.Input> = (props) => {
             defaultCountry="US"
             numberInputProps={{ className: 'px-2 form-control' }}
             countrySelectProps={{ className: 'form-control' }}
+            displayInitialValueAsLocalNumber
         />
     );
 };
