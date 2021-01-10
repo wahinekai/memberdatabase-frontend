@@ -5,18 +5,18 @@
 import { Settings } from '../model';
 import globalSettings from './global';
 
-const tenant = 'wahinekaidevelopment.onmicrosoft.com';
-const applicationID = 'feb5b82e-38d1-4b53-ae80-71818e92bb9e';
+const tenant = 'wahinekaimemberdatabaseauth.onmicrosoft.com';
+const applicationID = '71a0a9e2-6348-4e12-a13f-b380dc069b33';
 const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
-const reactRedirectUri = 'http://localhost:3000';
+const reactRedirectUri = 'https://wahinekai-memberdatabase.azurewebsites.net';
 
 const signInPolicy = 'B2C_1_signup_signin_api';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
-const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
+const frontendAssetsPrefix = 'https://memberdatabasestorage.blob.core.windows.net/frontend-assets';
 
 const settings: Readonly<Settings> = {
-    backendEndpoint: 'https://localhost:5001',
+    backendEndpoint: 'https://api-wahinekai-memberdatabase.azurewebsites.net/api/v1',
     frontendAssetsPrefix,
     emptyProfileImage: `${frontendAssetsPrefix}/no-image.png`,
     ...globalSettings,
@@ -24,7 +24,7 @@ const settings: Readonly<Settings> = {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaifrontend/user_impersonation',
+                `https://${tenant}/wahinekaifrontend/user_impersonation`,
             ],
         },
         signInConfig: {
@@ -41,7 +41,7 @@ const settings: Readonly<Settings> = {
             },
         },
         options: globalSettings.auth.options,
-        accessTokenScopes: ['https://wahinekaidevelopment.onmicrosoft.com/wahinekaibackend/user_impersonation'],
+        accessTokenScopes: [`https://${tenant}/wahinekaibackend/user_impersonation`],
     },
 };
 

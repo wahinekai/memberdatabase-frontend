@@ -24,7 +24,7 @@ const settings: Readonly<Settings> = {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                'https://wahinekaidevelopment.onmicrosoft.com/wahinekaifrontend/user_impersonation',
+                `https://${tenant}/wahinekaifrontend/user_impersonation`,
             ],
         },
         signInConfig: {
@@ -41,7 +41,7 @@ const settings: Readonly<Settings> = {
             },
         },
         options: globalSettings.auth.options,
-        accessTokenScopes: ['https://wahinekaidevelopment.onmicrosoft.com/wahinekaibackend/user_impersonation'],
+        accessTokenScopes: [`https://${tenant}/wahinekaibackend/user_impersonation`],
     },
 };
 
