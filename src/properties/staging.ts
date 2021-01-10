@@ -5,7 +5,7 @@
 import { Settings } from '../model';
 import globalSettings from './global';
 
-const tenant = 'wahinekaidevelopment.onmicrosoft.com';
+const tenant = 'devwahinekaimemberdbauth.onmicrosoft.com';
 const applicationID = 'feb5b82e-38d1-4b53-ae80-71818e92bb9e';
 const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
@@ -13,7 +13,7 @@ const reactRedirectUri = 'https://development-wahinekaimemberdatabase.azurewebsi
 
 const signInPolicy = 'B2C_1_signup_signin_api';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
-const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
+const frontendAssetsPrefix = 'https://devmemberdatabasestorage.blob.core.windows.net/frontend-assets';
 
 const settings: Readonly<Settings> = {
     backendEndpoint: 'https://backend-development-wahinekaimemberdatabase.azurewebsites.net/api/v1',
@@ -24,7 +24,7 @@ const settings: Readonly<Settings> = {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                `https://${tenant}/wahinekaifrontend/user_impersonation`,
+                `https://${tenant}/wahinekaifrontend-staging/user_impersonation`,
             ],
         },
         signInConfig: {

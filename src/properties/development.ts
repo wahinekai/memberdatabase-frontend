@@ -5,15 +5,15 @@
 import { Settings } from '../model';
 import globalSettings from './global';
 
-const tenant = 'wahinekaidevelopment.onmicrosoft.com';
-const applicationID = 'feb5b82e-38d1-4b53-ae80-71818e92bb9e';
+const tenant = 'devwahinekaimemberdbauth.onmicrosoft.com';
+const applicationID = '5857ef27-79ee-4c6d-b3a3-0314ea4d485f';
 const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
 const reactRedirectUri = 'http://localhost:3000';
 
 const signInPolicy = 'B2C_1_signup_signin_api';
 const signInAuthority = `${instance}${tenant}/${signInPolicy}`;
-const frontendAssetsPrefix = 'https://wahinekaidevelopment.blob.core.windows.net/frontend-assets';
+const frontendAssetsPrefix = 'https://devmemberdatabasestorage.blob.core.windows.net/frontend-assets';
 
 const settings: Readonly<Settings> = {
     backendEndpoint: 'http://localhost:5000/api/v1',
@@ -24,7 +24,7 @@ const settings: Readonly<Settings> = {
         authenticationParameters: {
             scopes: [
                 'https://graph.microsoft.com/Directory.Read.All',
-                `https://${tenant}/wahinekaifrontend/user_impersonation`,
+                `https://${tenant}/wahinekaifrontend-localdevelopment/user_impersonation`,
             ],
         },
         signInConfig: {
