@@ -6,7 +6,7 @@ import { Settings } from '../model';
 import globalSettings from './global';
 
 const tenant = 'devwahinekaimemberdbauth.onmicrosoft.com';
-const applicationID = 'feb5b82e-38d1-4b53-ae80-71818e92bb9e';
+const applicationID = 'f1837521-8fa7-4b51-b860-ba1154a2e8d3';
 const tenantSubdomain = tenant.split('.')[0];
 const instance = `https://${tenantSubdomain}.b2clogin.com/tfp/`;
 const reactRedirectUri = 'https://development-wahinekaimemberdatabase.azurewebsites.net';
