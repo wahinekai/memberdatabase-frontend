@@ -11,7 +11,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       NODE_ENV: production
-      AZURE_APP: wahinekaimemberdatabase
+      AZURE_APP: wahinekai-memberdatabase
 
     steps:
       - name: Checkout Code
