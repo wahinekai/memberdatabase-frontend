@@ -12,7 +12,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       NODE_ENV: staging
-      AZURE_APP: development-wahinekaimemberdatabase
+      AZURE_APP: dev-wahinekai-memberdatabase
       TAG: dev
 
     steps:
