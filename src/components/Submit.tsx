@@ -9,6 +9,8 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 
 import { PropTypes } from '../model';
+import FixedBottom from './FixedBottom';
+import TextCenter from './TextCenter';
 
 /**
  * Submit button component
@@ -27,9 +29,13 @@ const Submit: FC<PropTypes.Submit> = ({ children }) => (
                 </Col>
             </Row>
         </Container>
-        <Button variant="secondary" className="py-2 fixed-bottom" type="submit" block>
-            {children}
-        </Button>
+        <FixedBottom>
+            <TextCenter>
+                <Button variant="primary" className="my-2 px-5" type="submit">
+                    {children}
+                </Button>
+            </TextCenter>
+        </FixedBottom>
     </>
 );
 
