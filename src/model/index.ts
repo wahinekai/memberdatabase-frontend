@@ -6,6 +6,7 @@ import { Chapter, Country, Level, EnteredStatus, Position } from './Enums';
 import * as PartialUser from './PartialUser';
 import * as Regions from './Regions';
 import IFormikConvertable from './IFormikConvertable';
+import IUploadUsersReturn from './IUploadUsersReturn';
 import IPositionInformation from './IPositionInformation';
 import IUser from './IUser';
 import IValidatable from './IValidatable';
@@ -23,6 +24,7 @@ export type {
     IFormikConvertable,
     IPositionInformation,
     IUser,
+    IUploadUsersReturn,
     PartialUser,
     PropTypes,
 };

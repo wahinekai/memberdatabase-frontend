@@ -2,12 +2,12 @@
  * @file Lists all members of Wahine Kai as a UserCard
  */
 
-import { Guid } from 'guid-typescript';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import { Guid } from 'guid-typescript';
 import { useHistory } from 'react-router-dom';
 
-import { HttpMethodTypes, IUser } from '../model';
+import { HttpMethodTypes, IUser, PropTypes } from '../model';
 import { apiCallAsync } from '../utils';
 
 /**
@@ -20,16 +20,30 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
 /**
  * A Component that lists all users of the application in the form of user cards
  *
+ * @param props - Properties passed down from parents to children
+ * @param props.needsRefresh - Whether a refresh is required
+ * @param props.clearRefresh - Clears whether a refresh is required
  * @returns A list of user cards in a container
  */
-const UsersGrid: FC = () => {
-    const [users, setUsers] = useState<IUser[]>();
+const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
     const history = useHistory();
+
+    const [users, setUsers] = useState<IUser[]>();
+
+    const getAllCallbackAsync = useCallback(async () => {
+        const users = await getAllAsync();
+        setUsers(users);
+        clearRefresh();
+    }, [clearRefresh, setUsers]);
 
     // Update state with newest user on first render
     useEffect(() => {
-        getAllAsync().then((users) => setUsers(users));
-    }, [setUsers]);
+        getAllCallbackAsync();
+    }, [getAllCallbackAsync]);
+
+    if (needsRefresh) {
+        getAllCallbackAsync();
+    }
 
     const onClick = useCallback((id?: Guid) => history.push(`/users/${id}`), [history]);
 

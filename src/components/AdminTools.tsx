@@ -2,7 +2,7 @@
  * @file Contains the admin tools
  */
 
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -15,19 +15,26 @@ import UsersGrid from './UsersGrid';
  *
  * @returns the Register page
  */
-const AdminTools: FC = () => (
-    <>
-        <Container fluid className="mt-2">
-            <Row>
-                <Col xs={3}>
-                    <AdminSidebar />
-                </Col>
-                <Col xs={9}>
-                    <UsersGrid />
-                </Col>
-            </Row>
-        </Container>
-    </>
-);
+const AdminTools: FC = () => {
+    const [needsRefresh, setNeedsRefresh] = useState(false);
+
+    const requireRefresh = useCallback(() => setNeedsRefresh(true), [setNeedsRefresh]);
+    const clearRefresh = useCallback(() => setNeedsRefresh(false), [setNeedsRefresh]);
+
+    return (
+        <>
+            <Container fluid className="mt-2">
+                <Row>
+                    <Col xs={3}>
+                        <AdminSidebar requireRefresh={requireRefresh} />
+                    </Col>
+                    <Col xs={9}>
+                        <UsersGrid needsRefresh={needsRefresh} clearRefresh={clearRefresh} />
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    );
+};
 
 export default AdminTools;

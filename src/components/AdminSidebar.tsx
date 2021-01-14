@@ -7,14 +7,18 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import { downloadFileAsync, downloadExternalFileAsync, settings } from '../utils';
+import { PropTypes } from '../model';
 import TextCenter from './TextCenter';
+import UploadCsvModal from './UploadCsvModal';
 
 /**
  * Administrative Sidebar component
  *
+ * @param props - Properties passed from parents to children
+ * @param props.requireRefresh - Property to pass down to child
  * @returns Administrative sidebar component
  */
-const AdminSidebar: FC = () => (
+const AdminSidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh }) => (
     <>
         <Col>
             <TextCenter>
@@ -45,9 +49,7 @@ const AdminSidebar: FC = () => (
             </TextCenter>
         </Col>
         <Col>
-            <Button block variant="outline-primary" className="my-1" disabled>
-                Upload users from CSV (TBC)
-            </Button>
+            <UploadCsvModal requireRefresh={requireRefresh} />
         </Col>
     </>
 );

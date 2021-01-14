@@ -26,9 +26,21 @@ export type UserCard = SearchableUser;
 export type AdminUserRow = AdminUser;
 export type Search = Query;
 export type ProfilePhoto = Name & OptionalError & OptionalTouched;
+export type UsersGrid = RefreshConsumer;
+export type AdminSidebar = RefreshProducer;
+export type UploadCsvModal = RefreshProducer;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
+
+type RefreshProducer = {
+    requireRefresh: () => void;
+};
+
+type RefreshConsumer = {
+    clearRefresh: () => void;
+    needsRefresh: boolean;
+};
 
 type OptionalError = {
     error?: string;
