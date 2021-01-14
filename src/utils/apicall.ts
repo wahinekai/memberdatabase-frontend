@@ -95,3 +95,33 @@ export const downloadFileAsync = async (path: string, fileName: string): Promise
     link.download = fileName;
     link.click();
 };
+
+/**
+ * Get a file blob from an external endpoint
+ *
+ * @param path - The path to be used (or appended onto REACT_APP_BACKEND_ENDPOINT environment variable)
+ * @returns The Blob of data
+ */
+export const getExternalFileBlobAsync = async (path: string): Promise<Blob> => {
+    const config: AxiosRequestConfig = {
+        responseType: 'blob',
+    };
+
+    const res = await axios.get<Blob>(path, config);
+
+    return res.data;
+};
+
+/**
+ * Download a file from an external endpoint
+ *
+ * @param path - The path to be used
+ * @param fileName - The file name to download
+ */
+export const downloadExternalFileAsync = async (path: string, fileName: string): Promise<void> => {
+    const blob = await getExternalFileBlobAsync(path);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
+};

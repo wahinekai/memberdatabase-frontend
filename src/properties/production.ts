@@ -19,6 +19,7 @@ const settings: Readonly<Settings> = {
     backendEndpoint: 'https://api-wahinekai-memberdatabase.azurewebsites.net/api/v1',
     frontendAssetsPrefix,
     emptyProfileImage: `${frontendAssetsPrefix}/no-image.png`,
+    templateCsv: `${frontendAssetsPrefix}/csv_template_with_town.csv`,
     ...globalSettings,
     auth: {
         authenticationParameters: {

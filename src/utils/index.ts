@@ -2,7 +2,13 @@
  * @file index file compiling exports from the utility module
  */
 
-import { apiCallAsync, downloadFileAsync, getFileBlobAsync } from './apicall';
+import {
+    apiCallAsync,
+    downloadFileAsync,
+    getFileBlobAsync,
+    getExternalFileBlobAsync,
+    downloadExternalFileAsync,
+} from './apicall';
 import * as Ensure from './ensure';
 import * as Predicates from './predicates';
 import * as Timer from './timer';
@@ -13,7 +19,9 @@ import { usePrevious } from './hooks';
 export {
     apiCallAsync,
     downloadFileAsync,
+    downloadExternalFileAsync,
     getFileBlobAsync,
+    getExternalFileBlobAsync,
     Ensure,
     Predicates,
     Timer,

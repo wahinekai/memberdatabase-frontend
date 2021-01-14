@@ -21,10 +21,6 @@ const loadSettings = (): Readonly<Settings> => {
         return globalSettings.staging;
     }
 
-    if (process.env.REACT_APP_CUSTOM_NODE_ENV == 'localproduction') {
-        return globalSettings.localproduction;
-    }
-
     // Development environment, default
     return globalSettings.development;
 };

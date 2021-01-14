@@ -11,6 +11,7 @@ export type EnvironmentSettings = {
     backendEndpoint: string;
     frontendAssetsPrefix: string;
     emptyProfileImage: string;
+    templateCsv: string;
     auth: {
         signInConfig: Configuration;
         authenticationParameters: AuthenticationParameters;

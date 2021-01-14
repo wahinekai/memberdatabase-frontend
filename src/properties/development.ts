@@ -19,6 +19,7 @@ const settings: Readonly<Settings> = {
     backendEndpoint: 'http://localhost:5000/api/v1',
     frontendAssetsPrefix,
     emptyProfileImage: `${frontendAssetsPrefix}/no-image.png`,
+    templateCsv: `${frontendAssetsPrefix}/csv_template_with_town.csv`,
     ...globalSettings,
     auth: {
         authenticationParameters: {

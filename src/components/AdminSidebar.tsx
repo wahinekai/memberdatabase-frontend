@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import { downloadFileAsync } from '../utils';
+import { downloadFileAsync, downloadExternalFileAsync, settings } from '../utils';
 import TextCenter from './TextCenter';
 
 /**
@@ -30,8 +30,13 @@ const AdminSidebar: FC = () => (
             >
                 Download users as CSV
             </Button>
-            <Button block variant="outline-primary" className="my-1" disabled>
-                Download template CSV (TBC)
+            <Button
+                block
+                variant="outline-primary"
+                className="my-1"
+                onClick={() => downloadExternalFileAsync(settings.templateCsv, 'UploadTemplate.csv')}
+            >
+                Download template CSV
             </Button>
         </Col>
         <Col>
