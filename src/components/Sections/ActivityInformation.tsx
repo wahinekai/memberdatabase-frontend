@@ -6,8 +6,8 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
-import { PartialUser, PropTypes } from '../../model';
-import { DatePickerField, FormField, BooleanRadioField } from '../Forms';
+import { MemberStatus, PartialUser, PropTypes } from '../../model';
+import { DatePickerField, FormField, Select } from '../Forms';
 
 /**
  * A section of the edit profile form
@@ -18,11 +18,23 @@ import { DatePickerField, FormField, BooleanRadioField } from '../Forms';
  */
 const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
     const {
-        values: { active, lifetimeMember },
+        values: { status },
         touched,
         errors,
     } = useFormikContext<PartialUser.IActivityInformation>();
 
+    const joinedDateField = (
+        <Col>
+            <FormField
+                disabled={disabled}
+                error={errors.joinedDate}
+                touched={touched.joinedDate}
+                inputComponent={DatePickerField}
+                name="joinedDate"
+                label="Joined Date"
+            />
+        </Col>
+    );
     const renewalDateField = (
         <Col>
             <FormField
@@ -32,19 +44,6 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 inputComponent={DatePickerField}
                 name="renewalDate"
                 label="Renewal Date"
-            />
-        </Col>
-    );
-
-    const lifetimeMemberField = (
-        <Col>
-            <FormField
-                disabled={disabled}
-                error={errors.lifetimeMember}
-                touched={touched.lifetimeMember}
-                name="lifetimeMember"
-                label="Is this user a lifetime member?"
-                inputComponent={BooleanRadioField}
             />
         </Col>
     );
@@ -62,40 +61,49 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
         </Col>
     );
 
-    const activeField = lifetimeMember ? (
-        lifetimeMemberField
-    ) : (
-        <>
-            {lifetimeMemberField}
-            {renewalDateField}
-        </>
-    );
+    let fields = null;
 
-    const secondDateField = active ? activeField : terminatedDateField;
+    switch (status) {
+        case MemberStatus.Pending:
+            // No other fields
+            break;
+        case MemberStatus.ActivePaying:
+            fields = (
+                <>
+                    {joinedDateField}
+                    {renewalDateField}
+                </>
+            );
+            break;
+        case MemberStatus.ActiveNonPaying:
+            fields = joinedDateField;
+            break;
+        case MemberStatus.LifetimeMember:
+            fields = joinedDateField;
+            break;
+        case MemberStatus.Terminated:
+            fields = (
+                <>
+                    {joinedDateField}
+                    {terminatedDateField}
+                </>
+            );
+    }
 
     return (
         <>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.active}
-                    touched={touched.active}
-                    name="active"
-                    label="Is this user an active user?"
-                    inputComponent={BooleanRadioField}
+                    error={errors.status}
+                    touched={touched.status}
+                    inputComponent={Select}
+                    selectType={MemberStatus}
+                    name="status"
+                    label="Member Status"
                 />
             </Col>
-            <Col>
-                <FormField
-                    disabled={disabled}
-                    error={errors.joinedDate}
-                    touched={touched.joinedDate}
-                    inputComponent={DatePickerField}
-                    name="joinedDate"
-                    label="Join Date"
-                />
-            </Col>
-            {secondDateField}
+            {fields}
         </>
     );
 };

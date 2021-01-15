@@ -23,9 +23,29 @@ export enum Level {
 }
 
 /**
+ * Possible Member Statuses
+ */
+export enum MemberStatus {
+    Pending = 'Pending',
+    ActivePaying = 'Active: Paying',
+    ActiveNonPaying = 'Active: Non-Paying',
+    LifetimeMember = 'Lifetime Member',
+    Terminated = 'Terminated',
+}
+
+/**
  * Possible entered statuses
  */
-export enum EnteredStatus {
+export enum ChapterEnteredStatus {
+    Entered = 'Entered',
+    Pending = 'Pending',
+    NotAccepted = 'Not Accepted',
+}
+
+/**
+ * Possible entered statuses
+ */
+export enum WkiEnteredStatus {
     NotEntered = 'Not Entered',
     Entered = 'Entered',
     Accepted = 'Accepted',
@@ -42,8 +62,8 @@ export enum Chapter {
     Oregon = 'Oregon',
     Washington = 'Washington',
     Hawaii = 'Hawaii',
-    Maine = 'Maine',
-    Default = 'Select a Chapter',
+    NewEngland = 'New England',
+    WahineKaiInternational = 'Wahine Kai International',
 }
 
 /**

@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, Select } from '../Forms';
-import { EnteredStatus, PartialUser, PropTypes } from '../../model';
+import { ChapterEnteredStatus, WkiEnteredStatus, PartialUser, PropTypes } from '../../model';
 
 /**
  * A section of the edit profile form containing the information of a user being
@@ -28,7 +28,7 @@ const EnteredInFacebook: FC<PropTypes.Section> = ({ disabled = false }) => {
                     error={errors.enteredInFacebookChapter}
                     touched={touched.enteredInFacebookChapter}
                     inputComponent={Select}
-                    selectType={EnteredStatus}
+                    selectType={ChapterEnteredStatus}
                     name="enteredInFacebookChapter"
                     label="Entered in Local Facebook Chapter?"
                 />
@@ -39,7 +39,7 @@ const EnteredInFacebook: FC<PropTypes.Section> = ({ disabled = false }) => {
                     error={errors.enteredInFacebookWki}
                     touched={touched.enteredInFacebookWki}
                     inputComponent={Select}
-                    selectType={EnteredStatus}
+                    selectType={WkiEnteredStatus}
                     name="enteredInFacebookWki"
                     label="Entered in Facebook WKI Chapter?"
                 />

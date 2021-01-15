@@ -21,7 +21,7 @@ const positionArray = Yup.array<IPositionInformation>();
 const admin = bool;
 const firstName = string.required('First Name is required');
 const lastName = nullableString;
-const active = bool;
+const status = string.required('User must have a status');
 const facebookName = nullableString;
 const payPalName = nullableString;
 const email = string.email('Must enter a valid email').required('email is required');
@@ -53,7 +53,7 @@ export const updateProfileSchema = Yup.object().shape({
     admin,
     firstName,
     lastName,
-    active,
+    status,
     facebookName,
     payPalName,
     email,

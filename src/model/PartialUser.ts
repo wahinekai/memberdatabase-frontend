@@ -3,7 +3,7 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, EnteredStatus, Level, IPositionInformation } from '.';
+import { Chapter, Country, ChapterEnteredStatus, WkiEnteredStatus, Level, IPositionInformation, MemberStatus } from '.';
 
 export interface IId {
     id?: Guid; // Not in forms
@@ -27,8 +27,8 @@ export interface IWonSurfboardInformation {
 }
 
 export interface IEnteredInFacebook {
-    enteredInFacebookChapter?: EnteredStatus;
-    enteredInFacebookWki?: EnteredStatus;
+    enteredInFacebookChapter?: ChapterEnteredStatus;
+    enteredInFacebookWki?: WkiEnteredStatus;
 }
 
 export interface IPositions {
@@ -36,8 +36,7 @@ export interface IPositions {
 }
 
 export interface IActivityInformation {
-    active: boolean;
-    lifetimeMember: boolean;
+    status: MemberStatus;
     joinedDate?: Date;
     renewalDate?: Date;
     terminatedDate?: Date;
@@ -59,7 +58,7 @@ export interface IPublicLocation {
 }
 
 export interface IPublicSurfingInformation {
-    chapter?: Chapter;
+    chapter: Chapter;
     level?: Level;
     startedSurfing?: Date;
     boards?: string[];

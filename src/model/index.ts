@@ -2,7 +2,7 @@
  * @file Index file compiling exports from the model module
  */
 
-import { Chapter, Country, Level, EnteredStatus, Position } from './Enums';
+import { Chapter, Country, Level, ChapterEnteredStatus, WkiEnteredStatus, MemberStatus, Position } from './Enums';
 import * as PartialUser from './PartialUser';
 import * as Regions from './Regions';
 import IFormikConvertable from './IFormikConvertable';
@@ -32,10 +32,12 @@ export type {
 export {
     Chapter,
     Country,
-    EnteredStatus,
+    ChapterEnteredStatus,
+    WkiEnteredStatus,
     HttpMethodTypes,
     Level,
     Position,
+    MemberStatus,
     PositionInformation,
     Regions,
     Validation,

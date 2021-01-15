@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import { Chapter, PropTypes } from '../model';
+import { PropTypes } from '../model';
 import { settings, Predicates } from '../utils';
 import { TextCenter } from '.';
 
@@ -58,8 +58,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
             break;
     }
 
-    const chapter = user.chapter && user.chapter !== Chapter.Default ? user.chapter.toString() : 'Unknown';
-    const body = `${positions}, ${chapter} Chapter`;
+    const body = `${positions}, ${user.chapter} Chapter`;
 
     return (
         <TextCenter>

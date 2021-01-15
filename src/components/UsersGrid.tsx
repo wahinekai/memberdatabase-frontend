@@ -52,7 +52,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
             <td>{`${user.firstName ?? ''} ${user.lastName ?? ''}`}</td>
             <td>{user.chapter ?? ''}</td>
             <td>{user.email ?? ''}</td>
-            <td>{user.active ? 'Yes' : 'No'}</td>
+            <td>{user.status}</td>
             <td>{user.admin ? 'Yes' : 'No'}</td>
             <td>
                 {user.streetAddress ?? ''}
@@ -73,7 +73,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
                     <th>Name</th>
                     <th>Chapter</th>
                     <th>Email</th>
-                    <th>Active</th>
+                    <th>Status</th>
                     <th>Administrator</th>
                     <th>Address</th>
                 </tr>

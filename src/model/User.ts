@@ -10,13 +10,15 @@ import { Ensure } from '../utils';
 import {
     Chapter,
     Country,
-    EnteredStatus,
+    ChapterEnteredStatus,
+    WkiEnteredStatus,
     IUser,
     IValidatable,
     IFormikConvertable,
     Level,
     Regions,
     PositionInformation,
+    MemberStatus,
 } from '.';
 
 /**
@@ -28,7 +30,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public admin = false;
     public firstName?: string;
     public lastName?: string;
-    public active = true;
     public facebookName?: string;
     public payPalName?: string;
     public email?: string;
@@ -38,24 +39,24 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public region?: string;
     public country?: Country;
     public occupation?: string;
-    public chapter?: Chapter;
+    public chapter = Chapter.WahineKaiInternational;
     public birthdate?: Date;
     public level?: Level;
     public startedSurfing?: Date;
     public boards: string[] = [];
     public surfSpots: string[] = [];
     public photoUrl?: string;
+    public status = MemberStatus.Pending;
     public biography?: string;
     public joinedDate?: Date;
     public renewalDate?: Date;
     public terminatedDate?: Date;
-    public enteredInFacebookChapter: EnteredStatus = EnteredStatus.NotEntered;
-    public enteredInFacebookWki: EnteredStatus = EnteredStatus.NotEntered;
+    public enteredInFacebookChapter = ChapterEnteredStatus.Entered;
+    public enteredInFacebookWki = WkiEnteredStatus.NotEntered;
     public needsNewMemberBag = false;
     public wonSurfboard = false;
     public dateSurfboardWon?: Date;
     public postalCode?: number;
-    public lifetimeMember = false;
     public socialMediaOptOut = false;
     public timeStamp?: number;
 
@@ -76,10 +77,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
      */
     public validate(): void {
         // Undo ready for formik changes
-        if (this.chapter === Chapter.Default) {
-            delete this.chapter;
-        }
-
         if (this.level === Level.Default) {
             delete this.level;
         }
@@ -101,30 +98,36 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
         // Email is primary key, required, only changed on create
         Ensure.isNotNullOrWhitespace(() => this.email);
 
-        // Every user belongs to a chapter
-        this.chapter = Ensure.isNotNull(() => this.chapter);
-
-        // Every user must have a joined date
-        this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
-
-        // Validation of renewal/terminated date
-        if (this.active) {
-            // Active user, must have renewal date or be lifetime member, terminated date is null
-            if (!this.lifetimeMember) {
+        // Joined/Renewal/Terminated Date validation
+        // Depends on the status of the member
+        switch (this.status) {
+            case MemberStatus.Pending:
+                // Nothing is required
+                break;
+            case MemberStatus.ActivePaying:
+                // Joined & Renewal date required, terminated date null
+                this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
                 this.renewalDate = Ensure.isNotNull(() => this.renewalDate);
-            }
-
-            delete this.terminatedDate;
-        } else {
-            // Inactive user, must have terminated date, no renewal date
-            this.terminatedDate = Ensure.isNotNull(() => this.terminatedDate);
-
-            delete this.renewalDate;
-        }
-
-        // User must be either terminated or have renewal date
-        if (this.terminatedDate === null) {
-            this.renewalDate = Ensure.isNotNull(() => this.renewalDate);
+                delete this.terminatedDate;
+                break;
+            case MemberStatus.ActiveNonPaying:
+                // Joined date required, renewal & terminated null
+                this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
+                delete this.renewalDate;
+                delete this.terminatedDate;
+                break;
+            case MemberStatus.LifetimeMember:
+                // Joined date required, renewal & terminated null
+                this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
+                delete this.renewalDate;
+                delete this.terminatedDate;
+                break;
+            case MemberStatus.Terminated:
+                // Joined & terminated required, renewal null
+                this.joinedDate = Ensure.isNotNull(() => this.joinedDate);
+                this.terminatedDate = Ensure.isNotNull(() => this.terminatedDate);
+                delete this.renewalDate;
+                break;
         }
 
         // If user has won a surfboard, must hae a date won
@@ -145,7 +148,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
      * @returns An IUser ready to be used in forms
      */
     public readyForFormik(): IUser {
-        this.chapter = this.chapter ?? Chapter.Default;
         this.level = this.level ?? Level.Default;
         this.country = this.country ?? Country.Default;
 
@@ -167,18 +169,17 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public static createForFormik(): IUser {
         const newUser: IUser = {
             country: Country.Default,
-            chapter: Chapter.Default,
+            chapter: Chapter.WahineKaiInternational,
             level: Level.Default,
             boards: [],
             surfSpots: [],
             positions: [],
-            enteredInFacebookChapter: EnteredStatus.NotEntered,
-            enteredInFacebookWki: EnteredStatus.NotEntered,
+            enteredInFacebookChapter: ChapterEnteredStatus.Entered,
+            enteredInFacebookWki: WkiEnteredStatus.NotEntered,
             wonSurfboard: false,
             admin: false,
-            active: true,
+            status: MemberStatus.Pending,
             needsNewMemberBag: false,
-            lifetimeMember: false,
             socialMediaOptOut: false,
         };
         return newUser;
