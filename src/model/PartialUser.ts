@@ -3,7 +3,7 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, ChapterEnteredStatus, WkiEnteredStatus, Level, IPositionInformation, MemberStatus } from '.';
+import { Chapter, Country, EnteredStatus, Level, IPositionInformation, MemberStatus } from '.';
 
 export interface IId {
     id?: Guid; // Not in forms
@@ -27,8 +27,8 @@ export interface IWonSurfboardInformation {
 }
 
 export interface IEnteredInFacebook {
-    enteredInFacebookChapter?: ChapterEnteredStatus;
-    enteredInFacebookWki?: WkiEnteredStatus;
+    enteredInFacebookChapter?: EnteredStatus;
+    enteredInFacebookWki?: EnteredStatus;
 }
 
 export interface IPositions {

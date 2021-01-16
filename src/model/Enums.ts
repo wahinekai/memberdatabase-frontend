@@ -36,19 +36,10 @@ export enum MemberStatus {
 /**
  * Possible entered statuses
  */
-export enum ChapterEnteredStatus {
+export enum EnteredStatus {
     Entered = 'Entered',
     Pending = 'Pending',
     NotAccepted = 'Not Accepted',
-}
-
-/**
- * Possible entered statuses
- */
-export enum WkiEnteredStatus {
-    NotEntered = 'Not Entered',
-    Entered = 'Entered',
-    Accepted = 'Accepted',
 }
 
 /**

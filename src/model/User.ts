@@ -10,8 +10,7 @@ import { Ensure } from '../utils';
 import {
     Chapter,
     Country,
-    ChapterEnteredStatus,
-    WkiEnteredStatus,
+    EnteredStatus,
     IUser,
     IValidatable,
     IFormikConvertable,
@@ -51,8 +50,8 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public joinedDate?: Date;
     public renewalDate?: Date;
     public terminatedDate?: Date;
-    public enteredInFacebookChapter = ChapterEnteredStatus.Entered;
-    public enteredInFacebookWki = WkiEnteredStatus.NotEntered;
+    public enteredInFacebookChapter = EnteredStatus.Entered;
+    public enteredInFacebookWki = EnteredStatus.Entered;
     public needsNewMemberBag = false;
     public wonSurfboard = false;
     public dateSurfboardWon?: Date;
@@ -174,8 +173,8 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
             boards: [],
             surfSpots: [],
             positions: [],
-            enteredInFacebookChapter: ChapterEnteredStatus.Entered,
-            enteredInFacebookWki: WkiEnteredStatus.NotEntered,
+            enteredInFacebookChapter: EnteredStatus.Entered,
+            enteredInFacebookWki: EnteredStatus.Entered,
             wonSurfboard: false,
             admin: false,
             status: MemberStatus.Pending,
