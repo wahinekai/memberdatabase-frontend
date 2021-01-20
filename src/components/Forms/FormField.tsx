@@ -48,6 +48,9 @@ const FormField: FC<PropTypes.FormField> = (props) => {
                 aria-describedby={helpId}
                 selectType={props.selectType}
                 rows={props.rows}
+                dateFormat={props.dateFormat}
+                showYearPicker={props.showYearPicker}
+                showMonthYearPicker={props.showMonthYearPicker}
             />
             {help}
         </FormGroup>

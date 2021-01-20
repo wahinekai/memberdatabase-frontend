@@ -56,6 +56,9 @@ type Name = {
 
 type DatePickerAdditions = {
     br?: boolean;
+    dateFormat?: string;
+    showYearPicker?: boolean;
+    showMonthYearPicker?: boolean;
 };
 
 type Query = {

@@ -19,22 +19,27 @@ const DatePickerField: FC<PropTypes.DatePickerField> = (props) => {
     const { setFieldValue } = useFormikContext();
     const [field] = useField(props);
 
+    const dateFormat = props.dateFormat ?? 'MM/dd/yyyy';
+    const showYearPicker = props.showYearPicker ?? false;
+    const showMonthYearPicker = props.showMonthYearPicker ?? false;
     const selected = field.value ? new Date(field.value) : null;
-
     const onChange = useCallback((newDate: Date) => setFieldValue(field.name, newDate), [field.name, setFieldValue]);
-
     const br = props.br === false ? null : <br />;
 
     return (
         <>
             {br}
             <DatePicker
-                {...field}
                 selected={selected}
+                dateFormat={dateFormat}
                 placeholderText={props.placeholder}
                 className={`${props.className ?? ''} form-control px-2`}
                 onChange={onChange}
+                onBlur={field.onBlur}
+                name={field.name}
                 isClearable
+                showYearPicker={showYearPicker}
+                showMonthYearPicker={showMonthYearPicker}
             />
         </>
     );

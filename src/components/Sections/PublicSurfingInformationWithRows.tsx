@@ -75,6 +75,8 @@ const PublicSurfingInformationWithRows: FC<PropTypes.Section> = ({ disabled = fa
                         inputComponent={DatePickerField}
                         name="startedSurfing"
                         label="Started Surfing Date"
+                        dateFormat="yyyy"
+                        showYearPicker
                     />
                 </Col>
             </Row>
