@@ -64,7 +64,7 @@ const PublicSurfingInformationWithRows: FC<PropTypes.Section> = ({ disabled = fa
                         touched={touched.surfSpots}
                         inputComponent={InputArray}
                         name="surfSpots"
-                        label="Where They Normally Surf"
+                        label="Where You Normally Surf"
                     />
                 </Col>
                 <Col>

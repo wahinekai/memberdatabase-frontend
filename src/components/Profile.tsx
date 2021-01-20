@@ -103,10 +103,23 @@ const Profile: FC = () => {
         const user = Ensure.isNotNull(() => userMaybeNull);
         user.validate();
 
+        const lastEdited = new Date(0);
+
+        if (user.timeStamp) {
+            lastEdited.setUTCSeconds(user.timeStamp);
+        }
+
+        const lastEditedComponent = user.timeStamp ? (
+            <TextCenter>
+                <h5>Last Edited: {lastEdited.toLocaleString()}</h5>
+            </TextCenter>
+        ) : null;
+
         const userForFormik = user.readyForFormik();
 
         return (
             <>
+                {lastEditedComponent}
                 {errorComponent}
                 <Formik
                     initialValues={userForFormik}
