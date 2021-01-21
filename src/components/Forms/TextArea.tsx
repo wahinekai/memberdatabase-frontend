@@ -16,7 +16,15 @@ import { PropTypes } from '../../model';
 const TextArea: FC<PropTypes.TextArea> = (props) => {
     const [field] = useField<string>(props);
 
-    return <FormControl {...field} as="textarea" rows={props.rows ?? 3} value={field.value ?? ''} />;
+    return (
+        <FormControl
+            disabled={props.disabled}
+            {...field}
+            as="textarea"
+            rows={props.rows ?? 3}
+            value={field.value ?? ''}
+        />
+    );
 };
 
 export default TextArea;

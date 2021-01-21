@@ -30,6 +30,7 @@ const DatePickerField: FC<PropTypes.DatePickerField> = (props) => {
         <>
             {br}
             <DatePicker
+                disabled={props.disabled}
                 selected={selected}
                 dateFormat={dateFormat}
                 placeholderText={props.placeholder}

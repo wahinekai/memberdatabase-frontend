@@ -26,7 +26,7 @@ const Select: FC<PropTypes.Select> = (props) => {
     ));
 
     return (
-        <FormControl as="select" {...field}>
+        <FormControl as="select" {...field} disabled={props.disabled}>
             {children}
         </FormControl>
     );

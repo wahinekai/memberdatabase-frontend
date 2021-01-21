@@ -25,7 +25,7 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
         <>
             <Row>
                 <Col>
-                    <ProfilePhoto name="photoUrl" />
+                    <ProfilePhoto name="photoUrl" disabled={disabled} />
                 </Col>
                 <Col>
                     <FormField

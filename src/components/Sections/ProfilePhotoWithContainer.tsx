@@ -66,6 +66,7 @@ const ProfilePhoto: FC<PropTypes.ProfilePhoto> = (props) => {
                         accept="image/x-png,image/jpeg"
                         label="Upload Photo"
                         custom
+                        disabled={props.disabled}
                     />
                 </Col>
             </Row>

@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation } from '../model';
-import { apiCallAsync, Ensure } from '../utils';
+import { apiCallAsync, authProvider, Ensure, settings, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
 import TextCenter from './TextCenter';
@@ -37,22 +37,24 @@ const Profile: FC = () => {
     type StateType = {
         user?: User;
         error?: string;
-        submitCount: number;
         submitting: boolean;
     };
 
-    const [state, setState] = useState<StateType>({ submitCount: 0, submitting: false });
+    const [state, setState] = useState<StateType>({ submitting: false });
+    const [submitted, setSubmittedState] = useState(false);
 
-    const { error, submitCount, submitting, user: userMaybeNull } = state;
-    // eslint-disable-next-line jsdoc/require-jsdoc
+    const { error, submitting, user: userMaybeNull } = state;
     const setUser = useCallback(
         (user: IUser) => setState((state) => ({ ...state, user: plainToClass(User, user) })),
         []
     );
-    // eslint-disable-next-line jsdoc/require-jsdoc
     const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
-    // eslint-disable-next-line jsdoc/require-jsdoc
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
+    const setSubmitted = useCallback(async () => {
+        setSubmittedState(true);
+        await Timer.waitSecondsAsync(2);
+        setSubmittedState(false);
+    }, [setSubmittedState]);
 
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(
@@ -62,12 +64,25 @@ const Profile: FC = () => {
                 const updatedUser = plainToClass(User, updatedUserObject);
                 updatedUser.validate();
                 const userFromBackend = await updateMeAsync(updatedUser);
+
+                // Update access tokens if email changes
+                if (userFromBackend.email !== userMaybeNull?.email) {
+                    // Wait for AAD to propogate changes
+                    await Timer.waitSecondsAsync(15);
+
+                    // Force access token to refresh
+                    await authProvider.getAccessToken({
+                        forceRefresh: true,
+                        scopes: settings.auth.accessTokenScopes,
+                    });
+                }
+
                 setState((state) => ({
                     ...state,
                     user: plainToClass(User, userFromBackend),
                     submitting: false,
-                    submitCount: submitCount + 1,
                 }));
+                setSubmitted();
             } catch (err) {
                 setState((state) => ({
                     ...state,
@@ -76,7 +91,7 @@ const Profile: FC = () => {
                 }));
             }
         },
-        [setSubmitting, submitCount]
+        [setSubmitting, userMaybeNull, setSubmitted]
     );
 
     // Update state with newest user on first render
@@ -98,6 +113,8 @@ const Profile: FC = () => {
     const initialSubmitMessage = 'Update Member';
     const submittingMessage = 'Updating...';
     const afterSubmitMessage = 'Member updated successfully!';
+
+    const submitMessage = submitted ? afterSubmitMessage : submitting ? submittingMessage : initialSubmitMessage;
 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
@@ -126,13 +143,7 @@ const Profile: FC = () => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm
-                        submitCount={submitCount}
-                        submitting={submitting}
-                        initialSubmitMessage={initialSubmitMessage}
-                        submittingMessage={submittingMessage}
-                        afterSubmitMessage={afterSubmitMessage}
-                    />
+                    <ProfileForm submitMessage={submitMessage} disabled={submitting} />
                 </Formik>
             </>
         );

@@ -20,18 +20,22 @@ export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea & DatePickerField;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled;
-export type Form = SubmitCount & SubmitMessages;
+export type Form = SubmitMessage & OptionalDisabled;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
 export type AdminUserRow = AdminUser;
 export type Search = Query;
-export type ProfilePhoto = Name & OptionalError & OptionalTouched;
+export type ProfilePhoto = Name & OptionalError & OptionalTouched & OptionalDisabled;
 export type UsersGrid = RefreshConsumer;
 export type AdminSidebar = RefreshProducer;
 export type UploadCsvModal = RefreshProducer;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
+
+type SubmitMessage = {
+    submitMessage: string;
+};
 
 type RefreshProducer = {
     requireRefresh: () => void;
@@ -79,17 +83,6 @@ type Id = {
 
 type OptionalUserIdString = {
     userId?: string;
-};
-
-type SubmitCount = {
-    submitCount: number;
-    submitting: boolean;
-};
-
-type SubmitMessages = {
-    initialSubmitMessage: string;
-    submittingMessage: string;
-    afterSubmitMessage: string;
 };
 
 type OptionalDisabled = {

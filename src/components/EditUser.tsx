@@ -7,7 +7,7 @@ import { Guid } from 'guid-typescript';
 import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation, PropTypes } from '../model';
-import { apiCallAsync, Ensure } from '../utils';
+import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
 import TextCenter from './TextCenter';
@@ -43,22 +43,25 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
     type StateType = {
         user?: User;
         error?: string;
-        submitCount: number;
         submitting: boolean;
     };
 
-    const [state, setState] = useState<StateType>({ submitCount: 0, submitting: false });
+    const [state, setState] = useState<StateType>({ submitting: false });
+    const [submitted, setSubmittedState] = useState(false);
 
-    const { error, submitCount, submitting, user: userMaybeNull } = state;
+    const { error, submitting, user: userMaybeNull } = state;
     // eslint-disable-next-line jsdoc/require-jsdoc
     const setUser = useCallback(
         (user: IUser) => setState((state) => ({ ...state, user: plainToClass(User, user) })),
         []
     );
-    // eslint-disable-next-line jsdoc/require-jsdoc
     const setError = useCallback((error: string) => setState((state) => ({ ...state, error })), []);
-    // eslint-disable-next-line jsdoc/require-jsdoc
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
+    const setSubmitted = useCallback(async () => {
+        setSubmittedState(true);
+        await Timer.waitSecondsAsync(2);
+        setSubmittedState(false);
+    }, [setSubmittedState]);
 
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(
@@ -73,9 +76,9 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                     ...state,
                     user: plainToClass(User, userFromBackend),
                     submitting: false,
-                    submitCount: submitCount + 1,
                     error: undefined,
                 }));
+                setSubmitted();
             } catch (err) {
                 setState((state) => ({
                     ...state,
@@ -84,7 +87,7 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                 }));
             }
         },
-        [id, submitCount, setSubmitting]
+        [id, setSubmitting, setSubmitted]
     );
 
     // Update state with newest user on first render
@@ -106,6 +109,7 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
     const initialSubmitMessage = 'Update Member';
     const submittingMessage = 'Updating...';
     const afterSubmitMessage = 'Member updated successfully!';
+    const submitMessage = submitted ? afterSubmitMessage : submitting ? submittingMessage : initialSubmitMessage;
 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
@@ -134,13 +138,7 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm
-                        submitCount={submitCount}
-                        submitting={submitting}
-                        initialSubmitMessage={initialSubmitMessage}
-                        submittingMessage={submittingMessage}
-                        afterSubmitMessage={afterSubmitMessage}
-                    />
+                    <ProfileForm submitMessage={submitMessage} disabled={submitting} />
                 </Formik>
             </>
         );

@@ -30,17 +30,21 @@ const CreateUser: FC = () => {
     // Create state of user
     type StateType = {
         error?: string;
-        submitCount: number;
         submitting: boolean;
     };
 
     const history = useHistory();
 
-    const [state, setState] = useState<StateType>({ submitCount: 0, submitting: false });
+    const [state, setState] = useState<StateType>({ submitting: false });
+    const [submitted, setSubmittedState] = useState(false);
 
-    const { error, submitCount, submitting } = state;
-    // eslint-disable-next-line jsdoc/require-jsdoc
+    const { error, submitting } = state;
     const setSubmitting = useCallback((submitting: boolean) => setState((state) => ({ ...state, submitting })), []);
+    const setSubmitted = useCallback(async () => {
+        setSubmittedState(true);
+        await Timer.waitSecondsAsync(2);
+        setSubmittedState(false);
+    }, [setSubmittedState]);
 
     // Create onSubmit callback to update user
     const onSubmitAsync = useCallback(
@@ -57,8 +61,8 @@ const CreateUser: FC = () => {
                 setState((state) => ({
                     ...state,
                     submitting: false,
-                    submitCount: submitCount + 1,
                 }));
+                setSubmitted();
 
                 // Wait for 2 seconds, then go to edit user page
                 await Timer.waitSecondsAsync(2);
@@ -71,7 +75,7 @@ const CreateUser: FC = () => {
                 }));
             }
         },
-        [history, setSubmitting, submitCount]
+        [history, setSubmitting, setSubmitted]
     );
 
     const errorComponent =
@@ -84,6 +88,7 @@ const CreateUser: FC = () => {
     const initialSubmitMessage = 'Create Member';
     const submittingMessage = 'Creating...';
     const afterSubmitMessage = 'Member created successfully!  Taking you to the edit member page.';
+    const submitMessage = submitted ? afterSubmitMessage : submitting ? submittingMessage : initialSubmitMessage;
 
     return (
         <>
@@ -93,13 +98,7 @@ const CreateUser: FC = () => {
                 validationSchema={Validation.updateProfileSchema}
                 onSubmit={onSubmitAsync}
             >
-                <ProfileForm
-                    submitCount={submitCount}
-                    submitting={submitting}
-                    initialSubmitMessage={initialSubmitMessage}
-                    submittingMessage={submittingMessage}
-                    afterSubmitMessage={afterSubmitMessage}
-                />
+                <ProfileForm submitMessage={submitMessage} disabled={submitting} />
             </Formik>
         </>
     );
