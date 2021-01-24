@@ -28,7 +28,7 @@ const NeedsNewMemberBag: FC<PropTypes.Section> = ({ disabled = false }) => {
                     touched={touched.needsNewMemberBag}
                     inputComponent={BooleanRadioField}
                     name="needsNewMemberBag"
-                    label="Does this user need a new member bag?"
+                    label="Does this member need a new member bag?"
                 />
             </Col>
         </>

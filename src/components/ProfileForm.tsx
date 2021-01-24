@@ -30,21 +30,6 @@ const ProfileForm: FC<PropTypes.Form> = ({ submitMessage, disabled = false }) =>
                 <Sections.PrivatePersonalInformation disabled={disabled} />
             </Row>
             <Row>
-                <Col>
-                    <TextCenter>
-                        <h3>Surfing Information</h3>
-                    </TextCenter>
-                </Col>
-            </Row>
-            <Sections.PublicSurfingInformationWithRows disabled={disabled} />
-            <Row>
-                <Col>
-                    <TextCenter>
-                        <h3>Birthday</h3>
-                    </TextCenter>
-                </Col>
-            </Row>
-            <Row>
                 <Sections.Birthdate disabled={disabled} />
             </Row>
             <Row>
@@ -60,6 +45,14 @@ const ProfileForm: FC<PropTypes.Form> = ({ submitMessage, disabled = false }) =>
             <Row>
                 <Sections.PublicLocation disabled={disabled} />
             </Row>
+            <Row>
+                <Col>
+                    <TextCenter>
+                        <h3>Surfing Information</h3>
+                    </TextCenter>
+                </Col>
+            </Row>
+            <Sections.PublicSurfingInformationWithRows disabled={disabled} />
             <Row>
                 <Col>
                     <TextCenter>

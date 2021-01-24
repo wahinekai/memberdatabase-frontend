@@ -27,7 +27,7 @@ const Administrator: FC<PropTypes.Section> = ({ disabled = false }) => {
                     error={errors.admin}
                     touched={touched.admin}
                     name="admin"
-                    label="Is this user an administrator?"
+                    label="Is this member an administrator?"
                     inputComponent={BooleanRadioField}
                     helpText="An administrator can view & edit any user"
                 />

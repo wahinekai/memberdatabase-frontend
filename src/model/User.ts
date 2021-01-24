@@ -72,7 +72,7 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     }
 
     /**
-     * Ensures this user is in a correct state
+     * Ensures this member is in a correct state
      */
     public validate(): void {
         // Undo ready for formik changes

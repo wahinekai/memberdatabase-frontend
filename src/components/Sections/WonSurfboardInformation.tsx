@@ -32,7 +32,7 @@ const WonSurfboardInformation: FC<PropTypes.Section> = ({ disabled = false }) =>
                 touched={touched.dateSurfboardWon}
                 inputComponent={DatePickerField}
                 name="dateSurfboardWon"
-                label="Date This User Won a Surfboard"
+                label="Date This member Won a Surfboard"
             />
         </Col>
     ) : null;
@@ -46,7 +46,7 @@ const WonSurfboardInformation: FC<PropTypes.Section> = ({ disabled = false }) =>
                     touched={touched.wonSurfboard}
                     inputComponent={BooleanRadioField}
                     name="wonSurfboard"
-                    label="Has this user won a surfboard?"
+                    label="Has this member won a surfboard?"
                 />
             </Col>
             {dateWonField}
