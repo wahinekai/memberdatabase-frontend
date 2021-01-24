@@ -6,20 +6,20 @@
  * Supported countries
  */
 export enum Country {
+    Default = 'Select a Country',
     UnitedStates = 'United States',
     Canada = 'Canada',
-    Default = 'Select a Country',
 }
 
 /**
  * Possible skill levels
  */
 export enum Level {
+    Default = 'Select a Level',
     Beginner = 'Beginner',
     Intermediate = 'Intermediate',
     Advanced = 'Advanced',
     Expert = 'Expert',
-    Default = 'Select a Level',
 }
 
 /**
@@ -61,6 +61,7 @@ export enum Chapter {
  * Supported leadership positions
  */
 export enum Position {
+    Default = 'No Leadership Position',
     President = 'President',
     VicePresident = 'Vice President',
     VicePresidentOfEvents = 'Vice President of Events',
@@ -70,5 +71,4 @@ export enum Position {
     DirectorOfCommunityServices = 'Director of Community Services',
     ChapterDirector = 'Chapter Director',
     ChapterEventCoordinator = 'Chapter Event Coordinator',
-    Default = 'No Leadership Position',
 }
