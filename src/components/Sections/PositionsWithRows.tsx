@@ -108,10 +108,10 @@ const PositionInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     positions.length > 0 ? (
                         <Row>
                             <Col>
-                                <Label htmlFor="positions.name">Position Name</Label>
+                                <Label htmlFor="positions.name">Position Name*</Label>
                             </Col>
                             <Col>
-                                <Label htmlFor="positions.started">Date Started Position</Label>
+                                <Label htmlFor="positions.started">Date Started Position*</Label>
                             </Col>
                             <Col>
                                 <Label htmlFor="positions.ended">Date Ended Position</Label>
