@@ -31,7 +31,7 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 touched={touched.joinedDate}
                 inputComponent={DatePickerField}
                 name="joinedDate"
-                label="Joined Date"
+                label="Joined Date*"
             />
         </Col>
     );
@@ -43,7 +43,7 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 touched={touched.renewalDate}
                 inputComponent={DatePickerField}
                 name="renewalDate"
-                label="Renewal Date"
+                label="Renewal Date*"
             />
         </Col>
     );
@@ -56,7 +56,7 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                 touched={touched.terminatedDate}
                 inputComponent={DatePickerField}
                 name="terminatedDate"
-                label="Terminated Date"
+                label="Terminated Date*"
             />
         </Col>
     );
@@ -100,7 +100,7 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     inputComponent={Select}
                     selectType={MemberStatus}
                     name="status"
-                    label="Member Status"
+                    label="Member Status*"
                 />
             </Col>
             {fields}

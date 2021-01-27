@@ -95,7 +95,10 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
         this.firstName = Ensure.isNotNullOrWhitespace(() => this.firstName);
 
         // Email is primary key, required, only changed on create
-        Ensure.isNotNullOrWhitespace(() => this.email);
+        this.email = Ensure.isNotNullOrWhitespace(() => this.email);
+
+        // Chapter is required
+        this.chapter = Ensure.isNotNull(() => this.chapter);
 
         // Joined/Renewal/Terminated Date validation
         // Depends on the status of the member

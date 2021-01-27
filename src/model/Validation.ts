@@ -3,51 +3,121 @@
  */
 
 import * as Yup from 'yup';
-import { IPositionInformation } from '.';
+import { Chapter, Country, EnteredStatus, MemberStatus, Position } from '.';
+
+/**
+ * A function that converts an enum into a Regex, omitting the default value
+ *
+ * @param enumType Type of enum to convert to a Regex
+ * @returns A regex that can be tested to determine if an object matches that Regex
+ */
+const enumToRegexNoDefault = (enumType: Record<string, string>): RegExp => {
+    const keys = Object.keys(enumType);
+
+    const filteredKeys = keys.filter((key) => key !== 'Default');
+    const mappedKeys = filteredKeys.map((key) => enumType[key]);
+    const mappedKeysString = mappedKeys.join('|');
+
+    return new RegExp(`(${mappedKeysString})`);
+};
+
+/**
+ * A function that converts an enum into a Regex without omitting the default value
+ *
+ * @param enumType Type of enum to convert to a Regex
+ * @returns A regex that can be tested to determine if an object matches that Regex
+ */
+const enumToRegexWithDefault = (enumType: Record<string, string>): RegExp => {
+    const keys = Object.keys(enumType);
+
+    const mappedKeys = keys.map((key) => enumType[key]);
+    const mappedKeysString = mappedKeys.join('|');
+
+    return new RegExp(`(${mappedKeysString})`);
+};
 
 // Building Blocks
 const bool = Yup.bool().typeError('Must be yes or no');
 const string = Yup.string().typeError('This field is required');
 const date = Yup.date().typeError('A date is required');
 const integer = Yup.number().typeError('A Number is required').integer('Number must be an integer');
-const nullableString = string.nullable();
-const nullableDate = date.nullable();
-const nullableBool = bool.nullable();
-const nullableInteger = integer.nullable();
-const stringArray = Yup.array<string>();
-const positionArray = Yup.array<IPositionInformation>();
+const optionalString = string.optional();
+const optionalDate = date.optional();
+const optionalBool = bool.optional();
+const optionalInteger = integer.optional();
+const stringArray = Yup.array().of(string);
+
+const position = Yup.object().shape({
+    name: string
+        .required('Position Name is required')
+        .matches(enumToRegexNoDefault(Position), 'Must have a leadership position'),
+    started: date.required('Start date is required'),
+    ended: optionalDate,
+});
+
+const positionArray = Yup.array().of(position);
 
 // Fields
 const admin = bool;
 const firstName = string.required('First Name is required');
-const lastName = nullableString;
-const status = string.required('User must have a status');
-const facebookName = nullableString;
-const payPalName = nullableString;
+const lastName = optionalString;
+const facebookName = optionalString;
+const payPalName = optionalString;
+const occupation = optionalString;
 const email = string.email('Must enter a valid email').required('email is required');
-const phoneNumber = nullableString;
-const streetAddress = nullableString;
-const city = nullableString;
-const region = nullableString;
-const country = nullableString;
-const occupation = nullableString;
-const chapter = string.required('User must belong to a chapter');
-const birthdate = nullableDate;
-const level = nullableString;
-const startedSurfing = nullableDate;
+const phoneNumber = optionalString;
+const streetAddress = optionalString;
+const city = optionalString;
+const birthdate = optionalDate;
+const level = optionalString;
+const startedSurfing = optionalDate;
 const boards = stringArray;
+const photoUrl = optionalString;
+const biography = optionalString;
+const needsNewMemberBag = optionalBool;
+const wonSurfboard = optionalBool;
+const postalCode = optionalInteger;
+const enteredInFacebookChapter = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must have a status');
+const enteredInFacebookWki = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must make a selection');
+const region = optionalString;
+const country = optionalString.matches(enumToRegexWithDefault(Country), 'Must select a country');
 const positions = positionArray;
-const photoUrl = nullableString;
-const biography = nullableString;
-const joinedDate = date.required('Every member must have a joined date');
-const renewalDate = nullableDate;
-const terminatedDate = nullableDate;
-const enteredInFacebookChapter = nullableString;
-const enteredInFacebookWki = nullableString;
-const needsNewMemberBag = nullableBool;
-const wonSurfboard = nullableBool;
-const dateSurfboardWon = nullableDate;
-const postalCode = nullableInteger;
+
+const status = string
+    .required('User must have a status')
+    .matches(enumToRegexNoDefault(MemberStatus), 'Must not be default selection');
+
+const chapter = string
+    .required('User must belong to a chapter')
+    .matches(enumToRegexNoDefault(Chapter), 'Must be a valid chapter');
+
+const dateSurfboardWon = date.when('wonSurfboard', {
+    is: true,
+    then: date.required('Must have a surfboard won date'),
+    otherwise: optionalDate,
+});
+
+// Joined date required in all cases except for pending
+const joinedDate = date.when('status', {
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    is: (status) => status != MemberStatus.Pending,
+    then: date.required('Member must have a joined date'),
+    otherwise: optionalDate,
+});
+
+// Renewal date only required in Active: Paying
+const renewalDate = date.when('status', {
+    is: MemberStatus.ActivePaying,
+    then: date.required('Member must have a renewal date'),
+    otherwise: optionalDate,
+});
+
+// Terminated date only requried in Terminated
+const terminatedDate = date.when('status', {
+    is: MemberStatus.Terminated,
+    then: date.required('Member must have a terminated date'),
+    otherwise: optionalDate,
+});
 
 export const updateProfileSchema = Yup.object().shape({
     admin,

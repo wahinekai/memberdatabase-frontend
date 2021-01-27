@@ -23,7 +23,10 @@ const DatePickerField: FC<PropTypes.DatePickerField> = (props) => {
     const showYearPicker = props.showYearPicker ?? false;
     const showMonthYearPicker = props.showMonthYearPicker ?? false;
     const selected = field.value ? new Date(field.value) : null;
-    const onChange = useCallback((newDate: Date) => setFieldValue(field.name, newDate), [field.name, setFieldValue]);
+    const onChange = useCallback((newDate: Date | null) => setFieldValue(field.name, newDate ?? undefined), [
+        field.name,
+        setFieldValue,
+    ]);
     const br = props.br === false ? null : <br />;
 
     return (

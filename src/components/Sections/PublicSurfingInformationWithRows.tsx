@@ -31,7 +31,7 @@ const PublicSurfingInformationWithRows: FC<PropTypes.Section> = ({ disabled = fa
                         inputComponent={Select}
                         selectType={Chapter}
                         name="chapter"
-                        label="Chapter"
+                        label="Chapter*"
                     />
                 </Col>
                 <Col>

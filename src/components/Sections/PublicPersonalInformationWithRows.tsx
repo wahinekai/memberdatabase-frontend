@@ -46,7 +46,7 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
                         error={errors.firstName}
                         touched={touched.firstName}
                         name="firstName"
-                        label="First Name"
+                        label="First Name*"
                     />
                 </Col>
                 <Col>

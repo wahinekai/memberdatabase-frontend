@@ -7,13 +7,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useFormikContext, FieldArray } from 'formik';
+import { useFormikContext, FieldArray, FormikErrors, FormikTouched } from 'formik';
 
-import Error from '../Error';
 import TextCenter from '../TextCenter';
 
-import { Select, DatePickerField, Label } from '../Forms';
-import { PartialUser, Position, PropTypes } from '../../model';
+import { Select, DatePickerField, Label, FormField } from '../Forms';
+import { IPositionInformation, PartialUser, Position, PropTypes } from '../../model';
 
 /**
  * A section of the edit profile form containing the information of a user having
@@ -35,32 +34,59 @@ const PositionInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
             name="positions"
             render={(arrayHelpers) => {
                 const array = positions.map((_value, index) => {
-                    const error =
-                        errors.positions && touched.positions ? <Error>{errors?.positions[index]}</Error> : null;
+                    const error: FormikErrors<IPositionInformation> = errors.positions
+                        ? typeof errors.positions == 'string' || typeof errors.positions == 'undefined'
+                            ? { name: errors.positions, started: errors.positions, ended: errors.positions }
+                            : errors.positions[index]
+                            ? typeof errors.positions[index] == 'string'
+                                ? {
+                                      name: errors.positions[index] as string,
+                                      started: errors.positions[index] as string,
+                                      ended: errors.positions[index] as string,
+                                  }
+                                : (errors.positions[index] as FormikErrors<IPositionInformation>)
+                            : {}
+                        : {};
+
+                    const touch: FormikTouched<IPositionInformation> = {
+                        name: touched.positions && touched.positions[index] ? touched.positions[index].name : false,
+                        started:
+                            touched.positions && touched.positions[index] ? touched.positions[index].started : false,
+                        ended: touched.positions && touched.positions[index] ? touched.positions[index].ended : false,
+                    };
 
                     return (
                         <Row key={index}>
-                            {error}
                             <InputGroup className="py-1">
                                 <Col>
-                                    <Select
-                                        name={`positions.${index}.name`}
+                                    <FormField
                                         disabled={disabled}
+                                        name={`positions.${index}.name`}
                                         selectType={Position}
+                                        error={error.name}
+                                        touched={touch.name}
+                                        inputComponent={Select}
                                     />
                                 </Col>
                                 <Col>
-                                    <DatePickerField
+                                    <FormField
                                         name={`positions.${index}.started`}
                                         disabled={disabled}
+                                        inputComponent={DatePickerField}
+                                        error={error.started}
+                                        touched={touch.started}
                                         br={false}
+                                        placeholder="Starting date"
                                     />
                                 </Col>
                                 <Col>
-                                    <DatePickerField
+                                    <FormField
                                         name={`positions.${index}.ended`}
                                         disabled={disabled}
                                         placeholder="Ending date"
+                                        inputComponent={DatePickerField}
+                                        error={error.ended}
+                                        touched={touch.ended}
                                         br={false}
                                     />
                                 </Col>

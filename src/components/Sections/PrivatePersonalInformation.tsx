@@ -27,7 +27,7 @@ const PrivatePersonalInformation: FC<PropTypes.Section> = ({ disabled = false })
                     touched={touched.email}
                     name="email"
                     disabled={disabled}
-                    label="Email"
+                    label="Email*"
                 />
             </Col>
             <Col>

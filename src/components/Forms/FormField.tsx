@@ -51,6 +51,7 @@ const FormField: FC<PropTypes.FormField> = (props) => {
                 dateFormat={props.dateFormat}
                 showYearPicker={props.showYearPicker}
                 showMonthYearPicker={props.showMonthYearPicker}
+                br={props.br}
             />
             {help}
         </FormGroup>
