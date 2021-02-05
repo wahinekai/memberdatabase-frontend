@@ -69,6 +69,7 @@ export enum Position {
     DirectorOfMarketing = 'Director of Marketing',
     DirectorOfSocialMedia = 'Director of Social Media',
     DirectorOfCommunityServices = 'Director of Community Services',
+    SurfMamaDirector = 'Surf Mama Director',
     ChapterDirector = 'Chapter Director',
     ChapterEventCoordinator = 'Chapter Event Coordinator',
 }
