@@ -30,14 +30,14 @@ export type ProfilePhoto = Name & OptionalError & OptionalTouched & OptionalDisa
 export type UsersGrid = RefreshConsumer;
 export type AdminSidebar = RefreshProducer;
 export type UploadCsvModal = RefreshProducer;
+export type DeleteUserModal = Id;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
 
 type DeleteUser = {
     deleteUser?: boolean;
-    deleteUserMessage?: React.ReactNode;
-    onDeleteUser?: () => void;
+    deleteUserComponent?: React.ReactNode;
 };
 
 type SubmitMessage = {

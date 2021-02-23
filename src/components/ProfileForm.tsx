@@ -82,11 +82,7 @@ const ProfileForm: FC<PropTypes.Form> = (props) => {
                     <Sections.WonSurfboardInformation disabled={disabled} />
                 </Row>
 
-                <Submit
-                    deleteUser={props.deleteUser}
-                    onDeleteUser={props.onDeleteUser}
-                    deleteUserMessage={props.deleteUserMessage}
-                >
+                <Submit deleteUser={props.deleteUser} deleteUserComponent={props.deleteUserComponent}>
                     {props.submitMessage}
                 </Submit>
             </Form>

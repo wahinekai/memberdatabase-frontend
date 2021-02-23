@@ -29,11 +29,7 @@ const Submit: FC<PropTypes.Submit> = (props) => {
     const submitAndDelete = (
         <Row>
             <Col>
-                <TextRight>
-                    <Button variant="secondary" className="my-2 px-5" onClick={props.onDeleteUser}>
-                        {props.deleteUserMessage}
-                    </Button>
-                </TextRight>
+                <TextRight>{props.deleteUserComponent}</TextRight>
             </Col>
             <Col>
                 <Button variant="primary" className="my-2 px-5" type="submit">

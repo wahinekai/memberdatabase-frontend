@@ -11,6 +11,7 @@ import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
 import TextCenter from './Style/TextCenter';
+import DeleteUserModal from './DeleteUserModal';
 
 /**
  * Gets the profile of the user specified by the id parameter
@@ -129,6 +130,10 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
 
         const userForFormik = user.readyForFormik();
 
+        const userId = Ensure.isNotNull(() => user.id);
+
+        const deleteUserComponent = <DeleteUserModal id={userId} />;
+
         return (
             <>
                 {lastEditedComponent}
@@ -142,8 +147,7 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                         submitMessage={submitMessage}
                         disabled={submitting}
                         deleteUser
-                        onDeleteUser={() => console.log('Deleted')}
-                        deleteUserMessage="Delete User"
+                        deleteUserComponent={deleteUserComponent}
                     />
                 </Formik>
             </>
