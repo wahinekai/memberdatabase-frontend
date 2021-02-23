@@ -5,7 +5,7 @@
 import React, { FC } from 'react';
 
 import { PropTypes } from '../model';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 /**
  * Header component

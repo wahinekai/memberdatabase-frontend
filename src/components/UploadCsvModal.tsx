@@ -17,7 +17,7 @@ import { Guid } from 'guid-typescript';
 
 import { HttpMethodTypes, IUploadUsersReturn, IUser, PropTypes } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 import Error from './Error';
 import { Label } from './Forms';
 

@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import { downloadFileAsync, downloadExternalFileAsync, settings } from '../utils';
 import { PropTypes } from '../model';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 import UploadCsvModal from './UploadCsvModal';
 
 /**

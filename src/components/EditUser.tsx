@@ -10,7 +10,7 @@ import { HttpMethodTypes, User, IUser, Validation, PropTypes } from '../model';
 import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
-import TextCenter from './TextCenter';
+import TextCenter from './Style/TextCenter';
 
 /**
  * Gets the profile of the user specified by the id parameter
@@ -138,7 +138,13 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                     validationSchema={Validation.updateProfileSchema}
                     onSubmit={onSubmitAsync}
                 >
-                    <ProfileForm submitMessage={submitMessage} disabled={submitting} />
+                    <ProfileForm
+                        submitMessage={submitMessage}
+                        disabled={submitting}
+                        deleteUser
+                        onDeleteUser={() => console.log('Deleted')}
+                        deleteUserMessage="Delete User"
+                    />
                 </Formik>
             </>
         );

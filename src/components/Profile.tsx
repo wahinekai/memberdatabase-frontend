@@ -9,7 +9,7 @@ import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, authProvider, Ensure, settings, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 /**
  * Gets the profile of the authenticated user

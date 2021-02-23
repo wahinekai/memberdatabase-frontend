@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext, FieldArray, FormikErrors, FormikTouched } from 'formik';
 
-import TextCenter from '../TextCenter';
+import { TextCenter } from '../Style';
 
 import { Select, DatePickerField, Label, FormField } from '../Forms';
 import { IPositionInformation, PartialUser, Position, PropTypes } from '../../model';

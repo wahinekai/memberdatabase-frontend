@@ -10,7 +10,7 @@ import { HttpMethodTypes, User, IUser, Validation } from '../model';
 import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 /**
  * Create the user in the database and return the created user.

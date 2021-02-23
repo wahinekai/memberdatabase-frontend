@@ -3,6 +3,7 @@
  */
 
 import { Guid } from 'guid-typescript';
+import React from 'react';
 
 import { PartialUser, IUser } from '.';
 
@@ -11,7 +12,7 @@ export type Error = OptionalClassname;
 export type FormLabel = HTMLFor & OptionalClassname;
 export type Logo = OptionalClassname;
 export type Header = OptionalClassname;
-export type Submit = OptionalClassname;
+export type Submit = OptionalClassname & DeleteUser;
 export type Input = InputAdditions & OptionalClassname & InputBase;
 export type DatePickerField = InputBase & DatePickerAdditions & OptionalClassname;
 export type FormHelp = FormHelpAdditions & OptionalClassname;
@@ -20,7 +21,7 @@ export type TextArea = InputBase & TextAreaAdditions;
 export type InputComponent = Input & Select & TextArea & DatePickerField;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled;
-export type Form = SubmitMessage & OptionalDisabled;
+export type Form = SubmitMessage & OptionalDisabled & DeleteUser;
 export type EditUser = Id;
 export type UserCard = SearchableUser;
 export type AdminUserRow = AdminUser;
@@ -32,6 +33,12 @@ export type UploadCsvModal = RefreshProducer;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
+
+type DeleteUser = {
+    deleteUser?: boolean;
+    deleteUserMessage?: React.ReactNode;
+    onDeleteUser?: () => void;
+};
 
 type SubmitMessage = {
     submitMessage: string;

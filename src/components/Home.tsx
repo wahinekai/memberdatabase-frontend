@@ -9,7 +9,7 @@ import Image from 'react-bootstrap/Image';
 
 import { settings } from '../utils';
 import HomeForm from './HomeForm';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 /**
  * Definition of the Home Component

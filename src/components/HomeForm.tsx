@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
 import { Input } from './Forms';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 /**
  * Form for Home Page

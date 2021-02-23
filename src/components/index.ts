@@ -10,6 +10,6 @@ import Home from './Home';
 import Profile from './Profile';
 import EditUser from './EditUser';
 import Search from './Search';
-import TextCenter from './TextCenter';
+import { TextCenter } from './Style';
 
 export { AdminTools, CreateUser, ApplicationNavbar, EditUser, Header, Home, Profile, Search, TextCenter };
