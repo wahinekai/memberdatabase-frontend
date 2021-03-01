@@ -3,5 +3,6 @@
  */
 
 import IsAdminProvider from './IsAdminProvider';
+import UserIdProvider from './UserIdProvider';
 
-export { IsAdminProvider };
+export { IsAdminProvider, UserIdProvider };

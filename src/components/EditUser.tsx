@@ -1,12 +1,13 @@
 /**
  * @file Contains definitions for the Edit User component
  */
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { Guid } from 'guid-typescript';
 import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, User, IUser, Validation, PropTypes } from '../model';
+import { UserIdContext } from '../contexts';
 import { apiCallAsync, Ensure, Timer } from '../utils';
 import ProfileForm from './ProfileForm';
 import Error from './Error';
@@ -40,6 +41,8 @@ const updateByIdAsync = (id: Guid, updatedUserObject: IUser): Promise<IUser> =>
  * @returns The Edit Profile Component
  */
 const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
+    const myId = useContext(UserIdContext);
+
     // Create state of user
     type StateType = {
         user?: User;
@@ -132,6 +135,8 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
 
         const userId = Ensure.isNotNull(() => user.id);
 
+        const deleteUser = userId !== myId;
+
         const deleteUserComponent = <DeleteUserModal id={userId} />;
 
         return (
@@ -146,7 +151,7 @@ const EditUser: FC<PropTypes.EditUser> = ({ id }) => {
                     <ProfileForm
                         submitMessage={submitMessage}
                         disabled={submitting}
-                        deleteUser
+                        deleteUser={deleteUser}
                         deleteUserComponent={deleteUserComponent}
                     />
                 </Formik>

@@ -2,7 +2,7 @@
  * @file Definition of Delete User component
  */
 
-import React, { FC, useCallback, useState, useMemo } from 'react';
+import React, { FC, useCallback, useState, useMemo, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -10,7 +10,8 @@ import Row from 'react-bootstrap/esm/Row';
 import Modal from 'react-bootstrap/Modal';
 import { useHistory } from 'react-router-dom';
 
-import { HttpMethodTypes, IUser, PropTypes } from '../model';
+import { HttpMethodTypes, PropTypes } from '../model';
+import { UserIdContext } from '../contexts';
 import { apiCallAsync, Ensure, Timer } from '../utils';
 import Error from './Error';
 
@@ -24,6 +25,8 @@ import Error from './Error';
  * @returns The CSV Upload modal component
  */
 const DeleteUserModal: FC<PropTypes.DeleteUserModal> = ({ id }) => {
+    const myId = useContext(UserIdContext);
+
     const history = useHistory();
 
     type stateType = {
@@ -61,9 +64,7 @@ const DeleteUserModal: FC<PropTypes.DeleteUserModal> = ({ id }) => {
             setDeleting();
 
             // User cannot delete themselves
-            const me = await apiCallAsync<IUser>(HttpMethodTypes.GET, '/Users/Me');
-
-            if (id === me.id) {
+            if (id === myId) {
                 setError('You cannot delete yourself!');
                 return;
             }
@@ -79,7 +80,7 @@ const DeleteUserModal: FC<PropTypes.DeleteUserModal> = ({ id }) => {
             setError('Error deleting user.  Please try again later.');
             return;
         }
-    }, [setDeleting, setDeleted, id, history, setError]);
+    }, [setDeleting, setDeleted, id, history, setError, myId]);
 
     const preDeleteBodyText = 'Are you sure you want to delete this user? This action cannot be undone!';
     const deletingBodyText = 'Deleting this user...';

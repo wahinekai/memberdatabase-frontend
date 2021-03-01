@@ -3,5 +3,6 @@
  */
 
 import IsAdminContext from './IsAdminContext';
+import UserIdContext from './UserIdContext';
 
-export { IsAdminContext };
+export { IsAdminContext, UserIdContext };

@@ -11,7 +11,7 @@ import { MainRouter } from './routers';
 import { ErrorPage } from './pages';
 import { authProvider } from './utils';
 import { ApplicationNavbar } from './components';
-import { IsAdminProvider } from './providers';
+import { IsAdminProvider, UserIdProvider } from './providers';
 
 /**
  * Application entrypoint definition - root of the React DOM tree
@@ -25,8 +25,10 @@ const App: FC = () => {
                 <ErrorBoundary FallbackComponent={ErrorPage}>
                     <AzureAD provider={authProvider} forceLogin={true}>
                         <IsAdminProvider>
-                            <ApplicationNavbar />
-                            <MainRouter />
+                            <UserIdProvider>
+                                <ApplicationNavbar />
+                                <MainRouter />
+                            </UserIdProvider>
                         </IsAdminProvider>
                     </AzureAD>
                 </ErrorBoundary>
