@@ -52,10 +52,10 @@ const DeleteUserModal: FC<PropTypes.DeleteUserModal> = ({ id }) => {
     const handleCancel = useCallback(() => setState(initialState), [setState, initialState]);
 
     const handleShow = useCallback(() => setState({ ...state, showModal: true }), [setState, state]);
-    const setError = useCallback(
-        (error: string) => setState({ ...state, deleted: false, deleting: false, error }),
-        [setState, state]
-    );
+    const setError = useCallback((error: string) => setState({ ...state, deleted: false, deleting: false, error }), [
+        setState,
+        state,
+    ]);
     const setDeleting = useCallback(() => setState({ ...state, deleting: true }), [setState, state]);
     const setDeleted = useCallback(() => setState({ ...state, deleting: false, deleted: true }), [setState, state]);
     const handleDelete = useCallback(async () => {
