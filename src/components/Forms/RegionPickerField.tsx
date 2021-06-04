@@ -20,6 +20,9 @@ const RegionPickerField: FC<PropTypes.RegionPickerField> = (props) => {
 
     return (
         <RegionDropdown
+            disabled={props.disabled}
+            onBlur={field.onBlur}
+            name={field.name}
             classes={`form-control ${props.className ?? ''}`}
             country={props.country ?? 'United States'}
             value={field.value}

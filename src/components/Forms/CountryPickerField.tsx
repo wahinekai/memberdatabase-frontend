@@ -20,6 +20,9 @@ const CountryPickerField: FC<PropTypes.CountryPickerField> = (props) => {
 
     return (
         <CountryDropdown
+            disabled={props.disabled}
+            onBlur={field.onBlur}
+            name={field.name}
             classes={`form-control ${props.className ?? ''}`}
             value={field.value}
             onChange={(value: string) => setFieldValue(field.name, value)}
