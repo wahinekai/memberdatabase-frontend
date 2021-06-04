@@ -3,15 +3,6 @@
  */
 
 /**
- * Supported countries
- */
-export enum Country {
-    Default = 'Select a Country',
-    UnitedStates = 'United States',
-    Canada = 'Canada',
-}
-
-/**
  * Possible skill levels
  */
 export enum Level {

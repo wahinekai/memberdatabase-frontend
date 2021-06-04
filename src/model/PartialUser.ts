@@ -3,7 +3,7 @@
  */
 
 import { Guid } from 'guid-typescript';
-import { Chapter, Country, EnteredStatus, Level, IPositionInformation, MemberStatus } from '.';
+import { Chapter, EnteredStatus, Level, IPositionInformation, MemberStatus } from '.';
 
 export interface IId {
     id?: Guid; // Not in forms
@@ -54,7 +54,7 @@ export interface IPublicLocation {
     city?: string;
     region?: string;
     postalCode?: number;
-    country?: Country;
+    country?: string;
 }
 
 export interface IPublicSurfingInformation {

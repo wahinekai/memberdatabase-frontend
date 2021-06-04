@@ -2,9 +2,8 @@
  * @file Index file compiling exports from the model module
  */
 
-import { Chapter, Country, Level, EnteredStatus, MemberStatus, Position } from './Enums';
+import { Chapter, Level, EnteredStatus, MemberStatus, Position } from './Enums';
 import * as PartialUser from './PartialUser';
-import * as Regions from './Regions';
 import IFormikConvertable from './IFormikConvertable';
 import IUploadUsersReturn from './IUploadUsersReturn';
 import IPositionInformation from './IPositionInformation';
@@ -31,14 +30,12 @@ export type {
 
 export {
     Chapter,
-    Country,
     EnteredStatus,
     HttpMethodTypes,
     Level,
     Position,
     MemberStatus,
     PositionInformation,
-    Regions,
     Validation,
     User,
 };

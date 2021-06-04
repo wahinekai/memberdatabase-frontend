@@ -3,7 +3,7 @@
  */
 
 import * as Yup from 'yup';
-import { Chapter, Country, EnteredStatus, MemberStatus, Position } from '.';
+import { Chapter, EnteredStatus, MemberStatus, Position } from '.';
 
 /**
  * A function that converts an enum into a Regex, omitting the default value
@@ -16,21 +16,6 @@ const enumToRegexNoDefault = (enumType: Record<string, string>): RegExp => {
 
     const filteredKeys = keys.filter((key) => key !== 'Default');
     const mappedKeys = filteredKeys.map((key) => enumType[key]);
-    const mappedKeysString = mappedKeys.join('|');
-
-    return new RegExp(`(${mappedKeysString})`);
-};
-
-/**
- * A function that converts an enum into a Regex without omitting the default value
- *
- * @param enumType Type of enum to convert to a Regex
- * @returns A regex that can be tested to determine if an object matches that Regex
- */
-const enumToRegexWithDefault = (enumType: Record<string, string>): RegExp => {
-    const keys = Object.keys(enumType);
-
-    const mappedKeys = keys.map((key) => enumType[key]);
     const mappedKeysString = mappedKeys.join('|');
 
     return new RegExp(`(${mappedKeysString})`);
@@ -80,7 +65,7 @@ const postalCode = optionalInteger;
 const enteredInFacebookChapter = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must have a status');
 const enteredInFacebookWki = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must make a selection');
 const region = optionalString;
-const country = optionalString.matches(enumToRegexWithDefault(Country), 'Must select a country');
+const country = optionalString;
 const positions = positionArray;
 
 const status = string

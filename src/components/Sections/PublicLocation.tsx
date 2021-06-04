@@ -6,8 +6,8 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
-import { FormField, Select } from '../Forms';
-import { Country, PartialUser, PropTypes, Regions } from '../../model';
+import { CountryPickerField, FormField, RegionPickerField } from '../Forms';
+import { PartialUser, PropTypes } from '../../model';
 
 /**
  * A section of the edit profile form
@@ -26,10 +26,7 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
     // Show region field only if country is picked
     let regionField = null;
 
-    if (country && country !== Country.Default) {
-        const selectType = country === Country.UnitedStates ? Regions.USStates : Regions.CanadianProvinces;
-        const label = country === Country.UnitedStates ? 'State or Territory' : 'Province or Territory';
-
+    if (country && country !== '') {
         regionField = (
             <Col>
                 <FormField
@@ -37,9 +34,9 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     error={errors.region}
                     touched={touched.region}
                     name="region"
-                    label={label}
-                    inputComponent={Select}
-                    selectType={selectType}
+                    label={'Region'}
+                    inputComponent={RegionPickerField}
+                    country={country}
                 />
             </Col>
         );
@@ -67,8 +64,7 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
                     touched={touched.country}
                     name="country"
                     label="Country"
-                    inputComponent={Select}
-                    selectType={Country}
+                    inputComponent={CountryPickerField}
                 />
             </Col>
         </>

@@ -15,10 +15,12 @@ export type Header = OptionalClassname;
 export type Submit = OptionalClassname & DeleteUser;
 export type Input = InputAdditions & OptionalClassname & InputBase;
 export type DatePickerField = InputBase & DatePickerAdditions & OptionalClassname;
+export type RegionPickerField = InputBase & RegionPickerAdditions & OptionalClassname;
+export type CountryPickerField = InputBase & OptionalClassname;
 export type FormHelp = FormHelpAdditions & OptionalClassname;
 export type Select = SelectAdditions & InputBase;
 export type TextArea = InputBase & TextAreaAdditions;
-export type InputComponent = Input & Select & TextArea & DatePickerField;
+export type InputComponent = Input & Select & TextArea & DatePickerField & RegionPickerField & CountryPickerField;
 export type FormField = FormFieldAdditions & InputComponent & FormikAdditions;
 export type Section = OptionalDisabled;
 export type Form = SubmitMessage & OptionalDisabled & DeleteUser;
@@ -70,6 +72,10 @@ type DatePickerAdditions = {
     dateFormat?: string;
     showYearPicker?: boolean;
     showMonthYearPicker?: boolean;
+};
+
+type RegionPickerAdditions = {
+    country?: string;
 };
 
 type Query = {

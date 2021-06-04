@@ -9,13 +9,11 @@ import { Type } from 'class-transformer';
 import { Ensure } from '../utils';
 import {
     Chapter,
-    Country,
     EnteredStatus,
     IUser,
     IValidatable,
     IFormikConvertable,
     Level,
-    Regions,
     PositionInformation,
     MemberStatus,
 } from '.';
@@ -36,7 +34,7 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public streetAddress?: string;
     public city?: string;
     public region?: string;
-    public country?: Country;
+    public country?: string;
     public occupation?: string;
     public chapter = Chapter.WahineKaiInternational;
     public birthdate?: Date;
@@ -78,14 +76,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
         // Undo ready for formik changes
         if (this.level === Level.Default) {
             delete this.level;
-        }
-
-        if (this.region === Regions.CanadianProvinces.Default || this.region === Regions.USStates.Default) {
-            delete this.region;
-        }
-
-        if (this.country === Country.Default) {
-            delete this.country;
         }
 
         // Ensure each position is valid
@@ -151,14 +141,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
      */
     public readyForFormik(): IUser {
         this.level = this.level ?? Level.Default;
-        this.country = this.country ?? Country.Default;
-
-        // Set up region
-        if (this.country === Country.UnitedStates) {
-            this.region = this.region ?? Regions.USStates.Default;
-        } else if (this.country === Country.Canada) {
-            this.region = this.region ?? Regions.CanadianProvinces.Default;
-        }
 
         return this;
     }
@@ -170,7 +152,6 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
      */
     public static createForFormik(): IUser {
         const newUser: IUser = {
-            country: Country.Default,
             chapter: Chapter.WahineKaiInternational,
             level: Level.Default,
             boards: [],
