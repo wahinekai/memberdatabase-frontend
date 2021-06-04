@@ -85,7 +85,7 @@ const dateSurfboardWon = date.when('wonSurfboard', {
 // Joined date required in all cases except for pending
 const joinedDate = date.when('status', {
     // eslint-disable-next-line jsdoc/require-jsdoc
-    is: (status) => status != MemberStatus.Pending,
+    is: (status: MemberStatus) => status != MemberStatus.Pending,
     then: date.required('Member must have a joined date'),
     otherwise: optionalDate,
 });
