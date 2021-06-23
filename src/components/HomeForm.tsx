@@ -25,7 +25,10 @@ const HomeForm: FC = () => {
         search: '',
     };
 
-    const onSubmit = useCallback(({ search }: { search: string }) => history.push(`/search?q=${search}`), [history]);
+    const onSubmit = useCallback(
+        ({ search }: { search: string }) => history.push(`/search?q=${encodeURIComponent(search)}`),
+        [history]
+    );
 
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmit}>

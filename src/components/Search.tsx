@@ -47,7 +47,7 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
         setState({ searching: true, users: [] });
         const users = await apiCallAsync<PartialUser.UserForCard[]>(
             HttpMethodTypes.GET,
-            `/Search/Query?query=${query}`
+            `/Search/Query?query=${encodeURIComponent(query)}`
         );
         setState({ users, searching: false });
     }, [setState, query]);
