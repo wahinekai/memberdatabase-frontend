@@ -12,6 +12,7 @@ import InputArray from './InputArray';
 import Label from './Label';
 import PhoneNumber from './PhoneNumber';
 import RegionPickerField from './RegionPickerField';
+import SearchBar from './SearchBar';
 import Select from './Select';
 import TextArea from './TextArea';
 
@@ -26,6 +27,7 @@ export {
     Label,
     PhoneNumber,
     RegionPickerField,
+    SearchBar,
     Select,
     TextArea,
 };

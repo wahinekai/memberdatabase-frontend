@@ -2,15 +2,15 @@
  * @file Definition of form for home screen
  */
 
-import { Form, Formik } from 'formik';
 import React, { FC, useCallback } from 'react';
+import { Form, Formik } from 'formik';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
-import { Input } from './Forms';
+import { SearchBar } from './Forms';
 import { TextCenter } from './Style';
 
 /**
@@ -20,6 +20,7 @@ import { TextCenter } from './Style';
  */
 const HomeForm: FC = () => {
     const history = useHistory();
+    // const { setFieldValue } = useFormikContext();
 
     const initialValues = {
         search: '',
@@ -35,7 +36,7 @@ const HomeForm: FC = () => {
             <Container>
                 <Form>
                     <Row>
-                        <Input name="search" placeholder="Search for a user..." />
+                        <SearchBar name="search" placeholder="Search for a user..." />
                     </Row>
                     <Row>
                         <Col>
