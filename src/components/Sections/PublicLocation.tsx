@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { CountryPickerField, FormField, RegionPickerField } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form
@@ -23,6 +23,11 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
         errors,
     } = useFormikContext<PartialUser.IPublicLocation>();
 
+    const region = 'region';
+    const postalCode = 'postalCode';
+    const city = 'city';
+    const countryFieldName = 'country';
+
     // Show region field only if country is picked
     let regionField = null;
 
@@ -31,10 +36,10 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.region}
-                    touched={touched.region}
-                    name="region"
-                    label={'Region'}
+                    error={errors[region]}
+                    touched={touched[region]}
+                    name={region}
+                    label={userFieldLabels[region]}
                     inputComponent={RegionPickerField}
                     country={country}
                 />
@@ -45,25 +50,31 @@ const PublicLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
     return (
         <>
             <Col>
-                <FormField disabled={disabled} error={errors.city} touched={touched.city} name="city" label="City" />
+                <FormField
+                    disabled={disabled}
+                    error={errors[city]}
+                    touched={touched[city]}
+                    name={city}
+                    label={userFieldLabels[city]}
+                />
             </Col>
             {regionField}
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.postalCode}
-                    touched={touched.postalCode}
-                    name="postalCode"
-                    label="Postal (ZIP) Code"
+                    error={errors[postalCode]}
+                    touched={touched[postalCode]}
+                    name={postalCode}
+                    label={userFieldLabels[postalCode]}
                 />
             </Col>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.country}
-                    touched={touched.country}
-                    name="country"
-                    label="Country"
+                    error={errors[countryFieldName]}
+                    touched={touched[countryFieldName]}
+                    name={countryFieldName}
+                    label={userFieldLabels[countryFieldName]}
                     inputComponent={CountryPickerField}
                 />
             </Col>

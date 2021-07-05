@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import { useFormikContext } from 'formik';
 import differenceInYears from 'date-fns/differenceInYears';
 
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 import { DatePickerField, FormField } from '../Forms';
 import { InputComponent } from '../../model/PropTypes';
 
@@ -31,14 +31,17 @@ const Birthdate: FC<PropTypes.Section> = ({ disabled = false }) => {
         [birthdate]
     );
 
+    const age = 'age';
+    const birthdateName = 'birthdate';
+
     // eslint-disable-next-line jsdoc/require-jsdoc
-    const ageComponent: FC<InputComponent> = () => <FormControl disabled={true} name="age" value={ageCallback()} />;
+    const ageComponent: FC<InputComponent> = () => <FormControl disabled={true} name={age} value={ageCallback()} />;
 
     const ageField = birthdate ? (
         <Col>
             <FormField
                 label="Current Age"
-                name="age"
+                name={age}
                 helpText="Calculated automatically from birthdate"
                 inputComponent={ageComponent}
             />
@@ -50,11 +53,11 @@ const Birthdate: FC<PropTypes.Section> = ({ disabled = false }) => {
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.birthdate}
-                    touched={touched.birthdate}
+                    error={errors[birthdateName]}
+                    touched={touched[birthdateName]}
                     inputComponent={DatePickerField}
-                    name="birthdate"
-                    label="Birthday"
+                    name={birthdateName}
+                    label={userFieldLabels[birthdateName]}
                 />
             </Col>
             {ageField}

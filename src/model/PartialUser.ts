@@ -87,3 +87,52 @@ export type UserForCard = IId & {
     chapter?: Chapter;
     positions: IPositionInformation[];
 };
+
+type userFieldLabelsType = {
+    [key: string]: string;
+};
+
+export const userFieldLabels: userFieldLabelsType = {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    facebookName: 'Facebook Name',
+    payPalName: 'PayPal Name',
+    email: 'Email',
+    phoneNumber: 'Phone Number',
+    status: 'Member Status',
+    chapter: 'Chapter',
+    joinedDate: 'Joined Date',
+    renewalDate: 'Renewal Date',
+    terminatedDate: 'Terminated Date',
+    birthdate: 'Birthday',
+    age: 'Age',
+    streetAddress: 'Street Address',
+    city: 'City',
+    region: 'Region',
+    postalCode: 'Postal (ZIP) Code',
+    country: 'Country',
+    level: 'Surfer Level',
+    startedSurfing: 'Started Surfing Date',
+    boards: 'Surfboards',
+    surfSpots: 'Surf Spots', // Not the same in form
+    occupation: 'Occupation',
+    admin: 'Is this member an administrator?',
+    photoUrl: 'Profile Photo', // Not the same in form
+    biography: 'About',
+    positions: 'Positions',
+    enteredInFacebookChapter: 'Entered in Local Facebook Chapter?',
+    enteredInFacebookWki: 'Entered in Facebook WKI?',
+    wonSurfboard: 'Surfboard Won', // Not the same in form
+    dateSurfboardWon: 'Date Surfboard Won', // Not the same in form
+    socialMediaOptOut: 'Opt out of social media?',
+    needsNewMemberBag: 'Does this member need a new member bag?',
+    id: 'User ID',
+};
+
+export const userFields = {
+    allUserFields: Object.keys(userFieldLabels),
+    booleanFields: ['admin', 'wonSurfboard', 'socialMediaOptOut', 'needsNewMemberBag'],
+    dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate'],
+    arrayFields: ['boards', 'surfSpots'],
+    facebookFields: ['enteredInFacebookChapter', 'enteredInFacebookWki'],
+};

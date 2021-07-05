@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form
@@ -18,15 +18,16 @@ import { PartialUser, PropTypes } from '../../model';
  */
 const PrivateLocation: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IPrivateLocation>();
+    const name = 'streetAddress';
 
     return (
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.streetAddress}
-                touched={touched.streetAddress}
-                name="streetAddress"
-                label="Street Address"
+                error={errors[name]}
+                touched={touched[name]}
+                name={name}
+                label={userFieldLabels[name]}
             />
         </Col>
     );

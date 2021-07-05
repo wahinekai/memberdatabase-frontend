@@ -16,6 +16,9 @@ import * as Validation from './Validation';
 import { Settings, GlobalSettings } from './Settings';
 import { MethodTypes as HttpMethodTypes } from './Http';
 
+const userFieldLabels = PartialUser.userFieldLabels;
+const userFields = PartialUser.userFields;
+
 export type {
     Settings,
     IValidatable,
@@ -38,4 +41,6 @@ export {
     PositionInformation,
     Validation,
     User,
+    userFieldLabels,
+    userFields,
 };

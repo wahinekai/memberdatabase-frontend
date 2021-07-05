@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, BooleanRadioField } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form containing the information of a user opting out of services
@@ -18,16 +18,17 @@ import { PartialUser, PropTypes } from '../../model';
  */
 const OptOut: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IOptOut>();
+    const name = 'socialMediaOptOut';
 
     return (
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.socialMediaOptOut}
-                touched={touched.socialMediaOptOut}
+                error={errors[name]}
+                touched={touched[name]}
                 inputComponent={BooleanRadioField}
-                name="socialMediaOptOut"
-                label="Opt out of social media?"
+                name={name}
+                label={userFieldLabels[name]}
             />
         </Col>
     );

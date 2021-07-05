@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import { useFormikContext } from 'formik';
 
 import { FormField, TextArea } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 import ProfilePhoto from './ProfilePhotoWithContainer';
 
 /**
@@ -21,20 +21,27 @@ import ProfilePhoto from './ProfilePhotoWithContainer';
 const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IPublicPersonalInformation>();
 
+    const photoUrl = 'photoUrl';
+    const biography = 'biography';
+    const firstName = 'firstName';
+    const lastName = 'lastName';
+    const facebookName = 'facebookName';
+    const occupation = 'occupation';
+
     return (
         <>
             <Row>
                 <Col>
-                    <ProfilePhoto name="photoUrl" disabled={disabled} />
+                    <ProfilePhoto name={photoUrl} disabled={disabled} />
                 </Col>
                 <Col>
                     <FormField
                         disabled={disabled}
-                        error={errors.biography}
-                        touched={touched.biography}
+                        error={errors[biography]}
+                        touched={touched[biography]}
                         inputComponent={TextArea}
-                        name="biography"
-                        label="About"
+                        name={biography}
+                        label={userFieldLabels[biography]}
                         rows={7}
                     />
                 </Col>
@@ -43,19 +50,19 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
                 <Col>
                     <FormField
                         disabled={disabled}
-                        error={errors.firstName}
-                        touched={touched.firstName}
-                        name="firstName"
-                        label="First Name*"
+                        error={errors[firstName]}
+                        touched={touched[firstName]}
+                        name={firstName}
+                        label={userFieldLabels[firstName] + '*'}
                     />
                 </Col>
                 <Col>
                     <FormField
                         disabled={disabled}
-                        error={errors.lastName}
-                        touched={touched.lastName}
-                        name="lastName"
-                        label="Last Name"
+                        error={errors[lastName]}
+                        touched={touched[lastName]}
+                        name={lastName}
+                        label={userFieldLabels[lastName]}
                     />
                 </Col>
             </Row>
@@ -63,19 +70,19 @@ const PublicPersonalInformationWithRows: FC<PropTypes.Section> = ({ disabled = f
                 <Col>
                     <FormField
                         disabled={disabled}
-                        error={errors.facebookName}
-                        touched={touched.facebookName}
-                        name="facebookName"
-                        label="Facebook Name"
+                        error={errors[facebookName]}
+                        touched={touched[facebookName]}
+                        name={facebookName}
+                        label={userFieldLabels[facebookName]}
                     />
                 </Col>
                 <Col>
                     <FormField
                         disabled={disabled}
-                        error={errors.occupation}
-                        touched={touched.occupation}
-                        name="occupation"
-                        label="Occupation"
+                        error={errors[occupation]}
+                        touched={touched[occupation]}
+                        name={occupation}
+                        label={userFieldLabels[occupation]}
                     />
                 </Col>
             </Row>

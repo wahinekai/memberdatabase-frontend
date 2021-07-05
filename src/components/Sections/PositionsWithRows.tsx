@@ -29,9 +29,11 @@ const PositionInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
         errors,
     } = useFormikContext<PartialUser.IPositions>();
 
+    const name = 'positions';
+
     return (
         <FieldArray
-            name="positions"
+            name={name}
             render={(arrayHelpers) => {
                 const array = positions.map((_value, index) => {
                     const error: FormikErrors<IPositionInformation> = errors.positions

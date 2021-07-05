@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
-import { MemberStatus, PartialUser, PropTypes } from '../../model';
+import { MemberStatus, PartialUser, PropTypes, userFieldLabels } from '../../model';
 import { DatePickerField, FormField, Select } from '../Forms';
 
 /**
@@ -23,15 +23,20 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
         errors,
     } = useFormikContext<PartialUser.IActivityInformation>();
 
+    const joinedDate = 'joinedDate';
+    const renewalDate = 'renewalDate';
+    const terminatedDate = 'terminatedDate';
+    const statusFieldName = 'status';
+
     const joinedDateField = (
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.joinedDate}
-                touched={touched.joinedDate}
+                error={errors[joinedDate]}
+                touched={touched[joinedDate]}
                 inputComponent={DatePickerField}
-                name="joinedDate"
-                label="Joined Date*"
+                name={joinedDate}
+                label={userFieldLabels[joinedDate] + '*'}
             />
         </Col>
     );
@@ -39,11 +44,11 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.renewalDate}
-                touched={touched.renewalDate}
+                error={errors[renewalDate]}
+                touched={touched[renewalDate]}
                 inputComponent={DatePickerField}
-                name="renewalDate"
-                label="Renewal Date*"
+                name={renewalDate}
+                label={userFieldLabels[renewalDate] + '*'}
             />
         </Col>
     );
@@ -52,11 +57,11 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.terminatedDate}
-                touched={touched.terminatedDate}
+                error={errors[terminatedDate]}
+                touched={touched[terminatedDate]}
                 inputComponent={DatePickerField}
-                name="terminatedDate"
-                label="Terminated Date*"
+                name={terminatedDate}
+                label={userFieldLabels[terminatedDate] + '*'}
             />
         </Col>
     );
@@ -95,12 +100,12 @@ const ActivityInformation: FC<PropTypes.Section> = ({ disabled = false }) => {
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.status}
-                    touched={touched.status}
+                    error={errors[statusFieldName]}
+                    touched={touched[statusFieldName]}
                     inputComponent={Select}
                     selectType={MemberStatus}
-                    name="status"
-                    label="Member Status*"
+                    name={statusFieldName}
+                    label={userFieldLabels[statusFieldName]}
                 />
             </Col>
             {fields}

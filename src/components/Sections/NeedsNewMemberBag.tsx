@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, BooleanRadioField } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form containing the information of a user needing a new member bag
@@ -18,17 +18,18 @@ import { PartialUser, PropTypes } from '../../model';
  */
 const NeedsNewMemberBag: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.INeedsNewMemberBag>();
+    const name = 'needsNewMemberBag';
 
     return (
         <>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.needsNewMemberBag}
-                    touched={touched.needsNewMemberBag}
+                    error={errors[name]}
+                    touched={touched[name]}
                     inputComponent={BooleanRadioField}
-                    name="needsNewMemberBag"
-                    label="Does this member need a new member bag?"
+                    name={name}
+                    label={userFieldLabels[name]}
                 />
             </Col>
         </>

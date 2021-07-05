@@ -24,28 +24,31 @@ const WonSurfboardInformation: FC<PropTypes.Section> = ({ disabled = false }) =>
         errors,
     } = useFormikContext<PartialUser.IWonSurfboardInformation>();
 
+    const dateWonFieldName = 'dateSurfboardWon';
     const dateWonField = wonSurfboard ? (
         <Col>
             <FormField
                 disabled={disabled}
-                error={errors.dateSurfboardWon}
-                touched={touched.dateSurfboardWon}
+                error={errors[dateWonFieldName]}
+                touched={touched[dateWonFieldName]}
                 inputComponent={DatePickerField}
-                name="dateSurfboardWon"
+                name={dateWonFieldName}
                 label="Date This member Won a Surfboard*"
             />
         </Col>
     ) : null;
+
+    const wonSurfboardFieldName = 'wonSurfboard';
 
     return (
         <>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.wonSurfboard}
-                    touched={touched.wonSurfboard}
+                    error={errors[wonSurfboardFieldName]}
+                    touched={touched[wonSurfboardFieldName]}
                     inputComponent={BooleanRadioField}
-                    name="wonSurfboard"
+                    name={wonSurfboardFieldName}
                     label="Has this member won a surfboard?"
                 />
             </Col>

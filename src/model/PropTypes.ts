@@ -29,10 +29,13 @@ export type UserCard = SearchableUser;
 export type AdminUserRow = AdminUser;
 export type Search = Query;
 export type ProfilePhoto = Name & OptionalError & OptionalTouched & OptionalDisabled;
-export type UsersGrid = RefreshConsumer;
-export type AdminSidebar = RefreshProducer;
+export type UsersGrid = RefreshConsumer & UserFields;
+export type AdminSidebar = RefreshProducer & UserFields & SetUserFields;
 export type UploadCsvModal = RefreshProducer;
 export type DeleteUserModal = Id;
+export type AdminToolsTableHeader = UserFields;
+export type AdminToolsTableUserRow = UserFields & AdminUser & SetUser;
+export type AdminToolsTableUserCell = InputBase & AdminUser;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
@@ -104,6 +107,7 @@ type OptionalDisabled = {
 
 type SelectAdditions = {
     selectType?: Record<string, string>;
+    multiple?: boolean;
 };
 
 type TextAreaAdditions = {
@@ -145,4 +149,16 @@ type OptionalClassname = {
 
 type HTMLFor = {
     htmlFor: string;
+};
+
+type UserFields = {
+    fields: string[];
+};
+
+type SetUserFields = {
+    setUserFields: (fields: string[]) => void;
+};
+
+type SetUser = {
+    setUser: (user: IUser) => void;
 };

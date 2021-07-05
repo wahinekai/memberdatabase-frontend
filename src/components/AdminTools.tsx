@@ -16,7 +16,10 @@ import UsersGrid from './UsersGrid';
  * @returns the Register page
  */
 const AdminTools: FC = () => {
+    const initialUserFields: string[] = ['photoUrl', 'firstName', 'lastName', 'email', 'chapter'];
+
     const [needsRefresh, setNeedsRefresh] = useState(false);
+    const [userFields, setUserFields] = useState(initialUserFields);
 
     const requireRefresh = useCallback(() => setNeedsRefresh(true), [setNeedsRefresh]);
     const clearRefresh = useCallback(() => setNeedsRefresh(false), [setNeedsRefresh]);
@@ -26,10 +29,14 @@ const AdminTools: FC = () => {
             <Container fluid className="mt-2">
                 <Row>
                     <Col xs={3}>
-                        <AdminSidebar requireRefresh={requireRefresh} />
+                        <AdminSidebar
+                            requireRefresh={requireRefresh}
+                            fields={userFields}
+                            setUserFields={setUserFields}
+                        />
                     </Col>
                     <Col xs={9}>
-                        <UsersGrid needsRefresh={needsRefresh} clearRefresh={clearRefresh} />
+                        <UsersGrid needsRefresh={needsRefresh} clearRefresh={clearRefresh} fields={userFields} />
                     </Col>
                 </Row>
             </Container>

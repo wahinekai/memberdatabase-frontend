@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, BooleanRadioField } from '../Forms';
-import { PartialUser, PropTypes } from '../../model';
+import { PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form
@@ -18,16 +18,17 @@ import { PartialUser, PropTypes } from '../../model';
  */
 const Administrator: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IAdministrator>();
+    const name = 'admin';
 
     return (
         <>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.admin}
-                    touched={touched.admin}
-                    name="admin"
-                    label="Is this member an administrator?"
+                    error={errors[name]}
+                    touched={touched[name]}
+                    name={name}
+                    label={userFieldLabels[name]}
                     inputComponent={BooleanRadioField}
                     helpText="An administrator can view & edit any user"
                 />

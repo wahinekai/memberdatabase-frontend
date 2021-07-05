@@ -5,10 +5,23 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Guid } from 'guid-typescript';
-import { useHistory } from 'react-router-dom';
+import { plainToClass } from 'class-transformer';
 
-import { HttpMethodTypes, IUser, PropTypes } from '../model';
-import { apiCallAsync } from '../utils';
+import { HttpMethodTypes, IUser, PropTypes, User } from '../model';
+import { apiCallAsync, Ensure } from '../utils';
+
+import AdminToolsTableHeader from './AdminToolsTableHeader';
+import AdminToolsTableUserRow from './AdminToolsTableUserRow';
+
+/**
+ * Update the user in the database and return the updated user.
+ *
+ * @param id - The id of the user to get from the database
+ * @param updatedUserObject The updated to user to add to the database
+ * @returns The updated user from the database
+ */
+const updateByIdAsync = (id: Guid, updatedUserObject: IUser): Promise<IUser> =>
+    apiCallAsync<IUser>(HttpMethodTypes.PUT, `/Users/Id/${id.toString()}`, updatedUserObject);
 
 /**
  * Gets all users from the backend
@@ -23,11 +36,10 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
  * @param props - Properties passed down from parents to children
  * @param props.needsRefresh - Whether a refresh is required
  * @param props.clearRefresh - Clears whether a refresh is required
+ * @param props.fields - The list of user fields to display
  * @returns A list of user cards in a container
  */
-const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
-    const history = useHistory();
-
+const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields }) => {
     const [users, setUsers] = useState<IUser[]>();
 
     const getAllCallbackAsync = useCallback(async () => {
@@ -41,26 +53,33 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
         getAllCallbackAsync();
     }, [getAllCallbackAsync]);
 
+    const setUser = useCallback(
+        async (id: Guid | undefined, userData: IUser) => {
+            // Validate User
+            const updatedUser = plainToClass(User, userData);
+            updatedUser.validate();
+
+            // Update user in frontend
+            const idNotNull = Ensure.isNotNull(() => updatedUser.id);
+            const userFromBackend = await updateByIdAsync(idNotNull, updatedUser);
+
+            // Set user from backendd in state
+            setUsers(users?.map((user) => (user.id !== id ? user : userFromBackend)));
+        },
+        [setUsers, users]
+    );
+
     if (needsRefresh) {
         getAllCallbackAsync();
     }
 
-    const onClick = useCallback((id?: Guid) => history.push(`/users/${id}`), [history]);
-
     const rowsMaybeNull = users?.map((user, key) => (
-        <tr key={key} onClick={() => onClick(user.id)}>
-            <td>{`${user.firstName ?? ''} ${user.lastName ?? ''}`}</td>
-            <td>{user.chapter ?? ''}</td>
-            <td>{user.email ?? ''}</td>
-            <td>{user.status}</td>
-            <td>{user.admin ? 'Yes' : 'No'}</td>
-            <td>
-                {user.streetAddress ?? ''}
-                <br />
-                {`${user.city ?? ''}, ${user.region ?? ''} ${user.postalCode ?? ''}`}
-                <br />
-                {user.country ?? ''}
-            </td>
+        <tr key={key}>
+            <AdminToolsTableUserRow
+                fields={fields}
+                user={user}
+                setUser={(updatedUser) => setUser(user.id, updatedUser)}
+            />
         </tr>
     ));
 
@@ -68,16 +87,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh }) => {
 
     return (
         <Table striped hover>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Chapter</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Administrator</th>
-                    <th>Address</th>
-                </tr>
-            </thead>
+            <AdminToolsTableHeader fields={fields} />
             <tbody>{rows}</tbody>
         </Table>
     );

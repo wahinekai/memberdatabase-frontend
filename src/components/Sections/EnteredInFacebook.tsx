@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { useFormikContext } from 'formik';
 
 import { FormField, Select } from '../Forms';
-import { EnteredStatus, PartialUser, PropTypes } from '../../model';
+import { EnteredStatus, PartialUser, PropTypes, userFieldLabels } from '../../model';
 
 /**
  * A section of the edit profile form containing the information of a user being
@@ -19,29 +19,31 @@ import { EnteredStatus, PartialUser, PropTypes } from '../../model';
  */
 const EnteredInFacebook: FC<PropTypes.Section> = ({ disabled = false }) => {
     const { touched, errors } = useFormikContext<PartialUser.IEnteredInFacebook>();
+    const enteredInFacebookChapter = 'enteredInFacebookChapter';
+    const enteredInFacebookWki = 'enteredInFacebookWki';
 
     return (
         <>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.enteredInFacebookChapter}
-                    touched={touched.enteredInFacebookChapter}
+                    error={errors[enteredInFacebookChapter]}
+                    touched={touched[enteredInFacebookChapter]}
                     inputComponent={Select}
                     selectType={EnteredStatus}
-                    name="enteredInFacebookChapter"
-                    label="Entered in Local Facebook Chapter?"
+                    name={enteredInFacebookChapter}
+                    label={userFieldLabels[enteredInFacebookChapter]}
                 />
             </Col>
             <Col>
                 <FormField
                     disabled={disabled}
-                    error={errors.enteredInFacebookWki}
-                    touched={touched.enteredInFacebookWki}
+                    error={errors[enteredInFacebookWki]}
+                    touched={touched[enteredInFacebookWki]}
                     inputComponent={Select}
                     selectType={EnteredStatus}
-                    name="enteredInFacebookWki"
-                    label="Entered in Facebook WKI Chapter?"
+                    name={enteredInFacebookWki}
+                    label={userFieldLabels[enteredInFacebookWki]}
                 />
             </Col>
         </>

@@ -9,6 +9,7 @@ import {
     getExternalFileBlobAsync,
     downloadExternalFileAsync,
 } from './apicall';
+import * as DateUtils from './date';
 import * as Ensure from './ensure';
 import * as Predicates from './predicates';
 import * as Timer from './timer';
@@ -18,6 +19,7 @@ import { usePrevious } from './hooks';
 
 export {
     apiCallAsync,
+    DateUtils,
     downloadFileAsync,
     downloadExternalFileAsync,
     getFileBlobAsync,
