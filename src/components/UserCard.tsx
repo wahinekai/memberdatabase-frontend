@@ -62,7 +62,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
 
     return (
         <TextCenter>
-            <Card>
+            <Card className="my-3">
                 <Card.Img variant="top" src={image} alt="Profile picture" />
                 <Card.Body>
                     <Card.Title>{`${user.firstName} ${user.lastName}`}</Card.Title>

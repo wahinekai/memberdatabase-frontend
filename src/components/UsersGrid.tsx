@@ -12,6 +12,12 @@ import { apiCallAsync, Ensure } from '../utils';
 
 import AdminToolsTableHeader from './AdminToolsTableHeader';
 import AdminToolsTableUserRow from './AdminToolsTableUserRow';
+import PageChooser from './PageChooser';
+
+/**
+ * Number of users shown per page
+ */
+const NUM_USERS_PER_PAGE = 10;
 
 /**
  * Update the user in the database and return the updated user.
@@ -41,6 +47,7 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
  */
 const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields }) => {
     const [users, setUsers] = useState<IUser[]>();
+    const [page, setPage] = useState(0);
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -73,7 +80,13 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         getAllCallbackAsync();
     }
 
-    const rowsMaybeNull = users?.map((user, key) => (
+    // Pagination
+    const numUsers = users?.length ?? 0;
+    const pageCount = Math.ceil(numUsers / NUM_USERS_PER_PAGE);
+    const filteredUsers = users?.slice(page * NUM_USERS_PER_PAGE, page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE);
+
+    // Display
+    const rowsMaybeNull = filteredUsers?.map((user, key) => (
         <tr key={key}>
             <AdminToolsTableUserRow
                 fields={fields}
@@ -84,12 +97,16 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     ));
 
     const rows = rowsMaybeNull ?? null;
+    const pageChooser = pageCount > 1 ? <PageChooser pageCount={pageCount} onChange={setPage} /> : null;
 
     return (
-        <Table striped hover>
-            <AdminToolsTableHeader fields={fields} />
-            <tbody>{rows}</tbody>
-        </Table>
+        <>
+            <Table striped hover>
+                <AdminToolsTableHeader fields={fields} />
+                <tbody>{rows}</tbody>
+            </Table>
+            {pageChooser}
+        </>
     );
 };
 

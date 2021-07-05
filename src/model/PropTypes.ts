@@ -36,6 +36,7 @@ export type DeleteUserModal = Id;
 export type AdminToolsTableHeader = UserFields;
 export type AdminToolsTableUserRow = UserFields & AdminUser & SetUser;
 export type AdminToolsTableUserCell = InputBase & AdminUser;
+export type PageChooser = OnChangeNumber & PageCountAdditions;
 
 // Router Param Types
 export type EditUserPage = OptionalUserIdString;
@@ -161,4 +162,12 @@ type SetUserFields = {
 
 type SetUser = {
     setUser: (user: IUser) => void;
+};
+
+type OnChangeNumber = {
+    onChange: (num: number) => void;
+};
+
+type PageCountAdditions = {
+    pageCount: number;
 };

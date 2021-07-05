@@ -12,6 +12,12 @@ import { HttpMethodTypes, PartialUser, PropTypes } from '../model';
 import { apiCallAsync } from '../utils';
 import UserCard from './UserCard';
 import { TextCenter } from './Style';
+import PageChooser from './PageChooser';
+
+/**
+ * Number of users shown per page
+ */
+const NUM_USERS_PER_PAGE = 20;
 
 /**
  * A Component that displays search feedback text
@@ -39,17 +45,19 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
     type stateType = {
         users: PartialUser.UserForCard[];
         searching: boolean;
+        page: number;
     };
 
-    const [state, setState] = useState<stateType>({ searching: false, users: [] });
+    const [state, setState] = useState<stateType>({ searching: false, users: [], page: 0 });
+    const setPage = useCallback((page: number) => setState({ ...state, page }), [state]);
 
     const search = useCallback(async () => {
-        setState({ searching: true, users: [] });
+        setState({ searching: true, users: [], page: 0 });
         const users = await apiCallAsync<PartialUser.UserForCard[]>(
             HttpMethodTypes.GET,
             `/Search/Query?query=${encodeURIComponent(query)}`
         );
-        setState({ users, searching: false });
+        setState({ users, searching: false, page: 0 });
     }, [setState, query]);
 
     // Update state with newest user on first render
@@ -57,7 +65,15 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
         search();
     }, [search]);
 
-    const usersListMaybeNull = state.users.map((user, i) => (
+    // Pagination
+    const numUsers = state.users?.length ?? 0;
+    const pageCount = Math.ceil(numUsers / NUM_USERS_PER_PAGE);
+    const filteredUsers = state.users?.slice(
+        state.page * NUM_USERS_PER_PAGE,
+        state.page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE
+    );
+
+    const usersListMaybeNull = filteredUsers.map((user, i) => (
         <Col xs={12} sm={12} md={6} lg={4} xl={3} key={i}>
             <UserCard key={i} user={user} />
         </Col>
@@ -72,11 +88,15 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
     );
 
     const usersList = state.users.length > 0 ? usersListMaybeNull : state.searching ? searching : noUsersFound;
+    const pageChooser = pageCount > 1 ? <PageChooser pageCount={pageCount} onChange={setPage} /> : null;
 
     return (
-        <Container>
-            <Row>{usersList}</Row>
-        </Container>
+        <>
+            <Container>
+                <Row>{usersList}</Row>
+            </Container>
+            {pageChooser}
+        </>
     );
 };
 
