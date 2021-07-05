@@ -31,6 +31,7 @@ export enum EnteredStatus {
     Entered = 'Entered',
     Pending = 'Pending',
     NotAccepted = 'Not Accepted',
+    Terminated = 'Terminated',
 }
 
 /**
