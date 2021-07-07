@@ -135,4 +135,5 @@ export const userFields = {
     dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate'],
     arrayFields: ['boards', 'surfSpots'],
     facebookFields: ['enteredInFacebookChapter', 'enteredInFacebookWki'],
+    unsortableProperties: ['boards', 'surfSpots', 'positions', 'photoUrl', 'biography', 'id'],
 };

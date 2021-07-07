@@ -48,6 +48,10 @@ const getAllAsync = (): Promise<IUser[]> => apiCallAsync<IUser[]>(HttpMethodType
 const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields }) => {
     const [users, setUsers] = useState<IUser[]>();
     const [page, setPage] = useState(0);
+    const [sortingInformation, setSortingInformation] = useState<{ field: keyof IUser; ascending: boolean }>({
+        field: 'id',
+        ascending: true,
+    });
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -80,13 +84,27 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         getAllCallbackAsync();
     }
 
+    // Searching
+
+    // Filtering
+
+    // Sorting
+    const sortedUsers = users?.sort((first, second) => {
+        const firstField = first[sortingInformation.field] ?? 0;
+        const secondField = second[sortingInformation.field] ?? 0;
+        const result = firstField <= secondField;
+
+        // Return -1 if result && ascending or !result && !ascending
+        return result === sortingInformation.ascending ? -1 : 1;
+    });
+
     // Pagination
-    const numUsers = users?.length ?? 0;
+    const numUsers = sortedUsers?.length ?? 0;
     const pageCount = Math.ceil(numUsers / NUM_USERS_PER_PAGE);
-    const filteredUsers = users?.slice(page * NUM_USERS_PER_PAGE, page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE);
+    const paginatedUsers = users?.slice(page * NUM_USERS_PER_PAGE, page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE);
 
     // Display
-    const rowsMaybeNull = filteredUsers?.map((user, key) => (
+    const rowsMaybeNull = paginatedUsers?.map((user, key) => (
         <tr key={key}>
             <AdminToolsTableUserRow
                 fields={fields}
@@ -102,7 +120,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     return (
         <>
             <Table striped hover>
-                <AdminToolsTableHeader fields={fields} />
+                <AdminToolsTableHeader fields={fields} setSortingInformation={setSortingInformation} />
                 <tbody>{rows}</tbody>
             </Table>
             {pageChooser}

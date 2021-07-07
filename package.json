@@ -7,6 +7,11 @@
         "url": "https://github.com/wahine-kai/memberdatabase-frontend.git"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-brands-svg-icons": "^5.15.3",
+        "@fortawesome/free-regular-svg-icons": "^5.15.3",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@fortawesome/react-fontawesome": "^0.1.14",
         "@types/jquery": "^3.5.5",
         "@types/node": "^15.12.1",
         "@types/react": "^17.0.9",

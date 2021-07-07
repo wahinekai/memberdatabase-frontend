@@ -6,12 +6,16 @@ import React, { FC, StrictMode } from 'react';
 import AzureAD from 'react-aad-msal';
 import { ErrorBoundary } from 'react-error-boundary';
 import HttpsRedirect from 'react-https-redirect';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 import { MainRouter } from './routers';
 import { ErrorPage } from './pages';
 import { authProvider } from './utils';
 import { ApplicationNavbar } from './components';
 import { IsAdminProvider, UserIdProvider } from './providers';
+
+library.add(faSort, faSortUp, faSortDown);
 
 /**
  * Application entrypoint definition - root of the React DOM tree
