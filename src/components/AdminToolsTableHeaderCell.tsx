@@ -7,17 +7,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC, useState, useCallback } from 'react';
 import { IUser, PropTypes, userFields } from '../model';
 import { userFieldLabels } from '../model/PartialUser';
+import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
 
+/**
 /**
  * Admin Tools Table Header Cell Component
  *
  * @param props - React properties passed down from parents to children
- * @param props.field - User Field for this cell
- * @param props.setSortingInformation - A function that sets the current sorting information
  * @returns the component
  */
-const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = ({ field, setSortingInformation }) => {
-    const fieldAsUserProperty = field as keyof IUser;
+const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (props) => {
+    const fieldAsUserProperty = props.field as keyof IUser;
 
     const [ascending, setSorting] = useState<boolean | null>(null);
 
@@ -25,29 +25,49 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = ({ fi
         const nextState = ascending == null ? true : ascending ? false : null;
 
         if (nextState == null) {
-            setSortingInformation({ field: 'id', ascending: true });
+            props.setSortingInformation({ field: 'id', ascending: true });
         } else {
-            setSortingInformation({ field: fieldAsUserProperty, ascending: nextState });
+            props.setSortingInformation({ field: fieldAsUserProperty, ascending: nextState });
         }
 
         setSorting(nextState);
-    }, [ascending, setSorting, setSortingInformation, fieldAsUserProperty]);
+    }, [ascending, props, fieldAsUserProperty]);
+
+    const onSearch = useCallback(
+        (query: string) => {
+            if (query.length === 0) {
+                props.removeSearch(fieldAsUserProperty);
+            } else {
+                props.search(fieldAsUserProperty, query);
+            }
+        },
+        [props, fieldAsUserProperty]
+    );
 
     const sortIcon: IconProp = ascending == null ? 'sort' : ascending ? 'sort-up' : 'sort-down';
 
     // check if field is sortable
     let sortField = null;
 
-    if (!userFields.unsortableProperties.includes(field)) {
+    if (!userFields.unsortableProperties.includes(props.field)) {
         // Field is sortable, add Sortable property
         sortField = <FontAwesomeIcon icon={sortIcon} className="mx-2" onClick={onClick} />;
+    }
+
+    // Check if field is searchable
+    let searchField = null;
+
+    if (userFields.searchableProperties.includes(props.field)) {
+        // Field is searchable, add searchable property
+        searchField = <AdminToolsTableHeaderSearch onChange={onSearch} />;
     }
 
     return (
         <th>
             <>
-                {userFieldLabels[field]}
+                {userFieldLabels[props.field]}
                 {sortField}
+                {searchField}
             </>
         </th>
     );

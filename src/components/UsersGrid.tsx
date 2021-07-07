@@ -4,6 +4,7 @@
 
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
 import { Guid } from 'guid-typescript';
 import { plainToClass } from 'class-transformer';
 
@@ -13,6 +14,22 @@ import { apiCallAsync, Ensure } from '../utils';
 import AdminToolsTableHeader from './AdminToolsTableHeader';
 import AdminToolsTableUserRow from './AdminToolsTableUserRow';
 import PageChooser from './PageChooser';
+import { TextCenter } from './Style';
+
+/**
+ * A Component that displays Admin Table feedback text
+ *
+ * @param props - Parameters passed down from React parents to children
+ * @param props.children - Children in the React DOM Tree
+ * @returns The containing Components for Search Feedback Text
+ */
+const AdminTableFeedbackComponent: FC = ({ children }) => (
+    <Col>
+        <TextCenter>
+            <h2 className="text-muted font-weight-light pt-3">{children}</h2>
+        </TextCenter>
+    </Col>
+);
 
 /**
  * Number of users shown per page
@@ -52,6 +69,32 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         field: 'id',
         ascending: true,
     });
+    const [searchingInformation, setSearchingInformation] = useState<{ field: keyof IUser; query: string }[]>([]);
+
+    const search = useCallback(
+        (field: keyof IUser, query: string): void => {
+            const index = searchingInformation.findIndex((value) => value.field === field);
+            if (index === -1) {
+                // No search
+                searchingInformation.push({ field, query });
+                setSearchingInformation(searchingInformation);
+            } else {
+                // Remove and add
+                const newSearchingInformation = searchingInformation.filter((value) => value.field !== field);
+                newSearchingInformation.push({ field, query });
+                setSearchingInformation(newSearchingInformation);
+            }
+        },
+        [searchingInformation, setSearchingInformation]
+    );
+
+    const removeSearch = useCallback(
+        (field: keyof IUser) => {
+            const newSearchingInformation = searchingInformation.filter((value) => value.field !== field);
+            setSearchingInformation(newSearchingInformation);
+        },
+        [searchingInformation, setSearchingInformation]
+    );
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -84,12 +127,23 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         getAllCallbackAsync();
     }
 
-    // Searching
+    // Dropdown Filtering
 
-    // Filtering
+    // Date Filtering
+
+    // Searching
+    let searchedUsers = users;
+    // eslint-disable-next-line no-loops/no-loops
+    for (const search of searchingInformation) {
+        const searchableQuery = search.query.toLowerCase();
+        searchedUsers = searchedUsers?.filter((value) => {
+            const stringSearchValue = value[search.field]?.toString().toLowerCase() ?? '';
+            return stringSearchValue.includes(searchableQuery);
+        });
+    }
 
     // Sorting
-    const sortedUsers = users?.sort((first, second) => {
+    const sortedUsers = searchedUsers?.sort((first, second) => {
         const firstField = first[sortingInformation.field] ?? 0;
         const secondField = second[sortingInformation.field] ?? 0;
         const result = firstField <= secondField;
@@ -101,7 +155,10 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     // Pagination
     const numUsers = sortedUsers?.length ?? 0;
     const pageCount = Math.ceil(numUsers / NUM_USERS_PER_PAGE);
-    const paginatedUsers = users?.slice(page * NUM_USERS_PER_PAGE, page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE);
+    const paginatedUsers = sortedUsers?.slice(
+        page * NUM_USERS_PER_PAGE,
+        page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE
+    );
 
     // Display
     const rowsMaybeNull = paginatedUsers?.map((user, key) => (
@@ -117,12 +174,26 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     const rows = rowsMaybeNull ?? null;
     const pageChooser = pageCount > 1 ? <PageChooser pageCount={pageCount} onChange={setPage} /> : null;
 
+    // Add no users found
+    const underTable =
+        rows === null ? (
+            <AdminTableFeedbackComponent>Searching</AdminTableFeedbackComponent>
+        ) : rows.length === 0 ? (
+            <AdminTableFeedbackComponent>No Users Found</AdminTableFeedbackComponent>
+        ) : null;
+
     return (
         <>
             <Table striped hover>
-                <AdminToolsTableHeader fields={fields} setSortingInformation={setSortingInformation} />
+                <AdminToolsTableHeader
+                    fields={fields}
+                    setSortingInformation={setSortingInformation}
+                    search={search}
+                    removeSearch={removeSearch}
+                />
                 <tbody>{rows}</tbody>
             </Table>
+            {underTable}
             {pageChooser}
         </>
     );

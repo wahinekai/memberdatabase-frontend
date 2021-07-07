@@ -33,8 +33,9 @@ export type UsersGrid = RefreshConsumer & UserFields;
 export type AdminSidebar = RefreshProducer & UserFields & SetUserFields;
 export type UploadCsvModal = RefreshProducer;
 export type DeleteUserModal = Id;
-export type AdminToolsTableHeader = UserFields & SetSortingInformation;
-export type AdminToolsTableHeaderCell = UserField & SetSortingInformation;
+export type AdminToolsTableHeader = UserFields & SetSortingInformation & EditSearchInformation;
+export type AdminToolsTableHeaderCell = UserField & SetSortingInformation & EditSearchInformation;
+export type AdminToolsTableHeaderSearch = OnChangeString;
 export type AdminToolsTableUserRow = UserFields & AdminUser & SetUser;
 export type AdminToolsTableUserCell = InputBase & AdminUser;
 export type PageChooser = OnChangeNumber & PageCountAdditions;
@@ -173,10 +174,19 @@ type OnChangeNumber = {
     onChange: (num: number) => void;
 };
 
+type OnChangeString = {
+    onChange: (str: string) => void;
+};
+
 type PageCountAdditions = {
     pageCount: number;
 };
 
 type SetSortingInformation = {
     setSortingInformation: (state: { field: keyof IUser; ascending: boolean }) => void;
+};
+
+type EditSearchInformation = {
+    search: (field: keyof IUser, query: string) => void;
+    removeSearch: (field: keyof IUser) => void;
 };
