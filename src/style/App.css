@@ -1,0 +1,4 @@
+/* Send dropdown content to the front */
+.dropdown-content {
+    z-index: 999 !important;
+}

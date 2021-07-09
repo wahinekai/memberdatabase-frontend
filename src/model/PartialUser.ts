@@ -132,7 +132,7 @@ export const userFieldLabels: userFieldLabelsType = {
 export const userFields = {
     allUserFields: Object.keys(userFieldLabels),
     booleanFields: ['admin', 'wonSurfboard', 'socialMediaOptOut', 'needsNewMemberBag'],
-    dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate'],
+    dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate', 'dateSurfboardWon'],
     arrayFields: ['boards', 'surfSpots'],
     facebookFields: ['enteredInFacebookChapter', 'enteredInFacebookWki'],
     unsortableProperties: ['boards', 'surfSpots', 'positions', 'photoUrl', 'biography', 'id'],
@@ -151,4 +151,5 @@ export const userFields = {
         'surfSpots',
         'occupation',
     ],
+    numberFilterableProperties: ['age'],
 };

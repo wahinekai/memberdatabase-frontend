@@ -1,3 +1,4 @@
+/* eslint-disable no-loops/no-loops */
 /**
  * @file Lists all members of Wahine Kai as a UserCard
  */
@@ -10,6 +11,7 @@ import { plainToClass } from 'class-transformer';
 
 import { HttpMethodTypes, IUser, PropTypes, User } from '../model';
 import { apiCallAsync, Ensure } from '../utils';
+import { useFilterType } from '../hooks';
 
 import AdminToolsTableHeader from './AdminToolsTableHeader';
 import AdminToolsTableUserRow from './AdminToolsTableUserRow';
@@ -69,32 +71,8 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         field: 'id',
         ascending: true,
     });
-    const [searchingInformation, setSearchingInformation] = useState<{ field: keyof IUser; query: string }[]>([]);
-
-    const search = useCallback(
-        (field: keyof IUser, query: string): void => {
-            const index = searchingInformation.findIndex((value) => value.field === field);
-            if (index === -1) {
-                // No search
-                searchingInformation.push({ field, query });
-                setSearchingInformation(searchingInformation);
-            } else {
-                // Remove and add
-                const newSearchingInformation = searchingInformation.filter((value) => value.field !== field);
-                newSearchingInformation.push({ field, query });
-                setSearchingInformation(newSearchingInformation);
-            }
-        },
-        [searchingInformation, setSearchingInformation]
-    );
-
-    const removeSearch = useCallback(
-        (field: keyof IUser) => {
-            const newSearchingInformation = searchingInformation.filter((value) => value.field !== field);
-            setSearchingInformation(newSearchingInformation);
-        },
-        [searchingInformation, setSearchingInformation]
-    );
+    const [searchingInformation, search, removeSearch] = useFilterType<string>();
+    const [booleanFilters, addOrEditBooleanFilters, removeBooleanFilters] = useFilterType<boolean[]>();
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -127,15 +105,25 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         getAllCallbackAsync();
     }
 
-    // Dropdown Filtering
+    // Boolean Dropdown Filtering
+    let filteredUsers = users;
 
-    // Date Filtering
+    for (const filter of booleanFilters) {
+        filteredUsers = filteredUsers?.filter((value) => {
+            const searchValue = value[filter.field];
+            if (!(typeof searchValue === 'boolean')) {
+                // This should only be applied to boolean filters - so don't do anything if it isn't
+                return true;
+            }
+            return filter.value.includes(searchValue);
+        });
+    }
 
     // Searching
-    let searchedUsers = users;
-    // eslint-disable-next-line no-loops/no-loops
+    let searchedUsers = filteredUsers;
+
     for (const search of searchingInformation) {
-        const searchableQuery = search.query.toLowerCase();
+        const searchableQuery = search.value.toLowerCase();
         searchedUsers = searchedUsers?.filter((value) => {
             const stringSearchValue = value[search.field]?.toString().toLowerCase() ?? '';
             return stringSearchValue.includes(searchableQuery);
@@ -177,7 +165,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     // Add no users found
     const underTable =
         rows === null ? (
-            <AdminTableFeedbackComponent>Searching</AdminTableFeedbackComponent>
+            <AdminTableFeedbackComponent>Loading</AdminTableFeedbackComponent>
         ) : rows.length === 0 ? (
             <AdminTableFeedbackComponent>No Users Found</AdminTableFeedbackComponent>
         ) : null;
@@ -190,6 +178,8 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
                     setSortingInformation={setSortingInformation}
                     search={search}
                     removeSearch={removeSearch}
+                    addOrEditBooleanFilters={addOrEditBooleanFilters}
+                    removeBooleanFilters={removeBooleanFilters}
                 />
                 <tbody>{rows}</tbody>
             </Table>

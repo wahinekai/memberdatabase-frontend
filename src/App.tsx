@@ -15,6 +15,8 @@ import { authProvider } from './utils';
 import { ApplicationNavbar } from './components';
 import { IsAdminProvider, UserIdProvider } from './providers';
 
+import './style/App.css';
+
 library.add(faSort, faSortUp, faSortDown, faSearch);
 
 /**

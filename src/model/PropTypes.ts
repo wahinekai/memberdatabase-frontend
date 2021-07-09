@@ -33,9 +33,10 @@ export type UsersGrid = RefreshConsumer & UserFields;
 export type AdminSidebar = RefreshProducer & UserFields & SetUserFields;
 export type UploadCsvModal = RefreshProducer;
 export type DeleteUserModal = Id;
-export type AdminToolsTableHeader = UserFields & SetSortingInformation & EditSearchInformation;
-export type AdminToolsTableHeaderCell = UserField & SetSortingInformation & EditSearchInformation;
+export type AdminToolsTableHeader = UserFields & SetSortingInformation & EditSearchInformation & BooleanFilters;
+export type AdminToolsTableHeaderCell = UserField & SetSortingInformation & EditSearchInformation & BooleanFilters;
 export type AdminToolsTableHeaderSearch = OnChangeString;
+export type AdminToolsTableHeaderFilterBoolean = OnChangeBooleanArray;
 export type AdminToolsTableUserRow = UserFields & AdminUser & SetUser;
 export type AdminToolsTableUserCell = InputBase & AdminUser;
 export type PageChooser = OnChangeNumber & PageCountAdditions;
@@ -178,6 +179,10 @@ type OnChangeString = {
     onChange: (str: string) => void;
 };
 
+type OnChangeBooleanArray = {
+    onChange: (arr: boolean[]) => void;
+};
+
 type PageCountAdditions = {
     pageCount: number;
 };
@@ -187,6 +192,11 @@ type SetSortingInformation = {
 };
 
 type EditSearchInformation = {
-    search: (field: keyof IUser, query: string) => void;
+    search: (field: keyof IUser, value: string) => void;
     removeSearch: (field: keyof IUser) => void;
+};
+
+type BooleanFilters = {
+    addOrEditBooleanFilters: (field: keyof IUser, value: boolean[]) => void;
+    removeBooleanFilters: (field: keyof IUser) => void;
 };

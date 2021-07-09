@@ -20,6 +20,8 @@ const AdminToolsTableHeader: FC<PropTypes.AdminToolsTableHeader> = (props) => {
             setSortingInformation={props.setSortingInformation}
             search={props.search}
             removeSearch={props.removeSearch}
+            addOrEditBooleanFilters={props.addOrEditBooleanFilters}
+            removeBooleanFilters={props.removeBooleanFilters}
         />
     ));
 

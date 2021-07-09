@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC, useState, useCallback } from 'react';
 import { IUser, PropTypes, userFields } from '../model';
 import { userFieldLabels } from '../model/PartialUser';
+import AdminToolsTableHeaderFilterBoolean from './AdminToolsTableHeaderFilterBoolean';
 import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
 
 /**
@@ -44,6 +45,19 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
         [props, fieldAsUserProperty]
     );
 
+    const onFilterBoolean = useCallback(
+        (values: boolean[]) => {
+            if (values.length === 0) {
+                // Remove filter
+                props.removeBooleanFilters(fieldAsUserProperty);
+            } else {
+                // Filter
+                props.addOrEditBooleanFilters(fieldAsUserProperty, values);
+            }
+        },
+        [fieldAsUserProperty, props]
+    );
+
     const sortIcon: IconProp = ascending == null ? 'sort' : ascending ? 'sort-up' : 'sort-down';
 
     // check if field is sortable
@@ -60,6 +74,9 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
     if (userFields.searchableProperties.includes(props.field)) {
         // Field is searchable, add searchable property
         searchField = <AdminToolsTableHeaderSearch onChange={onSearch} />;
+    } else if (userFields.booleanFields.includes(props.field)) {
+        // Field is filterable as a boolean
+        searchField = <AdminToolsTableHeaderFilterBoolean onChange={onFilterBoolean} />;
     }
 
     return (
