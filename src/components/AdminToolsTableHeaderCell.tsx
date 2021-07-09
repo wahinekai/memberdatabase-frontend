@@ -8,6 +8,7 @@ import React, { FC, useState, useCallback } from 'react';
 import { IUser, PropTypes, userFields } from '../model';
 import { userFieldLabels } from '../model/PartialUser';
 import AdminToolsTableHeaderFilterBoolean from './AdminToolsTableHeaderFilterBoolean';
+import AdminToolsTableHeaderFilterEnum from './AdminToolsTableHeaderFilterEnum';
 import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
 
 /**
@@ -45,14 +46,14 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
         [props, fieldAsUserProperty]
     );
 
-    const onFilterBoolean = useCallback(
-        (values: boolean[]) => {
+    const onFilter = useCallback(
+        (values: boolean[] | string[]) => {
             if (values.length === 0) {
                 // Remove filter
-                props.removeBooleanFilters(fieldAsUserProperty);
+                props.removeFilters(fieldAsUserProperty);
             } else {
                 // Filter
-                props.addOrEditBooleanFilters(fieldAsUserProperty, values);
+                props.addOrEditFilters(fieldAsUserProperty, values);
             }
         },
         [fieldAsUserProperty, props]
@@ -76,7 +77,11 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
         searchField = <AdminToolsTableHeaderSearch onChange={onSearch} />;
     } else if (userFields.booleanFields.includes(props.field)) {
         // Field is filterable as a boolean
-        searchField = <AdminToolsTableHeaderFilterBoolean onChange={onFilterBoolean} />;
+        searchField = <AdminToolsTableHeaderFilterBoolean onChange={onFilter} />;
+    } else if (Object.keys(userFields.enumProperties).includes(props.field)) {
+        searchField = (
+            <AdminToolsTableHeaderFilterEnum onChange={onFilter} enumType={userFields.enumProperties[props.field]} />
+        );
     }
 
     return (

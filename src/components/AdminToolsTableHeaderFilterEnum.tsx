@@ -13,26 +13,20 @@ import { PropTypes } from '../model';
  *
  * @param props - React properties passed down from parents to children
  * @param props.onChange - Change function called when the search is changed
+ * @param props.enumType - The type of enum to be used for this dropdown
  * @returns the component
  */
-const AdminToolsTableHeaderFilterBoolean: FC<PropTypes.AdminToolsTableHeaderFilterBoolean> = ({
+const AdminToolsTableHeaderFilterEnum: FC<PropTypes.AdminToolsTableHeaderFilterEnum> = ({
     onChange: onChangeProp,
+    enumType,
 }) => {
-    const options = [
-        {
-            label: 'Yes',
-            value: true,
-        },
-        {
-            label: 'No',
-            value: false,
-        },
-    ];
+    // Value & label are both value
+    const options = Object.values(enumType).map((value) => ({ label: value, value }));
     const [visible, setVisible] = useState<boolean>(false);
     const [values, setValues] = useState<Option[]>([]);
 
     const onChangeLocal = useCallback(
-        (values: { label: string; value: boolean }[]) => {
+        (values: { label: string; value: string }[]) => {
             setValues(values);
             onChangeProp(values.map((v) => v.value));
         },
@@ -60,4 +54,4 @@ const AdminToolsTableHeaderFilterBoolean: FC<PropTypes.AdminToolsTableHeaderFilt
     );
 };
 
-export default AdminToolsTableHeaderFilterBoolean;
+export default AdminToolsTableHeaderFilterEnum;

@@ -129,7 +129,19 @@ export const userFieldLabels: userFieldLabelsType = {
     id: 'User ID',
 };
 
-export const userFields = {
+type userFieldsType = {
+    allUserFields: string[];
+    booleanFields: string[];
+    dateFields: string[];
+    facebookFields: string[];
+    unsortableProperties: string[];
+    searchableProperties: string[];
+    arrayFields: string[];
+    numberFilterableProperties: string[];
+    enumProperties: { [key: string]: Record<string, string> };
+};
+
+export const userFields: userFieldsType = {
     allUserFields: Object.keys(userFieldLabels),
     booleanFields: ['admin', 'wonSurfboard', 'socialMediaOptOut', 'needsNewMemberBag'],
     dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate', 'dateSurfboardWon'],
@@ -152,4 +164,11 @@ export const userFields = {
         'occupation',
     ],
     numberFilterableProperties: ['age'],
+    enumProperties: {
+        enteredInFacebookChapter: EnteredStatus,
+        enteredInFacebookWki: EnteredStatus,
+        status: MemberStatus,
+        chapter: Chapter,
+        level: Level,
+    },
 };

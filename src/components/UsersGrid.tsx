@@ -72,7 +72,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         ascending: true,
     });
     const [searchingInformation, search, removeSearch] = useFilterType<string>();
-    const [booleanFilters, addOrEditBooleanFilters, removeBooleanFilters] = useFilterType<boolean[]>();
+    const [filters, addOrEditFilters, removeFilters] = useFilterType<boolean[] | string[]>();
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -105,16 +105,20 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
         getAllCallbackAsync();
     }
 
-    // Boolean Dropdown Filtering
+    // Dropdown Filtering
     let filteredUsers = users;
 
-    for (const filter of booleanFilters) {
+    for (const filter of filters) {
         filteredUsers = filteredUsers?.filter((value) => {
-            const searchValue = value[filter.field];
-            if (!(typeof searchValue === 'boolean')) {
-                // This should only be applied to boolean filters - so don't do anything if it isn't
+            // Set to never so that it can be checked for inclusion
+            const searchValue = value[filter.field] as never;
+            // Check that filters have length and check that array types match (check first element of array)
+            if (filter.value.length === 0 || typeof filter.value[0] !== typeof searchValue) {
+                // If can't be filtered - just return true
                 return true;
             }
+
+            // Return true iff searchValue is one of the filteredValues
             return filter.value.includes(searchValue);
         });
     }
@@ -178,8 +182,8 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
                     setSortingInformation={setSortingInformation}
                     search={search}
                     removeSearch={removeSearch}
-                    addOrEditBooleanFilters={addOrEditBooleanFilters}
-                    removeBooleanFilters={removeBooleanFilters}
+                    addOrEditFilters={addOrEditFilters}
+                    removeFilters={removeFilters}
                 />
                 <tbody>{rows}</tbody>
             </Table>
