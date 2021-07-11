@@ -144,7 +144,7 @@ type userFieldsType = {
 export const userFields: userFieldsType = {
     allUserFields: Object.keys(userFieldLabels),
     booleanFields: ['admin', 'wonSurfboard', 'socialMediaOptOut', 'needsNewMemberBag'],
-    dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate', 'dateSurfboardWon'],
+    dateFields: ['joinedDate', 'renewalDate', 'terminatedDate', 'birthdate', 'dateSurfboardWon', 'startedSurfingDate'],
     arrayFields: ['boards', 'surfSpots'],
     facebookFields: ['enteredInFacebookChapter', 'enteredInFacebookWki'],
     unsortableProperties: ['boards', 'surfSpots', 'positions', 'photoUrl', 'biography', 'id'],
