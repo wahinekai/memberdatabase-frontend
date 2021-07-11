@@ -3,8 +3,8 @@
  */
 
 import React, { FC } from 'react';
-import { PropTypes } from '../model';
-import AdminToolsTableHeaderCell from './AdminToolsTableHeaderCell';
+import { PropTypes } from '../../model';
+import TableHeaderCell from './TableHeaderCell';
 
 /**
  * Admin Tools Table Header Component
@@ -12,9 +12,9 @@ import AdminToolsTableHeaderCell from './AdminToolsTableHeaderCell';
  * @param props - React properties passed down from parents to children
  * @returns the component
  */
-const AdminToolsTableHeader: FC<PropTypes.AdminToolsTableHeader> = (props) => {
+const TableHeader: FC<PropTypes.AdminToolsTableHeader> = (props) => {
     const headers = props.fields.map((field, key) => (
-        <AdminToolsTableHeaderCell
+        <TableHeaderCell
             key={key}
             field={field}
             setSortingInformation={props.setSortingInformation}
@@ -36,4 +36,4 @@ const AdminToolsTableHeader: FC<PropTypes.AdminToolsTableHeader> = (props) => {
     );
 };
 
-export default AdminToolsTableHeader;
+export default TableHeader;

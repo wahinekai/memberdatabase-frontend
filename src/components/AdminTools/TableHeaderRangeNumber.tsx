@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { PropTypes } from '../model';
+import { PropTypes } from '../../model';
 
 /**
  * Admin Tools Table Header Number Range Component
@@ -19,9 +19,7 @@ import { PropTypes } from '../model';
  * @param props.onChange - Change function called when the search is changed
  * @returns the component
  */
-const AdminToolsTableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRangeNumber> = ({
-    onChange: onChangeProp,
-}) => {
+const TableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRangeNumber> = ({ onChange: onChangeProp }) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [[first, second], setState] = useState<[number, number]>([Number.MIN_VALUE, Number.MAX_VALUE]);
 
@@ -98,4 +96,4 @@ const AdminToolsTableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRangeN
     );
 };
 
-export default AdminToolsTableHeaderRangeNumber;
+export default TableHeaderRangeNumber;

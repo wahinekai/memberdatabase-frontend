@@ -5,12 +5,12 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC, useState, useCallback } from 'react';
-import { IUser, PropTypes, userFields } from '../model';
-import { userFieldLabels } from '../model/PartialUser';
-import AdminToolsTableHeaderFilterBoolean from './AdminToolsTableHeaderFilterBoolean';
-import AdminToolsTableHeaderFilterEnum from './AdminToolsTableHeaderFilterEnum';
-import AdminToolsTableHeaderRangeNumber from './AdminToolsTableHeaderRangeNumber';
-import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
+import { IUser, PropTypes, userFields } from '../../model';
+import { userFieldLabels } from '../../model/PartialUser';
+import TableHeaderRangeNumber from './TableHeaderRangeNumber';
+import TableHeaderSearch from './TableHeaderSearch';
+import TableHeaderFilterBoolean from './TableHeaderFilterBoolean';
+import TableHeaderFilterEnum from './TableHeaderFilterEnum';
 
 /**
 /**
@@ -19,7 +19,7 @@ import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
  * @param props - React properties passed down from parents to children
  * @returns the component
  */
-const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (props) => {
+const TableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (props) => {
     const fieldAsUserProperty = props.field as keyof IUser;
 
     const [ascending, setSorting] = useState<boolean | null>(null);
@@ -86,16 +86,14 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
 
     if (userFields.searchableProperties.includes(props.field)) {
         // Field is searchable, add searchable property
-        searchField = <AdminToolsTableHeaderSearch onChange={onSearch} />;
+        searchField = <TableHeaderSearch onChange={onSearch} />;
     } else if (userFields.booleanFields.includes(props.field)) {
         // Field is filterable as a boolean
-        searchField = <AdminToolsTableHeaderFilterBoolean onChange={onFilter} />;
+        searchField = <TableHeaderFilterBoolean onChange={onFilter} />;
     } else if (Object.keys(userFields.enumProperties).includes(props.field)) {
-        searchField = (
-            <AdminToolsTableHeaderFilterEnum onChange={onFilter} enumType={userFields.enumProperties[props.field]} />
-        );
+        searchField = <TableHeaderFilterEnum onChange={onFilter} enumType={userFields.enumProperties[props.field]} />;
     } else if (userFields.numberFilterableProperties.includes(props.field)) {
-        searchField = <AdminToolsTableHeaderRangeNumber onChange={onChangeRange} />;
+        searchField = <TableHeaderRangeNumber onChange={onChangeRange} />;
     }
 
     return (
@@ -109,4 +107,4 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
     );
 };
 
-export default AdminToolsTableHeaderCell;
+export default TableHeaderCell;

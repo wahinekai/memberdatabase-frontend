@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import AdminSidebar from './AdminSidebar';
+import Sidebar from './Sidebar';
 import UsersGrid from './UsersGrid';
 
 /**
@@ -29,11 +29,7 @@ const AdminTools: FC = () => {
             <Container fluid className="mt-2">
                 <Row>
                     <Col xs={3}>
-                        <AdminSidebar
-                            requireRefresh={requireRefresh}
-                            fields={userFields}
-                            setUserFields={setUserFields}
-                        />
+                        <Sidebar requireRefresh={requireRefresh} fields={userFields} setUserFields={setUserFields} />
                     </Col>
                     <Col xs={9}>
                         <UsersGrid needsRefresh={needsRefresh} clearRefresh={clearRefresh} fields={userFields} />

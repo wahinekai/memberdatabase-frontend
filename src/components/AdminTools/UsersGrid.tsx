@@ -9,14 +9,14 @@ import Col from 'react-bootstrap/Col';
 import { Guid } from 'guid-typescript';
 import { plainToClass } from 'class-transformer';
 
-import { HttpMethodTypes, IUser, PropTypes, User } from '../model';
-import { apiCallAsync, Ensure } from '../utils';
-import { useFilterType } from '../hooks';
+import { HttpMethodTypes, IUser, PropTypes, User } from '../../model';
+import { apiCallAsync, Ensure } from '../../utils';
+import { useFilterType } from '../../hooks';
 
-import AdminToolsTableHeader from './AdminToolsTableHeader';
-import AdminToolsTableUserRow from './AdminToolsTableUserRow';
-import PageChooser from './PageChooser';
-import { TextCenter } from './Style';
+import PageChooser from '../PageChooser';
+import { TextCenter } from '../Style';
+import TableHeader from './TableHeader';
+import UserRow from './UserRow';
 
 /**
  * A Component that displays Admin Table feedback text
@@ -182,11 +182,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     // Display
     const rowsMaybeNull = paginatedUsers?.map((user, key) => (
         <tr key={key}>
-            <AdminToolsTableUserRow
-                fields={fields}
-                user={user}
-                setUser={(updatedUser) => setUser(user.id, updatedUser)}
-            />
+            <UserRow fields={fields} user={user} setUser={(updatedUser) => setUser(user.id, updatedUser)} />
         </tr>
     ));
 
@@ -204,7 +200,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     return (
         <>
             <Table striped hover>
-                <AdminToolsTableHeader
+                <TableHeader
                     fields={fields}
                     setSortingInformation={setSortingInformation}
                     search={search}

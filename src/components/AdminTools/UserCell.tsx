@@ -7,8 +7,8 @@ import { plainToClass } from 'class-transformer';
 import Image from 'react-bootstrap/esm/Image';
 import { useFormikContext } from 'formik';
 
-import { IUser, userFields, PropTypes, User, EnteredStatus, Level, Chapter, MemberStatus } from '../model';
-import { DateUtils, settings } from '../utils';
+import { IUser, userFields, PropTypes, User, EnteredStatus, Level, Chapter, MemberStatus } from '../../model';
+import { DateUtils, settings } from '../../utils';
 import {
     BooleanRadioField,
     CountryPickerField,
@@ -18,9 +18,9 @@ import {
     PhoneNumber,
     RegionPickerField,
     Select,
-} from './Forms';
+} from '../Forms';
 
-import Error from './Error';
+import Error from '../Error';
 
 /**
  * Admin Tools Table User Cell Component
@@ -28,7 +28,7 @@ import Error from './Error';
  * @param props - React properties passed down from parents to children
  * @returns the component
  */
-const AdminToolsTableUserCell: FC<PropTypes.AdminToolsTableUserCell> = (props) => {
+const UserCell: FC<PropTypes.AdminToolsTableUserCell> = (props) => {
     const { touched, errors } = useFormikContext<IUser>();
 
     const { user, name } = props;
@@ -142,4 +142,4 @@ const AdminToolsTableUserCell: FC<PropTypes.AdminToolsTableUserCell> = (props) =
     );
 };
 
-export default AdminToolsTableUserCell;
+export default UserCell;

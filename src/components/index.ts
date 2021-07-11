@@ -2,7 +2,7 @@
  * @file index file compiling exports from components folder
  */
 
-import AdminTools from './AdminTools';
+import { AdminTools } from './AdminTools';
 import ApplicationNavbar from './ApplicationNavbar';
 import CreateUser from './CreateUser';
 import Header from './Header';

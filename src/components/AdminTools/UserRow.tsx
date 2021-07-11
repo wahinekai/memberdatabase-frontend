@@ -7,11 +7,11 @@ import Button from 'react-bootstrap/Button';
 import { Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
 
-import { IUser, PropTypes, Validation } from '../model';
-import { Ensure, Timer } from '../utils';
-import AdminToolsTableUserCell from './AdminToolsUserCell';
-import { TextCenter } from './Style';
-import Error from './Error';
+import { IUser, PropTypes, Validation } from '../../model';
+import { Ensure, Timer } from '../../utils';
+import { TextCenter } from '../Style';
+import Error from '../Error';
+import UserCell from './UserCell';
 
 /**
  * Admin Tools Table User Row Component
@@ -22,7 +22,7 @@ import Error from './Error';
  * @param props.setUser - Sets the user's data
  * @returns the component
  */
-const AdminToolsTableUserRow: FC<PropTypes.AdminToolsTableUserRow> = ({ fields, user: userMaybeNull, setUser }) => {
+const UserRow: FC<PropTypes.AdminToolsTableUserRow> = ({ fields, user: userMaybeNull, setUser }) => {
     const history = useHistory();
 
     // Create state of user
@@ -95,9 +95,7 @@ const AdminToolsTableUserRow: FC<PropTypes.AdminToolsTableUserRow> = ({ fields, 
     try {
         const user = Ensure.isNotNull(() => userMaybeNull);
 
-        const cells = fields.map((field, i) => (
-            <AdminToolsTableUserCell name={field} user={user} key={i} disabled={submitting} />
-        ));
+        const cells = fields.map((field, i) => <UserCell name={field} user={user} key={i} disabled={submitting} />);
 
         return (
             <>
@@ -122,4 +120,4 @@ const AdminToolsTableUserRow: FC<PropTypes.AdminToolsTableUserRow> = ({ fields, 
     }
 };
 
-export default AdminToolsTableUserRow;
+export default UserRow;

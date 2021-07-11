@@ -7,10 +7,10 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Multiselect from 'react-multi-select-component';
 
-import { downloadFileAsync, downloadExternalFileAsync, settings } from '../utils';
-import { PropTypes, userFieldLabels } from '../model';
-import { TextCenter } from './Style';
-import UploadCsvModal from './UploadCsvModal';
+import { downloadFileAsync, downloadExternalFileAsync, settings } from '../../utils';
+import { PropTypes, userFieldLabels } from '../../model';
+import { TextCenter } from '../Style';
+import UploadCsvModal from '../UploadCsvModal';
 
 /**
  * Administrative Sidebar component
@@ -21,7 +21,7 @@ import UploadCsvModal from './UploadCsvModal';
  * @param props.fields - Current fields
  * @returns Administrative sidebar component
  */
-const AdminSidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserFields, fields }) => {
+const Sidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserFields, fields }) => {
     type multiselectType = {
         label: string;
         value: string;
@@ -90,4 +90,4 @@ const AdminSidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserField
     );
 };
 
-export default AdminSidebar;
+export default Sidebar;

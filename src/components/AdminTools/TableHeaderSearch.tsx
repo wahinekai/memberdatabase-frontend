@@ -5,7 +5,7 @@
 import React, { FC, useState, useCallback, ChangeEvent } from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PropTypes } from '../model';
+import { PropTypes } from '../../model';
 
 /**
  * Admin Tools Table Header Search Component
@@ -14,7 +14,7 @@ import { PropTypes } from '../model';
  * @param props.onChange - Change function called when the search is changed
  * @returns the component
  */
-const AdminToolsTableHeaderSearch: FC<PropTypes.AdminToolsTableHeaderSearch> = ({ onChange: onChangeProp }) => {
+const TableHeaderSearch: FC<PropTypes.AdminToolsTableHeaderSearch> = ({ onChange: onChangeProp }) => {
     const [visible, setVisible] = useState<boolean>(false);
 
     const onChangeLocal = useCallback((event: ChangeEvent<HTMLInputElement>) => onChangeProp(event.target.value), [
@@ -32,4 +32,4 @@ const AdminToolsTableHeaderSearch: FC<PropTypes.AdminToolsTableHeaderSearch> = (
     );
 };
 
-export default AdminToolsTableHeaderSearch;
+export default TableHeaderSearch;
