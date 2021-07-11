@@ -73,6 +73,7 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
     });
     const [searchingInformation, search, removeSearch] = useFilterType<string>();
     const [filters, addOrEditFilters, removeFilters] = useFilterType<boolean[] | string[]>();
+    const [ranges, addOrEditRanges, removeRanges] = useFilterType<[number, number]>();
 
     const getAllCallbackAsync = useCallback(async () => {
         const users = await getAllAsync();
@@ -120,6 +121,32 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
 
             // Return true iff searchValue is one of the filteredValues
             return filter.value.includes(searchValue);
+        });
+    }
+
+    // Range Filtering
+    for (const range of ranges) {
+        filteredUsers = filteredUsers?.filter((value) => {
+            // Set to never so that it can be checked for inclusion
+            const user = plainToClass(User, value);
+            const [first, second] = range.value;
+            const searchValue = user[range.field] as string | number | Date | undefined;
+
+            // If undefined, don't include
+            if (searchValue === undefined) {
+                return false;
+            }
+
+            // If number, do number comparison
+            if (typeof searchValue == 'number') {
+                return searchValue >= first && searchValue <= second;
+            }
+
+            // SearchDate is either a date already (this will do nothing) or a date string - make it unix number
+            const searchDate = new Date(searchValue as string | Date).valueOf();
+
+            // Compare to get answer
+            return searchDate >= first && searchDate <= second;
         });
     }
 
@@ -184,6 +211,8 @@ const UsersGrid: FC<PropTypes.UsersGrid> = ({ needsRefresh, clearRefresh, fields
                     removeSearch={removeSearch}
                     addOrEditFilters={addOrEditFilters}
                     removeFilters={removeFilters}
+                    addOrEditRanges={addOrEditRanges}
+                    removeRanges={removeRanges}
                 />
                 <tbody>{rows}</tbody>
             </Table>

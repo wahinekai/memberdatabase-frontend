@@ -33,8 +33,9 @@ export type UsersGrid = RefreshConsumer & UserFields;
 export type AdminSidebar = RefreshProducer & UserFields & SetUserFields;
 export type UploadCsvModal = RefreshProducer;
 export type DeleteUserModal = Id;
-export type AdminToolsTableHeader = UserFields & SetSortingInformation & EditSearchInformation & Filters;
-export type AdminToolsTableHeaderCell = UserField & SetSortingInformation & EditSearchInformation & Filters;
+export type AdminToolsTableHeader = UserFields & SetSortingInformation & EditSearchInformation & Filters & Ranges;
+export type AdminToolsTableHeaderCell = UserField & SetSortingInformation & EditSearchInformation & Filters & Ranges;
+export type AdminToolsTableHeaderRangeNumber = OnChangeTwoNumbers;
 export type AdminToolsTableHeaderSearch = OnChangeString;
 export type AdminToolsTableHeaderFilterBoolean = OnChangeBooleanOrStringArray;
 export type AdminToolsTableHeaderFilterEnum = OnChangeBooleanOrStringArray & EnumAdditions;
@@ -200,6 +201,15 @@ type EditSearchInformation = {
 type Filters = {
     addOrEditFilters: (field: keyof IUser, value: boolean[] | string[]) => void;
     removeFilters: (field: keyof IUser) => void;
+};
+
+type Ranges = {
+    addOrEditRanges: (field: keyof IUser, value: [number, number]) => void;
+    removeRanges: (field: keyof IUser) => void;
+};
+
+type OnChangeTwoNumbers = {
+    onChange: (value: [number, number]) => void;
 };
 
 type EnumAdditions = {

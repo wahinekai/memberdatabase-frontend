@@ -22,6 +22,8 @@ const AdminToolsTableHeader: FC<PropTypes.AdminToolsTableHeader> = (props) => {
             removeSearch={props.removeSearch}
             addOrEditFilters={props.addOrEditFilters}
             removeFilters={props.removeFilters}
+            addOrEditRanges={props.addOrEditRanges}
+            removeRanges={props.removeRanges}
         />
     ));
 

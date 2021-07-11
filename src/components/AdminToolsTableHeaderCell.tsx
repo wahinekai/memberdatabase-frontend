@@ -9,6 +9,7 @@ import { IUser, PropTypes, userFields } from '../model';
 import { userFieldLabels } from '../model/PartialUser';
 import AdminToolsTableHeaderFilterBoolean from './AdminToolsTableHeaderFilterBoolean';
 import AdminToolsTableHeaderFilterEnum from './AdminToolsTableHeaderFilterEnum';
+import AdminToolsTableHeaderRangeNumber from './AdminToolsTableHeaderRangeNumber';
 import AdminToolsTableHeaderSearch from './AdminToolsTableHeaderSearch';
 
 /**
@@ -59,6 +60,17 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
         [fieldAsUserProperty, props]
     );
 
+    const onChangeRange = useCallback(
+        ([first, second]: [number, number]) => {
+            if (first === Number.MIN_VALUE && second === Number.MAX_VALUE) {
+                props.removeRanges(fieldAsUserProperty);
+            } else {
+                props.addOrEditRanges(fieldAsUserProperty, [first, second]);
+            }
+        },
+        [fieldAsUserProperty, props]
+    );
+
     const sortIcon: IconProp = ascending == null ? 'sort' : ascending ? 'sort-up' : 'sort-down';
 
     // check if field is sortable
@@ -82,6 +94,8 @@ const AdminToolsTableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (prop
         searchField = (
             <AdminToolsTableHeaderFilterEnum onChange={onFilter} enumType={userFields.enumProperties[props.field]} />
         );
+    } else if (userFields.numberFilterableProperties.includes(props.field)) {
+        searchField = <AdminToolsTableHeaderRangeNumber onChange={onChangeRange} />;
     }
 
     return (
