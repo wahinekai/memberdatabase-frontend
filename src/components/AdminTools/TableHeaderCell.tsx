@@ -11,6 +11,7 @@ import TableHeaderRangeNumber from './TableHeaderRangeNumber';
 import TableHeaderSearch from './TableHeaderSearch';
 import TableHeaderFilterBoolean from './TableHeaderFilterBoolean';
 import TableHeaderFilterEnum from './TableHeaderFilterEnum';
+import TableHeaderDateRange from './TableHeaderDateRange';
 
 /**
 /**
@@ -94,6 +95,8 @@ const TableHeaderCell: FC<PropTypes.AdminToolsTableHeaderCell> = (props) => {
         searchField = <TableHeaderFilterEnum onChange={onFilter} enumType={userFields.enumProperties[props.field]} />;
     } else if (userFields.numberFilterableProperties.includes(props.field)) {
         searchField = <TableHeaderRangeNumber onChange={onChangeRange} />;
+    } else if (userFields.dateFields.includes(props.field)) {
+        searchField = <TableHeaderDateRange onChange={onChangeRange} />;
     }
 
     return (

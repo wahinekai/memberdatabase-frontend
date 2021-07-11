@@ -114,7 +114,9 @@ const UserCell: FC<PropTypes.AdminToolsTableUserCell> = (props) => {
                 component = <BooleanRadioField name={name} disabled={props.disabled} />;
             } else if (userFields.dateFields.includes(name)) {
                 // Date component - use a date picker field
-                component = <DatePickerField disabled={props.disabled} placeholder={props.placeholder} name={name} />;
+                component = (
+                    <DatePickerField disabled={props.disabled} placeholder={props.placeholder} name={name} br={false} />
+                );
             } else if (userFields.arrayFields.includes(name)) {
                 // Input array component - use an input array field
                 component = <InputArray disabled={props.disabled} placeholder={props.placeholder} name={name} />;

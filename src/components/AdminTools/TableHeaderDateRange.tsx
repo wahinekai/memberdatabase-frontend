@@ -2,11 +2,11 @@
  * @file Definition of Admin Tools Table Header Number Range Component
  */
 
-import React, { FC, useState, useCallback, ChangeEvent } from 'react';
-import FormControl from 'react-bootstrap/FormControl';
+import React, { FC, useState, useCallback } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -19,15 +19,13 @@ import { PropTypes } from '../../model';
  * @param props.onChange - Change function called when the search is changed
  * @returns the component
  */
-const TableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRange> = ({ onChange: onChangeProp }) => {
+const TableHeaderDateRange: FC<PropTypes.AdminToolsTableHeaderRange> = ({ onChange: onChangeProp }) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [[first, second], setState] = useState<[number, number]>([Number.MIN_VALUE, Number.MAX_VALUE]);
 
     const onChangeLocal = useCallback(
-        (event: ChangeEvent<HTMLInputElement>, isFirst: boolean) => {
-            const valueString = event.target.value;
-            const value =
-                valueString.length > 0 ? Number.parseFloat(valueString) : isFirst ? Number.MIN_VALUE : Number.MAX_VALUE;
+        (date: Date | null, isFirst: boolean) => {
+            const value = date === null ? (isFirst ? Number.MIN_VALUE : Number.MAX_VALUE) : date.valueOf();
 
             // Get new first and second
             const newFirst = isFirst ? value : first;
@@ -39,13 +37,8 @@ const TableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRange> = ({ onCh
         [first, second, setState, onChangeProp]
     );
 
-    const onChangeFirst = useCallback((event: ChangeEvent<HTMLInputElement>) => onChangeLocal(event, true), [
-        onChangeLocal,
-    ]);
-
-    const onChangeSecond = useCallback((event: ChangeEvent<HTMLInputElement>) => onChangeLocal(event, false), [
-        onChangeLocal,
-    ]);
+    const onChangeFirst = useCallback((date: Date | null) => onChangeLocal(date, true), [onChangeLocal]);
+    const onChangeSecond = useCallback((date: Date | null) => onChangeLocal(date, false), [onChangeLocal]);
 
     const reset = useCallback(() => {
         setState([Number.MIN_VALUE, Number.MAX_VALUE]);
@@ -54,27 +47,37 @@ const TableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRange> = ({ onCh
 
     const toggleVisible = useCallback(() => setVisible(!visible), [visible, setVisible]);
 
-    const firstComponentValue = first == Number.MIN_VALUE ? '' : new String(first).toString();
-    const secondComponentValue = second == Number.MAX_VALUE ? '' : new String(second).toString();
+    const firstComponentValue = first == Number.MIN_VALUE ? null : new Date(first);
+    const secondComponentValue = second == Number.MAX_VALUE ? null : new Date(second);
 
     const component = visible ? (
         <Form className="justify-content-center text-center">
             <Row>
                 <Col xs={5}>
-                    <FormControl
+                    <DatePicker
                         onChange={onChangeFirst}
-                        placeholder="Minimum"
-                        value={firstComponentValue}
+                        selected={firstComponentValue}
+                        selectsStart
+                        startDate={firstComponentValue}
+                        endDate={secondComponentValue}
+                        isClearable
                         name="first"
+                        dateFormat="MM/dd/yyyy"
+                        className="form-control"
                     />
                 </Col>
                 <Col xs={2}>-</Col>
                 <Col xs={5}>
-                    <FormControl
+                    <DatePicker
                         onChange={onChangeSecond}
-                        placeholder="Maximum"
-                        value={secondComponentValue}
+                        selected={secondComponentValue}
+                        selectsEnd
+                        startDate={firstComponentValue}
+                        endDate={secondComponentValue}
+                        isClearable
                         name="second"
+                        dateFormat="MM/dd/yyyy"
+                        className="form-control"
                     />
                 </Col>
             </Row>
@@ -96,4 +99,4 @@ const TableHeaderRangeNumber: FC<PropTypes.AdminToolsTableHeaderRange> = ({ onCh
     );
 };
 
-export default TableHeaderRangeNumber;
+export default TableHeaderDateRange;
