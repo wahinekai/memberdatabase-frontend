@@ -40,7 +40,7 @@ export enum EnteredStatus {
 export enum Chapter {
     SanDiego = 'San Diego',
     OrangeCountyLosAngeles = 'Orange County/Los Angeles',
-    Ventura = 'Ventura',
+    VenturaSantaBarbara = 'Ventura/Santa Barbara',
     SantaCruzSanFrancisco = 'Santa Cruz/San Francisco',
     Oregon = 'Oregon',
     Washington = 'Washington',
