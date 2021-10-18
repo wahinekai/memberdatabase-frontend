@@ -64,4 +64,5 @@ export enum Position {
     SurfMamaDirector = 'Surf Mama Director',
     ChapterDirector = 'Chapter Director',
     ChapterEventCoordinator = 'Chapter Event Coordinator',
+    Merchandiser = 'Merchandiser',
 }
