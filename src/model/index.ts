@@ -13,6 +13,7 @@ import PositionInformation from './PositionInformation';
 import User from './User';
 import * as PropTypes from './PropTypes';
 import * as Validation from './Validation';
+import * as Utils from './Utils';
 import { Settings, GlobalSettings } from './Settings';
 import { MethodTypes as HttpMethodTypes } from './Http';
 
@@ -43,4 +44,5 @@ export {
     User,
     userFieldLabels,
     userFields,
+    Utils,
 };

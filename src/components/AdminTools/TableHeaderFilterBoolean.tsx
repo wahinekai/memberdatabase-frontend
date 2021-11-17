@@ -4,9 +4,8 @@
 
 import React, { FC, useState, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MultiSelect from 'react-multi-select-component';
-import { Option } from 'react-multi-select-component/dist/lib/interfaces';
-import { PropTypes } from '../../model';
+import { MultiSelect } from 'react-multi-select-component';
+import { PropTypes, Utils } from '../../model';
 
 /**
  * Admin Tools Table Header Boolean Filter Component
@@ -16,7 +15,7 @@ import { PropTypes } from '../../model';
  * @returns the component
  */
 const TableHeaderFilterBoolean: FC<PropTypes.AdminToolsTableHeaderFilterBoolean> = ({ onChange: onChangeProp }) => {
-    const options = [
+    const options: Utils.ReactMultiSelectOption<boolean>[] = [
         {
             label: 'Yes',
             value: true,
@@ -27,10 +26,10 @@ const TableHeaderFilterBoolean: FC<PropTypes.AdminToolsTableHeaderFilterBoolean>
         },
     ];
     const [visible, setVisible] = useState<boolean>(false);
-    const [values, setValues] = useState<Option[]>([]);
+    const [values, setValues] = useState<Utils.ReactMultiSelectOption<boolean>[]>([]);
 
     const onChangeLocal = useCallback(
-        (values: { label: string; value: boolean }[]) => {
+        (values: Utils.ReactMultiSelectOption<boolean>[]) => {
             setValues(values);
             onChangeProp(values.map((v) => v.value));
         },

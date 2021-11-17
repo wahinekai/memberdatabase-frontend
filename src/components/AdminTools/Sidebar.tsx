@@ -5,10 +5,9 @@
 import React, { FC, useCallback } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Multiselect from 'react-multi-select-component';
-
+import { MultiSelect } from 'react-multi-select-component';
 import { downloadFileAsync, downloadExternalFileAsync, settings } from '../../utils';
-import { PropTypes, userFieldLabels } from '../../model';
+import { PropTypes, userFieldLabels, Utils } from '../../model';
 import { TextCenter } from '../Style';
 import UploadCsvModal from '../UploadCsvModal';
 
@@ -22,23 +21,18 @@ import UploadCsvModal from '../UploadCsvModal';
  * @returns Administrative sidebar component
  */
 const Sidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserFields, fields }) => {
-    type multiselectType = {
-        label: string;
-        value: string;
-    };
-
-    const arrayToMultiselect = useCallback((array: string[]): multiselectType[] => {
+    const arrayToMultiselect = useCallback((array: string[]): Utils.ReactMultiSelectOption<string>[] => {
         return array.map((key) => ({ label: userFieldLabels[key], value: key }));
     }, []);
 
-    const multiselectToArray = useCallback((multiselect: multiselectType[]): string[] => {
+    const multiselectToArray = useCallback((multiselect: Utils.ReactMultiSelectOption<string>[]): string[] => {
         return multiselect.map((key) => key.value);
     }, []);
 
-    const onChange = useCallback((multiselect: multiselectType[]) => setUserFields(multiselectToArray(multiselect)), [
-        setUserFields,
-        multiselectToArray,
-    ]);
+    const onChange = useCallback(
+        (multiselect: Utils.ReactMultiSelectOption<string>[]) => setUserFields(multiselectToArray(multiselect)),
+        [setUserFields, multiselectToArray]
+    );
 
     return (
         <>
@@ -79,7 +73,7 @@ const Sidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserFields, fi
                 </TextCenter>
             </Col>
             <Col>
-                <Multiselect
+                <MultiSelect
                     value={arrayToMultiselect(fields)}
                     options={arrayToMultiselect(Object.keys(userFieldLabels))}
                     labelledBy="Select"

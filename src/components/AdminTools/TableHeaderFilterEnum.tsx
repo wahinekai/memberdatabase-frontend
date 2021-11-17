@@ -4,9 +4,8 @@
 
 import React, { FC, useState, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MultiSelect from 'react-multi-select-component';
-import { Option } from 'react-multi-select-component/dist/lib/interfaces';
-import { PropTypes } from '../../model';
+import { MultiSelect } from 'react-multi-select-component';
+import { PropTypes, Utils } from '../../model';
 
 /**
  * Admin Tools Table Header Boolean Filter Component
@@ -20,10 +19,10 @@ const TableHeaderFilterEnum: FC<PropTypes.AdminToolsTableHeaderFilterEnum> = ({ 
     // Value & label are both value
     const options = Object.values(enumType).map((value) => ({ label: value, value }));
     const [visible, setVisible] = useState<boolean>(false);
-    const [values, setValues] = useState<Option[]>([]);
+    const [values, setValues] = useState<Utils.ReactMultiSelectOption<boolean>[]>([]);
 
     const onChangeLocal = useCallback(
-        (values: { label: string; value: string }[]) => {
+        (values: Utils.ReactMultiSelectOption<boolean>[]) => {
             setValues(values);
             onChangeProp(values.map((v) => v.value));
         },
