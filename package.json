@@ -66,9 +66,9 @@
     "scripts": {
         "lint": "npx eslint . --fix",
         "prestart": "npm run lint",
-        "start": "npx react-scripts start",
+        "start": "npx react-scripts --openssl-legacy-provider start",
         "prebuild": "npm run lint",
-        "build": "npx react-scripts build"
+        "build": "npx react-scripts --openssl-legacy-provider build"
     },
     "browserslist": {
         "production": [
