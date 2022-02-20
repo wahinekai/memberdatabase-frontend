@@ -25,11 +25,9 @@ const enumToRegexNoDefault = (enumType: Record<string, string>): RegExp => {
 const bool = Yup.bool().typeError('Must be yes or no');
 const string = Yup.string().typeError('This field is required');
 const date = Yup.date().typeError('A date is required');
-const integer = Yup.number().typeError('A Number is required').integer('Number must be an integer');
 const optionalString = string.optional();
 const optionalDate = date.optional();
 const optionalBool = bool.optional();
-const optionalInteger = integer.optional();
 const stringArray = Yup.array().of(string);
 
 const position = Yup.object().shape({
@@ -61,7 +59,7 @@ const photoUrl = optionalString;
 const biography = optionalString;
 const needsNewMemberBag = optionalBool;
 const wonSurfboard = optionalBool;
-const postalCode = optionalInteger;
+const postalCode = optionalString;
 const enteredInFacebookChapter = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must have a status');
 const enteredInFacebookWki = optionalString.matches(enumToRegexNoDefault(EnteredStatus), 'Must make a selection');
 const region = optionalString;

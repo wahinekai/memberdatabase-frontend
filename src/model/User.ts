@@ -53,7 +53,7 @@ class User implements IUser, IValidatable, IFormikConvertable<IUser> {
     public needsNewMemberBag = false;
     public wonSurfboard = false;
     public dateSurfboardWon?: Date;
-    public postalCode?: number;
+    public postalCode?: string;
     public socialMediaOptOut = false;
     public timeStamp?: number;
 

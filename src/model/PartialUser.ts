@@ -53,7 +53,7 @@ export interface IPrivateLocation {
 export interface IPublicLocation {
     city?: string;
     region?: string;
-    postalCode?: number;
+    postalCode?: string;
     country?: string;
 }
 
