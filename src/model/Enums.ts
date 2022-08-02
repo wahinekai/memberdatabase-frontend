@@ -43,6 +43,7 @@ export enum Chapter {
     VenturaSantaBarbara = 'Ventura/Santa Barbara',
     SantaCruzSanFrancisco = 'Santa Cruz/San Francisco',
     Oregon = 'Oregon',
+    DelNorteOregon = 'Del Norte Oregon',
     Washington = 'Washington',
     Hawaii = 'Hawaii',
     NewEngland = 'New England',
