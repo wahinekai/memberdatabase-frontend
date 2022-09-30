@@ -48,6 +48,8 @@ export enum Chapter {
     Hawaii = 'Hawaii',
     NewEngland = 'New England',
     NewJersey = 'New Jersey',
+    StAugustineFlorida = 'St. Augustine Florida',
+    RockawayBeachNewYork = 'Rockaway Beach New York',
     WahineKaiInternational = 'Wahine Kai International',
 }
 
