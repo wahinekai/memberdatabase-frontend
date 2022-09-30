@@ -30,6 +30,9 @@ export const apiCallAsync = async <T = never>(
     const config: AxiosRequestConfig = {
         headers: {
             Authorization: `Bearer ${accessToken}`,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, PUT, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
         },
     };
 
