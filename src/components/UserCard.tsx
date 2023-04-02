@@ -58,7 +58,7 @@ const UserCard: FC<PropTypes.UserCard> = ({ user }) => {
             break;
     }
 
-    const body = `${positions}, ${user.chapter} Chapter`;
+    const body = `${positions}, ${user.chapter} Chapter, Member Status ${user.status}`;
 
     return (
         <TextCenter>

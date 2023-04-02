@@ -7,7 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-
+import Accordion from 'react-bootstrap/Accordion';
+import { Button, Card } from 'react-bootstrap';
 import { HttpMethodTypes, PartialUser, PropTypes } from '../model';
 import { apiCallAsync } from '../utils';
 import UserCard from './UserCard';
@@ -58,6 +59,7 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
             `/Search/Query?query=${encodeURIComponent(query)}`
         );
         setState({ users, searching: false, page: 0 });
+        console.log(users);
     }, [setState, query]);
 
     // Update state with newest user on first render
@@ -65,10 +67,31 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
         search();
     }, [search]);
 
+    const activeUsers = state.users.filter((user) => {
+        return user.status != 'Terminated';
+    });
+    const terminatedUsers = state.users.filter((user) => {
+        return user.status == 'Terminated';
+    });
+
+    const terminatedfilteredUsers = terminatedUsers?.slice(
+        state.page * NUM_USERS_PER_PAGE,
+        state.page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE
+    );
+    const teminatedusersListMaybeNull = terminatedfilteredUsers.map((user, i) => (
+        <Col xs={12} sm={12} md={6} lg={4} xl={3} key={i}>
+            <UserCard key={i} user={user} />
+        </Col>
+    ));
+
     // Pagination
-    const numUsers = state.users?.length ?? 0;
+    const numUsers = activeUsers?.length ?? 0;
+    const numTerminatedUsers = terminatedUsers?.length ?? 0;
+
     const pageCount = Math.ceil(numUsers / NUM_USERS_PER_PAGE);
-    const filteredUsers = state.users?.slice(
+    const pageCountTerminated = Math.ceil(numTerminatedUsers / NUM_USERS_PER_PAGE);
+
+    const filteredUsers = activeUsers?.slice(
         state.page * NUM_USERS_PER_PAGE,
         state.page * NUM_USERS_PER_PAGE + NUM_USERS_PER_PAGE
     );
@@ -87,15 +110,50 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
         </SearchFeedbackComponent>
     );
 
+    const terminatedusersList =
+        terminatedUsers.length > 0 ? teminatedusersListMaybeNull : state.searching ? searching : noUsersFound;
+    //const pageChooserTerminated =
+    //    pageCountTerminated > 1 ? <PageChooser pageCountTerminated={pageCountTerminated} onChange={setPage} /> : null;
+
     const usersList = state.users.length > 0 ? usersListMaybeNull : state.searching ? searching : noUsersFound;
     const pageChooser = pageCount > 1 ? <PageChooser pageCount={pageCount} onChange={setPage} /> : null;
+    const pageChooserTerminated =
+        pageCountTerminated > 1 ? <PageChooser pageCount={pageCountTerminated} onChange={setPage} /> : null;
 
     return (
         <>
-            <Container>
-                <Row>{usersList}</Row>
-            </Container>
-            {pageChooser}
+            <Accordion defaultActiveKey="0">
+                <Card>
+                    <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            Active Users
+                        </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                            <Container>
+                                <Row>{usersList}</Row>
+                            </Container>
+                            {pageChooser}
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+                <Card>
+                    <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                            Terminated Users
+                        </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="1">
+                        <Card.Body>
+                            <Container>
+                                <Row>{terminatedusersList}</Row>
+                            </Container>
+                            {pageChooserTerminated}
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            </Accordion>
         </>
     );
 };
