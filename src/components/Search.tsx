@@ -112,9 +112,6 @@ const Search: FC<PropTypes.Search> = ({ query }) => {
 
     const terminatedusersList =
         terminatedUsers.length > 0 ? teminatedusersListMaybeNull : state.searching ? searching : noUsersFound;
-    //const pageChooserTerminated =
-    //    pageCountTerminated > 1 ? <PageChooser pageCountTerminated={pageCountTerminated} onChange={setPage} /> : null;
-
     const usersList = state.users.length > 0 ? usersListMaybeNull : state.searching ? searching : noUsersFound;
     const pageChooser = pageCount > 1 ? <PageChooser pageCount={pageCount} onChange={setPage} /> : null;
     const pageChooserTerminated =
