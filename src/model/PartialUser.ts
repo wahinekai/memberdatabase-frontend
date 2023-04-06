@@ -86,6 +86,7 @@ export type UserForCard = IId & {
     photoUrl?: string;
     chapter?: Chapter;
     positions: IPositionInformation[];
+    status?: MemberStatus;
 };
 
 type userFieldLabelsType = {
