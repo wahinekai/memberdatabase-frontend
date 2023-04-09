@@ -54,6 +54,14 @@ const Sidebar: FC<PropTypes.AdminSidebar> = ({ requireRefresh, setUserFields, fi
                     block
                     variant="outline-primary"
                     className="my-1"
+                    onClick={() => downloadFileAsync('/Users/AllActiveUsers.csv', 'AllActiveUsers.csv')}
+                >
+                    Download active users as CSV
+                </Button>
+                <Button
+                    block
+                    variant="outline-primary"
+                    className="my-1"
                     onClick={() => downloadExternalFileAsync(settings.templateCsv, 'UploadTemplate.csv')}
                 >
                     Download template CSV
