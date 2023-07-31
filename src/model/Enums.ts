@@ -51,6 +51,7 @@ export enum Chapter {
     StAugustineFlorida = 'St. Augustine Florida',
     RockawayBeachNewYork = 'Rockaway Beach New York',
     WahineKaiInternational = 'Wahine Kai International',
+    VirginiaBeach = 'Virginia Beach',
 }
 
 /**
