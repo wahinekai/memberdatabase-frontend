@@ -38,7 +38,6 @@ export enum EnteredStatus {
  * Supported chapters
  */
 export enum Chapter {
-    CorpusChristi = 'Corpus Christi',
     SanDiego = 'San Diego',
     OrangeCountyLosAngeles = 'Orange County/Los Angeles',
     VenturaSantaBarbara = 'Ventura/Santa Barbara',
@@ -53,6 +52,7 @@ export enum Chapter {
     RockawayBeachNewYork = 'Rockaway Beach New York',
     WahineKaiInternational = 'Wahine Kai International',
     VirginiaBeach = 'Virginia Beach',
+    CorpusChristi = 'Corpus Christi',
 }
 
 /**
